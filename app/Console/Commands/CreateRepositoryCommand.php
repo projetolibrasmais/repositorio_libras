@@ -13,7 +13,7 @@ class CreateRepositoryCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'make:repository';
+    protected $signature = 'make:repository {name} {model}';
 
     /**
      * The console command description.
@@ -60,7 +60,7 @@ class CreateRepositoryCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace;
+        return $rootNamespace.'\Repositories\Eloquent';
     }
 
     /**
