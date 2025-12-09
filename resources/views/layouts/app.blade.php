@@ -36,5 +36,89 @@
                 </div>
             </div>
         </div>
+
+        <!-- Toast Notifications -->
+        <x-toast />
+
+        <!-- Flash Messages -->
+        @if(session('success'))
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent('toast', {
+                            detail: {
+                                type: 'success',
+                                message: '{{ session('success') }}'
+                            }
+                        }));
+                    }, 100);
+                });
+            </script>
+        @endif
+
+        @if(session('error'))
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent('toast', {
+                            detail: {
+                                type: 'error',
+                                message: '{{ session('error') }}'
+                            }
+                        }));
+                    }, 100);
+                });
+            </script>
+        @endif
+
+        @if(session('warning'))
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent('toast', {
+                            detail: {
+                                type: 'warning',
+                                message: '{{ session('warning') }}'
+                            }
+                        }));
+                    }, 100);
+                });
+            </script>
+        @endif
+
+        @if(session('info'))
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent('toast', {
+                            detail: {
+                                type: 'info',
+                                message: '{{ session('info') }}'
+                            }
+                        }));
+                    }, 100);
+                });
+            </script>
+        @endif
+
+        @if($errors->any())
+            <script>
+                document.addEventListener('alpine:init', () => {
+                    setTimeout(() => {
+                        @foreach($errors->all() as $error)
+                            window.dispatchEvent(new CustomEvent('toast', {
+                                detail: {
+                                    type: 'error',
+                                    message: '{{ $error }}',
+                                    duration: 6000
+                                }
+                            }));
+                        @endforeach
+                    }, 100);
+                });
+            </script>
+        @endif
+
+        @stack('scripts')
     </body>
 </html>
