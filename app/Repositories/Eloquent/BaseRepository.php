@@ -15,8 +15,22 @@ class BaseRepository implements BaseContract
     }
 
     public function all($request = null, $perPage = 15)
-    {        
-        return $this->model->paginate($perPage);
+    {
+        $query = $this->model->query();
+
+        if ($request && $request->input('search')) {
+            $query->search($request->input('search'));
+        }
+
+        if ($request && $request->input('sort')) {
+            $sort = $request->input('sort');
+            $direction = $request->input('direction', 'asc');
+            $query->orderBy($sort, $direction);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        return $query->paginate($perPage)->withQueryString();
     }
 
     public function find(int $id)
