@@ -2,15 +2,21 @@
 
 namespace App\Models;
 
+use App\Traits\Searchable;
 use Spatie\Permission\Models\Permission as SpatiePermission;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Permission extends SpatiePermission
 {
-    use LogsActivity;
+    use LogsActivity, Searchable;
 
     protected $table = 'permissions';
+
+    /**
+     * The columns that can be searched.
+     */
+    protected $searchable = ['name', 'description', 'guard_name'];
 
     /**
      * The attributes that are mass assignable.

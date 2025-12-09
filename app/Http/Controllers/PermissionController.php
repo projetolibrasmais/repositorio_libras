@@ -36,9 +36,9 @@ class PermissionController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = $this->permissionRepository->all();
+        $permissions = $this->permissionRepository->all($request, 15);
         return view('permissions.index', compact('permissions'));
     }
 
