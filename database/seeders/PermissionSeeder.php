@@ -22,6 +22,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'create_roles', 'description' => 'Create roles', 'guard_name' => 'web'],
             ['name' => 'edit_roles', 'description' => 'Edit roles', 'guard_name' => 'web'],
             ['name' => 'delete_roles', 'description' => 'Delete roles', 'guard_name' => 'web'],
+
+            //Categorias
+            ['name' => 'view_categorias', 'description' => 'View categorias', 'guard_name' => 'web'],
+            ['name' => 'create_categorias', 'description' => 'Create categorias', 'guard_name' => 'web'],
+            ['name' => 'edit_categorias', 'description' => 'Edit categorias', 'guard_name' => 'web'],
+            ['name' => 'delete_categorias', 'description' => 'Delete categorias', 'guard_name' => 'web'],
         ];
 
         foreach ($permissions as $permission) {
