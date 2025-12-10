@@ -16,7 +16,7 @@ class BaseRepository implements BaseContract
 
     public function all($request = null, $perPage = 15)
     {
-        $query = $this->model->query();
+        $query = $this->getBaseQuery();
 
         if ($request && $request->input('search')) {
             $query->search($request->input('search'));
@@ -31,6 +31,15 @@ class BaseRepository implements BaseContract
         }
 
         return $query->paginate($perPage)->withQueryString();
+    }
+
+    /**
+     * Get the base query builder.
+     * Can be overridden in child repositories to add eager loading.
+     */
+    protected function getBaseQuery()
+    {
+        return $this->model->query();
     }
 
     public function find(int $id)

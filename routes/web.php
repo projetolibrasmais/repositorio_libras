@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('categorias', CategoriaController::class);
 
     Route::resource('sinais', SinalController::class);
+    Route::resource('logs', LogController::class)->only(['index', 'show']);
 });
 
 require __DIR__.'/auth.php';

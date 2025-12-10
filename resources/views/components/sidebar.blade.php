@@ -97,7 +97,7 @@
                             </a>
                         </li>
                     @endcan
-                    
+
                     @can('view_permissions')
                         <!-- Permissions -->
                         <li>
@@ -116,8 +116,49 @@
                         </li>
                     @endcan
 
+                    @can(['view_logs', 'view_users'])
+                        <small class="text-xs font-bold text-gray-500">SISTEMA</small>
+                        <hr class="mb-3">
+                    @endcan
+
+                    @can('view_users')
+                        <!-- Users -->
+                        <li>
+                            <a href="{{ route('logs.index') }}"
+                                :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('logs.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                <span class="grid place-items-center shrink-0"
+                                    :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
+                                    <i class="ph ph-users text-xl"></i>
+                                </span>
+                                <span x-show="!collapsed || window.innerWidth < 1024"
+                                    x-transition:enter="transition ease-in-out duration-200"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    class="flex-1">Usuários</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @can('view_logs')
+                        <!-- Logs -->
+                        <li>
+                            <a href="{{ route('logs.index') }}"
+                                :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('logs.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                <span class="grid place-items-center shrink-0"
+                                    :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
+                                    <i class="ph ph-clock-counter-clockwise text-xl"></i>
+                                </span>
+                                <span x-show="!collapsed || window.innerWidth < 1024"
+                                    x-transition:enter="transition ease-in-out duration-200"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    class="flex-1">Logs</span>
+                            </a>
+                        </li>
+                    @endcan
+
                     <!-- More (com submenu) -->
-                    <li x-data="{ submenuOpen: false }">
+                    {{-- <li x-data="{ submenuOpen: false }">
                         <button @click="submenuOpen = !submenuOpen"
                             :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : 'justify-between'"
                             class="w-full flex items-center py-2.5 px-3 rounded-md transition-all duration-200 text-slate-600 hover:text-slate-800 hover:bg-slate-100">
@@ -189,7 +230,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
