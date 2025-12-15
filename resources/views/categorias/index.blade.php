@@ -76,18 +76,16 @@
                                             </a>
                                         @endcan
                                         @can('delete_categorias')
-                                            @if ($categoria->id !== 1)
-                                                <form action="{{ route('categorias.destroy', $categoria) }}" method="POST"
-                                                    class="delete-form-{{ $categoria->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button"
-                                                        onclick="deleteForm = document.querySelector('.delete-form-{{ $categoria->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-categoria' }));"
-                                                        class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors">
-                                                        <i class="ph ph-trash text-lg"></i>
-                                                    </button>
-                                                </form>
-                                            @endif
+                                            <form action="{{ route('categorias.destroy', $categoria) }}" method="POST"
+                                                class="delete-form-{{ $categoria->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    onclick="deleteForm = document.querySelector('.delete-form-{{ $categoria->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-categoria' }));"
+                                                    class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors">
+                                                    <i class="ph ph-trash text-lg"></i>
+                                                </button>
+                                            </form>
                                         @endcan
                                     </div>
                                 </td>

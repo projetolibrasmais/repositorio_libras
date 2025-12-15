@@ -34,7 +34,7 @@
                                     <!-- Nome -->
                                     <div>
                                         <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Nome da categoria <span class="text-red-500">*</span>
+                                            Nome da Categoria <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -51,7 +51,9 @@
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>
-
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Sidebar Info (1/3) -->
                         <div class="lg:col-span-1">
@@ -73,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>        
+                    </div>                 
 
                     <!-- Form Actions -->
                     <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-200">
