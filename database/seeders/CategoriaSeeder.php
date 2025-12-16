@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Permission;
+use App\Models\Categoria;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CategoriaSeeder extends Seeder
 {
@@ -13,16 +15,22 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        $permissions = [
-            // Permissions
-            ['name' => 'view_permissions', 'description' => 'View permissions', 'guard_name' => 'web'],
-
-            //Categorias
-            
+        $categorias = [
+            'Letras Português',
+            'Letras Inglês',
+            'Pedagogia',
+            'Matemática',
+            'História',
+            'Geografia',
+            'Ciências Biológicas',
+            'Educação Física',
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create($permission);
+        foreach ($categorias as $nome) {
+            Categoria::updateOrCreate(
+                ['slug' => Str::slug($nome)],
+                ['nome' => $nome, 'slug' => Str::slug($nome)]
+            );
         }
     }
 }
