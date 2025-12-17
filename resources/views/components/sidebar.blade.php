@@ -75,8 +75,37 @@
                         </a>
                     </li>
 
+                    @can('view_categorias')
+                        <small x-show="!collapsed || window.innerWidth < 1024"
+                            x-transition:enter="transition ease-in-out duration-200"
+                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                            class="text-xs font-bold text-gray-500">CONTEÚDO</small>
+                        <hr class="mb-3">
+                    @endcan
+
+                    @can('view_categorias')
+                        <!-- Categories -->
+                        <li>
+                            <a href="{{ route('categorias.index') }}"
+                                :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('categorias.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                <span class="grid place-items-center shrink-0"
+                                    :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
+                                    <i class="ph ph-bookmarks text-xl"></i>
+                                </span>
+                                <span x-show="!collapsed || window.innerWidth < 1024"
+                                    x-transition:enter="transition ease-in-out duration-200"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    class="flex-1">Categorias</span>
+                            </a>
+                        </li>
+                    @endcan
+
                     @can(['view_permissions', 'view_roles'])
-                        <small class="text-xs font-bold text-gray-500">PERMISSÕES</small>
+                        <small x-show="!collapsed || window.innerWidth < 1024"
+                            x-transition:enter="transition ease-in-out duration-200"
+                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                            class="text-xs font-bold text-gray-500">PERMISSÕES</small>
                         <hr class="mb-3">
                     @endcan
 
@@ -117,16 +146,19 @@
                     @endcan
 
                     @can(['view_logs', 'view_users'])
-                        <small class="text-xs font-bold text-gray-500">SISTEMA</small>
+                        <small x-show="!collapsed || window.innerWidth < 1024"
+                            x-transition:enter="transition ease-in-out duration-200"
+                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                            class="text-xs font-bold text-gray-500">SISTEMA</small>
                         <hr class="mb-3">
                     @endcan
 
                     @can('view_users')
                         <!-- Users -->
                         <li>
-                            <a href="{{ route('logs.index') }}"
+                            <a href="{{ route('users.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('logs.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-users text-xl"></i>
