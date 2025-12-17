@@ -22,7 +22,7 @@ class UpdateRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:roles,name,' . $this->route('role')->id,
+            'name' => 'required|string|unique:roles,name,' . $this->route('role')->id . '|min:3|max:50',
             'permissions' => 'required|array',
             'permissions.*' => 'exists:permissions,name',
         ];
@@ -36,10 +36,10 @@ class UpdateRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'required' => 'O campo :attribute é obrigatório.',
-            'string' => 'O campo :attribute deve ser uma string.',
-            'unique' => 'O campo :attribute já está em uso.',
-            'array' => 'O campo :attribute deve ser um array.',
+            'required' => 'O :attribute é obrigatório.',
+            'string' => 'O :attribute deve ser uma string.',
+            'unique' => 'O :attribute já está em uso.',
+            'array' => 'As :attribute devem ser um array.',
             'exists' => 'O valor selecionado para :attribute é inválido.',
         ];
     }
