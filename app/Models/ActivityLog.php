@@ -69,7 +69,7 @@ class ActivityLog extends Activity
             case 'updated':
                 return 'atualizado';
             case 'deleted':
-                return 'removido';
+                return 'deletado';
             case 'restored':
                 return 'restaurado';
             default:

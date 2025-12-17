@@ -38,7 +38,19 @@ class LogController extends Controller implements HasMiddleware
     public function index(Request $request)
     {
         $logs = $this->logRepository->all($request, 15);
-        return view('logs.index', compact('logs'));
+        
+        // Get unique users who have logged activities
+        $users = \App\Models\User::whereIn('id', 
+            \App\Models\ActivityLog::distinct()->pluck('causer_id')->filter()
+        )->orderBy('name')->get();
+        
+        // Get unique events
+        $events = \App\Models\ActivityLog::distinct()->pluck('event')->sort()->values();
+        
+        // Get unique log names
+        $logNames = \App\Models\ActivityLog::distinct()->pluck('log_name')->sort()->values();
+        
+        return view('logs.index', compact('logs', 'users', 'events', 'logNames'));
     }
 
     /**
