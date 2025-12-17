@@ -50,7 +50,7 @@
                                     <div class="flex items-center">
                                         <div
                                             class="flex-shrink-0 h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                            <i class="ph ph-shield-checkered text-purple-600"></i>
+                                            <i class="ph ph-bookmark text-purple-600"></i>
                                         </div>
                                         <div class="ml-3">
                                             <div class="text-sm font-medium text-gray-900">
