@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\SinalController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,7 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('categorias', CategoriaController::class);
 
     Route::resource('sinais', SinalController::class);
+
     Route::resource('logs', LogController::class)->only(['index', 'show']);
+
+    Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
+    Route::delete('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('users.force-delete');
+    Route::resource('users', UserController::class);
 });
 
 require __DIR__.'/auth.php';
