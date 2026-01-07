@@ -24,7 +24,8 @@ class SinalController extends Controller
     public function index(Request $request)
     {
         $sinais = $this->sinalRepository->all($request, 15);
-        return view('sinais.index', compact('sinais'));
+        $categorias = Categoria::orderBy('nome')->get();
+        return view('sinais.index', compact('sinais', 'categorias'));
     }
 
     /**
@@ -42,7 +43,7 @@ class SinalController extends Controller
     public function store(StoreSinalRequest $request)
     {
         $sinal = $this->sinalRepository->create($request->validated());
-        return redirect()->route('sinais.show')->with('success', 'Sinal criado com sucesso.');
+        return redirect()->route('sinais.show', $sinal)->with('success', 'Sinal criado com sucesso.');
     }
 
     /**

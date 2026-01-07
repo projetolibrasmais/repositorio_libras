@@ -13,6 +13,9 @@ class Categoria extends Model
 
     protected $table = 'categorias';
 
+    /**
+     * The columns that can be searched.
+     */
     protected $searchable = ['nome', 'slug'];
 
     /**
@@ -23,11 +26,25 @@ class Categoria extends Model
         'slug',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     */
     protected $casts = [
         'nome' => 'string',
         'slug' => 'string',
     ];
 
+    /**
+     * Relationship to Sinal model.
+     */
+    public function sinais()
+    {
+        return $this->belongsToMany(Sinal::class, 'sinal_categoria', 'categoria_id', 'sinal_id');
+    }
+
+    /**
+     * Get the activity log options for the model.
+     */
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
