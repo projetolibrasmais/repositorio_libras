@@ -39,7 +39,7 @@ class SinalRepository extends BaseRepository
      */
     public function create(array $data): Sinal
     {
-        $data['slug'] = Str::slug($data['nome']);
+        $data['slug'] = Str::slug($data['palavra_portugues']);
 
         return parent::create($data);
     }
@@ -49,7 +49,7 @@ class SinalRepository extends BaseRepository
      */
     public function update(int $id, array $data): ?Sinal
     {
-        $data['slug'] = Str::slug($data['nome']);
+        $data['slug'] = Str::slug($data['palavra_portugues']);
 
         return parent::update($id, $data);
     }

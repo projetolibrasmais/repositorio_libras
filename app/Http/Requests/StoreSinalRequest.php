@@ -25,7 +25,7 @@ class StoreSinalRequest extends FormRequest
             'palavra_portugues' => 'required|string|max:255',
             'definicao' => 'nullable|string',
             'instrucao_execucao' => 'nullable|string',
-            'status' => 'required|in:Sinal Existente Catalogado, Em Validacao, Publicado',
+            'status' => 'required|in:catalogado,em_validacao,publicado',
             'video_principal_id' => 'nullable|exists:videos,id',
         ];
     }

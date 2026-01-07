@@ -47,7 +47,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'create_sinais', 'description' => 'Criar sinais', 'guard_name' => 'web'],
             ['name' => 'edit_sinais', 'description' => 'Editar sinais', 'guard_name' => 'web'],
             ['name' => 'delete_sinais', 'description' => 'Excluir sinais', 'guard_name' => 'web'],
-            ['name' => 'restore_sinais', 'dePscription' => 'Restaurar sinais', 'guard_name' => 'web'],
+            ['name' => 'restore_sinais', 'description' => 'Restaurar sinais', 'guard_name' => 'web'],
             ['name' => 'force_delete_sinais', 'description' => 'Excluir permanentemente sinais', 'guard_name' => 'web'],
         ];
 

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('palavra_portugues');
             $table->string('slug')->unique();
-            $table->text('definicao');
-            $table->text('instrucao_execucao');
-            $table->enum('status', ["Sinal Existente Catalogado", "Em Validacao", "Publicado"])->default('Em Validacao');
+            $table->text('definicao')->nullable();
+            $table->text('instrucao_execucao')->nullable();
+            $table->enum('status', ["catalogado", "em_validacao", "publicado"])->default('em_validacao');
             $table->timestamps();
         });
     }

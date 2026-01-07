@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSinalRequest;
 use App\Http\Requests\UpdateSinalRequest;
+use App\Models\Categoria;
 use App\Models\Sinal;
+use App\Repositories\Eloquent\SinalRepository;
 use Illuminate\Http\Request;
 
 class SinalController extends Controller
@@ -30,7 +32,8 @@ class SinalController extends Controller
      */
     public function create()
     {
-        return view('sinais.create');
+        $categorias = Categoria::orderBy('nome')->get();
+        return view('sinais.create', compact('categorias'));
     }
 
     /**
