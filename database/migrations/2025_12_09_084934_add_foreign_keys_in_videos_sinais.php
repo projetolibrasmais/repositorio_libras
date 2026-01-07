@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->foreignId('sinal_id')->constrained('sinais')->nullable();
+            $table->unsignedBigInteger('sinal_id')->nullable();
+            $table->foreign('sinal_id')->references('id')->on('sinais');
         });
 
         Schema::table('sinais', function (Blueprint $table) {
-            $table->foreignId('video_principal_id')->constrained('videos')->nullable();
+            $table->unsignedBigInteger('video_id')->nullable();
+            $table->foreign('video_id')->references('id')->on('videos');            
         });
     }
 
@@ -31,8 +33,8 @@ return new class extends Migration
         });
 
         Schema::table('sinais', function (Blueprint $table) {
-            $table->dropForeign(['video_principal_id']);
-            $table->dropColumn('video_principal_id');
+            $table->dropForeign(['video_id']);
+            $table->dropColumn('video_id');
         });
     }
 };
