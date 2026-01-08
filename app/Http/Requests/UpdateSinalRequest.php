@@ -22,11 +22,13 @@ class UpdateSinalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'palavra_portugues' => 'required|string|max:255,' .$this->sinais->id,
-            'definicao' => 'nullable|string,' .$this->sinais->id,
-            'instrucao_execucao' => 'nullable|string,' .$this->sinais->id,
-            'status' => 'required|in:Sinal Existente Catalogado, Em Validacao, Publicado,' .$this->sinais->id,
-            'video_principal_id' => 'nullable|exists:videos,id,' .$this->sinais->id,
+            'palavra_portugues' => 'required|string|max:255' .$this->route('sinal')->id,
+            'definicao' => 'nullable|string',
+            'instrucao_execucao' => 'nullable|string',
+            'status' => 'required|in:catalogado,em_validacao,publicado',
+            'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240',
+            'categorias' => 'nullable|array',
+            'categorias.*' => 'exists:categorias,id',
         ];
     }
 }

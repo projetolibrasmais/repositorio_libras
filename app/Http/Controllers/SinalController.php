@@ -51,7 +51,8 @@ class SinalController extends Controller
      */
     public function show(Sinal $sinal)
     {
-        return view('sinais.show', compact('sinal'));
+        $video = $sinal->video;
+        return view('sinais.show', compact('sinal', 'video'));
     }
 
     /**
@@ -59,14 +60,18 @@ class SinalController extends Controller
      */
     public function edit(Sinal $sinal)
     {
-        return view('sinais.edit', compact('sinal'));
+        $video = $sinal->video;
+
+        $categorias = Categoria::orderBy('nome')->get();
+        return view('sinais.edit', compact('sinal', 'categorias', 'video'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateSinalRequest $request, Sinal $sinal)
-    {
+    {      
+        
         $sinal = $this->sinalRepository->update($sinal->id, $request->validated());
         return redirect()->route('sinais.show', $sinal)->with('success', 'Sinal atualizado com sucesso.');
     }

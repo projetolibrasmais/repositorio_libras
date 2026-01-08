@@ -28,8 +28,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categorias', CategoriaController::class);
 
-    Route::resource('sinais', SinalController::class);
-
+    Route::resource('sinais', SinalController::class)->parameters([
+    'sinais' => 'sinal']);
+    
     Route::resource('logs', LogController::class)->only(['index', 'show']);
 
     Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');

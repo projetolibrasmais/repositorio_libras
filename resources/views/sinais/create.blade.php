@@ -156,10 +156,6 @@
                                                         {{ $categoria->nome }}
                                                     </label>
 
-                                                    @if (!empty($categoria->descricao))
-                                                        <p class="text-gray-500 text-xs">
-                                                            {{ $categoria->descricao }}</p>
-                                                    @endif
                                                 </div>
                                             </div>
                                         @endforeach
