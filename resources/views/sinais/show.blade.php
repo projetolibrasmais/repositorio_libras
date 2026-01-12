@@ -29,7 +29,7 @@
                     </x-slot>
                 </x-page-header>
 
-                <!-- Categoria Details -->
+                <!-- Sinal Details -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Main Info Card -->
                     <div class="lg:col-span-2">
@@ -66,7 +66,7 @@
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
                                         Definição
                                     </label>
-                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 whitespace-pre-line">
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 ">
                                         {{ $sinal->definicao ?? 'Nenhuma definição fornecida.' }}
                                     </p>
                                 </div>
@@ -76,32 +76,42 @@
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
                                         Instrução de Execução
                                     </label>
-                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 whitespace-pre-line">
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 ">
                                         {{ $sinal->instrucao_execucao ?? 'Nenhuma instrução fornecida.' }}
                                     </p>
                                 </div>
 
                                 <!-- Status -->
-                                <div>
+                               <div>
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
                                         Status
                                     </label>
+
                                     @php
-                                        $statusLabels = [
-                                            'catalogado' => 'Catalogado',
-                                            'em_validacao' => 'Em Validação',
-                                            'publicado' => 'Publicado',
+                                        $statusMap = [
+                                            'catalogado' => [
+                                                'label' => 'Catalogado',
+                                                'class' => 'bg-blue-100 text-blue-800',
+                                            ],
+                                            'em_validacao' => [
+                                                'label' => 'Em Validação',
+                                                'class' => 'bg-yellow-100 text-yellow-800',
+                                            ],
+                                            'publicado' => [
+                                                'label' => 'Publicado',
+                                                'class' => 'bg-green-100 text-green-800',
+                                            ],
                                         ];
 
-                                        $statusLabel = null;
-                                        if ($sinal->status) {
-                                            $statusLabel = $statusLabels[$sinal->status] ?? ucwords(str_replace('_', ' ', $sinal->status));
-                                        }
+                                        $status = $statusMap[$sinal->status] ?? [
+                                            'label' => ucwords(str_replace('_', ' ', $sinal->status ?? 'Indefinido')),
+                                            'class' => 'bg-gray-100 text-gray-800',
+                                        ];
                                     @endphp
 
-                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 whitespace-pre-line">
-                                        {{ $statusLabel ?? 'Nenhuma descrição fornecida.' }}
-                                    </p>
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold {{ $status['class'] }}">
+                                        {{ $status['label'] }}
+                                    </span>
                                 </div>
 
                                 <!-- Categorias -->
@@ -113,7 +123,27 @@
                                         @if ($sinal->categorias && $sinal->categorias->count())
                                             <div class="flex flex-wrap gap-2">
                                                 @foreach ($sinal->categorias as $categoria)
-                                                    <span class="inline-flex items-center px-3 py-1 bg-gray-100 text-sm rounded-full border">{{ $categoria->nome }}</span>
+                                                    @php
+                                                    $cores = [
+                                                        'bg-blue-100 text-blue-800 border-blue-200',
+                                                        'bg-green-100 text-green-800 border-green-200',
+                                                        'bg-yellow-100 text-yellow-800 border-yellow-200',
+                                                        'bg-red-100 text-red-800 border-red-200',
+                                                        'bg-purple-100 text-purple-800 border-purple-200',
+                                                        'bg-pink-100 text-pink-800 border-pink-200',
+                                                        'bg-indigo-100 text-indigo-800 border-indigo-200',
+                                                        'bg-teal-100 text-teal-800 border-teal-200',
+                                                    ];
+
+                                                    // garante índice válido mesmo se o ID for alto
+                                                    $cor = $cores[($categoria->id - 1) % count($cores)];
+                                                @endphp
+
+                                                <span
+                                                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border {{ $cor }}">
+                                                    {{ $categoria->nome }}
+                                                </span>
+
                                                 @endforeach
                                             </div>
                                         @else
@@ -128,7 +158,7 @@
                                         Vídeo do Sinal
                                     </label>
                                     @if ($sinal->video && $sinal->video->url_video)
-                                        <div class="mb-4">
+                                        <div class="mb-4 flex justify-center">
                                             <video controls class="w-full max-w-md rounded-lg border" preload="metadata">
                                                 <source src="{{ Storage::url($sinal->video->url_video) }}" type="video/mp4">
                                                 Seu navegador não suporta vídeo.

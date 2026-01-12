@@ -180,12 +180,12 @@
                                 @if ($sinal->video && $sinal->video->url_video)
                                     <div class="mb-4">
                                         <p class="text-sm text-gray-600 mb-2">Vídeo atual:</p>
-
-                                        <video controls class="w-full max-w-md rounded-lg border" preload="metadata">
+                                        <div class="flex justify-center">
+                                            <video controls class="w-full max-w-md rounded-lg border" preload="metadata">
                                             <source src="{{ Storage::url($sinal->video->url_video) }}" type="video/mp4">
                                             Seu navegador não suporta vídeo.
                                         </video>
- 
+                                        </div> 
                                     </div>
                                 @endif
                         

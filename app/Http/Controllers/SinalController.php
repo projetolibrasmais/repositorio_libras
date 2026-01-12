@@ -33,7 +33,7 @@ class SinalController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::orderBy('nome')->get();
+        $categorias = Categoria::select('id', 'nome')->get();
         return view('sinais.create', compact('categorias'));
     }
 
@@ -62,7 +62,7 @@ class SinalController extends Controller
     {
         $video = $sinal->video;
 
-        $categorias = Categoria::orderBy('nome')->get();
+        $categorias = Categoria::select('id', 'nome')->get();
         return view('sinais.edit', compact('sinal', 'categorias', 'video'));
     }
 

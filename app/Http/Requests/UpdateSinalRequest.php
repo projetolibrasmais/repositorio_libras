@@ -31,4 +31,36 @@ class UpdateSinalRequest extends FormRequest
             'categorias.*' => 'exists:categorias,id',
         ];
     }
+
+    /**
+     * Custom messages for validation errors.
+     */
+    public function messages(): array
+    {
+        return [
+            'required' => 'O campo :attribute é obrigatório.',
+            'string' => 'O campo :attribute deve ser uma string.',
+            'max' => 'O campo :attribute não pode exceder :max caracteres.',
+            'in' => 'O campo :attribute deve ser um dos seguintes valores: :values.',
+            'file' => 'O campo :attribute deve ser um arquivo válido.',
+            'mimes' => 'O campo :attribute deve ser um arquivo do tipo: :values.',
+            'array' => 'O campo :attribute deve ser um array.',
+            'exists' => 'O valor selecionado para :attribute é inválido.',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     */
+    public function attributes(): array
+    {
+        return [
+            'palavra_portugues' => 'palavra em português',
+            'definicao' => 'definição',
+            'instrucao_execucao' => 'instrução de execução',
+            'status' => 'status',
+            'video' => 'vídeo',
+            'categorias' => 'categorias',
+        ];
+    }
 }

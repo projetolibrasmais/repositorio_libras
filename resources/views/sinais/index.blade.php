@@ -203,17 +203,36 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        @if ($sinal->categorias->isNotEmpty())
-                                            <div class="flex flex-wrap gap-1">
-                                                @foreach ($sinal->categorias as $categoria)
-                                                    <span class="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">
+                                        <div class="bg-gray-50 rounded-lg p-3">
+                                            @if ($sinal->categorias && $sinal->categorias->count())
+                                                <div class="flex flex-wrap gap-2">
+                                                    @foreach ($sinal->categorias as $categoria)
+                                                        @php
+                                                        $cores = [
+                                                            'bg-blue-100 text-blue-800 border-blue-200',
+                                                            'bg-green-100 text-green-800 border-green-200',
+                                                            'bg-yellow-100 text-yellow-800 border-yellow-200',
+                                                            'bg-red-100 text-red-800 border-red-200',
+                                                            'bg-purple-100 text-purple-800 border-purple-200',
+                                                            'bg-pink-100 text-pink-800 border-pink-200',
+                                                            'bg-indigo-100 text-indigo-800 border-indigo-200',
+                                                            'bg-teal-100 text-teal-800 border-teal-200',
+                                                        ];
+
+                                                        // garante índice válido mesmo se o ID for alto
+                                                        $cor = $cores[($categoria->id - 1) % count($cores)];
+                                                    @endphp
+
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border {{ $cor }}">
                                                         {{ $categoria->nome }}
                                                     </span>
-                                                @endforeach
-                                            </div>
-                                        @else
-                                            <span class="text-gray-400 text-sm">—</span>
-                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @else
+                                                <p class="text-sm text-gray-600">Nenhuma categoria atribuída a este sinal.</p>
+                                            @endif
+                                        </div>
                                     </td>
 
 
