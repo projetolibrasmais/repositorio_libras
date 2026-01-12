@@ -159,7 +159,7 @@
                                     </label>
                                     @if ($sinal->video && $sinal->video->url_video)
                                         <div class="mb-4 flex justify-center">
-                                            <video controls class="w-full max-w-md rounded-lg border" preload="metadata">
+                                            <video controls class="w-full max-w-2xl rounded-lg border" preload="metadata">
                                                 <source src="{{ Storage::url($sinal->video->url_video) }}" type="video/mp4">
                                                 Seu navegador não suporta vídeo.
                                             </video>
