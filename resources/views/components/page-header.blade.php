@@ -5,7 +5,7 @@
         <div>
             <h1 class="text-2xl font-semibold text-gray-900">{{ $title }}</h1>
             @if($description)
-                <p class="mt-1 text-sm text-gray-600">{{ $description }}</p>
+                <p class="mt-1 text-sm text-gray-600 break-all">{{ $description }}</p>
             @endif
         </div>
         

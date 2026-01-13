@@ -10,7 +10,7 @@
             <div class="p-6">
                 <!-- Page Header -->
                 <x-page-header title="Visualizar Sinal"
-                    description="Detalhes completos do sinal {{ $sinal->palavra_portugues }}">
+                    description="Detalhes completos do sinal {{ $sinal->palavra_portugues }}" >
                     <x-slot name="action">
                         <div class="flex gap-2">
                             <a href="{{ route('sinais.index') }}"
@@ -43,10 +43,10 @@
                             <div class="p-6 space-y-4">
                                 <!-- Palavra em Português -->
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                    <label class="block text-sm font-medium text-gray-500 mb-1 ">
                                         Palavra em Português
                                     </label>
-                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3">
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
                                         {{ $sinal->palavra_portugues }}
                                     </p>
                                 </div>                                
@@ -66,7 +66,7 @@
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
                                         Definição
                                     </label>
-                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 ">
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
                                         {{ $sinal->definicao ?? 'Nenhuma definição fornecida.' }}
                                     </p>
                                 </div>
@@ -76,7 +76,7 @@
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
                                         Instrução de Execução
                                     </label>
-                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 ">
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
                                         {{ $sinal->instrucao_execucao ?? 'Nenhuma instrução fornecida.' }}
                                     </p>
                                 </div>
