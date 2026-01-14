@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Sinal extends Model
 {
-    use LogsActivity, Searchable;
+    use LogsActivity, Searchable, SoftDeletes;
 
     protected $table = 'sinais';
 
@@ -27,7 +28,6 @@ class Sinal extends Model
         'definicao',
         'instrucao_execucao',
         'status',
-        'video_id',
     ];
 
     /**
@@ -39,7 +39,6 @@ class Sinal extends Model
         'definicao' => 'string',
         'instrucao_execucao' => 'string',
         'status' => 'string',
-        'video_id' => 'integer',
     ];
 
      /**
@@ -50,6 +49,7 @@ class Sinal extends Model
         'slug' => 'like',
         'definicao' => 'like',
         'instrucao_execucao' => 'like',
+        'status' => '=',
         'categorias.id' => '=',
         'created_from:created_at' => 'date_from',
         'created_to:created_at' => 'date_to',

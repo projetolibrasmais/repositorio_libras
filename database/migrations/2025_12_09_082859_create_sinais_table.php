@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('instrucao_execucao')->nullable();
             $table->enum('status', ["catalogado", "em_validacao", "publicado"])->default('em_validacao');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

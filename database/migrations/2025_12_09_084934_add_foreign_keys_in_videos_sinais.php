@@ -13,12 +13,7 @@ return new class extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             $table->unsignedBigInteger('sinal_id')->nullable();
-            $table->foreign('sinal_id')->references('id')->on('sinais');
-        });
-
-        Schema::table('sinais', function (Blueprint $table) {
-            $table->unsignedBigInteger('video_id')->nullable();
-            $table->foreign('video_id')->references('id')->on('videos');            
+            $table->foreign('sinal_id')->references('id')->on('sinais')->onDelete('cascade');
         });
     }
 
@@ -30,11 +25,6 @@ return new class extends Migration
         Schema::table('videos', function (Blueprint $table) {
             $table->dropForeign(['sinal_id']);
             $table->dropColumn('sinal_id');
-        });
-
-        Schema::table('sinais', function (Blueprint $table) {
-            $table->dropForeign(['video_id']);
-            $table->dropColumn('video_id');
         });
     }
 };
