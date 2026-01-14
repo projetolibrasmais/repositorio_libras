@@ -26,45 +26,24 @@ class UserRepository extends BaseRepository
         $query = $this->model->query()->with('roles');
 
         if ($request) {
-            // Apply search
             if ($request->filled('search')) {
                 $query->search($request->search);
             }
 
-            // Apply filters
-            $query = $this->applyFilters($query, $request);
+            if ($request->filled('role')) {
+                $query->whereHas('roles', function($q) use ($request) {
+                    $q->where('name', $request->role);
+                });
+            }
 
-            // Apply sorting
+            $query->applyFilters($request);
+
             $sortColumn = $request->get('sort', 'created_at');
             $sortDirection = $request->get('direction', 'desc');
             $query->orderByColumn($sortColumn, $sortDirection);
         }
 
         return $query->paginate($perPage)->withQueryString();
-    }
-
-    /**
-     * Apply advanced filters to query.
-     */
-    protected function applyFilters($query, $request)
-    {
-        // Filter by role
-        if ($request->filled('role')) {
-            $query->whereHas('roles', function($q) use ($request) {
-                $q->where('name', $request->role);
-            });
-        }
-
-        // Filter by date range
-        if ($request->filled('date_from')) {
-            $query->whereDate('created_at', '>=', $request->date_from);
-        }
-
-        if ($request->filled('date_to')) {
-            $query->whereDate('created_at', '<=', $request->date_to);
-        }
-
-        return $query;
     }
 
     /**
