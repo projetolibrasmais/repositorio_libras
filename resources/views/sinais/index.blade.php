@@ -257,7 +257,7 @@
                                                     @endphp
 
                                                     <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border {{ $cor }}">
+                                                        class="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold border {{ $cor }}">
                                                         {{ $categoria->nome }}
                                                     </span>
                                                     @endforeach
