@@ -89,7 +89,7 @@
                                 @if (count($categorias) > 0)
                                     <div>
                                         <label for="categoria_id" class="block text-sm font-medium text-gray-700 mb-1">
-                                            <i class="ph ph-user mr-1"></i>
+                                            <i class="ph ph-bookmark mr-1"></i>
                                             Categoria
                                         </label>
                                         <select name="categoria_id" id="categoria_id"
@@ -107,7 +107,7 @@
 
                                  <div>
                                     <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
-                                        <i class="ph ph-trash mr-1"></i>
+                                        <i class="ph ph-tag mr-1"></i>
                                         Status
                                     </label>
                                     <select name="status" id="status"
