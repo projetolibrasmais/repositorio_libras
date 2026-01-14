@@ -49,10 +49,10 @@
                                     <span x-show="!filtersOpen" class="ml-2">
                                         <i class="ph ph-caret-down"></i>
                                     </span>
-                                    @if (request()->hasAny(['categoria_id', 'date_from', 'date_to']))
+                                    @if (request()->hasAny(['categoria_id', 'date_from', 'date_to', 'show_deleted']))
                                         <span
                                             class="absolute -top-2 -right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
-                                            {{ collect(['categoria_id', 'date_from', 'date_to'])->filter(fn($key) => request()->filled($key))->count() }}
+                                            {{ collect(['categoria_id', 'date_from', 'date_to', 'show_deleted'])->filter(fn($key) => request()->filled($key))->count() }}
                                         </span>
                                     @endif
                                 </button>
@@ -65,7 +65,7 @@
                                 </button>
 
                                 <!-- Clear Button -->
-                                @if (request('search') || request()->hasAny(['categoria_id', 'date_from', 'date_to']))
+                                @if (request('search') || request()->hasAny(['categoria_id', 'date_from', 'date_to', 'show_deleted']))
                                     <a href="{{ url()->current() }}"
                                         class="inline-flex items-center px-4 py-2.5 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors">
                                         <i class="ph ph-x mr-2"></i>
@@ -105,6 +105,20 @@
                                     </div>
                                 @endif
 
+                                 <div>
+                                    <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
+                                        <i class="ph ph-trash mr-1"></i>
+                                        Status
+                                    </label>
+                                    <select name="status" id="status"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        <option value="" {{ request('status') == '' ? 'selected' : '' }}>Todos</option>
+                                        <option value="catalogado" {{ request('status') == 'catalogado' ? 'selected' : '' }}>Catalogado</option>
+                                        <option value="em_validacao" {{ request('status') == 'em_validacao' ? 'selected' : '' }}>Em Validação</option>
+                                        <option value="publicado" {{ request('status') == 'publicado' ? 'selected' : '' }}>Publicado</option>
+                                    </select>
+                                </div>
+
                                 <!-- Date From -->
                                 <div>
                                     <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">
@@ -125,6 +139,20 @@
                                     <input type="date" name="date_to" id="date_to"
                                         value="{{ request('date_to') }}"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                </div>
+
+                                <!-- Show Deleted Filter -->
+                                <div>
+                                    <label for="show_deleted" class="block text-sm font-medium text-gray-700 mb-1">
+                                        <i class="ph ph-trash mr-1"></i>
+                                        Sinais Deletados
+                                    </label>
+                                    <select name="show_deleted" id="show_deleted"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        <option value="" {{ request('show_deleted') == '' ? 'selected' : '' }}>Apenas Ativos</option>
+                                        <option value="with" {{ request('show_deleted') == 'with' ? 'selected' : '' }}>Todos</option>
+                                        <option value="only" {{ request('show_deleted') == 'only' ? 'selected' : '' }}>Apenas Deletados</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -169,6 +197,12 @@
                                                 <div class="text-sm font-medium text-gray-900">
                                                     {{ $sinal->palavra_portugues }}
                                                 </div>
+                                                @if($sinal->trashed())
+                                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
+                                                        <i class="ph ph-trash text-xs mr-1"></i>
+                                                        Deletado
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
@@ -203,7 +237,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="bg-gray-50 rounded-lg p-3">
+                                        <div>
                                             @if ($sinal->categorias && $sinal->categorias->count())
                                                 <div class="flex flex-wrap gap-2">
                                                     @foreach ($sinal->categorias as $categoria)
@@ -218,7 +252,6 @@
                                                             'bg-indigo-100 text-indigo-800 border-indigo-200',
                                                             'bg-teal-100 text-teal-800 border-teal-200',
                                                         ];
-
                                                         // garante índice válido mesmo se o ID for alto
                                                         $cor = $cores[($categoria->id - 1) % count($cores)];
                                                     @endphp
@@ -241,28 +274,59 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center gap-2">
-                                            <a href="{{ route('sinais.show', $sinal) }}"
-                                                class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
-                                                <i class="ph ph-eye text-lg"></i>
-                                            </a>
-                                            @can('edit_sinais')
-                                                <a href="{{ route('sinais.edit', $sinal) }}"
-                                                    class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-200 transition-colors">
-                                                    <i class="ph ph-pencil text-lg"></i>
+                                            @if($sinal->trashed())
+                                                <!-- Restore Button -->
+                                                @can('edit_sinais')
+                                                    <form action="{{ route('sinais.restore', $sinal->id) }}" method="POST"
+                                                        class="restore-form-{{ $sinal->id }}">
+                                                        @csrf
+                                                        <button type="button"
+                                                            onclick="restoreForm = document.querySelector('.restore-form-{{ $sinal->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'restore-sinal' }));"
+                                                            class="bg-green-100 text-green-600 px-3 py-1 rounded-lg hover:bg-green-200 transition-colors"
+                                                            title="Restaurar">
+                                                            <i class="ph ph-arrow-counter-clockwise text-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+                                                
+                                                <!-- Force Delete Button -->
+                                                @can('delete_sinais')
+                                                    <form action="{{ route('sinais.force-delete', $sinal->id) }}" method="POST"
+                                                        class="force-delete-form-{{ $sinal->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            onclick="forceDeleteForm = document.querySelector('.force-delete-form-{{ $sinal->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'force-delete-sinal' }));"
+                                                            class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors"
+                                                            title="Excluir Permanentemente">
+                                                            <i class="ph ph-trash text-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+                                            @else
+                                                <a href="{{ route('sinais.show', $sinal) }}"
+                                                    class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                                    <i class="ph ph-eye text-lg"></i>
                                                 </a>
-                                            @endcan
-                                            @can('delete_sinais')
-                                                <form action="{{ route('sinais.destroy', $sinal) }}" method="POST"
-                                                    class="delete-form-{{ $sinal->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button"
-                                                        onclick="deleteForm = document.querySelector('.delete-form-{{ $sinal->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-sinal' }));"
-                                                        class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors">
-                                                        <i class="ph ph-trash text-lg"></i>
-                                                    </button>
-                                                </form>
-                                            @endcan
+                                                @can('edit_sinais')
+                                                    <a href="{{ route('sinais.edit', $sinal) }}"
+                                                        class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-200 transition-colors">
+                                                        <i class="ph ph-pencil text-lg"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('delete_sinais')
+                                                    <form action="{{ route('sinais.destroy', $sinal) }}" method="POST"
+                                                        class="delete-form-{{ $sinal->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            onclick="deleteForm = document.querySelector('.delete-form-{{ $sinal->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-sinal' }));"
+                                                            class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors">
+                                                            <i class="ph ph-trash text-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -293,16 +357,38 @@
     </div>
 
     <!-- Delete Modal -->
-    <x-delete-modal name="delete-sinal" title="Confirmar Exclusão da sinal"
-        message="Tem certeza que deseja excluir esta sinal? Todos os sinais associados a esta sinal perderão suas definições. Esta ação não pode ser desfeita." />
+    <x-delete-modal name="delete-sinal" title="Confirmar Exclusão do Sinal"
+        message="Tem certeza que deseja excluir este sinal? O sinal e o vídeo associado serão movidos para a lixeira, mas o arquivo permanecerá no storage." />
+
+    <!-- Restore Modal -->
+    <x-restore-modal name="restore-sinal" title="Confirmar Restauração do Sinal"
+        message="Tem certeza que deseja restaurar este sinal? O sinal e o vídeo associado serão restaurados." />
+
+    <!-- Force Delete Modal -->
+    <x-force-delete-modal name="force-delete-sinal" title="Confirmar Exclusão Permanente do Sinal"
+        message="Tem certeza que deseja excluir este sinal permanentemente? O sinal, o vídeo e o arquivo no storage serão removidos. Esta ação não pode ser desfeita!" />
 
     @push('scripts')
         <script>
             let deleteForm = null;
+            let restoreForm = null;
+            let forceDeleteForm = null;
 
             function confirmDelete() {
                 if (deleteForm) {
                     deleteForm.submit();
+                }
+            }
+
+            function confirmRestore() {
+                if (restoreForm) {
+                    restoreForm.submit();
+                }
+            }
+
+            function confirmForceDelete() {
+                if (forceDeleteForm) {
+                    forceDeleteForm.submit();
                 }
             }
         </script>

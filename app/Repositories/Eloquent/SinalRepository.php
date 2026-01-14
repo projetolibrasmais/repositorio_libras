@@ -28,15 +28,14 @@ class SinalRepository extends BaseRepository
         $query = $this->model->query()->with(['video', 'categorias']);
 
         if ($request) {
-            // Apply search
+            $query->withDeletedFilter($request->get('show_deleted'));
+
             if ($request->filled('search')) {
                 $query->search($request->search);
             }
 
-            // Apply filters
-            $query = $this->applyFilters($query, $request);
+            $query->applyFilters($request);
 
-            // Apply sorting
             $sortColumn = $request->get('sort', 'created_at');
             $sortDirection = $request->get('direction', 'desc');
             $query->orderByColumn($sortColumn, $sortDirection);
@@ -46,35 +45,13 @@ class SinalRepository extends BaseRepository
     }
 
     /**
-     * Apply advanced filters to query.
-     */
-    protected function applyFilters($query, $request)
-    {
-        // Filter by categoria
-        if ($request->filled('categoria_id')) {
-            $query->whereHas('categorias', function($q) use ($request) {
-                $q->where('categorias.id', $request->categoria_id);
-            });
-        }
-
-        // Filter by date range
-        if ($request->filled('date_from')) {
-            $query->whereDate('created_at', '>=', $request->date_from);
-        }
-
-        if ($request->filled('date_to')) {
-            $query->whereDate('created_at', '<=', $request->date_to);
-        }
-
-        return $query;
-    }
-
-    /**
      * Find a record by its ID.
      */
     public function find(int $id): ?Sinal
     {
-        return $this->model->with(['video', 'categorias'])->find($id);
+        return $this->model->withTrashed()->with(['video' => function ($query) {
+            $query->withTrashed();
+        }, 'categorias'])->find($id);
     }
 
     /**
@@ -84,36 +61,27 @@ class SinalRepository extends BaseRepository
     {
         $data['slug'] = Str::slug($data['palavra_portugues']);
 
-        $videoId = null;
-        if (isset($data['video']) && $data['video']) {
+        $categorias = $data['categorias'] ?? [];
+        unset($data['categorias']);
+        
+        $videoFile = $data['video'] ?? null;
+        unset($data['video']);
+
+        $sinal = parent::create($data);
+
+        if ($videoFile) {
             $videoPath = StorageHelper::uploadVideo(
-                $data['video'],
+                $videoFile,
                 $data['palavra_portugues'],
                 'sinais'
             );
 
             if ($videoPath) {
-                $video = Video::create([
+                Video::create([
                     'url_video' => $videoPath,
+                    'sinal_id' => $sinal->id,
                 ]);
-
-                $videoId = $video->id;
             }
-
-            unset($data['video']);
-        }
-
-        if ($videoId) {
-            $data['video_id'] = $videoId;
-        }
-
-        $categorias = $data['categorias'] ?? [];
-        unset($data['categorias']);
-
-        $sinal = parent::create($data);
-
-        if ($videoId) {
-            Video::where('id', $videoId)->update(['sinal_id' => $sinal->id]);
         }
 
         if (!empty($categorias)) {
@@ -138,7 +106,7 @@ class SinalRepository extends BaseRepository
         if (isset($data['video']) && $data['video']) {
             $oldVideo = $sinal->video;
             $oldPath = $oldVideo ? $oldVideo->url_video : null;
-            
+
             $videoPath = StorageHelper::replaceVideo(
                 $oldPath,
                 $data['video'],
@@ -150,11 +118,10 @@ class SinalRepository extends BaseRepository
                 if ($oldVideo) {
                     $oldVideo->update(['url_video' => $videoPath]);
                 } else {
-                    $video = Video::create([
+                    Video::create([
                         'url_video' => $videoPath,
                         'sinal_id' => $sinal->id,
                     ]);
-                    $data['video_id'] = $video->id;
                 }
             }
 
@@ -180,19 +147,15 @@ class SinalRepository extends BaseRepository
     {
         $sinal = $this->find($id);
         
-        if ($sinal) {
-            $video = $sinal->video;
-            
-            if ($video) {
-                if ($video->url_video) {
-                    StorageHelper::deleteVideo($video->url_video);
-                }
-                
-                $video->delete();
-            }
+        if (!$sinal) {
+            return false;
         }
 
-        return parent::delete($id);
+        if ($sinal->video) {
+            $sinal->video->delete();
+        }
+
+        return $sinal->delete();
     }
 
     /**
@@ -200,7 +163,22 @@ class SinalRepository extends BaseRepository
      */
     public function restore(int $id): bool
     {
-        return parent::restore($id);
+        $sinal = $this->model->withTrashed()->find($id);
+        
+        if (!$sinal || !$sinal->trashed()) {
+            return false;
+        }
+
+        $restored = $sinal->restore();
+        
+        if ($restored) {
+            $video = Video::withTrashed()->where('sinal_id', $sinal->id)->first();
+            if ($video && $video->trashed()) {
+                $video->restore();
+            }
+        }
+
+        return $restored;
     }
 
     /**
@@ -208,6 +186,23 @@ class SinalRepository extends BaseRepository
      */
     public function forceDelete(int $id): bool
     {
-        return parent::forceDelete($id);
+        $sinal = $this->model->withTrashed()->find($id);
+        
+        if (!$sinal) {
+            return false;
+        }
+
+        $sinal->categorias()->detach();
+
+        $video = Video::withTrashed()->where('sinal_id', $sinal->id)->first();
+        if ($video) {
+            if ($video->url_video) {
+                StorageHelper::deleteVideo($video->url_video);
+            }
+            
+            $video->forceDelete();
+        }
+
+        return $sinal->forceDelete();
     }
 }

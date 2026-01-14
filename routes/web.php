@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categorias', CategoriaController::class);
 
+    Route::post('/sinais/restore/{id}', [SinalController::class, 'restore'])->name('sinais.restore');
+    Route::delete('/sinais/force-delete/{id}', [SinalController::class, 'forceDelete'])->name('sinais.force-delete');
     Route::resource('sinais', SinalController::class)->parameters([
     'sinais' => 'sinal']);
     

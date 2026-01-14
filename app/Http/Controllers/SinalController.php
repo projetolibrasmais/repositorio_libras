@@ -84,4 +84,32 @@ class SinalController extends Controller
         $this->sinalRepository->delete($sinal->id);
         return redirect()->route('sinais.index')->with('success', 'Sinal removido com sucesso.');
     }
+
+    /**
+     * Restore a soft deleted resource.
+     */
+    public function restore(int $id)
+    {
+        $restored = $this->sinalRepository->restore($id);
+        
+        if ($restored) {
+            return redirect()->route('sinais.index')->with('success', 'Sinal restaurado com sucesso.');
+        }
+        
+        return redirect()->route('sinais.index')->with('error', 'Erro ao restaurar o sinal.');
+    }
+
+    /**
+     * Permanently delete the specified resource from storage.
+     */
+    public function forceDelete(int $id)
+    {
+        $deleted = $this->sinalRepository->forceDelete($id);
+        
+        if ($deleted) {
+            return redirect()->route('sinais.index')->with('success', 'Sinal excluído permanentemente com sucesso.');
+        }
+        
+        return redirect()->route('sinais.index')->with('error', 'Erro ao excluir o sinal permanentemente.');
+    }
 }
