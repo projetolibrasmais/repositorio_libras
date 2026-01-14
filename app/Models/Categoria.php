@@ -19,6 +19,16 @@ class Categoria extends Model
     protected $searchable = ['nome', 'slug'];
 
     /**
+     * The attributes that can be filtered.
+     */
+    protected $filterable = [
+        'nome' => 'like',
+        'slug' => 'like',
+        'date_from:created_at' => 'date_from',
+        'date_to:created_at' => 'date_to',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [

@@ -22,6 +22,15 @@ class User extends Authenticatable
     protected $searchable = ['name', 'email'];
 
     /**
+     * The attributes that can be filtered.
+     */
+    protected $filterable = [
+        'role' => 'role_filter',
+        'date_from:created_at' => 'date_from',
+        'date_to:created_at' => 'date_to',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>

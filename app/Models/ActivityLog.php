@@ -38,8 +38,10 @@ class ActivityLog extends Activity
         'causer_type' => 'like',
         'event' => '=',
         'causer_id' => '=',
-        'created_from:created_at' => 'date_from',
-        'created_to:created_at' => 'date_to',
+        'user_id:causer_id' => '=',
+        'log_name' => '=',
+        'date_from:created_at' => 'date_from',
+        'date_to:created_at' => 'date_to',
     ];
 
     /**

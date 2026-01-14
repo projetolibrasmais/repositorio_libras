@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 trait Searchable
 {
@@ -20,12 +21,10 @@ trait Searchable
             return $query;
         }
 
-        // Use searchable columns defined in the model or default to ['name']
         $searchableColumns = $columns ?? $this->searchable ?? ['name'];
 
         return $query->where(function (Builder $query) use ($search, $searchableColumns) {
             foreach ($searchableColumns as $column) {
-                // Check if column contains a relation (e.g., 'user.name')
                 if (str_contains($column, '.')) {
                     $this->addRelationSearch($query, $column, $search);
                 } else {
@@ -69,7 +68,129 @@ trait Searchable
     }
 
     /**
-     * Scope to apply filters dynamically.
+     * Scope to apply advanced filters dynamically based on model's $filterable property.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Http\Request|array $request
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeApplyFilters(Builder $query, $request): Builder
+    {
+        $filters = is_array($request) ? $request : $request->all();
+        $filterable = $this->filterable ?? [];
+
+        foreach ($filterable as $key => $operator) {
+            if (str_contains($key, ':')) {
+                [$requestKey, $dbColumn] = explode(':', $key);
+            } else {
+                $requestKey = $key;
+                $dbColumn = $key;
+            }
+
+            if (!isset($filters[$requestKey]) || $filters[$requestKey] === '' || $filters[$requestKey] === null) {
+                continue;
+            }
+
+            $value = $filters[$requestKey];
+
+            $this->applyFilterByOperator($query, $dbColumn, $value, $operator, $requestKey);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Apply filter based on operator type.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $column
+     * @param mixed $value
+     * @param string $operator
+     * @param string $requestKey
+     * @return void
+     */
+    protected function applyFilterByOperator(Builder $query, string $column, $value, string $operator, string $requestKey): void
+    {
+        switch (strtolower($operator)) {
+            case 'like':
+                if (str_contains($column, '.')) {
+                    $this->applyRelationFilter($query, $column, $value, 'LIKE');
+                } else {
+                    $query->where($column, 'LIKE', "%{$value}%");
+                }
+                break;
+
+            case '=':
+            case 'exact':
+                if (str_contains($column, '.')) {
+                    $this->applyRelationFilter($query, $column, $value, '=');
+                } else {
+                    $query->where($column, '=', $value);
+                }
+                break;
+
+            case 'in':
+                $values = is_array($value) ? $value : [$value];
+                $query->whereIn($column, $values);
+                break;
+
+            case 'date_from':
+            case '>=':
+                $query->whereDate($column, '>=', $value);
+                break;
+
+            case 'date_to':
+            case '<=':
+                $query->whereDate($column, '<=', $value);
+                break;
+
+            case '>':
+                $query->where($column, '>', $value);
+                break;
+
+            case '<':
+                $query->where($column, '<', $value);
+                break;
+
+            case 'between':
+                if (is_array($value) && count($value) === 2) {
+                    $query->whereBetween($column, $value);
+                }
+                break;
+
+            default:
+                // Default to exact match
+                $query->where($column, $value);
+                break;
+        }
+    }
+
+    /**
+     * Apply filter for relationship columns.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $column
+     * @param mixed $value
+     * @param string $operator
+     * @return void
+     */
+    protected function applyRelationFilter(Builder $query, string $column, $value, string $operator = '='): void
+    {
+        $parts = explode('.', $column);
+        $relation = $parts[0];
+        $relatedColumn = $parts[1];
+
+        $query->whereHas($relation, function (Builder $query) use ($relatedColumn, $value, $operator) {
+            if ($operator === 'LIKE') {
+                $query->where($relatedColumn, 'LIKE', "%{$value}%");
+            } else {
+                $query->where($relatedColumn, $operator, $value);
+            }
+        });
+    }
+
+    /**
+     * Scope to apply filters dynamically (legacy support).
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param array $filters
@@ -82,12 +203,10 @@ trait Searchable
                 continue;
             }
 
-            // Skip search parameter as it's handled separately
             if ($key === 'search') {
                 continue;
             }
 
-            // Handle exact match
             if (is_array($value)) {
                 $query->whereIn($key, $value);
             } else {
@@ -114,6 +233,31 @@ trait Searchable
             }
         } else {
             $query->orderBy($column, $direction);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Scope to handle soft delete filters.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string|null $showDeleted
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithDeletedFilter(Builder $query, ?string $showDeleted): Builder
+    {
+        if (!$showDeleted) {
+            return $query;
+        }
+
+        switch ($showDeleted) {
+            case 'only':
+                $query->onlyTrashed();
+                break;
+            case 'with':
+                $query->withTrashed();
+                break;
         }
 
         return $query;
