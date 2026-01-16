@@ -74,9 +74,11 @@
                                         Evento
                                     </label>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                        {{ $log->event === 'created' ? 'bg-green-100 text-green-800' : '' }}
+                                        {{ $log->event === 'created' ? 'bg-blue-100 text-blue-800' : '' }}
                                         {{ $log->event === 'updated' ? 'bg-yellow-100 text-yellow-800' : '' }}
-                                        {{ $log->event === 'deleted' ? 'bg-red-100 text-red-800' : '' }}">
+                                        {{ $log->event === 'restored' ? 'bg-green-100 text-green-800' : '' }}
+                                        {{ $log->event === 'deleted' ? 'bg-red-100 text-red-800' : '' }}
+                                        {{ $log->event === 'force_deleted' ? 'bg-gray-800 text-white' : '' }}">
                                         <i class="ph ph-lightning mr-1"></i>
                                         {{ ucfirst($log->event) }}
                                     </span>

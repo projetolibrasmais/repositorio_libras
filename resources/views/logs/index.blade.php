@@ -216,7 +216,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span
-                                            class="px-2 inline-flex uppercase text-xs leading-5 font-semibold rounded-md {{ $log->event == 'created' ? 'bg-green-100 text-green-800' : ($log->event == 'updated' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
+                                            class="px-2 inline-flex uppercase text-xs leading-5 font-semibold rounded-md 
+                                            {{ $log->event == 'created' ? 'bg-blue-100 text-blue-800' : '' }}
+                                            {{ $log->event == 'updated' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                                            {{ $log->event == 'restored' ? 'bg-green-100 text-green-800' : '' }}
+                                            {{ $log->event == 'deleted' ? 'bg-red-100 text-red-800' : '' }}
+                                            {{ $log->event == 'force_deleted' ? 'bg-gray-800 text-white' : '' }}">
                                             {{ $log->event }}
                                         </span>
                                     </td>

@@ -96,4 +96,19 @@ class Sinal extends Model
             ->logOnlyDirty()
             ->logAll();
     }
+
+    /**
+     * Boot method to register force delete event logging.
+     */
+    protected static function booted(): void
+    {
+        static::forceDeleting(function (Sinal $sinal) {
+            activity()
+                ->causedBy(auth()->user())
+                ->performedOn($sinal)
+                ->event('force_deleted')
+                ->withProperties(['old' => $sinal->toArray()])
+                ->log(ActivityLog::getDescricaoGenericaEvento('force_deleted'));
+        });
+    }
 }

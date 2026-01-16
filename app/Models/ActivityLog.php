@@ -71,9 +71,11 @@ class ActivityLog extends Activity
             case 'updated':
                 return 'atualizado';
             case 'deleted':
-                return 'deletado';
+                return 'excluído';
             case 'restored':
                 return 'restaurado';
+            case 'force_deleted':
+                return 'excluído permanentemente';
             default:
                 return $eventName;
         }
@@ -90,6 +92,8 @@ class ActivityLog extends Activity
                 return 'Remoção';
             case 'restored':
                 return 'Restauração';
+            case 'force_deleted':
+                return 'Exclusão Permanente';
             default:
                 return $this->description;
         }
