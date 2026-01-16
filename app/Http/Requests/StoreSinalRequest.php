@@ -23,11 +23,11 @@ class StoreSinalRequest extends FormRequest
     {
         return [
             'palavra_portugues' => 'required|string|max:255',
-            'definicao' => 'nullable|string',
-            'instrucao_execucao' => 'nullable|string',
+            'definicao' => 'required|string',
+            'instrucao_execucao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
-            'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
-            'categorias' => 'nullable|array',
+            'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
+            'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];
     }
