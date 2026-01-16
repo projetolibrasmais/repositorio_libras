@@ -56,8 +56,7 @@
                                         <label for="definicao" class="block text-sm font-medium text-gray-700 mb-1">
                                             Definição <span class="text-red-500">*</span>
                                         </label>
-                                        <textarea name="definicao" id="definicao" rows="3"
-                                            placeholder="Digite a definição do sinal..."
+                                        <textarea name="definicao" id="definicao" rows="3" placeholder="Digite a definição do sinal..."
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('definicao') border-red-500 @enderror">{{ old('definicao') }}</textarea>
                                         @error('definicao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -122,7 +121,8 @@
                         <div class="lg:col-span-3 flex flex-col gap-6">
                             <!-- Categorias -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
-                                <h3 class="block text-sm font-medium text-gray-700 mb-1">Categorias <span class="text-red-500">*</span></h3>
+                                <h3 class="block text-sm font-medium text-gray-700 mb-1">Categorias <span
+                                        class="text-red-500">*</span></h3>
                                 <p class="text-sm text-gray-600 mb-4">Selecione a ou as categorias relacionadas a
                                     este sinal.</p>
 

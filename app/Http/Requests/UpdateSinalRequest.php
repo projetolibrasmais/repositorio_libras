@@ -22,11 +22,11 @@ class UpdateSinalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'palavra_portugues' => 'required|string|max:255' .$this->route('sinal')->id,
+            'palavra_portugues' => 'required|string|max:255',
             'definicao' => 'required|string',
             'instrucao_execucao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
-            'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240',
+            'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240',
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];
