@@ -66,9 +66,15 @@ class RoleRepository extends BaseRepository
     public function delete(int $id): bool
     {
         $role = $this->find($id);
+
         if ($role && $role->id === 1) {
             return false; // Prevent deletion of the default role
         }
+
+        if ($role->users()->count() > 0) {
+            return false;
+        }
+        
         return parent::delete($id);
     }
 
