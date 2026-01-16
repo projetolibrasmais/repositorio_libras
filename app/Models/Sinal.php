@@ -103,7 +103,7 @@ class Sinal extends Model
     protected static function booted(): void
     {
         static::forceDeleting(function (Sinal $sinal) {
-            activity()
+            activity('Sinal')
                 ->causedBy(auth()->user())
                 ->performedOn($sinal)
                 ->event('force_deleted')
