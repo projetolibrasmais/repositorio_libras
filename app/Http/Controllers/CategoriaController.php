@@ -73,7 +73,12 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $this->categoriaRepository->delete($categoria->id);
+        $deleted = $this->categoriaRepository->delete($categoria->id);
+
+        if (!$deleted) {
+            return redirect()->route('categorias.index')->with('error', 'Não é possível remover a categoria porque ela está associada a um ou mais sinais.');
+        }
+        
         return redirect()->route('categorias.index')->with('success', 'Categoria removida com sucesso.');
     }
 }
