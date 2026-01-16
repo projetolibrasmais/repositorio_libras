@@ -123,7 +123,7 @@
                                 <div>
                                     <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">
                                         <i class="ph ph-calendar mr-1"></i>
-                                        Data Início
+                                        Criado de
                                     </label>
                                     <input type="date" name="date_from" id="date_from"
                                         value="{{ request('date_from') }}"
@@ -134,7 +134,7 @@
                                 <div>
                                     <label for="date_to" class="block text-sm font-medium text-gray-700 mb-1">
                                         <i class="ph ph-calendar mr-1"></i>
-                                        Data Fim
+                                        Criado até
                                     </label>
                                     <input type="date" name="date_to" id="date_to"
                                         value="{{ request('date_to') }}"
@@ -168,10 +168,10 @@
                         <x-table-header column="palavra_portugues" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
                             Palavra em Português
                         </x-table-header>
-                        <x-table-header column="status" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Status
                         </x-table-header>
-                        <x-table-header column="categorias" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Categorias
                         </x-table-header>
                         <x-table-header column="created_at" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">

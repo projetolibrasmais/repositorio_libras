@@ -147,7 +147,7 @@
                                 <div>
                                     <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">
                                         <i class="ph ph-calendar mr-1"></i>
-                                        Data Início
+                                        Criado de
                                     </label>
                                     <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
@@ -157,7 +157,7 @@
                                 <div>
                                     <label for="date_to" class="block text-sm font-medium text-gray-700 mb-1">
                                         <i class="ph ph-calendar mr-1"></i>
-                                        Data Fim
+                                        Criado até
                                     </label>
                                     <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
@@ -170,19 +170,19 @@
                 <!-- Table -->
                 @if ($logs->count() > 0)
                     <x-table :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
-                        <x-table-header column="log_name" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Nome
                         </x-table-header>
-                        <x-table-header column="description" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Descrição
                         </x-table-header>
-                        <x-table-header column="event" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Evento
                         </x-table-header>
                         <x-table-header column="subject_id" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
                             ID do Objeto
                         </x-table-header>
-                        <x-table-header column="causer_id" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Usuário
                         </x-table-header>
                         <x-table-header column="created_at" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
@@ -210,13 +210,13 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         <span
-                                            class="inline-flex items-center rounded-full text-xs font-medium">
+                                            class="inline-flex items-center rounded-md text-xs font-medium">
                                             {{ $log->description }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $log->event == 'created' ? 'bg-green-100 text-green-800' : ($log->event == 'updated' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
+                                            class="px-2 inline-flex uppercase text-xs leading-5 font-semibold rounded-md {{ $log->event == 'created' ? 'bg-green-100 text-green-800' : ($log->event == 'updated' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
                                             {{ $log->event }}
                                         </span>
                                     </td>
@@ -247,7 +247,7 @@
                 @else
                     <!-- Empty State -->
                     <div class="text-center py-12">
-                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-md mb-4">
                             <i class="ph ph-shield-checkered text-gray-400 text-3xl"></i>
                         </div>
                         <h3 class="text-lg font-medium text-gray-900 mb-1">Nenhum log encontrado</h3>

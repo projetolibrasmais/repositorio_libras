@@ -55,17 +55,11 @@
                                     <!-- Definição -->
                                     <div>
                                         <label for="definicao" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Definição
+                                            Definição <span class="text-red-500">*</span>
                                         </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <i class="ph ph-book-open-text text-gray-400"></i>
-                                            </div>
-                                            <input type="text" name="definicao" id="definicao"
-                                                value="{{ old('definicao', $sinal->definicao) }}" placeholder=""
-                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('definicao') border-red-500 @enderror">
-                                        </div>
+                                        <textarea name="definicao" id="definicao" rows="3"
+                                            placeholder="Digite a definição do sinal..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('definicao') border-red-500 @enderror">{{ old('definicao', $sinal->definicao) }}</textarea>
                                         @error('definicao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -75,17 +69,11 @@
                                     <div>
                                         <label for="instrucao_execucao"
                                             class="block text-sm font-medium text-gray-700 mb-1">
-                                            Instrução de Execução
+                                            Instrução de Execução <span class="text-red-500">*</span>
                                         </label>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <i class="ph ph-hand-waving text-gray-400"></i>
-                                            </div>
-                                            <input type="text" name="instrucao_execucao" id="instrucao_execucao"
-                                                value="{{ old('instrucao_execucao', $sinal->instrucao_execucao) }}" placeholder=""
-                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('instrucao_execucao') border-red-500 @enderror">
-                                        </div>
+                                        <textarea name="instrucao_execucao" id="instrucao_execucao" rows="3"
+                                            placeholder="Digite as instruções de execução do sinal..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('instrucao_execucao') border-red-500 @enderror">{{ old('instrucao_execucao', $sinal->instrucao_execucao) }}</textarea>
                                         @error('instrucao_execucao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -135,10 +123,9 @@
                         <div class="lg:col-span-3 flex flex-col gap-6">
                             <!-- Categorias -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
-                                <h3 class="block text-sm font-medium text-gray-700 mb-1">Categorias</h3>
-                                <p class="text-sm text-gray-600 mb-4">Selecione as categorias relacionadas a
+                                <h3 class="block text-sm font-medium text-gray-700 mb-1">Categorias <span class="text-red-500">*</span></h3>
+                                <p class="text-sm text-gray-600 mb-4">Selecione a ou as categorias relacionadas a
                                     este sinal.</p>
-
                                 @if ($categorias->count() > 0)
                                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                                         @foreach ($categorias as $categoria)

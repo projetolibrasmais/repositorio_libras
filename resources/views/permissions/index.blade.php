@@ -23,10 +23,10 @@
                         <x-table-header column="name" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
                             Nome
                         </x-table-header>
-                        <x-table-header column="description" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Descrição
                         </x-table-header>
-                        <x-table-header column="guard_name" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Guard
                         </x-table-header>
                         <x-table-header column="created_at" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
@@ -60,7 +60,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-100 text-green-800">
                                         {{ $permission->guard_name }}
                                     </span>
                                 </td>

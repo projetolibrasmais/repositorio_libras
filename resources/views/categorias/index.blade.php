@@ -118,7 +118,7 @@
 
     <!-- Delete Modal -->
     <x-delete-modal name="delete-categoria" title="Confirmar Exclusão da Categoria"
-        message="Tem certeza que deseja excluir esta categoria? Todos os sinais associados a esta categoria perderão suas definições. Esta ação não pode ser desfeita." />
+        message="Tem certeza que deseja excluir esta categoria? Esta ação não pode ser desfeita." />
 
     @push('scripts')
         <script>

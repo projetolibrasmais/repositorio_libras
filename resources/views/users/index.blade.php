@@ -119,7 +119,7 @@
                                 <div>
                                     <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">
                                         <i class="ph ph-calendar mr-1"></i>
-                                        Data Início
+                                        Criado de
                                     </label>
                                     <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
@@ -129,7 +129,7 @@
                                 <div>
                                     <label for="date_to" class="block text-sm font-medium text-gray-700 mb-1">
                                         <i class="ph ph-calendar mr-1"></i>
-                                        Data Fim
+                                        Criado até
                                     </label>
                                     <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
@@ -151,7 +151,7 @@
                         <x-table-header :sortable="false">
                             Função
                         </x-table-header>
-                        <x-table-header column="email" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Email
                         </x-table-header>
                         <x-table-header column="created_at" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
@@ -183,14 +183,14 @@
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         @foreach ($user->roles as $role)
                                             <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
                                                 {{ $role->name }}
                                             </span>
                                         @endforeach
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-100 text-green-800">
                                             {{ $user->email }}
                                         </span>
                                     </td>
