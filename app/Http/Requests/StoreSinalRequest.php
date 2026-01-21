@@ -22,7 +22,7 @@ class StoreSinalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'palavra_portugues' => 'required|string|max:255',
+            'palavra_portugues' => 'required|string|max:255|unique:sinais,palavra_portugues',
             'definicao' => 'required|string',
             'instrucao_execucao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
@@ -38,6 +38,7 @@ class StoreSinalRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'unique' => 'A palavra em português já foi registrada.',
             'required' => 'O campo :attribute é obrigatório.',
             'string' => 'O campo :attribute deve ser uma string.',
             'max' => 'O campo :attribute não pode exceder :max caracteres.',

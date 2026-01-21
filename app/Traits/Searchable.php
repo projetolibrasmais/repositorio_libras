@@ -111,9 +111,11 @@ trait Searchable
      */
     protected function applyFilterByOperator(Builder $query, string $column, $value, string $operator, string $requestKey): void
     {
+        $isRelation = str_contains($column, '.');
+
         switch (strtolower($operator)) {
             case 'like':
-                if (str_contains($column, '.')) {
+                if ($isRelation) {
                     $this->applyRelationFilter($query, $column, $value, 'LIKE');
                 } else {
                     $query->where($column, 'LIKE', "%{$value}%");
@@ -122,7 +124,7 @@ trait Searchable
 
             case '=':
             case 'exact':
-                if (str_contains($column, '.')) {
+                if ($isRelation) {
                     $this->applyRelationFilter($query, $column, $value, '=');
                 } else {
                     $query->where($column, '=', $value);
@@ -131,36 +133,64 @@ trait Searchable
 
             case 'in':
                 $values = is_array($value) ? $value : [$value];
-                $query->whereIn($column, $values);
+                if ($isRelation) {
+                    $this->applyRelationFilterIn($query, $column, $values);
+                } else {
+                    $query->whereIn($column, $values);
+                }
                 break;
 
             case 'date_from':
             case '>=':
-                $query->whereDate($column, '>=', $value);
+                if ($isRelation) {
+                    $this->applyRelationFilter($query, $column, $value, '>=', true);
+                } else {
+                    $query->whereDate($column, '>=', $value);
+                }
                 break;
 
             case 'date_to':
             case '<=':
-                $query->whereDate($column, '<=', $value);
+                if ($isRelation) {
+                    $this->applyRelationFilter($query, $column, $value, '<=', true);
+                } else {
+                    $query->whereDate($column, '<=', $value);
+                }
                 break;
 
             case '>':
-                $query->where($column, '>', $value);
+                if ($isRelation) {
+                    $this->applyRelationFilter($query, $column, $value, '>');
+                } else {
+                    $query->where($column, '>', $value);
+                }
                 break;
 
             case '<':
-                $query->where($column, '<', $value);
+                if ($isRelation) {
+                    $this->applyRelationFilter($query, $column, $value, '<');
+                } else {
+                    $query->where($column, '<', $value);
+                }
                 break;
 
             case 'between':
                 if (is_array($value) && count($value) === 2) {
-                    $query->whereBetween($column, $value);
+                    if ($isRelation) {
+                        $this->applyRelationFilterBetween($query, $column, $value);
+                    } else {
+                        $query->whereBetween($column, $value);
+                    }
                 }
                 break;
 
             default:
                 // Default to exact match
-                $query->where($column, $value);
+                if ($isRelation) {
+                    $this->applyRelationFilter($query, $column, $value, '=');
+                } else {
+                    $query->where($column, $value);
+                }
                 break;
         }
     }
@@ -172,20 +202,61 @@ trait Searchable
      * @param string $column
      * @param mixed $value
      * @param string $operator
+     * @param bool $isDate
      * @return void
      */
-    protected function applyRelationFilter(Builder $query, string $column, $value, string $operator = '='): void
+    protected function applyRelationFilter(Builder $query, string $column, $value, string $operator = '=', bool $isDate = false): void
     {
         $parts = explode('.', $column);
         $relation = $parts[0];
         $relatedColumn = $parts[1];
 
-        $query->whereHas($relation, function (Builder $query) use ($relatedColumn, $value, $operator) {
+        $query->whereHas($relation, function (Builder $query) use ($relatedColumn, $value, $operator, $isDate) {
             if ($operator === 'LIKE') {
                 $query->where($relatedColumn, 'LIKE', "%{$value}%");
+            } elseif ($isDate) {
+                $query->whereDate($relatedColumn, $operator, $value);
             } else {
                 $query->where($relatedColumn, $operator, $value);
             }
+        });
+    }
+
+    /**
+     * Apply 'IN' filter for relationship columns.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $column
+     * @param array $values
+     * @return void
+     */
+    protected function applyRelationFilterIn(Builder $query, string $column, array $values): void
+    {
+        $parts = explode('.', $column);
+        $relation = $parts[0];
+        $relatedColumn = $parts[1];
+
+        $query->whereHas($relation, function (Builder $query) use ($relatedColumn, $values) {
+            $query->whereIn($relatedColumn, $values);
+        });
+    }
+
+    /**
+     * Apply 'BETWEEN' filter for relationship columns.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $column
+     * @param array $values
+     * @return void
+     */
+    protected function applyRelationFilterBetween(Builder $query, string $column, array $values): void
+    {
+        $parts = explode('.', $column);
+        $relation = $parts[0];
+        $relatedColumn = $parts[1];
+
+        $query->whereHas($relation, function (Builder $query) use ($relatedColumn, $values) {
+            $query->whereBetween($relatedColumn, $values);
         });
     }
 

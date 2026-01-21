@@ -342,7 +342,7 @@
                         <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
                             <i class="ph ph-shield-checkered text-gray-400 text-3xl"></i>
                         </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-1">Nenhuma sinal encontrada</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-1">Nenhum sinal encontrado</h3>
                         <p class="text-gray-600">
                             @if (request('search'))
                                 Não foram encontradas sinais com o termo "{{ request('search') }}".

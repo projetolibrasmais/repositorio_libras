@@ -50,9 +50,9 @@ class Sinal extends Model
         'definicao' => 'like',
         'instrucao_execucao' => 'like',
         'status' => '=',
-        'categorias.id' => '=',
-        'created_from:created_at' => 'date_from',
-        'created_to:created_at' => 'date_to',
+        'categoria_id:categorias.id' => '=',
+        'date_from:created_at' => 'date_from',
+        'date_to:created_at' => 'date_to',
     ];
 
     /**
