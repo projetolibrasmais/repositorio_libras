@@ -38,6 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
     Route::delete('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('users.force-delete');
     Route::resource('users', UserController::class);
+    
+    Route::get('/ajuda', function () {
+        return view('ajuda.index');
+    })->middleware('auth')->name('ajuda.index');
+
 });
 
 require __DIR__.'/auth.php';

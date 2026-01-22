@@ -171,4 +171,56 @@
         </div>
     </div>
 
+    <div class="bg-gray-100 p-4 border-b border-gray-200">
+        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Logs</h1>
+        <div class="p-6 space-y-4">
+            <!-- VISUALIZAR LOGS -->
+            <x-help-card
+                permissao="view_logs"
+                titulo="Visualizar Logs"
+                descricao="Para visualizar os logs do sistema, acesse o menu Logs. Você pode filtrar os logs por data, usuário e ação realizada. Para ver mais informações basta clicar no ícone indicado."
+                imagem="help\logs\view_logs.PNG"
+            />
+        </div>
+    </div>
+
+    <div class="bg-gray-100 p-4 border-b border-gray-200">
+        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Permissões</h1>
+        <div class="p-6 space-y-4">
+            <!-- VISUALIZAR PERMISSÕES -->
+            <x-help-card
+                permissao="view_permissions"
+                titulo="Visualizar Permissões"
+                descricao="Para visualizar as permissões do sistema, acesse o menu Permissões. Você pode ver todas as permissões disponíveis e suas descrições, ao clicar no ícone de detalhes."
+                imagem="help\permissions\view_permissions.PNG"
+            />
+
+        </div>
+    </div>
+    
+     <div class="bg-gray-100 p-4 border-b border-gray-200">
+        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Perfil</h1>
+        <div class="p-6 space-y-4">
+            <!-- ACESSAR PERFIL -->
+            <x-help-card                
+                titulo="Acessar Perfil"
+                descricao="Para acessar seu perfil, clique no seu nome no canto superior direito e selecione 'Perfil'."
+                imagem="help\profile\access_profile.PNG"
+            />
+
+            <!-- EDITAR NOME e EMAIL -->
+            <x-help-card                
+                titulo="Editar Nome e Email"
+                descricao="Para editar seu perfil, clique no seu nome no canto superior direito e selecione 'Perfil'. Faça as alterações desejadas e clique em 'Salvar."
+                imagem="help\profile\edit_name_profile.PNG"
+            />
+
+            <!-- EDITAR SENHA DO PERFIL -->
+            <x-help-card                
+                titulo="Editar Senha"
+                descricao="Para editar sua senha, clique no seu nome no canto superior direito e selecione 'Perfil'. Faça as alterações desejadas e clique em 'Salvar."
+                imagem="help\profile\edit_password_profile.PNG"
+            />
+        </div>
+    </div>
 </x-app-layout>

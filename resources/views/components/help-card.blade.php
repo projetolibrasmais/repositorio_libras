@@ -1,11 +1,15 @@
 @props([
-    'permissao',
+    'permissao' => null,
     'titulo',
     'descricao' => '',
     'imagem'
 ])
 
-@can($permissao)
+@php
+    $podeVer = $permissao ? auth()->user()?->can($permissao) : true;
+@endphp
+
+@if($podeVer)
 <div x-data="{ open: false }">
 
     <!-- CARD -->
@@ -58,4 +62,4 @@
     </div>
 
 </div>
-@endcan
+@endif
