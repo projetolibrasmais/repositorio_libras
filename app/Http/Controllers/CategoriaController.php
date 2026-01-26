@@ -7,14 +7,31 @@ use App\Http\Requests\UpdateCategoriaRequest;
 use App\Models\Categoria;
 use App\Repositories\Eloquent\CategoriaRepository;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CategoriaController extends Controller
+class CategoriaController extends Controller implements HasMiddleware
 {
 
     protected $categoriaRepository;
 
     public function __construct(CategoriaRepository $categoriaRepository){
         $this->categoriaRepository = $categoriaRepository;
+    }
+
+    /**
+     * Middleware assignment.
+     */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:view_categorias', ['only' => ['index', 'show']]),
+            new Middleware('permission:create_categorias', ['only' => ['create', 'store']]),
+            new Middleware('permission:edit_categorias', ['only' => ['edit', 'update']]),
+            new Middleware('permission:delete_categorias', ['only' => ['destroy']]),
+            new Middleware('permission:restore_categorias', ['only' => ['restore']]),
+            new Middleware('permission:force_delete_categorias', ['only' => ['forceDelete']]),
+        ];
     }
 
     /**
@@ -80,5 +97,23 @@ class CategoriaController extends Controller
         }
         
         return redirect()->route('categorias.index')->with('success', 'Categoria removida com sucesso.');
+    }
+    
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore($id)
+    {
+        $this->categoriaRepository->restore($id);
+        return redirect()->route('categorias.index')->with('success', 'Categoria restaurada com sucesso.');
+    }
+
+    /**
+     * Force delete the specified resource from storage.
+     */
+    public function forceDelete($id)
+    {
+        $this->categoriaRepository->forceDelete($id);
+        return redirect()->route('categorias.index')->with('success', 'Categoria excluída permanentemente com sucesso.');
     }
 }

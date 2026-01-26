@@ -26,12 +26,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('roles', RoleController::class);
 
+    Route::post('/categorias/restore/{id}', [CategoriaController::class, 'restore'])->name('categorias.restore');
+    Route::delete('/categorias/force-delete/{id}', [CategoriaController::class, 'forceDelete'])->name('categorias.force-delete');
     Route::resource('categorias', CategoriaController::class);
 
     Route::post('/sinais/restore/{id}', [SinalController::class, 'restore'])->name('sinais.restore');
     Route::delete('/sinais/force-delete/{id}', [SinalController::class, 'forceDelete'])->name('sinais.force-delete');
-    Route::resource('sinais', SinalController::class)->parameters([
-    'sinais' => 'sinal']);
+    Route::resource('sinais', SinalController::class)->parameters(['sinais' => 'sinal']);
     
     Route::resource('logs', LogController::class)->only(['index', 'show']);
 

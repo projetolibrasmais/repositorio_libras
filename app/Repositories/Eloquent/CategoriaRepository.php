@@ -23,7 +23,22 @@ class CategoriaRepository extends BaseRepository
      */
     public function all($request = null, $perPage = 15): LengthAwarePaginator
     {
-        return parent::all($request, $perPage);
+        if ($request) {
+            $query = $this->model->newQuery();
+            $query->withDeletedFilter($request->get('show_deleted'));
+
+            if ($request->filled('search')) {
+                $query->search($request->search);
+            }
+
+            $query->applyFilters($request);
+
+            $sortColumn = $request->get('sort', 'created_at');
+            $sortDirection = $request->get('direction', 'desc');
+            $query->orderByColumn($sortColumn, $sortDirection);
+        }
+
+        return $query->paginate($perPage)->withQueryString();
     }
 
     /**

@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Categoria extends Model
 {
-    use LogsActivity, Searchable;
+    use LogsActivity, Searchable, SoftDeletes;
 
     protected $table = 'categorias';
 
@@ -62,6 +63,7 @@ class Categoria extends Model
             ->useLogName('Categoria')
             ->dontSubmitEmptyLogs()
             ->logOnlyDirty()
-            ->logAll();
+            ->logOnly(['nome', 'slug'])
+            ->dontLogIfAttributesChangedOnly(['deleted_at']);
     }
 }
