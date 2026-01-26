@@ -8,8 +8,10 @@ use App\Models\Categoria;
 use App\Models\Sinal;
 use App\Repositories\Eloquent\SinalRepository;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class SinalController extends Controller
+class SinalController extends Controller implements HasMiddleware
 {
 
     protected $sinalRepository;
@@ -17,6 +19,21 @@ class SinalController extends Controller
     public function __construct(SinalRepository $sinalRepository){
         $this->sinalRepository = $sinalRepository;
     }   
+
+    /**
+     * Middleware assignment.
+     */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:view_sinais', ['only' => ['index', 'show']]),
+            new Middleware('permission:create_sinais', ['only' => ['create', 'store']]),
+            new Middleware('permission:edit_sinais', ['only' => ['edit', 'update']]),
+            new Middleware('permission:delete_sinais', ['only' => ['destroy']]),
+            new Middleware('permission:restore_sinais', ['only' => ['restore']]),
+            new Middleware('permission:force_delete_sinais', ['only' => ['forceDelete']]),
+        ];
+    }
 
     /**
      * Display a listing of the resource.

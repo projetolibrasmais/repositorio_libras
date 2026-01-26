@@ -94,7 +94,8 @@ class Sinal extends Model
             ->useLogName('Sinal')
             ->dontSubmitEmptyLogs()
             ->logOnlyDirty()
-            ->logAll();
+            ->logOnly(['palavra_portugues', 'slug', 'definicao', 'instrucao_execucao', 'status'])
+            ->dontLogIfAttributesChangedOnly(['deleted_at']);
     }
 
     /**

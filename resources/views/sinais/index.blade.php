@@ -22,142 +22,84 @@
                 </x-page-header>
 
                 <!-- Search Bar -->
-                <div x-data="{ filtersOpen: false }" class="mb-4">
-                    <!-- Search and Filter Bar -->
-                    <form method="GET" class="space-y-3">
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <!-- Search Input -->
-                            <div class="flex-1 relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="ph ph-magnifying-glass text-gray-400 text-lg"></i>
-                                </div>
-                                <input type="text" name="search" value="{{ request('search') }}"
-                                    placeholder="Pesquisar sinais..."
-                                    class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" />
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="flex gap-2 sm:justify-end">
-                                <!-- Filter Button -->
-                                <button @click.prevent="filtersOpen = !filtersOpen" type="button"
-                                    class="inline-flex items-center px-4 py-2.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors relative">
-                                    <i class="ph ph-funnel mr-2"></i>
-                                    Filtros
-                                    <span x-show="filtersOpen" class="ml-2">
-                                        <i class="ph ph-caret-up"></i>
-                                    </span>
-                                    <span x-show="!filtersOpen" class="ml-2">
-                                        <i class="ph ph-caret-down"></i>
-                                    </span>
-                                    @if (request()->hasAny(['categoria_id', 'date_from', 'date_to', 'show_deleted']))
-                                        <span
-                                            class="absolute -top-2 -right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
-                                            {{ collect(['categoria_id', 'date_from', 'date_to', 'show_deleted'])->filter(fn($key) => request()->filled($key))->count() }}
-                                        </span>
-                                    @endif
-                                </button>
-
-                                <!-- Search Button -->
-                                <button type="submit"
-                                    class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                                    <i class="ph ph-magnifying-glass mr-2"></i>
-                                    Buscar
-                                </button>
-
-                                <!-- Clear Button -->
-                                @if (request('search') || request()->hasAny(['categoria_id', 'date_from', 'date_to', 'show_deleted']))
-                                    <a href="{{ url()->current() }}"
-                                        class="inline-flex items-center px-4 py-2.5 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors">
-                                        <i class="ph ph-x mr-2"></i>
-                                        Limpar
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- Filter Panel -->
-                        <div x-show="filtersOpen" x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 -translate-y-2"
-                            x-transition:enter-end="opacity-100 translate-y-0"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0"
-                            x-transition:leave-end="opacity-0 -translate-y-2"
-                            class="bg-gray-50 border border-gray-200 rounded-lg p-4" style="display: none;">
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <!-- User Filter -->
-                                @if (count($categorias) > 0)
-                                    <div>
-                                        <label for="categoria_id" class="block text-sm font-medium text-gray-700 mb-1">
-                                            <i class="ph ph-bookmark mr-1"></i>
-                                            Categoria
-                                        </label>
-                                        <select name="categoria_id" id="categoria_id"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                            <option value="">Todas as categorias</option>
-                                            @foreach ($categorias as $categoria)
-                                                <option value="{{ $categoria->id }}"
-                                                    {{ request('categoria_id') == $categoria->id ? 'selected' : '' }}>
-                                                    {{ $categoria->nome }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-
-                                 <div>
-                                    <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
-                                        <i class="ph ph-tag mr-1"></i>
-                                        Status
+                <x-search-bar 
+                    placeholder="Pesquisar sinais..." 
+                    :filterKeys="['categoria_id', 'status', 'date_from', 'date_to', 'show_deleted']">
+                    <x-slot name="filters">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Categoria Filter -->
+                            @if (count($categorias) > 0)
+                                <div>
+                                    <label for="categoria_id" class="block text-sm font-medium text-gray-700 mb-1">
+                                        <i class="ph ph-bookmark mr-1"></i>
+                                        Categoria
                                     </label>
-                                    <select name="status" id="status"
+                                    <select name="categoria_id" id="categoria_id"
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                        <option value="" {{ request('status') == '' ? 'selected' : '' }}>Todos</option>
-                                        <option value="catalogado" {{ request('status') == 'catalogado' ? 'selected' : '' }}>Catalogado</option>
-                                        <option value="em_validacao" {{ request('status') == 'em_validacao' ? 'selected' : '' }}>Em Validação</option>
-                                        <option value="publicado" {{ request('status') == 'publicado' ? 'selected' : '' }}>Publicado</option>
+                                        <option value="">Todas as categorias</option>
+                                        @foreach ($categorias as $categoria)
+                                            <option value="{{ $categoria->id }}"
+                                                {{ request('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                                                {{ $categoria->nome }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
+                            @endif
 
-                                <!-- Date From -->
-                                <div>
-                                    <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">
-                                        <i class="ph ph-calendar mr-1"></i>
-                                        Criado de
-                                    </label>
-                                    <input type="date" name="date_from" id="date_from"
-                                        value="{{ request('date_from') }}"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                </div>
+                            <!-- Status Filter -->
+                            <div>
+                                <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <i class="ph ph-tag mr-1"></i>
+                                    Status
+                                </label>
+                                <select name="status" id="status"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    <option value="" {{ request('status') == '' ? 'selected' : '' }}>Todos</option>
+                                    <option value="catalogado" {{ request('status') == 'catalogado' ? 'selected' : '' }}>Catalogado</option>
+                                    <option value="em_validacao" {{ request('status') == 'em_validacao' ? 'selected' : '' }}>Em Validação</option>
+                                    <option value="publicado" {{ request('status') == 'publicado' ? 'selected' : '' }}>Publicado</option>
+                                </select>
+                            </div>
 
-                                <!-- Date To -->
-                                <div>
-                                    <label for="date_to" class="block text-sm font-medium text-gray-700 mb-1">
-                                        <i class="ph ph-calendar mr-1"></i>
-                                        Criado até
-                                    </label>
-                                    <input type="date" name="date_to" id="date_to"
-                                        value="{{ request('date_to') }}"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                </div>
+                            <!-- Date From -->
+                            <div>
+                                <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <i class="ph ph-calendar mr-1"></i>
+                                    Criado de
+                                </label>
+                                <input type="date" name="date_from" id="date_from"
+                                    value="{{ request('date_from') }}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            </div>
 
-                                <!-- Show Deleted Filter -->
-                                <div>
-                                    <label for="show_deleted" class="block text-sm font-medium text-gray-700 mb-1">
-                                        <i class="ph ph-trash mr-1"></i>
-                                        Sinais Deletados
-                                    </label>
-                                    <select name="show_deleted" id="show_deleted"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
-                                        <option value="" {{ request('show_deleted') == '' ? 'selected' : '' }}>Apenas Ativos</option>
-                                        <option value="with" {{ request('show_deleted') == 'with' ? 'selected' : '' }}>Todos</option>
-                                        <option value="only" {{ request('show_deleted') == 'only' ? 'selected' : '' }}>Apenas Deletados</option>
-                                    </select>
-                                </div>
+                            <!-- Date To -->
+                            <div>
+                                <label for="date_to" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <i class="ph ph-calendar mr-1"></i>
+                                    Criado até
+                                </label>
+                                <input type="date" name="date_to" id="date_to"
+                                    value="{{ request('date_to') }}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            </div>
+
+                            <!-- Show Deleted Filter -->
+                            <div>
+                                <label for="show_deleted" class="block text-sm font-medium text-gray-700 mb-1">
+                                    <i class="ph ph-trash mr-1"></i>
+                                    Sinais Deletados
+                                </label>
+                                <select name="show_deleted" id="show_deleted"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    <option value="" {{ request('show_deleted') == '' ? 'selected' : '' }}>Apenas Ativos</option>
+                                    <option value="with" {{ request('show_deleted') == 'with' ? 'selected' : '' }}>Todos</option>
+                                    <option value="only" {{ request('show_deleted') == 'only' ? 'selected' : '' }}>Apenas Deletados</option>
+                                </select>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </x-slot>
+                </x-search-bar>
 
                 <!-- Table -->
                 @if ($sinais->count() > 0)
@@ -276,7 +218,7 @@
                                         <div class="flex items-center gap-2">
                                             @if($sinal->trashed())
                                                 <!-- Restore Button -->
-                                                @can('edit_sinais')
+                                                @can('restore_sinais')
                                                     <form action="{{ route('sinais.restore', $sinal->id) }}" method="POST"
                                                         class="restore-form-{{ $sinal->id }}">
                                                         @csrf
@@ -290,7 +232,7 @@
                                                 @endcan
                                                 
                                                 <!-- Force Delete Button -->
-                                                @can('delete_sinais')
+                                                @can('force_delete_sinais')
                                                     <form action="{{ route('sinais.force-delete', $sinal->id) }}" method="POST"
                                                         class="force-delete-form-{{ $sinal->id }}">
                                                         @csrf
