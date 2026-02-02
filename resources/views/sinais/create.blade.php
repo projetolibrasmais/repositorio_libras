@@ -63,16 +63,16 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Instrução de Execução -->
+                                    <!-- Parâmetros -->
                                     <div>
-                                        <label for="instrucao_execucao"
+                                        <label for="parametros"
                                             class="block text-sm font-medium text-gray-700 mb-1">
-                                            Instrução de Execução <span class="text-red-500">*</span>
+                                            Parâmetros <span class="text-red-500">*</span>
                                         </label>
-                                        <textarea name="instrucao_execucao" id="instrucao_execucao" rows="3"
-                                            placeholder="Digite as instruções de execução do sinal..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('instrucao_execucao') border-red-500 @enderror">{{ old('instrucao_execucao') }}</textarea>
-                                        @error('instrucao_execucao')
+                                        <textarea name="parametros" id="parametros" rows="3"
+                                            placeholder="Digite os parâmetros do sinal..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('parametros') border-red-500 @enderror">{{ old('parametros') }}</textarea>
+                                        @error('parametros')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>

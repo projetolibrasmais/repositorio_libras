@@ -26,7 +26,7 @@ class Sinal extends Model
         'palavra_portugues',
         'slug',
         'definicao',
-        'instrucao_execucao',
+        'parametros',
         'status',
     ];
 
@@ -37,7 +37,7 @@ class Sinal extends Model
         'palavra_portugues' => 'string',
         'slug' => 'string',
         'definicao' => 'string',
-        'instrucao_execucao' => 'string',
+        'parametros' => 'string',
         'status' => 'string',
     ];
 
@@ -48,7 +48,7 @@ class Sinal extends Model
         'palavra_portugues' => 'like',
         'slug' => 'like',
         'definicao' => 'like',
-        'instrucao_execucao' => 'like',
+        'parametros' => 'like',
         'status' => '=',
         'categoria_id:categorias.id' => '=',
         'date_from:created_at' => 'date_from',
@@ -63,7 +63,7 @@ class Sinal extends Model
         'palavra_portugues',
         'slug',
         'definicao',
-        'instrucao_execucao',
+        'parametros',
         'created_at',
         'updated_at',
     ];
@@ -94,7 +94,7 @@ class Sinal extends Model
             ->useLogName('Sinal')
             ->dontSubmitEmptyLogs()
             ->logOnlyDirty()
-            ->logOnly(['palavra_portugues', 'slug', 'definicao', 'instrucao_execucao', 'status'])
+            ->logOnly(['palavra_portugues', 'slug', 'definicao', 'parametros', 'status'])
             ->dontLogIfAttributesChangedOnly(['deleted_at']);
     }
 

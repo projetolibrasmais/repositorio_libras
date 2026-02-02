@@ -24,7 +24,7 @@ class StoreSinalRequest extends FormRequest
         return [
             'palavra_portugues' => 'required|string|max:255|unique:sinais,palavra_portugues',
             'definicao' => 'required|string',
-            'instrucao_execucao' => 'required|string',
+            'parametros' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
             'categorias' => 'required|array',
@@ -58,7 +58,7 @@ class StoreSinalRequest extends FormRequest
         return [
             'palavra_portugues' => 'palavra em português',
             'definicao' => 'definição',
-            'instrucao_execucao' => 'instrução de execução',
+            'parametros' => 'parâmetros',
             'status' => 'status',
             'video' => 'vídeo',
             'categorias' => 'categorias',

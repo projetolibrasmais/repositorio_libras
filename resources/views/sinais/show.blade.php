@@ -71,13 +71,13 @@
                                     </p>
                                 </div>
 
-                                <!-- Instrução de Execução -->
+                                <!-- Parâmetros -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
-                                        Instrução de Execução
+                                        Parâmetros
                                     </label>
                                     <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
-                                        {{ $sinal->instrucao_execucao ?? 'Nenhuma instrução fornecida.' }}
+                                        {{ $sinal->parametros ?? 'Nenhuma instrução fornecida.' }}
                                     </p>
                                 </div>
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('palavra_portugues');
             $table->string('slug')->unique();
             $table->text('definicao')->nullable();
-            $table->text('instrucao_execucao')->nullable();
+            $table->text('parametros')->nullable();
             $table->enum('status', ["catalogado", "em_validacao", "publicado"])->default('em_validacao');
             $table->timestamps();
             $table->softDeletes();
