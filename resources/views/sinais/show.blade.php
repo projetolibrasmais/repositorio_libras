@@ -81,6 +81,16 @@
                                     </p>
                                 </div>
 
+                                <!-- Contexto de Utilização -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                        Contexto de Utilização
+                                    </label>
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
+                                        {{ $sinal->contexto_utilizacao ?? 'Nenhum contexto fornecido.' }}
+                                    </p>
+                                </div>
+
                                 <!-- Status -->
                                <div>
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
@@ -165,6 +175,25 @@
                                             </video>
     
                                         </div>
+                                    @endif
+                                </div>
+
+                                <!-- Imagens -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                        Imagens do Sinal
+                                    </label>
+                                    @if ($sinal->imagens && $sinal->imagens->count())
+                                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                            @foreach ($sinal->imagens as $imagem)
+                                                <div class="border rounded-lg overflow-hidden">
+                                                    <img src="{{ Storage::url($imagem->url_imagem) }}" alt="Imagem do Sinal"
+                                                        class="w-full h-32 object-cover">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <p class="text-sm text-gray-600">Nenhuma imagem disponível para este sinal.</p>
                                     @endif
                                 </div>
 

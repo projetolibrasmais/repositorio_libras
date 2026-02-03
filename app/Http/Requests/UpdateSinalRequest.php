@@ -24,10 +24,12 @@ class UpdateSinalRequest extends FormRequest
         return [
             'palavra_portugues' => 'required|string|max:255',
             'definicao' => 'required|string',
-            'instrucao_execucao' => 'required|string',
+            'parametros' => 'required|string',
+            'contexto_utilizacao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240',
-            'desenho' => 'file|mimes:png,jpg,jpeg,gif|max:10240',
+            'imagens' => 'array',
+            'imagens.*' => 'file|mimes:jpg,jpeg,png,gif|max:5120',
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];
@@ -58,10 +60,11 @@ class UpdateSinalRequest extends FormRequest
         return [
             'palavra_portugues' => 'palavra em português',
             'definicao' => 'definição',
-            'instrucao_execucao' => 'instrução de execução',
+            'parametros' => 'parâmetros',
+            'contexto_utilizacao' => 'contexto de utilização',
             'status' => 'status',
             'video' => 'vídeo',
-            'desenho' => 'desenho',
+            'imagens' => 'imagens',
             'categorias' => 'categorias',
         ];
     }

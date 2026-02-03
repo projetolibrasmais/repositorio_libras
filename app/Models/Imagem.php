@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Video extends Model
+class Imagem extends Model
 {
     use SoftDeletes;
     
-    protected $table = 'desenhos';
+    protected $table = 'imagens';
 
     /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'url_desenho',
+        'url_imagem',
         'sinal_id',
     ];
 
@@ -23,7 +23,7 @@ class Video extends Model
      * The attributes that should be cast to native types.
      */
     protected $casts = [
-        'url_desenho' => 'string',
+        'url_imagem' => 'string',
         'sinal_id' => 'integer',
     ];
 

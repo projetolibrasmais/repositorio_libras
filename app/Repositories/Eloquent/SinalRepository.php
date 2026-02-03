@@ -25,7 +25,7 @@ class SinalRepository extends BaseRepository
      */
     public function all($request = null, $perPage = 15): LengthAwarePaginator
     {
-        $query = $this->model->query()->with(['video', 'categorias']);
+        $query = $this->model->query()->with(['video', 'categorias', 'imagens']);
 
         if ($request) {
             $query->withDeletedFilter($request->get('show_deleted'));
@@ -51,7 +51,9 @@ class SinalRepository extends BaseRepository
     {
         return $this->model->withTrashed()->with(['video' => function ($query) {
             $query->withTrashed();
-        }, 'categorias'])->find($id);
+        }, 'categorias', 'imagens' => function ($query) {
+            $query->withTrashed();
+        }])->find($id);
     }
 
     /**
@@ -67,6 +69,9 @@ class SinalRepository extends BaseRepository
         $videoFile = $data['video'] ?? null;
         unset($data['video']);
 
+        $imagens = $data['imagens'] ?? [];
+        unset($data['imagens']);
+
         $sinal = parent::create($data);
 
         if ($videoFile) {
@@ -81,6 +86,22 @@ class SinalRepository extends BaseRepository
                     'url_video' => $videoPath,
                     'sinal_id' => $sinal->id,
                 ]);
+            }
+        }
+
+        if ($imagens) {
+            foreach ($imagens as $imagem) {
+                $imagemPath = StorageHelper::uploadImage(
+                    $imagem,
+                    $data['palavra_portugues'],
+                    'sinais'
+                );
+
+                if ($imagemPath) {
+                    $sinal->imagens()->create([
+                        'url_imagem' => $imagemPath,
+                    ]);
+                }
             }
         }
 
@@ -128,6 +149,25 @@ class SinalRepository extends BaseRepository
             unset($data['video']);
         }
 
+        $imagens = $data['imagens'] ?? null;
+        unset($data['imagens']);
+
+        if ($imagens) {
+            foreach ($imagens as $imagem) {
+                $imagemPath = StorageHelper::uploadImage(
+                    $imagem,
+                    $data['palavra_portugues'],
+                    'sinais'
+                );
+
+                if ($imagemPath) {
+                    $sinal->imagens()->create([
+                        'url_imagem' => $imagemPath,
+                    ]);
+                }
+            }
+        }
+
         $categorias = $data['categorias'] ?? null;
         unset($data['categorias']);
 
@@ -151,8 +191,16 @@ class SinalRepository extends BaseRepository
             return false;
         }
 
+        // Soft delete video
         if ($sinal->video) {
             $sinal->video->delete();
+        }
+
+        // Soft delete images
+        if ($sinal->imagens) {
+            foreach ($sinal->imagens as $imagem) {
+                $imagem->delete();
+            }
         }
 
         return $sinal->delete();
@@ -172,9 +220,18 @@ class SinalRepository extends BaseRepository
         $restored = $sinal->restore();
         
         if ($restored) {
+            // Restore video
             $video = Video::withTrashed()->where('sinal_id', $sinal->id)->first();
             if ($video && $video->trashed()) {
                 $video->restore();
+            }
+
+            // Restore images
+            $imagens = $sinal->imagens()->withTrashed()->get();
+            foreach ($imagens as $imagem) {
+                if ($imagem->trashed()) {
+                    $imagem->restore();
+                }
             }
         }
 
@@ -192,8 +249,10 @@ class SinalRepository extends BaseRepository
             return false;
         }
 
+        // Detach categories
         $sinal->categorias()->detach();
 
+        // Delete video and file
         $video = Video::withTrashed()->where('sinal_id', $sinal->id)->first();
         if ($video) {
             if ($video->url_video) {
@@ -203,6 +262,67 @@ class SinalRepository extends BaseRepository
             $video->forceDelete();
         }
 
+        // Delete images and files
+        $imagens = $sinal->imagens()->withTrashed()->get();
+        foreach ($imagens as $imagem) {
+            if ($imagem->url_imagem) {
+                StorageHelper::deleteImage($imagem->url_imagem);
+            }
+            $imagem->forceDelete();
+        }
+
         return $sinal->forceDelete();
+    }
+
+    /**
+     * Delete a specific image from a sinal.
+     *
+     * @param int $sinalId
+     * @param int $imagemId
+     * @return bool
+     */
+    public function deleteImage(int $sinalId, int $imagemId): bool
+    {
+        $sinal = $this->find($sinalId);
+        
+        if (!$sinal) {
+            return false;
+        }
+
+        $imagem = $sinal->imagens()->find($imagemId);
+        
+        if (!$imagem) {
+            return false;
+        }
+
+        return $imagem->delete();
+    }
+
+    /**
+     * Force delete a specific image from a sinal.
+     *
+     * @param int $sinalId
+     * @param int $imagemId
+     * @return bool
+     */
+    public function forceDeleteImage(int $sinalId, int $imagemId): bool
+    {
+        $sinal = $this->find($sinalId);
+        
+        if (!$sinal) {
+            return false;
+        }
+
+        $imagem = $sinal->imagens()->withTrashed()->find($imagemId);
+        
+        if (!$imagem) {
+            return false;
+        }
+
+        if ($imagem->url_imagem) {
+            StorageHelper::deleteImage($imagem->url_imagem);
+        }
+
+        return $imagem->forceDelete();
     }
 }

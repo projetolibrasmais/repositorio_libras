@@ -27,6 +27,7 @@ class Sinal extends Model
         'slug',
         'definicao',
         'parametros',
+        'contexto_utilizacao',
         'status',
     ];
 
@@ -38,6 +39,7 @@ class Sinal extends Model
         'slug' => 'string',
         'definicao' => 'string',
         'parametros' => 'string',
+        'contexto_utilizacao' => 'string',
         'status' => 'string',
     ];
 
@@ -74,6 +76,14 @@ class Sinal extends Model
     public function video()
     {
         return $this->hasOne(Video::class, 'sinal_id');
+    }
+
+    /**
+     * Relationship to Imagem model.
+     */
+    public function imagens()
+    {
+        return $this->hasMany(Imagem::class, 'sinal_id');
     }
 
     /**

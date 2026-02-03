@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreign('sinal_id')->references('id')->on('sinais')->onDelete('cascade');
         });
 
-        Schema::table('desenhos', function (Blueprint $table) {
+        Schema::table('imagens', function (Blueprint $table) {
             $table->unsignedBigInteger('sinal_id')->nullable();
             $table->foreign('sinal_id')->references('id')->on('sinais')->onDelete('cascade');
         });
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->dropColumn('sinal_id');
         });
 
-        Schema::table('desenhos', function (Blueprint $table) {
+        Schema::table('imagens', function (Blueprint $table) {
             $table->dropForeign(['sinal_id']);
             $table->dropColumn('sinal_id');
         });

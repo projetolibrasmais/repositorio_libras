@@ -8,6 +8,7 @@
     'description' => null,
     'showPreview' => false,
     'previewType' => 'image', // 'image' or 'video'
+    'multiple' => false,
 ])
 
 @php
@@ -20,13 +21,80 @@
     fileName: '',
     fileSize: '',
     previewUrl: null,
+    files: [],
     error: '',
-    handleFiles(files) {
-        if (files.length === 0) return;
+    isMultiple: {{ $multiple ? 'true' : 'false' }},
+    handleFiles(fileList) {
+        if (fileList.length === 0) return;
         
-        const file = files[0];
         this.error = '';
         
+        if (this.isMultiple) {
+            // Handle multiple files
+            const validFiles = [];
+            
+            for (let i = 0; i < fileList.length; i++) {
+                const file = fileList[i];
+                const validation = this.validateFile(file);
+                
+                if (validation.valid) {
+                    const fileData = {
+                        name: file.name,
+                        size: this.formatFileSize(file.size),
+                        previewUrl: null
+                    };
+                    
+                    // Generate preview
+                    @if($showPreview)
+                        if (file.type.startsWith('{{ $previewType }}/')) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                fileData.previewUrl = e.target.result;
+                                this.$nextTick(() => {
+                                    this.files = [...this.files];
+                                });
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    @endif
+                    
+                    validFiles.push(fileData);
+                } else {
+                    this.error = validation.error;
+                    this.$refs.fileInput.value = '';
+                    return;
+                }
+            }
+            
+            this.files = [...this.files, ...validFiles];
+        } else {
+            // Handle single file
+            const file = fileList[0];
+            const validation = this.validateFile(file);
+            
+            if (!validation.valid) {
+                this.error = validation.error;
+                this.$refs.fileInput.value = '';
+                return;
+            }
+            
+            // Set file info
+            this.fileName = file.name;
+            this.fileSize = this.formatFileSize(file.size);
+            
+            // Generate preview
+            @if($showPreview)
+                if (file.type.startsWith('{{ $previewType }}/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.previewUrl = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            @endif
+        }
+    },
+    validateFile(file) {
         // Validate file type
         const acceptedTypes = '{{ $accept }}'.split(',').map(t => t.trim());
         const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
@@ -42,35 +110,18 @@
             });
             
             if (!isValidType) {
-                this.error = 'Tipo de arquivo não permitido.';
-                this.$refs.fileInput.value = '';
-                return;
+                return { valid: false, error: 'Tipo de arquivo não permitido: ' + file.name };
             }
         }
         
         // Validate file size
         @if($maxSize)
             if (file.size > {{ $maxSize }} * 1024) {
-                this.error = 'Arquivo muito grande. Tamanho máximo: {{ $maxSizeMB }}MB';
-                this.$refs.fileInput.value = '';
-                return;
+                return { valid: false, error: 'Arquivo muito grande: ' + file.name + '. Tamanho máximo: {{ $maxSizeMB }}MB' };
             }
         @endif
         
-        // Set file info
-        this.fileName = file.name;
-        this.fileSize = this.formatFileSize(file.size);
-        
-        // Generate preview
-        @if($showPreview)
-            if (file.type.startsWith('{{ $previewType }}/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.previewUrl = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        @endif
+        return { valid: true };
     },
     formatFileSize(bytes) {
         if (bytes === 0) return '0 Bytes';
@@ -79,10 +130,25 @@
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
     },
+    removeFile(index) {
+        this.files.splice(index, 1);
+        
+        // Clear input and recreate with remaining files
+        const dt = new DataTransfer();
+        const input = this.$refs.fileInput;
+        
+        // Unfortunately, we can't recreate the FileList, so we clear it
+        input.value = '';
+        
+        if (this.files.length === 0) {
+            this.clearFile();
+        }
+    },
     clearFile() {
         this.fileName = '';
         this.fileSize = '';
         this.previewUrl = null;
+        this.files = [];
         this.error = '';
         this.$refs.fileInput.value = '';
     }
@@ -124,12 +190,13 @@
             accept="{{ $accept }}"
             @change="handleFiles($event.target.files)"
             {{ $required ? 'required' : '' }}
+            {{ $multiple ? 'multiple' : '' }}
             class="hidden"
             {{ $attributes }}
         >
 
         <!-- Empty State -->
-        <div x-show="!fileName && !error" class="text-center">
+        <div x-show="!fileName && !error && files.length === 0" class="text-center">
             <div class="mx-auto h-12 w-12 text-gray-400 mb-3">
                 <i class="ph ph-upload-simple text-4xl"></i>
             </div>
@@ -151,8 +218,8 @@
             @endif
         </div>
 
-        <!-- File Info -->
-        <div x-show="fileName && !error" class="flex items-center justify-between">
+        <!-- File Info (Single File) -->
+        <div x-show="fileName && !error && !isMultiple" class="flex items-center justify-between">
             <div class="flex items-center space-x-3 flex-1 min-w-0">
                 <div class="flex-shrink-0">
                     <i class="ph ph-file text-blue-600 text-3xl"></i>
@@ -169,6 +236,43 @@
             >
                 <i class="ph ph-trash text-xl"></i>
             </button>
+        </div>
+
+        <!-- Multiple Files List -->
+        <div x-show="files.length > 0 && isMultiple" class="space-y-2">
+            <div class="flex items-center justify-between mb-3">
+                <p class="text-sm font-medium text-gray-700">
+                    <span x-text="files.length"></span> arquivo(s) selecionado(s)
+                </p>
+                <button 
+                    type="button"
+                    @click.stop="clearFile()"
+                    class="text-sm text-red-600 hover:text-red-700 font-medium"
+                >
+                    Remover todos
+                </button>
+            </div>
+            
+            <template x-for="(file, index) in files" :key="index">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <div class="flex items-center space-x-3 flex-1 min-w-0">
+                        <div class="flex-shrink-0">
+                            <i class="ph ph-file text-blue-600 text-2xl"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate" x-text="file.name"></p>
+                            <p class="text-xs text-gray-500" x-text="file.size"></p>
+                        </div>
+                    </div>
+                    <button 
+                        type="button"
+                        @click.stop="removeFile(index)"
+                        class="flex-shrink-0 ml-3 p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                        <i class="ph ph-x text-lg"></i>
+                    </button>
+                </div>
+            </template>
         </div>
 
         <!-- Error State -->
@@ -189,12 +293,35 @@
 
     <!-- Preview -->
     @if($showPreview)
-        <div x-show="previewUrl" class="mt-4">
+        <!-- Single File Preview -->
+        <div x-show="previewUrl && !isMultiple" class="mt-4">
             @if($previewType === 'image')
                 <img :src="previewUrl" alt="Preview" class="max-h-64 rounded-lg border border-gray-200 mx-auto">
             @elseif($previewType === 'video')
                 <video :src="previewUrl" controls class="max-h-64 rounded-lg border border-gray-200 mx-auto"></video>
             @endif
+        </div>
+        
+        <!-- Multiple Files Preview -->
+        <div x-show="files.length > 0 && isMultiple" class="mt-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <template x-for="(file, index) in files" :key="index">
+                    <div x-show="file.previewUrl" class="relative group">
+                        @if($previewType === 'image')
+                            <img :src="file.previewUrl" :alt="file.name" class="w-full h-32 object-cover rounded-lg border border-gray-200">
+                        @elseif($previewType === 'video')
+                            <video :src="file.previewUrl" class="w-full h-32 object-cover rounded-lg border border-gray-200"></video>
+                        @endif
+                        <button 
+                            type="button"
+                            @click.stop="removeFile(index)"
+                            class="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                        >
+                            <i class="ph ph-x text-sm"></i>
+                        </button>
+                    </div>
+                </template>
+            </div>
         </div>
     @endif
 

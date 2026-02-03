@@ -25,9 +25,11 @@ class StoreSinalRequest extends FormRequest
             'palavra_portugues' => 'required|string|max:255|unique:sinais,palavra_portugues',
             'definicao' => 'required|string',
             'parametros' => 'required|string',
+            'contexto_utilizacao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
-            'desenho' => 'required|file|mimes:png,jpg,jpeg,gif|max:10240', 
+            'imagens' => 'required|array',
+            'imagens.*' => 'file|mimes:jpg,jpeg,png,gif|max:5120', // Max 5MB each
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];
@@ -60,10 +62,12 @@ class StoreSinalRequest extends FormRequest
             'palavra_portugues' => 'palavra em português',
             'definicao' => 'definição',
             'parametros' => 'parâmetros',
+            'contexto_utilizacao' => 'contexto de utilização',
             'status' => 'status',
             'video' => 'vídeo',
             'desenho' => 'desenho',
             'categorias' => 'categorias',
+            'imagens' => 'imagens',
         ];
     }
 }

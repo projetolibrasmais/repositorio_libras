@@ -5,7 +5,7 @@
         this.collapsed = !this.collapsed;
         window.dispatchEvent(new CustomEvent('sidebar-toggled', { detail: { collapsed: this.collapsed } }));
     }
-}" x-init="window.dispatchEvent(new CustomEvent('sidebar-toggled', { detail: { collapsed: collapsed } }))" 
+}" x-init="window.dispatchEvent(new CustomEvent('sidebar-toggled', { detail: { collapsed: collapsed } }))"
     @resize.window="if (window.innerWidth >= 1024) { open = true; } else { collapsed = false; window.dispatchEvent(new CustomEvent('sidebar-toggled', { detail: { collapsed: false } })); }"
     @toggle-sidebar.window="open = !open" class="relative">
 
@@ -30,7 +30,7 @@
             <!-- Header com botão de toggle -->
             <div class="flex items-center p-4 pb-3 border-b border-slate-200"
                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : 'justify-between'">
-                
+
                 <!-- Logo e título quando expandido -->
                 <div x-show="!collapsed || window.innerWidth < 1024"
                     x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0"
@@ -93,9 +93,8 @@
 
                     @can(['view_categorias', 'view_sinais'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
-                            x-transition:enter="transition ease-in-out duration-200"
-                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                            class="text-xs font-bold text-gray-500">CONTEÚDO</small>
+                            x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">CONTEÚDO</small>
                         <hr class="mb-3">
                     @endcan
 
@@ -155,8 +154,8 @@
 
                     @can(['view_permissions', 'view_roles'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
-                            x-transition:enter="transition ease-in-out duration-200"
-                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                            x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100"
                             class="text-xs font-bold text-gray-500">PERMISSÕES</small>
                         <hr class="mb-3">
                     @endcan
@@ -199,9 +198,8 @@
 
                     @can(['view_logs', 'view_users'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
-                            x-transition:enter="transition ease-in-out duration-200"
-                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                            class="text-xs font-bold text-gray-500">SISTEMA</small>
+                            x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">SISTEMA</small>
                         <hr class="mb-3">
                     @endcan
 
@@ -240,6 +238,22 @@
                             </a>
                         </li>
                     @endcan
+
+                    <!-- Ajuda -->
+                    <li>
+                        <a href="{{ route('ajuda.index') }}"
+                            :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
+                            class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('ajuda.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                            <span class="grid place-items-center shrink-0"
+                                :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
+                                <i class="ph ph-question text-xl"></i>
+                            </span>
+                            <span x-show="!collapsed || window.innerWidth < 1024"
+                                x-transition:enter="transition ease-in-out duration-200"
+                                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                class="flex-1">Ajuda</span>
+                        </a>
+                    </li>
 
                     <!-- More (com submenu) -->
                     {{-- <li x-data="{ submenuOpen: false }">

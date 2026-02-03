@@ -77,6 +77,20 @@
                                         @enderror
                                     </div>
 
+                                    <!-- Contexto de Utilização -->
+                                    <div>
+                                        <label for="contexto_utilizacao"
+                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                            Contexto de Utilização <span class="text-red-500">*</span>
+                                        </label>
+                                        <textarea name="contexto_utilizacao" id="contexto_utilizacao" rows="3"
+                                            placeholder="Digite o contexto de utilização do sinal..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('contexto_utilizacao') border-red-500 @enderror">{{ old('contexto_utilizacao') }}</textarea>
+                                        @error('contexto_utilizacao')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
                                     <!-- Status -->
                                     <div>
                                         <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
@@ -162,12 +176,22 @@
                                 @enderror
                             </div>
 
-                            <!-- Video Principal Id -->
+                            <!-- Video -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
                                 <x-file-input name="video" label="Vídeo do Sinal" accept="video/mp4" :maxSize="51200"
                                     :showPreview="true" previewType="video"
                                     description="Arraste e solte o vídeo ou clique para selecionar" required />
                                 @error('video')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <!-- Imagens -->
+                            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                <x-file-input name="imagens[]" label="Imagens do Sinal" accept="image/*"
+                                    :maxSize="10240" :showPreview="true" previewType="image" multiple
+                                    description="Arraste e solte as imagens ou clique para selecionar" />
+                                @error('imagens')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>

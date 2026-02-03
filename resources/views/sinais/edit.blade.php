@@ -44,7 +44,8 @@
                                                 <i class="ph ph-hand-waving text-gray-400"></i>
                                             </div>
                                             <input type="text" name="palavra_portugues" id="palavra_portugues"
-                                                value="{{ old('palavra_portugues', $sinal->palavra_portugues) }}" required placeholder=""
+                                                value="{{ old('palavra_portugues', $sinal->palavra_portugues) }}"
+                                                required placeholder=""
                                                 class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('palavra_portugues') border-red-500 @enderror">
                                         </div>
                                         @error('palavra_portugues')
@@ -57,8 +58,7 @@
                                         <label for="definicao" class="block text-sm font-medium text-gray-700 mb-1">
                                             Definição <span class="text-red-500">*</span>
                                         </label>
-                                        <textarea name="definicao" id="definicao" rows="3"
-                                            placeholder="Digite a definição do sinal..."
+                                        <textarea name="definicao" id="definicao" rows="3" placeholder="Digite a definição do sinal..."
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('definicao') border-red-500 @enderror">{{ old('definicao', $sinal->definicao) }}</textarea>
                                         @error('definicao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -67,14 +67,27 @@
 
                                     <!-- Parâmetros -->
                                     <div>
-                                        <label for="parametros"
-                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                        <label for="parametros" class="block text-sm font-medium text-gray-700 mb-1">
                                             Parâmetros <span class="text-red-500">*</span>
                                         </label>
-                                        <textarea name="parametros" id="parametros" rows="3"
-                                            placeholder="Digite as instruções de execução do sinal..."
+                                        <textarea name="parametros" id="parametros" rows="3" placeholder="Digite as instruções de execução do sinal..."
                                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('parametros') border-red-500 @enderror">{{ old('parametros', $sinal->parametros) }}</textarea>
                                         @error('parametros')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Contexto de Utilização -->
+                                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Contexto de Utilização</h3>
+                                        <label for="contexto_utilizacao"
+                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                            Contexto de Utilização <span class="text-red-500">*</span>
+                                        </label>
+                                        <textarea name="contexto_utilizacao" id="contexto_utilizacao" rows="3"
+                                            placeholder="Descreva o contexto de utilização do sinal..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('contexto_utilizacao') border-red-500 @enderror">{{ old('contexto_utilizacao', $sinal->contexto_utilizacao) }}</textarea>
+                                        @error('contexto_utilizacao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -123,7 +136,8 @@
                         <div class="lg:col-span-3 flex flex-col gap-6">
                             <!-- Categorias -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
-                                <h3 class="block text-sm font-medium text-gray-700 mb-1">Categorias <span class="text-red-500">*</span></h3>
+                                <h3 class="block text-sm font-medium text-gray-700 mb-1">Categorias <span
+                                        class="text-red-500">*</span></h3>
                                 <p class="text-sm text-gray-600 mb-4">Selecione a ou as categorias relacionadas a
                                     este sinal.</p>
                                 @if ($categorias->count() > 0)
@@ -142,7 +156,7 @@
                                                     <label for="categoria_{{ $categoria->id }}"
                                                         class="font-medium text-gray-700 cursor-pointer">
                                                         {{ $categoria->nome }}
-                                                    </label>                                                    
+                                                    </label>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -161,27 +175,62 @@
                                 @enderror
                             </div>
 
-                            <!-- Video Principal Id -->
+                            <!-- Video -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
-
                                 @if ($sinal->video && $sinal->video->url_video)
                                     <div class="mb-4">
                                         <p class="text-sm text-gray-600 mb-2">Vídeo atual:</p>
                                         <div class="flex justify-center">
-                                            <video controls class="w-full max-w-md rounded-lg border" preload="metadata">
-                                            <source src="{{ Storage::url($sinal->video->url_video) }}" type="video/mp4">
-                                            Seu navegador não suporta vídeo.
-                                        </video>
-                                        </div> 
+                                            <video controls class="w-full max-w-md rounded-lg border"
+                                                preload="metadata">
+                                                <source src="{{ Storage::url($sinal->video->url_video) }}"
+                                                    type="video/mp4">
+                                                Seu navegador não suporta vídeo.
+                                            </video>
+                                        </div>
                                     </div>
                                 @endif
-                        
-                                <x-file-input name="video" label="Vídeo do Sinal" accept="video/mp4" :maxSize="51200"
-                                    :showPreview="true" previewType="video"
+
+                                <x-file-input name="video" label="Vídeo do Sinal" accept="video/mp4"
+                                    :maxSize="51200" :showPreview="true" previewType="video"
                                     description="Arraste e solte o vídeo ou clique para selecionar apenas caso queira trocar o vídeo atual" />
                                 @error('video')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
+                            </div>
+
+                            <!-- Imagens -->
+                            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Imagens</h3>
+                                @if ($sinal->imagens->count() > 0)
+                                    <div
+                                        class="mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                        @foreach ($sinal->imagens as $imagem)
+                                            <div class="relative border rounded-lg overflow-hidden">
+                                                <img src="{{ Storage::url($imagem->url_imagem) }}"
+                                                    alt="Imagem do Sinal" class="w-full h-48 object-cover">
+                                                <form method="POST"
+                                                    action="{{ route('sinais.imagens.destroy', [$sinal, $imagem]) }}"
+                                                    class="absolute top-2 right-2">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="bg-red-600 text-white rounded-full p-1 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                                        onclick="return confirm('Tem certeza que deseja remover esta imagem?');">
+                                                        <i class="ph ph-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                    </div>
+                                @endif
+                                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                    <x-file-input name="imagens[]" label="Adicionar Novas Imagens do Sinal"
+                                        accept="image/*" :maxSize="10240" :showPreview="true" previewType="image"
+                                        multiple description="Arraste e solte as imagens ou clique para selecionar" />
+                                    @error('imagens')
+                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

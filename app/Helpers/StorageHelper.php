@@ -20,9 +20,19 @@ class StorageHelper
     const MATERIAL_DIRECTORY = 'materiais';
 
     /**
+     * Directory where images are stored.
+     */
+    const IMAGE_DIRECTORY = 'imagens';
+
+    /**
      * Allowed video extensions.
      */
     const ALLOWED_EXTENSIONS = ['mp4', 'mov', 'avi', 'webm', 'mkv'];
+
+    /**
+     * Allowed image extensions.
+     */
+    const ALLOWED_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
 
     /**
      * Allowed material extensions.
@@ -38,6 +48,11 @@ class StorageHelper
      * Maximum material file size in kilobytes (20MB).
      */
     const MAX_MATERIAL_SIZE = 20480;
+
+    /**
+     * Maximum image file size in kilobytes (5MB).
+     */
+    const MAX_IMAGE_SIZE = 5120;
 
     /**
      * Upload a video file.
@@ -375,5 +390,145 @@ class StorageHelper
             Log::error('Error getting MIME type: ' . $e->getMessage());
             return null;
         }
+    }
+
+    /**
+     * Upload an image file.
+     *
+     * @param UploadedFile $file
+     * @param string|null $customName
+     * @param string|null $subdirectory
+     * @return string|false Returns the file path on success, false on failure
+     */
+    public static function uploadImage(UploadedFile $file, ?string $customName = null, ?string $subdirectory = null)
+    {
+        try {
+            $extension = $file->getClientOriginalExtension();
+            if (!in_array(strtolower($extension), self::ALLOWED_IMAGE_EXTENSIONS)) {
+                throw new \Exception('Tipo de arquivo não permitido. Use: ' . implode(', ', self::ALLOWED_IMAGE_EXTENSIONS));
+            }
+
+            if ($file->getSize() > self::MAX_IMAGE_SIZE * 1024) {
+                throw new \Exception('Arquivo muito grande. Tamanho máximo: ' . (self::MAX_IMAGE_SIZE / 1024) . 'MB');
+            }
+
+            $filename = $customName 
+                ? Str::slug($customName) . '-' . uniqid() . '.' . $extension
+                : Str::random(40) . '.' . $extension;
+
+            $directory = self::IMAGE_DIRECTORY;
+            if ($subdirectory) {
+                $directory .= '/' . trim($subdirectory, '/');
+            }
+
+            $path = $file->storeAs($directory, $filename, 'public');
+
+            return $path;
+        } catch (\Exception $e) {
+            Log::error('Error uploading image: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Delete an image file.
+     *
+     * @param string $path
+     * @return bool
+     */
+    public static function deleteImage(string $path): bool
+    {
+        try {
+            if (Storage::disk('public')->exists($path)) {
+                return Storage::disk('public')->delete($path);
+            }
+            return false;
+        } catch (\Exception $e) {
+            Log::error('Error deleting image: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Replace an existing image with a new one.
+     * Deletes the old image and uploads the new one.
+     *
+     * @param string|null $oldPath Path of the image to be replaced
+     * @param UploadedFile $newFile New image file to upload
+     * @param string|null $customName Custom name for the new file
+     * @param string|null $subdirectory Subdirectory to store the new file
+     * @return string|false Returns the new file path on success, false on failure
+     */
+    public static function replaceImage(?string $oldPath, UploadedFile $newFile, ?string $customName = null, ?string $subdirectory = null)
+    {
+        try {
+            if ($oldPath && Storage::disk('public')->exists($oldPath)) {
+                self::deleteImage($oldPath);
+            }
+
+            $newPath = self::uploadImage($newFile, $customName, $subdirectory);
+
+            if (!$newPath) {
+                throw new \Exception('Falha ao fazer upload da nova imagem.');
+            }
+
+            return $newPath;
+        } catch (\Exception $e) {
+            Log::error('Error replacing image: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Delete multiple image files.
+     *
+     * @param array $paths
+     * @return bool
+     */
+    public static function deleteImages(array $paths): bool
+    {
+        try {
+            $existingPaths = array_filter($paths, function($path) {
+                return Storage::disk('public')->exists($path);
+            });
+
+            if (empty($existingPaths)) {
+                return false;
+            }
+
+            return Storage::disk('public')->delete($existingPaths);
+        } catch (\Exception $e) {
+            Log::error('Error deleting images: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Get the public URL of an image file.
+     *
+     * @param string|null $path
+     * @return string|null
+     */
+    public static function getImageUrl(?string $path): ?string
+    {
+        if (!$path || !Storage::disk('public')->exists($path)) {
+            return null;
+        }
+
+        return asset('storage/' . $path);
+    }
+
+    /**
+     * Get the full path of an image file.
+     *
+     * @param string $path
+     * @return string|null
+     */
+    public static function getImagePath(string $path): ?string
+    {
+        if (Storage::disk('public')->exists($path)) {
+            return Storage::disk('public')->path($path);
+        }
+        return null;
     }
 }
