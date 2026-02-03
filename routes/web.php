@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/sinais/restore/{id}', [SinalController::class, 'restore'])->name('sinais.restore');
     Route::delete('/sinais/force-delete/{id}', [SinalController::class, 'forceDelete'])->name('sinais.force-delete');
+    Route::delete('/sinais/{sinal}/imagens/{imagem}', [SinalController::class, 'destroyImage'])->name('sinais.imagens.destroy');
     Route::resource('sinais', SinalController::class)->parameters(['sinais' => 'sinal']);
 
     Route::post('/materiais/restore/{id}', [MaterialController::class, 'restore'])->name('materiais.restore');

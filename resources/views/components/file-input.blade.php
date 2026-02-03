@@ -24,24 +24,32 @@
     files: [],
     error: '',
     isMultiple: {{ $multiple ? 'true' : 'false' }},
+    dataTransfer: null,
+    init() {
+        if (this.isMultiple) {
+            this.dataTransfer = new DataTransfer();
+        }
+    },
     handleFiles(fileList) {
         if (fileList.length === 0) return;
         
         this.error = '';
         
         if (this.isMultiple) {
-            // Handle multiple files
-            const validFiles = [];
-            
+            // Handle multiple files - accumulate them
             for (let i = 0; i < fileList.length; i++) {
                 const file = fileList[i];
                 const validation = this.validateFile(file);
                 
                 if (validation.valid) {
+                    // Add to DataTransfer
+                    this.dataTransfer.items.add(file);
+                    
                     const fileData = {
                         name: file.name,
                         size: this.formatFileSize(file.size),
-                        previewUrl: null
+                        previewUrl: null,
+                        file: file
                     };
                     
                     // Generate preview
@@ -58,15 +66,15 @@
                         }
                     @endif
                     
-                    validFiles.push(fileData);
+                    this.files.push(fileData);
                 } else {
                     this.error = validation.error;
-                    this.$refs.fileInput.value = '';
                     return;
                 }
             }
             
-            this.files = [...this.files, ...validFiles];
+            // Update input with accumulated files
+            this.$refs.fileInput.files = this.dataTransfer.files;
         } else {
             // Handle single file
             const file = fileList[0];
@@ -131,16 +139,26 @@
         return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
     },
     removeFile(index) {
+        // Remove from files array
         this.files.splice(index, 1);
         
-        // Clear input and recreate with remaining files
-        const dt = new DataTransfer();
-        const input = this.$refs.fileInput;
-        
-        // Unfortunately, we can't recreate the FileList, so we clear it
-        input.value = '';
-        
-        if (this.files.length === 0) {
+        if (this.isMultiple) {
+            // Rebuild DataTransfer without this file
+            this.dataTransfer = new DataTransfer();
+            
+            for (let i = 0; i < this.files.length; i++) {
+                if (this.files[i].file) {
+                    this.dataTransfer.items.add(this.files[i].file);
+                }
+            }
+            
+            // Update input
+            this.$refs.fileInput.files = this.dataTransfer.files;
+            
+            if (this.files.length === 0) {
+                this.clearFile();
+            }
+        } else {
             this.clearFile();
         }
     },
@@ -151,6 +169,10 @@
         this.files = [];
         this.error = '';
         this.$refs.fileInput.value = '';
+        
+        if (this.isMultiple) {
+            this.dataTransfer = new DataTransfer();
+        }
     }
 }" class="w-full">
     <!-- Label -->

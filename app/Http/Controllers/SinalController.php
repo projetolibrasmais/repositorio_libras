@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSinalRequest;
 use App\Http\Requests\UpdateSinalRequest;
 use App\Models\Categoria;
+use App\Models\Imagem;
 use App\Models\Sinal;
 use App\Repositories\Eloquent\SinalRepository;
 use Illuminate\Http\Request;
@@ -69,7 +70,9 @@ class SinalController extends Controller implements HasMiddleware
     public function show(Sinal $sinal)
     {
         $video = $sinal->video;
-        return view('sinais.show', compact('sinal', 'video'));
+        $imagens = $sinal->imagens;
+
+        return view('sinais.show', compact('sinal', 'video', 'imagens'));
     }
 
     /**
@@ -128,5 +131,19 @@ class SinalController extends Controller implements HasMiddleware
         }
         
         return redirect()->route('sinais.index')->with('error', 'Erro ao excluir o sinal permanentemente.');
+    }
+
+    /**
+     * Delete a specific image from a sinal.
+     */
+    public function destroyImage(Sinal $sinal, Imagem $imagem)
+    {
+        $deleted = $this->sinalRepository->forceDeleteImage($sinal->id, $imagem->id);
+        
+        if ($deleted) {
+            return redirect()->route('sinais.edit', $sinal)->with('success', 'Imagem removida com sucesso.');
+        }
+        
+        return redirect()->route('sinais.edit', $sinal)->with('error', 'Erro ao remover a imagem.');
     }
 }

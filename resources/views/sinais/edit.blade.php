@@ -78,8 +78,7 @@
                                     </div>
 
                                     <!-- Contexto de Utilização -->
-                                    <div class="bg-white border border-gray-200 rounded-lg p-6">
-                                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Contexto de Utilização</h3>
+                                    <div>
                                         <label for="contexto_utilizacao"
                                             class="block text-sm font-medium text-gray-700 mb-1">
                                             Contexto de Utilização <span class="text-red-500">*</span>
@@ -201,29 +200,24 @@
 
                             <!-- Imagens -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Imagens</h3>
                                 @if ($sinal->imagens->count() > 0)
+                                    <p class="text-sm text-gray-600 mb-2">Imagens atuais:</p>
                                     <div
                                         class="mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                         @foreach ($sinal->imagens as $imagem)
-                                            <div class="relative border rounded-lg overflow-hidden">
+                                            <div class="relative border rounded-lg overflow-hidden group">
                                                 <img src="{{ Storage::url($imagem->url_imagem) }}"
                                                     alt="Imagem do Sinal" class="w-full h-48 object-cover">
-                                                <form method="POST"
-                                                    action="{{ route('sinais.imagens.destroy', [$sinal, $imagem]) }}"
-                                                    class="absolute top-2 right-2">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="bg-red-600 text-white rounded-full p-1 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                                                        onclick="return confirm('Tem certeza que deseja remover esta imagem?');">
-                                                        <i class="ph ph-trash"></i>
-                                                    </button>
-                                                </form>
+                                                <button type="button" x-data=""
+                                                    x-on:click="$dispatch('open-modal', 'delete-image-{{ $imagem->id }}')"
+                                                    class="absolute top-2 right-2 bg-red-600 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                    <i class="ph ph-trash text-lg"></i>
+                                                </button>
                                             </div>
+                                        @endforeach
                                     </div>
                                 @endif
-                                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                <div>
                                     <x-file-input name="imagens[]" label="Adicionar Novas Imagens do Sinal"
                                         accept="image/*" :maxSize="10240" :showPreview="true" previewType="image"
                                         multiple description="Arraste e solte as imagens ou clique para selecionar" />
@@ -248,6 +242,13 @@
                         </button>
                     </div>
                 </form>
+
+                <!-- Delete Modals for Images -->
+                @foreach ($sinal->imagens as $imagem)
+                    <x-delete-modal name="delete-image-{{ $imagem->id }}" title="Remover Imagem"
+                        message="Tem certeza que deseja remover esta imagem? Esta ação não pode ser desfeita."
+                        action="{{ route('sinais.imagens.destroy', [$sinal, $imagem]) }}" />
+                @endforeach
             </div>
         </div>
     </div>

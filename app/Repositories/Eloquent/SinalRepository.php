@@ -72,6 +72,7 @@ class SinalRepository extends BaseRepository
         $imagens = $data['imagens'] ?? [];
         unset($data['imagens']);
 
+
         $sinal = parent::create($data);
 
         if ($videoFile) {
