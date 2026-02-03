@@ -219,7 +219,7 @@
                                 @endif
                                 <div>
                                     <x-file-input name="imagens[]" label="Adicionar Novas Imagens do Sinal"
-                                        accept="image/*" :maxSize="10240" :showPreview="true" previewType="image"
+                                        accept="image/jpg,image/jpeg,image/png,image/gif,image/webp,image/svg+xml" :maxSize="10240" :showPreview="true" previewType="image"
                                         multiple description="Arraste e solte as imagens ou clique para selecionar" />
                                     @error('imagens')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -243,13 +243,46 @@
                     </div>
                 </form>
 
+                <!-- Hidden Forms for Image Deletion -->
+                @foreach ($sinal->imagens as $imagem)
+                    <form id="delete-image-form-{{ $imagem->id }}" method="POST" 
+                          action="{{ route('sinais.imagens.destroy', [$sinal, $imagem]) }}" 
+                          style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                @endforeach
+
                 <!-- Delete Modals for Images -->
                 @foreach ($sinal->imagens as $imagem)
                     <x-delete-modal name="delete-image-{{ $imagem->id }}" title="Remover Imagem"
-                        message="Tem certeza que deseja remover esta imagem? Esta ação não pode ser desfeita."
-                        action="{{ route('sinais.imagens.destroy', [$sinal, $imagem]) }}" />
+                        message="Tem certeza que deseja remover esta imagem? Esta ação não pode ser desfeita." />
                 @endforeach
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            let deleteForm = null;
+
+            function confirmDelete() {
+                if (deleteForm) {
+                    deleteForm.submit();
+                }
+            }
+
+            // Set the delete form when opening modals
+            document.addEventListener('alpine:init', () => {
+                window.addEventListener('open-modal', (event) => {
+                    const modalName = event.detail;
+                    if (modalName && modalName.startsWith('delete-image-')) {
+                        const imageId = modalName.replace('delete-image-', '');
+                        deleteForm = document.getElementById('delete-image-form-' + imageId);
+                    }
+                });
+            });
+        </script>
+    @endpush
+
 </x-app-layout>

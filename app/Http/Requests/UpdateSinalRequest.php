@@ -29,7 +29,7 @@ class UpdateSinalRequest extends FormRequest
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240',
             'imagens' => 'array',
-            'imagens.*' => 'file|mimes:jpg,jpeg,png,gif|max:5120',
+            'imagens.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg|max:5120',
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];

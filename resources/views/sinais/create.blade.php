@@ -188,7 +188,7 @@
 
                             <!-- Imagens -->
                             <div class="bg-white border border-gray-200 rounded-lg p-6">
-                                <x-file-input name="imagens[]" label="Imagens do Sinal" accept="image/*"
+                                <x-file-input name="imagens[]" label="Imagens do Sinal" accept="image/jpg,image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
                                     :maxSize="10240" :showPreview="true" previewType="image" multiple
                                     description="Arraste e solte as imagens ou clique para selecionar" />
                                 @error('imagens')
