@@ -15,6 +15,11 @@ return new class extends Migration
             $table->unsignedBigInteger('sinal_id')->nullable();
             $table->foreign('sinal_id')->references('id')->on('sinais')->onDelete('cascade');
         });
+
+        Schema::table('desenhos', function (Blueprint $table) {
+            $table->unsignedBigInteger('sinal_id')->nullable();
+            $table->foreign('sinal_id')->references('id')->on('sinais')->onDelete('cascade');
+        });
     }
 
     /**
@@ -23,6 +28,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('videos', function (Blueprint $table) {
+            $table->dropForeign(['sinal_id']);
+            $table->dropColumn('sinal_id');
+        });
+
+        Schema::table('desenhos', function (Blueprint $table) {
             $table->dropForeign(['sinal_id']);
             $table->dropColumn('sinal_id');
         });

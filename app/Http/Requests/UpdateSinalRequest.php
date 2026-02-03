@@ -27,6 +27,7 @@ class UpdateSinalRequest extends FormRequest
             'instrucao_execucao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240',
+            'desenho' => 'file|mimes:png,jpg,jpeg,gif|max:10240',
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];
@@ -60,6 +61,7 @@ class UpdateSinalRequest extends FormRequest
             'instrucao_execucao' => 'instrução de execução',
             'status' => 'status',
             'video' => 'vídeo',
+            'desenho' => 'desenho',
             'categorias' => 'categorias',
         ];
     }

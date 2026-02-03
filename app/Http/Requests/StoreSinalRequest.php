@@ -27,6 +27,7 @@ class StoreSinalRequest extends FormRequest
             'parametros' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
+            'desenho' => 'required|file|mimes:png,jpg,jpeg,gif|max:10240', 
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
         ];
@@ -61,6 +62,7 @@ class StoreSinalRequest extends FormRequest
             'parametros' => 'parâmetros',
             'status' => 'status',
             'video' => 'vídeo',
+            'desenho' => 'desenho',
             'categorias' => 'categorias',
         ];
     }
