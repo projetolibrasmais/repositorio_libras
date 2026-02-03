@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class UserInvitation extends Notification implements ShouldQueue
+class UserInvitation extends Notification
 {
     use Queueable;
 
