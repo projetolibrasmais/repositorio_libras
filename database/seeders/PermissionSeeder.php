@@ -31,6 +31,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'restore_categorias', 'description' => 'Restaurar categorias', 'guard_name' => 'web'],
             ['name' => 'force_delete_categorias', 'description' => 'Excluir permanentemente categorias', 'guard_name' => 'web'],
 
+            // Materiais
+            ['name' => 'view_materiais', 'description' => 'Visualizar materiais', 'guard_name' => 'web'],
+            ['name' => 'create_materiais', 'description' => 'Criar materiais', 'guard_name' => 'web'],
+            ['name' => 'edit_materiais', 'description' => 'Editar materiais', 'guard_name' => 'web'],
+            ['name' => 'delete_materiais', 'description' => 'Excluir materiais', 'guard_name' => 'web'],
+            ['name' => 'restore_materiais', 'description' => 'Restaurar materiais', 'guard_name' => 'web'],
+            ['name' => 'force_delete_materiais', 'description' => 'Excluir permanentemente materiais', 'guard_name' => 'web'],
+
             // Logs
             ['name' => 'view_logs', 'description' => 'Visualizar logs de atividade', 'guard_name' => 'web'],
 
