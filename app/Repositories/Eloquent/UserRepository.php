@@ -59,8 +59,11 @@ class UserRepository extends BaseRepository
      */
     public function create(array $data): User
     {
+        // Create user without password (will be set via email invitation)
+        $data['password'] = bcrypt(uniqid('temp_', true));
+        
         $user = parent::create($data);
-        $user->assignRole($data['role']);
+        $user->assignRole($data['role'] ?? 'user');
         return $user;
     }
 

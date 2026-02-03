@@ -109,9 +109,9 @@
                                         <h3 class="text-sm font-medium text-blue-800">Informações</h3>
                                         <div class="mt-2 text-sm text-blue-700">
                                             <ul class="list-disc list-inside space-y-1">
-                                                <li>O e-mail deve ser único</li>
-                                                <li>Uma senha temporária será gerada</li>
-                                                <li>O usuário receberá um e-mail de boas-vindas</li>
+                                                <li>O e-mail deve ser único no sistema</li>
+                                                <li>Um e-mail de convite será enviado automaticamente</li>
+                                                <li>O usuário definirá sua própria senha via e-mail</li>
                                                 <li>Campos marcados com * são obrigatórios</li>
                                             </ul>
                                         </div>

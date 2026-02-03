@@ -67,7 +67,11 @@ class UserController extends Controller implements HasMiddleware
     public function store(StoreUserRequest $request)
     {
         $user = $this->userRepository->create($request->validated());
-        return redirect()->route('users.show', $user)->with('success', 'Usuário criado com sucesso!');
+        
+        // Send invitation email to set password
+        $user->notify(new \App\Notifications\UserInvitation());
+        
+        return redirect()->route('users.show', $user)->with('success', 'Usuário criado com sucesso! Um e-mail de convite foi enviado.');
     }
 
     /**
