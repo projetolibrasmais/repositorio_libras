@@ -57,6 +57,14 @@ class SinalRepository extends BaseRepository
     }
 
     /**
+     * Find a record by its slug.
+     */
+    public function findBySlug(string $slug): ?Sinal
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
+
+    /**
      * Create a new record.
      */
     public function create(array $data): Sinal
