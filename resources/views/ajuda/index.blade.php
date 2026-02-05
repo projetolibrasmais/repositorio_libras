@@ -223,4 +223,66 @@
             />
         </div>
     </div>
+
+
+    <div class="bg-gray-100 p-4 border-b border-gray-200">
+        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Material</h1>
+        <div class="p-6 space-y-4">
+            <!-- CRIAR Material -->
+            <x-help-card
+                permissao="create_materiais"
+                titulo="Criar Material"
+                descricao="Para criar um material, acesse o menu Materiais, clique em Novo Material, preencha os dados e clique em Criar Material."
+                imagem="help\materiais\create_material.PNG"
+            />
+            <!-- EDITAR MATERIAL -->
+            <x-help-card
+                permissao="edit_materiais"
+                titulo="Editar Material"
+                descricao="Para editar um material, acesse o menu Materiais, clique no material desejado, faça as alterações e clique em Atualizar Material."
+                imagem="help\materiais\edit_material.PNG"
+            />
+
+            <!-- BAIXAR MATERIAL -->
+            <x-help-card
+                permissao="view_materiais"
+                titulo="Baixar Material"
+                descricao="Para baixar um material, acesse o menu Materiais, clique no material desejado e clique no ícone de download."
+                imagem="help\materiais\download_material.PNG"
+            />
+
+            <!-- EXCLUIR MATERIAL -->
+            <x-help-card
+                permissao="delete_materiais"
+                titulo="Excluir Material"
+                descricao="Para excluir um material, acesse o menu Materiais, clique no material desejado, clique em Excluir Material e confirme."
+                imagem="help\materiais\delete_material.PNG"
+            />
+
+            <!-- ACESSAR Materiais DELETADAS -->
+            <x-help-card
+                permissao="delete_materiais"
+                titulo="Acessar Materiais Deletados"
+                descricao="Para acessar materiais deletados, acesse o menu Materiais, acesse o filtro e selecione 'Apenas Materiais Deletados'."
+                imagem="help\materiais\filtro_material.PNG"
+            />
+
+            <!-- RESTAURAR MATERIAIS DELETADAS -->
+            <x-help-card
+                permissao="restore_materiais"
+                titulo="Restaurar Materiais Deletados"
+                descricao="Para restaurar um material deletado, acesse o menu Materiais, acesse o filtro e selecione 'Apenas Materiais Deletados'. Busque no material desejado e clique no ícone Restaurar."
+                imagem="help\materiais\restore_material.PNG"
+            />
+
+            <!-- DELETAR PERMANENTEMENTE MATERIAIS DELETADAS-->
+            <x-help-card
+                permissao="force_delete_materiais"
+                titulo="Deletar Permanentemente um Material"
+                descricao="Para deletar permanentemente um material, acesse o menu Materiais, acesse o filtro e selecione 'Apenas Materiais Deletados'. Clique no material desejado, clique no ícone Deletar Permanentemente e confirme."
+                imagem="help\materiais\force_delete_material.PNG"
+            />
+
+        </div>
+    </div>
 </x-app-layout>

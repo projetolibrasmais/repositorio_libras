@@ -34,7 +34,14 @@
 
     <!-- Seção Equipe -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <h1 class="text-4xl font-bold text-[#4A83FF] mb-8 text-center">Equipe</h1>
+        <h1 class="text-4xl font-bold text-[#4A83FF] mb-8 text-center ">Equipe</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <x-team-card nome="Caio Luis" cargo="Desenvolvedor" />
+            <x-team-card nome="Matheus Souza" cargo="Desenvolvedor" />
+            <x-team-card nome="João Silva" cargo="Pesquisador" />
+            <x-team-card nome="Ricardo Macedo" cargo="Designer" />
+            <x-team-card nome="Marcos Oliveira" cargo="Analista de Dados" />
+        </div>
     </div>
 
     <!-- Divisor -->
@@ -73,6 +80,11 @@
     <!-- Seção Financiamento -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <h1 class="text-4xl font-bold text-[#4A83FF] mb-8 text-center">Financiamento</h1>
+         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-6">
+            <x-team-card nome="Fadenor" />
+            <x-team-card nome="Unimontes CEAD" />
+            <x-team-card nome="UAB"/>            
+        </div>
     </div>
 
     <!-- Divisor -->
