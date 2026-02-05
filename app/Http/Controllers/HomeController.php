@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sinal;
 use App\Repositories\Eloquent\CategoriaRepository;
 use App\Repositories\Eloquent\SinalRepository;
 use Illuminate\Http\Request;
@@ -61,9 +62,28 @@ class HomeController extends Controller
     /**
      * Show the catalog page.
      */
-    public function catalog()
+    public function catalog(Request $request)
     {
-        return view('public.catalogo');
+        $query = Sinal::whereIn('status', ['catalogado', 'publicado'])
+            ->with('video', 'categorias');
+
+        // Filter by letter if provided
+        if ($request->filled('letra')) {
+            $letra = strtoupper($request->letra);
+            $query->where('palavra_portugues', 'LIKE', $letra . '%');
+        }
+
+        // Search filter
+        if ($request->filled('query')) {
+            $searchQuery = $request->query;
+            $query->search($searchQuery, ['palavra_portugues', 'definicao', 'parametros']);
+        }
+
+        $sinais = $query->orderBy('palavra_portugues', 'asc')
+                        ->paginate(12)
+                        ->withQueryString();
+
+        return view('public.catalogo', compact('sinais'));
     }
 
     /**
