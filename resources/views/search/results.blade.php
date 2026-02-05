@@ -15,7 +15,7 @@
 
             <!-- Search Again -->
             <div class="mb-12">
-                <x-global-search placeholder="Refinar busca..." />
+                <x-global-search placeholder="Buscar novamente" />
             </div>
 
             <!-- Sinais Results -->
@@ -47,7 +47,7 @@
                                     @if($sinal->categorias->count() > 0)
                                         <div class="flex flex-wrap gap-2">
                                             @foreach($sinal->categorias->take(2) as $categoria)
-                                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                                                <span class="px-2 py-1 bg-blue-100 text-[#4A83FF] border border-[#4A83FF] text-xs rounded-md font-semibold">
                                                     {{ $categoria->nome }}
                                                 </span>
                                             @endforeach
