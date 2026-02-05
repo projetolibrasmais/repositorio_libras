@@ -46,8 +46,7 @@ class HomeController extends Controller
      */
     public function sinais()
     {
-        $sinais = $this->sinalRepository->all();
-        return view('public.sinais', compact('sinais'));
+        return view('public.sinais');
     }
 
     /**

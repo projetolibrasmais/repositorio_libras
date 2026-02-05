@@ -23,8 +23,9 @@ class CategoriaRepository extends BaseRepository
      */
     public function all($request = null, $perPage = 15): LengthAwarePaginator
     {
+        $query = $this->model->newQuery();
+        
         if ($request) {
-            $query = $this->model->newQuery();
             $query->withDeletedFilter($request->get('show_deleted'));
 
             if ($request->filled('search')) {
