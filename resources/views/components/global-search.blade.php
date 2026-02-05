@@ -6,6 +6,7 @@
             type="text" 
             x-model="query"
             @input.debounce.300ms="search()"
+            @keyup.enter="performSearch()"
             @focus="showResults = true"
             @click.away="showResults = false"
             placeholder="{{ $placeholder }}"
