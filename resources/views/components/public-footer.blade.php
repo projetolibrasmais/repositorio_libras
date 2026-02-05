@@ -5,13 +5,13 @@
             <div class="space-y-4">
                 <h3 class="text-lg font-semibold mb-4">Parceiros</h3>
                 <div class="flex gap-4">
-                    <div class="bg-white rounded-lg p-3">
-                        <img src="/images/fapemig-logo.png" alt="FAPEMIG" class="h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="bg-white rounded-lg p-3 flex items-center justify-center">
+                        <img src="/images/fapemig.png" alt="FAPEMIG" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">FAPEMIG</div>
                     </div>
-                    <div class="bg-white rounded-lg p-3">
-                        <img src="/images/unimontes-logo.png" alt="Unimontes" class="h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">Unimontes</div>
+                    <div class="bg-white rounded-lg p-3 flex items-center justify-center">
+                        <img src="/images/unimontes.png" alt="UAB UNIMONTES" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">UAB UNIMONTES</div>
                     </div>
                 </div>
             </div>
@@ -28,16 +28,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.fadenor.edu.br" target="_blank" rel="noopener noreferrer" 
+                        <a href="https://www.cotec.fadenor.com.br" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-blue-200 transition-colors flex items-center gap-2">
                             FADENOR
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.uab.unimontes.br" target="_blank" rel="noopener noreferrer" 
+                        <a href="https://www.cead.unimontes.br/uab/" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-blue-200 transition-colors flex items-center gap-2">
-                            UNIMONTES
+                            UAB UNIMONTES
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
