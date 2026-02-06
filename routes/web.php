@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SinalController;
 use App\Http\Controllers\UserController;
@@ -36,9 +37,7 @@ Route::get('/buscar', [GlobalSearchController::class, 'results'])->name('search.
 Route::get('/api/buscar/autocomplete', [GlobalSearchController::class, 'autocomplete'])->name('search.autocomplete');
 
 Route::middleware('auth')->prefix('/admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
