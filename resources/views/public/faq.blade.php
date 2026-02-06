@@ -20,19 +20,19 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div>
-                <x-faq-card
+                <x-acordeon-faq
                     nome="O que é a Plataforma Digital Libras+?"
                     descricao="A Plataforma Digital Libras+ é um recurso online projetado para facilitar o aprendizado e a prática da Língua Brasileira de Sinais (Libras) por meio de vídeos, exercícios interativos e materiais didáticos."            
                 />
 
-                <x-faq-card
+                <x-acordeon-faq
                     nome="Quem pode usar a Plataforma Digital Libras+?"
                     descricao="A plataforma é aberta a todos os interessados em aprender Libras, incluindo estudantes, profissionais da área de educação, intérpretes e qualquer pessoa que deseje se comunicar com a comunidade surda."/>
-                <x-faq-card
+                <x-acordeon-faq
                     nome="Quais são os recursos disponíveis na plataforma?"
                     descricao="Os recursos disponíveis incluem vídeos explicativos, materiais didáticos e um repositório de sinais em Libras."/>
 
-                <x-faq-card
+                <x-acordeon-faq
                     nome="Como posso acessar a plataforma?"
                     descricao="A plataforma pode ser acessada através do nosso site oficial, onde você pode criar uma conta gratuita para começar a explorar os recursos disponíveis."/>
         </div>
