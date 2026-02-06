@@ -95,4 +95,9 @@ class HomeController extends Controller
         $categorias = $this->categoriaRepository->all();
         return view('public.categorias', compact('categorias'));
     }
+
+    public function faq()
+    {
+        return view('public.faq');
+    }
 }

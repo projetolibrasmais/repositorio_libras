@@ -28,6 +28,12 @@
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.categorias') ? 'bg-[#3B6ED8]' : '' }}">
                     {{ __('CATEGORIAS') }}
                 </a>
+
+                <a href="{{ route('public.faq') }}" 
+                   class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.faq') ? 'bg-[#3B6ED8]' : '' }}">
+                    {{ __('FAQ') }}
+                </a>
+                
                 <a href="{{ route('public.about') }}" 
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.about') ? 'bg-[#3B6ED8]' : '' }}">
                     {{ __('SOBRE') }}
