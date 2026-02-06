@@ -101,4 +101,14 @@
         <h1 class="text-4xl font-bold text-[#4A83FF] mb-8 text-center">Materiais e Produções</h1>
     </div>
 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="materiais">
+        @foreach ($materiais as $material)
+            <x-material-card 
+                titulo="{{ $material->titulo }}" 
+                descricao="{{ $material->descricao }}" 
+                link="{{ $material->arquivo_path }}" 
+            />
+        @endforeach
+    </div>
+
 </x-public-layout>

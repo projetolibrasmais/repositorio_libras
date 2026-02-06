@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Material;
 use App\Models\Sinal;
 use App\Repositories\Eloquent\CategoriaRepository;
 use App\Repositories\Eloquent\SinalRepository;
@@ -38,7 +39,8 @@ class HomeController extends Controller
      */
     public function about()
     {
-        return view('public.sobre');
+        $materiais = Material::all();
+        return view('public.sobre', compact('materiais'));
     }
 
     /**
