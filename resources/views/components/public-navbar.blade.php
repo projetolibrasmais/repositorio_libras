@@ -14,23 +14,23 @@
             <div class="hidden md:flex md:items-center md:space-x-8">
                 <a href="{{ route('home') }}" 
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('home') ? 'bg-[#3B6ED8]' : '' }}">
-                    INÍCIO
+                    {{ __('INÍCIO') }}
                 </a>
                 <a href="{{ route('public.sinais') }}" 
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.sinais') ? 'bg-[#3B6ED8]' : '' }}">
-                    SINAIS
+                    {{ __('SINAIS') }}
                 </a>
                 <a href="{{ route('public.catalogo') }}" 
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.catalogo') ? 'bg-[#3B6ED8]' : '' }}">
-                    CATÁLOGO
+                    {{ __('CATÁLOGO') }}
                 </a>
                 <a href="{{ route('public.categorias') }}" 
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.categorias') ? 'bg-[#3B6ED8]' : '' }}">
-                    CATEGORIAS
+                    {{ __('CATEGORIAS') }}
                 </a>
                 <a href="{{ route('public.about') }}" 
                    class="text-white hover:bg-[#3B6ED8] px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.about') ? 'bg-[#3B6ED8]' : '' }}">
-                    SOBRE
+                    {{ __('SOBRE') }}
                 </a>
             </div>
 
@@ -55,23 +55,23 @@
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-blue-700">
             <a href="{{ route('home') }}" 
                class="text-white hover:text-blue-100 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'bg-blue-800' : '' }}">
-                INÍCIO
+                {{ __('INÍCIO') }}
             </a>
             <a href="{{ route('public.sinais') }}" 
                class="text-white hover:text-blue-100 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.sinais') ? 'bg-blue-800' : '' }}">
-                SINAIS
+                {{ __('SINAIS') }}
             </a>
             <a href="{{ route('public.catalogo') }}" 
                class="text-white hover:text-blue-100 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.catalogo') ? 'bg-blue-800' : '' }}">
-                CATÁLOGO
+                {{ __('CATÁLOGO') }}
             </a>
             <a href="{{ route('public.categorias') }}" 
                class="text-white hover:text-blue-100 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.categorias') ? 'bg-blue-800' : '' }}">
-                CATEGORIAS
+                {{ __('CATEGORIAS') }}
             </a>
             <a href="{{ route('public.about') }}" 
                class="text-white hover:text-blue-100 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.about') ? 'bg-blue-800' : '' }}">
-                SOBRE
+                {{ __('SOBRE') }}
             </a>
         </div>
     </div>

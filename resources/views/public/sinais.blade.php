@@ -45,15 +45,15 @@
                     </a>
                 </div>
             @else
-                <h1 class="text-4xl font-bold text-blue-600 mb-4">Sinais</h1>
+                <h1 class="text-4xl font-bold text-blue-600 mb-4">{{ __('Sinais') }}</h1>
                 <p class="text-gray-600 mb-8">
-                    Explore todos os sinais catalogados na plataforma
+                    {{ __('Explore todos os sinais catalogados na plataforma') }}
                 </p>
             @endif
 
             <!-- Search -->
             <div class="mb-8">
-                <x-global-search placeholder="Buscar sinais..." />
+                <x-global-search :placeholder="__('Buscar sinais...')" />
             </div>
 
             <!-- Sinais Grid -->
@@ -123,7 +123,7 @@
             @else
                 <div class="text-center py-12">
                     <i class="ph ph-hand-waving text-gray-400 text-6xl mb-4"></i>
-                    <p class="text-gray-600">Nenhum sinal disponível no momento.</p>
+                    <p class="text-gray-600">{{ __('Nenhum sinal disponível no momento.') }}</p>
                 </div>
             @endif
         </div>

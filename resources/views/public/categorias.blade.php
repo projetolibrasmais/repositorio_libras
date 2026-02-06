@@ -3,9 +3,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-bold text-blue-600 mb-4">Categorias</h1>
+            <h1 class="text-4xl font-bold text-blue-600 mb-4">{{ __('Categorias') }}</h1>
             <p class="text-gray-600 mb-8">
-                Explore os sinais organizados por áreas do conhecimento
+                {{ __('Explore os sinais organizados por áreas do conhecimento') }}
             </p>
 
             <!-- Categorias Grid -->
@@ -36,7 +36,7 @@
                                     <div class="flex items-center gap-2 text-blue-600">
                                         <i class="ph ph-hand-waving"></i>
                                         <span class="text-sm font-medium">
-                                            {{ $categoria->sinais_count }} sinais
+                                            {{ $categoria->sinais_count }} {{ __('sinais') }}
                                         </span>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
             @else
                 <div class="text-center py-12">
                     <i class="ph ph-folders text-gray-400 text-6xl mb-4"></i>
-                    <p class="text-gray-600">Nenhuma categoria disponível no momento.</p>
+                    <p class="text-gray-600">{{ __('Nenhuma categoria disponível no momento.') }}</p>
                 </div>
             @endif
         </div>

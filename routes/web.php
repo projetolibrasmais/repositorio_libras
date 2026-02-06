@@ -12,6 +12,14 @@ use App\Http\Controllers\SinalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+// Locale switcher
+Route::get('/locale/{locale}', function ($locale) {
+    if (in_array($locale, ['pt_BR', 'en', 'es'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('locale.switch');
+
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sobre', [HomeController::class, 'about'])->name('public.about');
