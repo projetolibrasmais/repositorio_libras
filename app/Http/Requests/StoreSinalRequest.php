@@ -28,7 +28,7 @@ class StoreSinalRequest extends FormRequest
             'contexto_utilizacao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
-            'imagens' => 'required|array',
+            'imagens' => 'array',
             'imagens.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg|max:5120', // Max 5MB each
             'categorias' => 'required|array',
             'categorias.*' => 'exists:categorias,id',
