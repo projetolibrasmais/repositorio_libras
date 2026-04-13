@@ -24,7 +24,11 @@ class StoreSinalRequest extends FormRequest
         return [
             'palavra_portugues' => 'required|string|max:255|unique:sinais,palavra_portugues',
             'definicao' => 'required|string',
-            'parametros' => 'required|string',
+            'config_mao' => 'required|string',
+            'ponto_articulacao' => 'required|string',
+            'orientacao_palma_mao' => 'required|string',
+            'movimento' => 'required|string',
+            'expressao_nao_manual' => 'required|string',
             'contexto_utilizacao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
             'video' => 'required|file|mimes:mp4,avi,mov,wmv|max:10240', // Max 10MB
@@ -61,7 +65,11 @@ class StoreSinalRequest extends FormRequest
         return [
             'palavra_portugues' => 'palavra em português',
             'definicao' => 'definição',
-            'parametros' => 'parâmetros',
+            'config_mao' => 'configuração da mão',
+            'ponto_articulacao' => 'ponto de articulação',
+            'orientacao_palma_mao' => 'orientação da palma da mão',
+            'movimento' => 'movimento',
+            'expressao_nao_manual' => 'expressão não manual',
             'contexto_utilizacao' => 'contexto de utilização',
             'status' => 'status',
             'video' => 'vídeo',

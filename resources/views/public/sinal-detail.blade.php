@@ -61,14 +61,58 @@
                         </p>
                     </div>
 
-                    <!-- Parameters -->
+                    <!-- Configuração de Mão -->
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <h2 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
                             <i class="ph ph-list-bullets text-blue-600"></i>
-                            Parâmetros
+                            Configuração de Mão
                         </h2>
                         <p class="text-gray-700 leading-relaxed">
-                            {{ $sinal->parametros }}
+                            {{ $sinal->config_mao }}
+                        </p>
+                    </div>
+
+                    <!-- Ponto de Articulação -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="ph ph-list-bullets text-blue-600"></i>
+                            Ponto de Articulação
+                        </h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            {{ $sinal->ponto_articulacao }}
+                        </p>
+                    </div>
+
+                    <!-- Orientação da Palma da Mão -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="ph ph-list-bullets text-blue-600"></i>
+                            Orientação da Palma da Mão
+                        </h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            {{ $sinal->orientacao_palma_mao }}
+                        </p>
+                    </div>
+
+                    <!-- Movimento -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="ph ph-list-bullets text-blue-600"></i>
+                            Movimento
+                        </h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            {{ $sinal->movimento }}
+                        </p>
+                    </div>
+
+                    <!-- Expressão não Manual -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="ph ph-list-bullets text-blue-600"></i>
+                            Expressão não Manual
+                        </h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            {{ $sinal->expressao_nao_manual }}
                         </p>
                     </div>
 

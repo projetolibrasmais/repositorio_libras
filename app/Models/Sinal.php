@@ -26,7 +26,11 @@ class Sinal extends Model
         'palavra_portugues',
         'slug',
         'definicao',
-        'parametros',
+        'config_mao',
+        'ponto_articulacao',
+        'orientacao_palma_mao',
+        'movimento',
+        'expressao_nao_manual',
         'contexto_utilizacao',
         'status',
     ];
@@ -38,7 +42,11 @@ class Sinal extends Model
         'palavra_portugues' => 'string',
         'slug' => 'string',
         'definicao' => 'string',
-        'parametros' => 'string',
+        'config_mao' => 'string',
+        'ponto_articulacao' => 'string',
+        'orientacao_palma_mao' => 'string',
+        'movimento' => 'string',
+        'expressao_nao_manual' => 'string',
         'contexto_utilizacao' => 'string',
         'status' => 'string',
     ];
@@ -50,7 +58,12 @@ class Sinal extends Model
         'palavra_portugues' => 'like',
         'slug' => 'like',
         'definicao' => 'like',
-        'parametros' => 'like',
+        'config_mao' => 'like',
+        'ponto_articulacao' => 'like',
+        'orientacao_palma_mao' => 'like',
+        'movimento' => 'like',
+        'expressao_nao_manual' => 'like',
+        'contexto_utilizacao' => 'like',
         'status' => '=',
         'categoria_id:categorias.id' => '=',
         'date_from:created_at' => 'date_from',
@@ -65,7 +78,13 @@ class Sinal extends Model
         'palavra_portugues',
         'slug',
         'definicao',
-        'parametros',
+        'config_mao',
+        'ponto_articulacao',
+        'orientacao_palma_mao',
+        'movimento',
+        'expressao_nao_manual',
+        'contexto_utilizacao',
+        'status',
         'created_at',
         'updated_at',
     ];
@@ -104,7 +123,7 @@ class Sinal extends Model
             ->useLogName('Sinal')
             ->dontSubmitEmptyLogs()
             ->logOnlyDirty()
-            ->logOnly(['palavra_portugues', 'slug', 'definicao', 'parametros', 'status'])
+            ->logOnly(['palavra_portugues', 'slug', 'definicao', 'config_mao', 'ponto_articulacao', 'orientacao_palma_mao', 'movimento', 'expressao_nao_manual', 'contexto_utilizacao', 'status'])
             ->dontLogIfAttributesChangedOnly(['deleted_at']);
     }
 

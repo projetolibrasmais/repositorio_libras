@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('palavra_portugues');
             $table->string('slug')->unique();
             $table->text('definicao')->nullable();
-            $table->text('parametros')->nullable();
+            $table->text('config_mao')->nullable();
+            $table->text('ponto_articulacao')->nullable();
+            $table->text('orientacao_palma_mao')->nullable();
+            $table->text('movimento')->nullable();
+            $table->text('expressao_nao_manual')->nullable();
             $table->text('contexto_utilizacao')->nullable();
             $table->enum('status', ["catalogado", "em_validacao", "publicado"])->default('em_validacao');
 

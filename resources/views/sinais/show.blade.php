@@ -71,13 +71,53 @@
                                     </p>
                                 </div>
 
-                                <!-- Parâmetros -->
+                                <!-- Configuração de Mão -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-500 mb-1">
-                                        Parâmetros
+                                        Configuração de Mão
                                     </label>
                                     <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
-                                        {{ $sinal->parametros ?? 'Nenhuma instrução fornecida.' }}
+                                        {{ $sinal->config_mao ?? 'Nenhuma configuração fornecida.' }}
+                                    </p>
+                                </div>
+
+                                <!-- Ponto de Articulação -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                        Ponto de Articulação
+                                    </label>
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
+                                        {{ $sinal->ponto_articulacao ?? 'Nenhum ponto de articulação fornecido.' }}
+                                    </p>
+                                </div>
+
+                                <!-- Orientação da Palma da Mão -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                        Orientação da Palma da Mão
+                                    </label>
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
+                                        {{ $sinal->orientacao_palma_mao ?? 'Nenhuma orientação fornecida.' }}
+                                    </p>
+                                </div>
+
+                                <!-- Movimento -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                        Movimento
+                                    </label>
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
+                                        {{ $sinal->movimento ?? 'Nenhum movimento fornecido.' }}
+                                    </p>
+                                </div>
+
+                                <!-- Expressão não Manual -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-500 mb-1">
+                                        Expressão não Manual
+                                    </label>
+                                    <p class="text-sm text-gray-900 bg-gray-50 rounded-lg p-3 break-all overflow-hidden">
+                                        {{ $sinal->expressao_nao_manual ?? 'Nenhuma expressão não manual fornecida.' }}
                                     </p>
                                 </div>
 

@@ -63,16 +63,72 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Parâmetros -->
+                                    <!-- Configuração de mão -->
                                     <div>
-                                        <label for="parametros"
+                                        <label for="config_mao"
                                             class="block text-sm font-medium text-gray-700 mb-1">
-                                            Parâmetros <span class="text-red-500">*</span>
+                                            Configuração de Mão <span class="text-red-500">*</span>
                                         </label>
-                                        <textarea name="parametros" id="parametros" rows="3"
-                                            placeholder="Digite os parâmetros do sinal..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('parametros') border-red-500 @enderror">{{ old('parametros') }}</textarea>
-                                        @error('parametros')
+                                        <textarea name="config_mao" id="config_mao" rows="3"
+                                            placeholder="Digite a configuração da mão..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('config_mao') border-red-500 @enderror">{{ old('config_mao') }}</textarea>
+                                        @error('config_mao')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Ponto de Articulação -->
+                                    <div>
+                                        <label for="ponto_articulacao"
+                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                            Ponto de Articulação <span class="text-red-500">*</span>
+                                        </label>
+                                        <textarea name="ponto_articulacao" id="ponto_articulacao" rows="3"
+                                            placeholder="Digite o ponto de articulação..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('ponto_articulacao') border-red-500 @enderror">{{ old('ponto_articulacao') }}</textarea>
+                                        @error('ponto_articulacao')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Orientação da Palma da Mão -->
+                                    <div>
+                                        <label for="orientacao_palma_mao"
+                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                            Orientação da Palma da Mão <span class="text-red-500">*</span>
+                                        </label>
+                                        <textarea name="orientacao_palma_mao" id="orientacao_palma_mao" rows="3"
+                                            placeholder="Digite a orientação da palma da mão..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('orientacao_palma_mao') border-red-500 @enderror">{{ old('orientacao_palma_mao') }}</textarea>
+                                        @error('orientacao_palma_mao')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Movimento -->
+                                    <div>
+                                        <label for="movimento"
+                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                            Movimento <span class="text-red-500">*</span>
+                                        </label>
+                                        <textarea name="movimento" id="movimento" rows="3"
+                                            placeholder="Digite o movimento..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('movimento') border-red-500 @enderror">{{ old('movimento') }}</textarea>
+                                        @error('movimento')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Expressão não Manual -->
+                                    <div>
+                                        <label for="expressao_nao_manual"
+                                            class="block text-sm font-medium text-gray-700 mb-1">
+                                            Expressão não Manual <span class="text-red-500">*</span>
+                                        </label>
+                                        <textarea name="expressao_nao_manual" id="expressao_nao_manual" rows="3"
+                                            placeholder="Digite a expressão não manual..."
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('expressao_nao_manual') border-red-500 @enderror">{{ old('expressao_nao_manual') }}</textarea>
+                                        @error('expressao_nao_manual')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>
