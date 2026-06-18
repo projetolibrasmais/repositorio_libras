@@ -5,7 +5,7 @@
             <!-- Logo -->
             <div class="md:hidden shrink-0 flex items-center">
                 <button @click="$dispatch('toggle-sidebar')" class="focus:outline-none">
-                    <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
                 </button>
             </div>
 
