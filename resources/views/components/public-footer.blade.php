@@ -6,12 +6,16 @@
                 <h3 class="text-lg font-semibold mb-4">Parceiros</h3>
                 <div class="flex gap-4">
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
-                        <img src="/images/fapemig.png" alt="FAPEMIG" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="text-brand-600 font-bold text-sm">FAPEMIG</div>
+                        <img src="/images/asmoc.png" alt="ASMOC" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">ASMOC</div>
                     </div>
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
-                        <img src="/images/unimontes.png" alt="UAB UNIMONTES" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="text-brand-600 font-bold text-sm">UAB UNIMONTES</div>
+                        <img src="/images/cead.png" alt="CEAD" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">CEAD</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-3 flex items-center justify-center">
+                        <img src="/images/fapemig.png" alt="FAPEMIG" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">FAPEMIG</div>
                     </div>
                 </div>
             </div>
@@ -21,26 +25,27 @@
                 <h3 class="text-lg font-semibold mb-4">Links Úteis</h3>
                 <ul class="space-y-2">
                     <li>
-                        <a href="https://www.fapemig.br" target="_blank" rel="noopener noreferrer" 
+                        <a href="https://signbank.libras.ufsc.br/pt" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-brand-100 transition-colors flex items-center gap-2">
-                            FAPEMIG
+                            SignBank - UFSC
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.cotec.fadenor.com.br" target="_blank" rel="noopener noreferrer" 
+                        <a href="https://www.sign-lang.uni-hamburg.de/lr/compendium/index.html" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-brand-100 transition-colors flex items-center gap-2">
-                            FADENOR
+                            Sign Language Dataset Compendium
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.cead.unimontes.br/uab/" target="_blank" rel="noopener noreferrer" 
+                        <a href="https://sldict.korean.go.kr/front/main/main.do" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-brand-100 transition-colors flex items-center gap-2">
-                            UAB UNIMONTES
+                            Sign Language Dictionary - Coreia
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
+                    
                 </ul>
             </div>
 
