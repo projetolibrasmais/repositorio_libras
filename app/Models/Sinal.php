@@ -17,7 +17,18 @@ class Sinal extends Model
     /**
      * The columns that can be searched.
      */
-    protected $searchable = ['palavra_portugues', 'slug', 'definicao'];
+    protected $searchable = [
+        'palavra_portugues',
+        'slug',
+        'definicao',
+        'config_mao',
+        'ponto_articulacao',
+        'orientacao_palma_mao',
+        'movimento',
+        'expressao_nao_manual',
+        'contexto_utilizacao',
+        'categorias.nome',
+    ];
 
     /**
      * The attributes that are mass assignable.

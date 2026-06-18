@@ -1,4 +1,4 @@
-<footer class="bg-[#4A83FF] text-white mt-auto">
+<footer class="bg-brand-600 text-white mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Logo e Instituições -->
@@ -7,11 +7,11 @@
                 <div class="flex gap-4">
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
                         <img src="/images/fapemig.png" alt="FAPEMIG" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">FAPEMIG</div>
+                        <div style="display:none;" class="text-brand-600 font-bold text-sm">FAPEMIG</div>
                     </div>
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
                         <img src="/images/unimontes.png" alt="UAB UNIMONTES" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">UAB UNIMONTES</div>
+                        <div style="display:none;" class="text-brand-600 font-bold text-sm">UAB UNIMONTES</div>
                     </div>
                 </div>
             </div>
@@ -22,21 +22,21 @@
                 <ul class="space-y-2">
                     <li>
                         <a href="https://www.fapemig.br" target="_blank" rel="noopener noreferrer" 
-                           class="hover:text-blue-200 transition-colors flex items-center gap-2">
+                           class="hover:text-brand-100 transition-colors flex items-center gap-2">
                             FAPEMIG
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.cotec.fadenor.com.br" target="_blank" rel="noopener noreferrer" 
-                           class="hover:text-blue-200 transition-colors flex items-center gap-2">
+                           class="hover:text-brand-100 transition-colors flex items-center gap-2">
                             FADENOR
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://www.cead.unimontes.br/uab/" target="_blank" rel="noopener noreferrer" 
-                           class="hover:text-blue-200 transition-colors flex items-center gap-2">
+                           class="hover:text-brand-100 transition-colors flex items-center gap-2">
                             UAB UNIMONTES
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
@@ -48,11 +48,11 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">Menu</h3>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('home') }}" class="hover:text-blue-200 transition-colors">Início</a></li>
-                    <li><a href="{{ route('public.sinais') }}" class="hover:text-blue-200 transition-colors">Sinais</a></li>
-                    <li><a href="{{ route('public.catalogo') }}" class="hover:text-blue-200 transition-colors">Catálogo</a></li>
-                    <li><a href="{{ route('public.categorias') }}" class="hover:text-blue-200 transition-colors">Categorias</a></li>
-                    <li><a href="{{ route('public.about') }}" class="hover:text-blue-200 transition-colors">Sobre</a></li>
+                    <li><a href="{{ route('home') }}" class="hover:text-brand-100 transition-colors">Início</a></li>
+                    <li><a href="{{ route('public.sinais') }}" class="hover:text-brand-100 transition-colors">Sinais</a></li>
+                    <li><a href="{{ route('public.catalogo') }}" class="hover:text-brand-100 transition-colors">Catálogo</a></li>
+                    <li><a href="{{ route('public.categorias') }}" class="hover:text-brand-100 transition-colors">Categorias</a></li>
+                    <li><a href="{{ route('public.about') }}" class="hover:text-brand-100 transition-colors">Sobre</a></li>
                 </ul>
             </div>
         </div>

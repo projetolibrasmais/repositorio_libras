@@ -13,7 +13,7 @@
                     <x-slot name="action">
                         @can('create_sinais')
                             <a href="{{ route('sinais.create') }}"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                                 <i class="ph ph-plus mr-2"></i>
                                 Novo Sinal
                             </a>
@@ -35,7 +35,7 @@
                                         Categoria
                                     </label>
                                     <select name="categoria_id" id="categoria_id"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                         <option value="">Todas as categorias</option>
                                         @foreach ($categorias as $categoria)
                                             <option value="{{ $categoria->id }}"
@@ -54,7 +54,7 @@
                                     Status
                                 </label>
                                 <select name="status" id="status"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                     <option value="" {{ request('status') == '' ? 'selected' : '' }}>Todos</option>
                                     <option value="catalogado" {{ request('status') == 'catalogado' ? 'selected' : '' }}>Catalogado</option>
                                     <option value="em_validacao" {{ request('status') == 'em_validacao' ? 'selected' : '' }}>Em Validação</option>
@@ -70,7 +70,7 @@
                                 </label>
                                 <input type="date" name="date_from" id="date_from"
                                     value="{{ request('date_from') }}"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             </div>
 
                             <!-- Date To -->
@@ -81,7 +81,7 @@
                                 </label>
                                 <input type="date" name="date_to" id="date_to"
                                     value="{{ request('date_to') }}"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             </div>
 
                             <!-- Show Deleted Filter -->
@@ -91,7 +91,7 @@
                                     Sinais Deletados
                                 </label>
                                 <select name="show_deleted" id="show_deleted"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                     <option value="" {{ request('show_deleted') == '' ? 'selected' : '' }}>Apenas Ativos</option>
                                     <option value="with" {{ request('show_deleted') == 'with' ? 'selected' : '' }}>Todos</option>
                                     <option value="only" {{ request('show_deleted') == 'only' ? 'selected' : '' }}>Apenas Deletados</option>
@@ -161,7 +161,7 @@
 
                                                 @case('catalogado')
                                                     <div
-                                                        class="text-xs font-medium text-blue-700 bg-blue-200 py-1 px-2 rounded-md">
+                                                        class="text-xs font-medium text-brand-700 bg-brand-100 py-1 px-2 rounded-md">
                                                         Catalogado
                                                     </div>
                                                 @break
@@ -185,13 +185,13 @@
                                                     @foreach ($sinal->categorias as $categoria)
                                                         @php
                                                         $cores = [
-                                                            'bg-blue-100 text-blue-800 border-blue-200',
+                                                            'bg-brand-100 text-brand-800 border-brand-100',
                                                             'bg-green-100 text-green-800 border-green-200',
                                                             'bg-yellow-100 text-yellow-800 border-yellow-200',
                                                             'bg-red-100 text-red-800 border-red-200',
                                                             'bg-purple-100 text-purple-800 border-purple-200',
                                                             'bg-pink-100 text-pink-800 border-pink-200',
-                                                            'bg-indigo-100 text-indigo-800 border-indigo-200',
+                                                            'bg-brand-100 text-brand-800 border-logo-pink',
                                                             'bg-teal-100 text-teal-800 border-teal-200',
                                                         ];
                                                         // garante índice válido mesmo se o ID for alto
@@ -247,7 +247,7 @@
                                                 @endcan
                                             @else
                                                 <a href="{{ route('sinais.show', $sinal) }}"
-                                                    class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                                    class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
                                                     <i class="ph ph-eye text-lg"></i>
                                                 </a>
                                                 @can('edit_sinais')

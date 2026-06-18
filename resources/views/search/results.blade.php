@@ -9,7 +9,7 @@
                     Resultados da busca
                 </h1>
                 <p class="text-gray-600">
-                    Mostrando resultados para: <span class="font-semibold text-[#4A83FF]">"{{ $query }}"</span>
+                    Mostrando resultados para: <span class="font-semibold text-brand-600">"{{ $query }}"</span>
                 </p>
             </div>
 
@@ -22,7 +22,7 @@
             @if($sinais->count() > 0)
                 <div class="mb-12">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <i class="ph ph-hand-waving text-[#4A83FF]"></i>
+                        <i class="ph ph-hand-waving text-brand-600"></i>
                         Sinais ({{ $sinais->total() }})
                     </h2>
                     
@@ -47,7 +47,7 @@
                                     @if($sinal->categorias->count() > 0)
                                         <div class="flex flex-wrap gap-2">
                                             @foreach($sinal->categorias->take(2) as $categoria)
-                                                <span class="px-2 py-1 bg-blue-100 text-[#4A83FF] border border-[#4A83FF] text-xs rounded-md font-semibold">
+                                                <span class="px-2 py-1 bg-brand-100 text-brand-600 border border-logo-sky text-xs rounded-md font-semibold">
                                                     {{ $categoria->nome }}
                                                 </span>
                                             @endforeach
@@ -68,7 +68,7 @@
             @if($categorias->count() > 0)
                 <div class="mb-12">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <i class="ph ph-folders text-[#4A83FF]"></i>
+                        <i class="ph ph-folders text-brand-600"></i>
                         Categorias ({{ $categorias->total() }})
                     </h2>
                     
@@ -77,14 +77,14 @@
                             <a href="{{ route('public.categoria.show', $categoria->slug) }}" 
                                class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow p-6 border border-gray-200">
                                 <div class="flex items-start gap-4">
-                                    <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <i class="ph ph-folder text-[#4A83FF] text-2xl"></i>
+                                    <div class="flex-shrink-0 w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center">
+                                        <i class="ph ph-folder text-brand-600 text-2xl"></i>
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <h3 class="font-semibold text-lg text-gray-900 mb-2">
                                             {{ $categoria->nome }}
                                         </h3>
-                                        <span class="text-[#4A83FF] text-sm font-medium">
+                                        <span class="text-brand-600 text-sm font-medium">
                                             {{ $categoria->sinais_count }} sinais
                                         </span>
                                     </div>
@@ -110,7 +110,7 @@
                         Tente usar palavras-chave diferentes ou mais gerais
                     </p>
                     <a href="{{ route('home') }}" 
-                       class="inline-flex items-center px-6 py-3 bg-[#4A83FF] text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                       class="inline-flex items-center px-6 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors">
                         <i class="ph ph-house mr-2"></i>
                         Voltar para o início
                     </a>

@@ -10,14 +10,14 @@
             @focus="showResults = true"
             @click.away="showResults = false"
             placeholder="{{ $placeholder }}"
-            class="w-full p-4 text-lg text-gray-600 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#4A83FF] focus:border-[#4A83FF]"
+            class="w-full p-4 text-lg text-gray-600 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-logo-sky focus:border-logo-sky"
             autocomplete="on"
         />
         <button 
             type="submit"
             @click="performSearch()"
             class="absolute inset-y-0 right-0 pr-4 flex items-center">
-            <i class="ph ph-magnifying-glass text-2xl hover:text-[#4A83FF] cursor-pointer text-gray-600"></i>
+            <i class="ph ph-magnifying-glass text-2xl hover:text-brand-600 cursor-pointer text-gray-600"></i>
         </button>
     </div>
 
@@ -27,16 +27,16 @@
          class="absolute z-50 w-full mt-2 bg-white rounded-xl shadow border border-gray-200 max-h-96 overflow-y-auto">
         <template x-for="(result, index) in results" :key="index">
             <a :href="result.url" 
-               class="block px-4 py-3 hover:bg-blue-50 transition-colors border-b border-gray-100 last:border-b-0">
+               class="block px-4 py-3 hover:bg-brand-50 transition-colors border-b border-gray-100 last:border-b-0">
                 <div class="flex items-center gap-3">
                     <div class="flex-shrink-0 mt-1">
-                        <i :class="result.icon" class="text-[#4A83FF] text-xl"></i>
+                        <i :class="result.icon" class="text-brand-600 text-xl"></i>
                     </div>
                     <div class="w-full text-start">
                         <p class="text-sm font-semibold text-gray-900" x-text="result.title"></p>
                         <p class="text-xs text-gray-500 mt-1 line-clamp-2" x-text="result.description"></p>
                         <span class="inline-block mt-1 px-2 py-0.5 text-xs font-medium rounded-full"
-                              :class="result.type === 'sinal' ? 'bg-blue-100 text-[#4A83FF]' : 'bg-gray-100 text-gray-800'"
+                              :class="result.type === 'sinal' ? 'bg-brand-100 text-brand-600' : 'bg-gray-100 text-gray-800'"
                               x-text="result.type_label"></span>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
     <div x-show="loading" 
          x-transition
          class="absolute z-50 w-full mt-2 bg-white rounded-xl shadow border border-gray-200 p-4 text-center">
-        <i class="ph ph-circle-notch animate-spin text-[#4A83FF] text-2xl"></i>
+        <i class="ph ph-circle-notch animate-spin text-brand-600 text-2xl"></i>
         <p class="text-sm text-gray-600 mt-2">Buscando...</p>
     </div>
 

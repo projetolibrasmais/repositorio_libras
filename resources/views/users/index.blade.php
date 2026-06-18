@@ -13,7 +13,7 @@
                     <x-slot name="action">
                         @can('create_users')
                             <a href="{{ route('users.create') }}"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                                 <i class="ph ph-plus mr-2"></i>
                                 Novo Usuário
                             </a>
@@ -35,7 +35,7 @@
                                     name="search" 
                                     value="{{ request('search') }}"
                                     placeholder="Pesquisar usuários..."
-                                    class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                                    class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm"
                                 />
                             </div>
                             
@@ -56,7 +56,7 @@
                                         <i class="ph ph-caret-down"></i>
                                     </span>
                                     @if(request()->hasAny(['role', 'date_from', 'date_to']))
-                                        <span class="absolute -top-2 -right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
+                                        <span class="absolute -top-2 -right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-brand-600 rounded-full">
                                             {{ collect(['role', 'date_from', 'date_to'])->filter(fn($key) => request()->filled($key))->count() }}
                                         </span>
                                     @endif
@@ -65,7 +65,7 @@
                                 <!-- Search Button -->
                                 <button 
                                     type="submit"
-                                    class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                                    class="inline-flex items-center px-4 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors"
                                 >
                                     <i class="ph ph-magnifying-glass mr-2"></i>
                                     Buscar
@@ -104,7 +104,7 @@
                                             Função
                                         </label>
                                         <select name="role" id="role"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                             <option value="">Todas as funções</option>
                                             @foreach($roles as $role)
                                                 <option value="{{ $role->name }}" {{ request('role') == $role->name ? 'selected' : '' }}>
@@ -122,7 +122,7 @@
                                         Criado de
                                     </label>
                                     <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                 </div>
 
                                 <!-- Date To -->
@@ -132,7 +132,7 @@
                                         Criado até
                                     </label>
                                     <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                                     <td class="px-6 py-4 text-sm text-gray-600">
                                         @foreach ($user->roles as $role)
                                             <span
-                                                class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-brand-100 text-brand-800">
                                                 {{ $role->name }}
                                             </span>
                                         @endforeach
@@ -200,7 +200,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center gap-2">
                                             <a href="{{ route('users.show', $user) }}"
-                                                class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                                class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
                                                 <i class="ph ph-eye text-lg"></i>
                                             </a>
                                             @can('edit_users')

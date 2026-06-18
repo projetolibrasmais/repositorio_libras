@@ -13,7 +13,7 @@
                     <x-slot name="action">
                         @can('create_categorias')
                             <a href="{{ route('categorias.create') }}"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                                 <i class="ph ph-plus mr-2"></i>
                                 Nova Categoria
                             </a>
@@ -32,7 +32,7 @@
                                     Criado de
                                 </label>
                                 <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             </div>
 
                             <!-- Date To -->
@@ -42,7 +42,7 @@
                                     Criado até
                                 </label>
                                 <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             </div>
 
                             <!-- Show Deleted Filter -->
@@ -52,7 +52,7 @@
                                     Categorias Deletadas
                                 </label>
                                 <select name="show_deleted" id="show_deleted"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                     <option value="" {{ request('show_deleted') == '' ? 'selected' : '' }}>Apenas
                                         Ativas</option>
                                     <option value="with" {{ request('show_deleted') == 'with' ? 'selected' : '' }}>
@@ -137,7 +137,7 @@
                                                 @endcan
                                             @else
                                                 <a href="{{ route('categorias.show', $categoria) }}"
-                                                    class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                                    class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
                                                     <i class="ph ph-eye text-lg"></i>
                                                 </a>
                                                 @can('edit_categorias')

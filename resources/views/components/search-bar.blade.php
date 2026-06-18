@@ -12,7 +12,7 @@
                     name="search" 
                     value="{{ request('search') }}"
                     placeholder="{{ $placeholder }}"
-                    class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                    class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm"
                 />
             </div>
             
@@ -31,7 +31,7 @@
                         </span>
                         @if (count($filterKeys) > 0 && request()->hasAny($filterKeys))
                             <span
-                                class="absolute -top-2 -right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
+                                class="absolute -top-2 -right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-brand-600 rounded-full">
                                 {{ collect($filterKeys)->filter(fn($key) => request()->filled($key))->count() }}
                             </span>
                         @endif
@@ -40,7 +40,7 @@
 
                 <button 
                     type="submit"
-                    class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                    class="inline-flex items-center px-4 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors"
                 >
                     <i class="ph ph-magnifying-glass mr-2"></i>
                     Buscar

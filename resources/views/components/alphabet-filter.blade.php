@@ -4,7 +4,7 @@
     <!-- Botão Todos (ícone #) -->
     <a href="{{ route('public.catalogo') }}" 
        class="w-10 h-10 flex items-center justify-center rounded-lg font-semibold text-sm transition-colors
-              {{ !$currentLetter ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-600 hover:bg-blue-200' }}">
+              {{ !$currentLetter ? 'bg-brand-600 text-white' : 'bg-brand-100 text-brand-600 hover:bg-brand-500 hover:text-white' }}">
         #
     </a>
 
@@ -12,7 +12,7 @@
     @foreach(range('A', 'Z') as $letter)
         <a href="{{ route('public.catalogo', ['letra' => $letter]) }}" 
            class="w-10 h-10 flex items-center justify-center rounded-lg font-semibold text-sm transition-colors
-                  {{ $currentLetter === $letter ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-600 hover:bg-blue-200' }}">
+                  {{ $currentLetter === $letter ? 'bg-brand-600 text-white' : 'bg-brand-100 text-brand-600 hover:bg-brand-500 hover:text-white' }}">
             {{ $letter }}
         </a>
     @endforeach

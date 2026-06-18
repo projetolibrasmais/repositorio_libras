@@ -28,7 +28,7 @@
         </div>
 
         <div class="mt-4 text-center">
-            <a href="{{ route('login') }}" class="text-sm text-blue-600 hover:text-blue-800 underline">
+            <a href="{{ route('login') }}" class="text-sm text-brand-600 hover:text-brand-800 underline">
                 {{ __('Voltar para o Login') }}
             </a>
         </div>

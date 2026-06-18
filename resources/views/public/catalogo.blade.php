@@ -4,7 +4,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
-            <h1 class="text-4xl font-bold text-[#4A83FF] mb-8 text-center">Catálogo</h1>
+            <h1 class="text-4xl font-bold text-brand-600 mb-8 text-center">Catálogo</h1>
 
             <!-- Search Bar -->
             <div class="mb-8">
@@ -18,14 +18,15 @@
             <div class="flex items-center justify-center py-10 px-10">
                 <div class="flex-grow border-t border-gray-300"></div>
                 <div class="mx-4">
-                    <i class="ph ph-hand-waving text-[#4A83FF] text-3xl"></i>
+                    <i
+                        class="ph ph-hand-waving bg-gradient-to-r from-brand-600 via-logo-green to-logo-pink text-transparent bg-clip-text text-3xl"></i>
                 </div>
                 <div class="flex-grow border-t border-gray-300"></div>
             </div>
 
             <!-- Section Title -->
             <div class="mb-6">
-                <h2 class="text-3xl font-bold text-[#4A83FF] text-center">Sinais</h2>
+                <h2 class="text-3xl font-bold text-brand-600 text-center">Sinais</h2>
             </div>
 
             <!-- Sinais Grid -->
@@ -63,7 +64,7 @@
                     {{ $sinais->appends(request()->query())->links() }}
                 </div>
             @else
-                <div class="text-center py-12 bg-white rounded-xl shadow-lg">
+                <div class="text-center py-12 bg-white rounded-xl">
                     <i class="ph ph-magnifying-glass text-gray-400 text-6xl mb-4"></i>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">
                         Nenhum sinal encontrado

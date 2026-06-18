@@ -9,15 +9,15 @@
         <!-- Cards de Estatísticas -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <!-- Total de Sinais -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-[#4A83FF]">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-logo-sky">
                 <div class="p-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-gray-600 mb-1">Sinais Cadastrados</p>
                             <p class="text-3xl font-bold text-gray-900">{{ $totalSinais }}</p>
                         </div>
-                        <div class="bg-blue-100 rounded-full p-3">
-                            <i class="ph ph-hands-clapping text-[#4A83FF] text-3xl"></i>
+                        <div class="bg-brand-100 rounded-full p-3">
+                            <i class="ph ph-hands-clapping text-brand-600 text-3xl"></i>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="ph ph-clock-counter-clockwise text-[#4A83FF] mr-2 text-2xl"></i>
+                        <i class="ph ph-clock-counter-clockwise text-brand-600 mr-2 text-2xl"></i>
                         Últimos Sinais Cadastrados
                     </h3>
                     <div class="space-y-3">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="mt-4 text-center">
                         <a href="{{ route('sinais.index') }}"
-                            class="text-[#4A83FF] hover:underline text-sm font-medium">
+                            class="text-brand-600 hover:underline text-sm font-medium">
                             Ver todos os sinais →
                         </a>
                     </div>
@@ -157,7 +157,7 @@
             <div class="lg:col-span-2 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="ph ph-trend-up text-[#4A83FF] mr-2 text-2xl"></i>
+                        <i class="ph ph-trend-up text-brand-600 mr-2 text-2xl"></i>
                         Crescimento Mensal de Sinais
                     </h3>
                     <div class="flex items-end justify-between space-x-2 h-64">
@@ -185,7 +185,7 @@
                                 <div class="relative w-full bg-gray-200 rounded-t-lg flex items-end justify-center"
                                     style="height: {{ $altura }}%; min-height: 30px;">
                                     <div
-                                        class="absolute inset-0 bg-gradient-to-t from-[#4A83FF] to-blue-400 rounded-t-lg">
+                                        class="absolute inset-0 bg-gradient-to-t from-brand-600 to-logo-sky rounded-t-lg">
                                     </div>
                                     <span class="relative text-white font-bold text-xs mb-1">{{ $mes->total }}</span>
                                 </div>
@@ -215,8 +215,8 @@
                                                 <i class="ph ph-plus text-green-600 text-sm"></i>
                                             </div>
                                         @elseif($atividade->event === 'updated')
-                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                                <i class="ph ph-pencil text-blue-600 text-sm"></i>
+                                            <div class="w-8 h-8 bg-brand-100 rounded-full flex items-center justify-center">
+                                                <i class="ph ph-pencil text-brand-600 text-sm"></i>
                                             </div>
                                         @elseif($atividade->event === 'deleted')
                                             <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -265,7 +265,7 @@
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h4 class="text-sm font-semibold text-gray-600">Tipos de Materiais</h4>
-                        <i class="ph ph-files text-indigo-500 text-2xl"></i>
+                        <i class="ph ph-files text-logo-pink text-2xl"></i>
                     </div>
                     <div class="space-y-2">
                         @forelse($materiaisPorTipo as $tipo)
@@ -281,7 +281,7 @@
             </div>
 
             <!-- Acesso Rápido -->
-            <div class="bg-[#4A83FF] overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-brand-600 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-white">
                     <div class="flex items-center justify-between mb-4">
                         <h4 class="text-sm font-semibold">Acesso Rápido</h4>

@@ -24,7 +24,7 @@
                                         Usuário
                                     </label>
                                     <select name="user_id" id="user_id"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                         <option value="">Todos os usuários</option>
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}" {{ request('user_id') == $user->id ? 'selected' : '' }}>
@@ -43,7 +43,7 @@
                                         Evento
                                     </label>
                                     <select name="event" id="event"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                         <option value="">Todos os eventos</option>
                                         @foreach($events as $event)
                                             <option value="{{ $event }}" {{ request('event') == $event ? 'selected' : '' }}>
@@ -62,7 +62,7 @@
                                         Nome do Log
                                     </label>
                                     <select name="log_name" id="log_name"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                                         <option value="">Todos os tipos</option>
                                         @foreach($logNames as $logName)
                                             <option value="{{ $logName }}" {{ request('log_name') == $logName ? 'selected' : '' }}>
@@ -80,7 +80,7 @@
                                     Criado de
                                 </label>
                                 <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             </div>
 
                             <!-- Date To -->
@@ -90,7 +90,7 @@
                                     Criado até
                                 </label>
                                 <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             </div>
                         </div>
                     </x-slot>
@@ -146,7 +146,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span
                                             class="px-2 inline-flex uppercase text-xs leading-5 font-semibold rounded-md 
-                                            {{ $log->event == 'created' ? 'bg-blue-100 text-blue-800' : '' }}
+                                            {{ $log->event == 'created' ? 'bg-brand-100 text-brand-800' : '' }}
                                             {{ $log->event == 'updated' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                             {{ $log->event == 'restored' ? 'bg-green-100 text-green-800' : '' }}
                                             {{ $log->event == 'deleted' ? 'bg-red-100 text-red-800' : '' }}
@@ -166,7 +166,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex items-center gap-2">
                                             <a href="{{ route('logs.show', $log) }}"
-                                                class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                                class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
                                                 <i class="ph ph-eye text-lg"></i>
                                             </a>
                                         </div>

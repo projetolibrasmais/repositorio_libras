@@ -22,7 +22,7 @@
         </div>
 
         @if (Route::has('password.request'))
-            <a class="hover:underline text-xs pl-1 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <a class="hover:underline text-xs pl-1 text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky"
                 href="{{ route('password.request') }}">
                 {{ __('Forgot your password?') }}
             </a>

@@ -13,7 +13,7 @@
             <i class="ph ph-caret-down"></i>
         </span>
         @if(request()->hasAny(['user_id', 'event', 'log_name', 'date_from', 'date_to']))
-            <span class="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
+            <span class="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-brand-600 rounded-full">
                 {{ collect(['user_id', 'event', 'log_name', 'date_from', 'date_to'])->filter(fn($key) => request()->filled($key))->count() }}
             </span>
         @endif
@@ -45,7 +45,7 @@
                             Usuário
                         </label>
                         <select name="user_id" id="user_id"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             <option value="">Todos os usuários</option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}" {{ request('user_id') == $user->id ? 'selected' : '' }}>
@@ -64,7 +64,7 @@
                             Evento
                         </label>
                         <select name="event" id="event"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             <option value="">Todos os eventos</option>
                             @foreach($events as $event)
                                 <option value="{{ $event }}" {{ request('event') == $event ? 'selected' : '' }}>
@@ -83,7 +83,7 @@
                             Nome do Log
                         </label>
                         <select name="log_name" id="log_name"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                             <option value="">Todos os tipos</option>
                             @foreach($logNames as $logName)
                                 <option value="{{ $logName }}" {{ request('log_name') == $logName ? 'selected' : '' }}>
@@ -101,7 +101,7 @@
                         Data Início
                     </label>
                     <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                 </div>
 
                 <!-- Date To -->
@@ -111,7 +111,7 @@
                         Data Fim
                     </label>
                     <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-logo-sky text-sm">
                 </div>
             </div>
 
@@ -123,7 +123,7 @@
                     Limpar Filtros
                 </a>
                 <button type="submit"
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                    class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                     <i class="ph ph-funnel mr-2"></i>
                     Aplicar Filtros
                 </button>

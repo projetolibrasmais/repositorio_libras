@@ -77,7 +77,18 @@ class HomeController extends Controller
         // Search filter
         if ($request->filled('query')) {
             $searchQuery = $request->query;
-            $query->search($searchQuery, ['palavra_portugues', 'definicao', 'parametros']);
+            $query->search($searchQuery, [
+                'palavra_portugues',
+                'slug',
+                'definicao',
+                'config_mao',
+                'ponto_articulacao',
+                'orientacao_palma_mao',
+                'movimento',
+                'expressao_nao_manual',
+                'contexto_utilizacao',
+                'categorias.nome',
+            ]);
         }
 
         $sinais = $query->orderBy('palavra_portugues', 'asc')

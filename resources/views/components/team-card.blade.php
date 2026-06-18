@@ -8,7 +8,7 @@
             flex flex-col items-center text-center
             hover:shadow-md transition">
 
-    <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mb-4 overflow-hidden">
+    <div class="w-20 h-20 rounded-full bg-brand-100 flex items-center justify-center mb-4 overflow-hidden">
         
         @if($foto)
             <img
@@ -19,7 +19,7 @@
         @else
             <!-- Ícone padrão -->
             <svg xmlns="http://www.w3.org/2000/svg"
-                 class="w-10 h-10 text-blue-500"
+                 class="w-10 h-10 text-logo-sky"
                  fill="none"
                  viewBox="0 0 24 24"
                  stroke="currentColor">

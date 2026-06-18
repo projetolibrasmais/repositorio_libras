@@ -20,7 +20,7 @@
                             </a>
                             @can('edit_sinais')
                                 <a href="{{ route('sinais.edit', $sinal) }}"
-                                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                    class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                                     <i class="ph ph-pencil mr-2"></i>
                                     Editar
                                 </a>
@@ -36,7 +36,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-info mr-2 text-blue-600"></i>
+                                    <i class="ph ph-info mr-2 text-brand-600"></i>
                                     Informações Gerais
                                 </h3>
                             </div>
@@ -141,7 +141,7 @@
                                         $statusMap = [
                                             'catalogado' => [
                                                 'label' => 'Catalogado',
-                                                'class' => 'bg-blue-100 text-blue-800',
+                                                'class' => 'bg-brand-100 text-brand-800',
                                             ],
                                             'em_validacao' => [
                                                 'label' => 'Em Validação',
@@ -175,13 +175,13 @@
                                                 @foreach ($sinal->categorias as $categoria)
                                                     @php
                                                     $cores = [
-                                                        'bg-blue-100 text-blue-800 border-blue-200',
+                                                        'bg-brand-100 text-brand-800 border-brand-100',
                                                         'bg-green-100 text-green-800 border-green-200',
                                                         'bg-yellow-100 text-yellow-800 border-yellow-200',
                                                         'bg-red-100 text-red-800 border-red-200',
                                                         'bg-purple-100 text-purple-800 border-purple-200',
                                                         'bg-pink-100 text-pink-800 border-pink-200',
-                                                        'bg-indigo-100 text-indigo-800 border-indigo-200',
+                                                        'bg-brand-100 text-brand-800 border-logo-pink',
                                                         'bg-teal-100 text-teal-800 border-teal-200',
                                                     ];
 
@@ -247,7 +247,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-clock mr-2 text-blue-600"></i>
+                                    <i class="ph ph-clock mr-2 text-brand-600"></i>
                                     Registro
                                 </h3>
                             </div>

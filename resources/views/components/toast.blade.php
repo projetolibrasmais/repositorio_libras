@@ -15,7 +15,7 @@
                 'bg-green-50 border-green-200': toast.type === 'success',
                 'bg-red-50 border-red-200': toast.type === 'error',
                 'bg-yellow-50 border-yellow-200': toast.type === 'warning',
-                'bg-blue-50 border-blue-200': toast.type === 'info'
+                'bg-brand-50 border-brand-100': toast.type === 'info'
              }"
              class="flex items-start gap-3 p-4 rounded-lg border shadow-lg">
             
@@ -37,8 +37,8 @@
                     </div>
                 </template>
                 <template x-if="toast.type === 'info'">
-                    <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                        <i class="ph ph-info text-blue-600 text-lg"></i>
+                    <div class="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center">
+                        <i class="ph ph-info text-brand-600 text-lg"></i>
                     </div>
                 </template>
             </div>
@@ -50,7 +50,7 @@
                        'text-green-800': toast.type === 'success',
                        'text-red-800': toast.type === 'error',
                        'text-yellow-800': toast.type === 'warning',
-                       'text-blue-800': toast.type === 'info'
+                       'text-brand-800': toast.type === 'info'
                    }"
                    class="text-sm font-medium"></p>
             </div>
@@ -61,7 +61,7 @@
                         'text-green-600 hover:text-green-800': toast.type === 'success',
                         'text-red-600 hover:text-red-800': toast.type === 'error',
                         'text-yellow-600 hover:text-yellow-800': toast.type === 'warning',
-                        'text-blue-600 hover:text-blue-800': toast.type === 'info'
+                        'text-brand-600 hover:text-brand-800': toast.type === 'info'
                     }"
                     class="flex-shrink-0 transition-colors">
                 <i class="ph ph-x text-lg"></i>

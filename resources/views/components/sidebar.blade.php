@@ -35,8 +35,8 @@
                 <div x-show="!collapsed || window.innerWidth < 1024"
                     x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" class="flex items-center space-x-3">
-                    <x-application-logo class="block h-8 w-8 fill-current text-gray-800" />
-                    <p class="font-sans antialiased text-base text-current font-semibold">
+                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
+                    <p class="font-sans antialiased text-base text-current font-semibold text-brand-800">
                         Repositório Libras+
                     </p>
                 </div>
@@ -46,7 +46,7 @@
                     x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" class="flex items-center justify-center cursor-pointer"
                     @click="toggleCollapsed()">
-                    <x-application-logo class="block h-8 w-8 fill-current text-gray-800" />
+                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
                 </div>
 
                 <!-- Toggle button desktop -->
@@ -79,7 +79,7 @@
                     <li>
                         <a href="{{ route('dashboard') }}"
                             :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                            class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                            class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                             <span class="grid place-items-center shrink-0"
                                 :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                 <i class="ph ph-house text-xl"></i>
@@ -103,7 +103,7 @@
                         <li>
                             <a href="{{ route('sinais.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('sinais.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('sinais.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-hand-waving text-xl"></i>
@@ -121,7 +121,7 @@
                         <li>
                             <a href="{{ route('categorias.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('categorias.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('categorias.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-bookmarks text-xl"></i>
@@ -139,7 +139,7 @@
                         <li>
                             <a href="{{ route('materiais.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('materiais.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('materiais.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-file text-xl"></i>
@@ -165,7 +165,7 @@
                         <li>
                             <a href="{{ route('roles.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('roles.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('roles.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-shield-checkered text-xl"></i>
@@ -183,7 +183,7 @@
                         <li>
                             <a href="{{ route('permissions.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('permissions.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('permissions.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-shield-check text-xl"></i>
@@ -208,7 +208,7 @@
                         <li>
                             <a href="{{ route('users.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('users.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('users.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-users text-xl"></i>
@@ -226,7 +226,7 @@
                         <li>
                             <a href="{{ route('logs.index') }}"
                                 :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('logs.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('logs.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                                 <span class="grid place-items-center shrink-0"
                                     :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                     <i class="ph ph-clock-counter-clockwise text-xl"></i>
@@ -243,7 +243,7 @@
                     <li>
                         <a href="{{ route('ajuda.index') }}"
                             :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
-                            class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('ajuda.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                            class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('ajuda.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
                             <span class="grid place-items-center shrink-0"
                                 :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
                                 <i class="ph ph-question text-xl"></i>
@@ -336,7 +336,7 @@
 
     <!-- Botão para abrir sidebar no mobile -->
     <button @click="open = true" x-show="!open"
-        class="fixed bottom-4 left-4 lg:hidden z-30 p-3 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-colors"
+        class="fixed bottom-4 left-4 lg:hidden z-30 p-3 rounded-full bg-brand-600 text-white shadow-lg hover:bg-brand-700 transition-colors"
         style="display: none;">
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />

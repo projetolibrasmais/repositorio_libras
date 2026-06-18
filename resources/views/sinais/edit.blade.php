@@ -46,7 +46,7 @@
                                             <input type="text" name="palavra_portugues" id="palavra_portugues"
                                                 value="{{ old('palavra_portugues', $sinal->palavra_portugues) }}"
                                                 required placeholder=""
-                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('palavra_portugues') border-red-500 @enderror">
+                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('palavra_portugues') border-red-500 @enderror">
                                         </div>
                                         @error('palavra_portugues')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -59,7 +59,7 @@
                                             Definição <span class="text-red-500">*</span>
                                         </label>
                                         <textarea name="definicao" id="definicao" rows="3" placeholder="Digite a definição do sinal..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('definicao') border-red-500 @enderror">{{ old('definicao', $sinal->definicao) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('definicao') border-red-500 @enderror">{{ old('definicao', $sinal->definicao) }}</textarea>
                                         @error('definicao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -71,7 +71,7 @@
                                             Configuração de Mão <span class="text-red-500">*</span>
                                         </label>
                                         <textarea name="config_mao" id="config_mao" rows="3" placeholder="Digite as instruções de execução do sinal..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('config_mao') border-red-500 @enderror">{{ old('config_mao', $sinal->config_mao) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('config_mao') border-red-500 @enderror">{{ old('config_mao', $sinal->config_mao) }}</textarea>
                                         @error('config_mao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -83,7 +83,7 @@
                                             Ponto de Articulação <span class="text-red-500">*</span>
                                         </label>
                                         <textarea name="ponto_articulacao" id="ponto_articulacao" rows="3" placeholder="Digite as instruções de execução do sinal..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('ponto_articulacao') border-red-500 @enderror">{{ old('ponto_articulacao', $sinal->ponto_articulacao) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('ponto_articulacao') border-red-500 @enderror">{{ old('ponto_articulacao', $sinal->ponto_articulacao) }}</textarea>
                                         @error('ponto_articulacao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -95,7 +95,7 @@
                                             Orientação da Palma da Mão <span class="text-red-500">*</span>
                                         </label>
                                         <textarea name="orientacao_palma_mao" id="orientacao_palma_mao" rows="3" placeholder="Digite a orientação da palma da mão..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('orientacao_palma_mao') border-red-500 @enderror">{{ old('orientacao_palma_mao', $sinal->orientacao_palma_mao) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('orientacao_palma_mao') border-red-500 @enderror">{{ old('orientacao_palma_mao', $sinal->orientacao_palma_mao) }}</textarea>
                                         @error('orientacao_palma_mao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -107,7 +107,7 @@
                                             Movimento <span class="text-red-500">*</span>
                                         </label>
                                         <textarea name="movimento" id="movimento" rows="3" placeholder="Digite o movimento..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('movimento') border-red-500 @enderror">{{ old('movimento', $sinal->movimento) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('movimento') border-red-500 @enderror">{{ old('movimento', $sinal->movimento) }}</textarea>
                                         @error('movimento')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -119,7 +119,7 @@
                                             Expressão não Manual <span class="text-red-500">*</span>
                                         </label>
                                         <textarea name="expressao_nao_manual" id="expressao_nao_manual" rows="3" placeholder="Digite a expressão não manual..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('expressao_nao_manual') border-red-500 @enderror">{{ old('expressao_nao_manual', $sinal->expressao_nao_manual) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('expressao_nao_manual') border-red-500 @enderror">{{ old('expressao_nao_manual', $sinal->expressao_nao_manual) }}</textarea>
                                         @error('expressao_nao_manual')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -133,7 +133,7 @@
                                         </label>
                                         <textarea name="contexto_utilizacao" id="contexto_utilizacao" rows="3"
                                             placeholder="Descreva o contexto de utilização do sinal..."
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('contexto_utilizacao') border-red-500 @enderror">{{ old('contexto_utilizacao', $sinal->contexto_utilizacao) }}</textarea>
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('contexto_utilizacao') border-red-500 @enderror">{{ old('contexto_utilizacao', $sinal->contexto_utilizacao) }}</textarea>
                                         @error('contexto_utilizacao')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
@@ -150,7 +150,7 @@
                                                 <i class="ph ph-shield-checkered text-gray-400"></i>
                                             </div>
                                             <select name="status" id="status" required
-                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg  bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('status') border-red-500 @enderror">
+                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg  bg-white focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('status') border-red-500 @enderror">
 
                                                 <option value="">Selecione o status</option>
 
@@ -196,7 +196,7 @@
                                                         id="categoria_{{ $categoria->id }}"
                                                         value="{{ $categoria->id }}"
                                                         {{ in_array($categoria->id, old('categorias', $sinal->categorias->pluck('id')->toArray())) ? 'checked' : '' }}
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                                        class="w-4 h-4 text-brand-600 bg-gray-100 border-gray-300 rounded focus:ring-logo-sky focus:ring-2">
                                                 </div>
 
                                                 <div class="ml-2 text-sm">
@@ -284,7 +284,7 @@
                             Cancelar
                         </a>
                         <button type="submit"
-                            class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                            class="px-6 py-2 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                             <i class="ph ph-plus mr-2"></i>
                             Salvar Alterações
                         </button>

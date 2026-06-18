@@ -30,7 +30,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-info mr-2 text-blue-600"></i>
+                                    <i class="ph ph-info mr-2 text-brand-600"></i>
                                     Informações Gerais
                                 </h3>
                             </div>
@@ -61,7 +61,7 @@
                                         Descrição
                                     </label>
                                     <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-brand-100 text-brand-800">
                                         <i class="ph ph-note mr-1"></i>
                                         {{ $log->description }}
                                     </span>
@@ -74,7 +74,7 @@
                                         Evento
                                     </label>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                        {{ $log->event === 'created' ? 'bg-blue-100 text-blue-800' : '' }}
+                                        {{ $log->event === 'created' ? 'bg-brand-100 text-brand-800' : '' }}
                                         {{ $log->event === 'updated' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                         {{ $log->event === 'restored' ? 'bg-green-100 text-green-800' : '' }}
                                         {{ $log->event === 'deleted' ? 'bg-red-100 text-red-800' : '' }}
@@ -117,7 +117,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-code mr-2 text-blue-600"></i>
+                                    <i class="ph ph-code mr-2 text-brand-600"></i>
                                     Propriedades
                                 </h3>
                             </div>
@@ -137,14 +137,14 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-user mr-2 text-blue-600"></i>
+                                    <i class="ph ph-user mr-2 text-brand-600"></i>
                                     Usuário Responsável
                                 </h3>
                             </div>
                             <div class="p-6">
                                 <div class="flex items-center space-x-3">
-                                    <div class="flex-shrink-0 h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <i class="ph ph-user text-blue-600 text-xl"></i>
+                                    <div class="flex-shrink-0 h-12 w-12 bg-brand-100 rounded-full flex items-center justify-center">
+                                        <i class="ph ph-user text-brand-600 text-xl"></i>
                                     </div>
                                     <div>
                                         <p class="text-sm font-medium text-gray-900">{{ $log->causer->name }}</p>
@@ -158,7 +158,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-user mr-2 text-blue-600"></i>
+                                    <i class="ph ph-user mr-2 text-brand-600"></i>
                                     Usuário Responsável
                                 </h3>
                             </div>
@@ -173,7 +173,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-clock mr-2 text-blue-600"></i>
+                                    <i class="ph ph-clock mr-2 text-brand-600"></i>
                                     Registro
                                 </h3>
                             </div>

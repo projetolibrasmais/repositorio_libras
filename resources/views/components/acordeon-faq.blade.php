@@ -15,10 +15,10 @@
 
         <div class="flex items-center gap-4">
             <!-- Ícone FAQ -->
-            <div class="w-12 h-12 rounded-full bg-blue-100
+            <div class="w-12 h-12 rounded-full bg-brand-100
                         flex items-center justify-center flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-6 h-6 text-blue-500"
+                     class="w-6 h-6 text-logo-sky"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">

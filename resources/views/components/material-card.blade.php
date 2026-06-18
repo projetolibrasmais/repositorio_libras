@@ -20,15 +20,15 @@
     <!-- Card Content -->
     <div class="p-6">
         <!-- Ícone do documento -->
-        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4 mx-auto">
+        <div class="w-16 h-16 rounded-full bg-brand-100 flex items-center justify-center mb-4 mx-auto">
             @if($isPdf)
-                <i class="ph ph-file-pdf text-[#4A83FF] text-3xl"></i>
+                <i class="ph ph-file-pdf text-brand-600 text-3xl"></i>
             @elseif($isImage)
-                <i class="ph ph-file-image text-[#4A83FF] text-3xl"></i>
+                <i class="ph ph-file-image text-brand-600 text-3xl"></i>
             @elseif($isVideo)
-                <i class="ph ph-file-video text-[#4A83FF] text-3xl"></i>
+                <i class="ph ph-file-video text-brand-600 text-3xl"></i>
             @else
-                <i class="ph ph-file-text text-[#4A83FF] text-3xl"></i>
+                <i class="ph ph-file-text text-brand-600 text-3xl"></i>
             @endif
         </div>
 
@@ -44,7 +44,7 @@
 
         <!-- Botão Ver mais -->
         <div class="mt-4 text-center">
-            <span class="text-[#4A83FF] text-sm font-medium hover:underline">
+            <span class="text-brand-600 text-sm font-medium hover:underline">
                 Ver mais →
             </span>
         </div>
@@ -82,7 +82,7 @@
              @click.stop>
             
             <!-- Modal Header -->
-            <div class="bg-gradient-to-r from-[#4A83FF] to-blue-600 px-6 py-4 rounded-t-lg">
+            <div class="bg-gradient-to-r from-brand-700 to-logo-sky px-6 py-4 rounded-t-lg">
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-bold text-white">
                         {{ $titulo }}
@@ -152,7 +152,7 @@
                 <a href="{{ Storage::url($link) }}" 
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center px-6 py-2.5 bg-[#4A83FF] text-white font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                   class="inline-flex items-center justify-center px-6 py-2.5 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors shadow-sm">
                     <i class="ph ph-arrow-square-out mr-2 text-xl"></i>
                     Abrir em Nova Página
                 </a>

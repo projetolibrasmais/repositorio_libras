@@ -8,14 +8,14 @@
                 <nav class="flex mb-6" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-2">
                         <li class="inline-flex items-center">
-                            <a href="{{ route('home') }}" class="text-gray-600 hover:text-[#4A83FF] flex items-center gap-1">
+                            <a href="{{ route('home') }}" class="text-gray-600 hover:text-brand-600 flex items-center gap-1">
                                 <i class="ph ph-house text-lg"></i>
                             </a>
                         </li>
                         <li>
                             <div class="flex items-center">
                                 <i class="ph ph-caret-right text-gray-400 mx-2"></i>
-                                <a href="{{ route('public.categorias') }}" class="text-gray-600 hover:text-[#4A83FF]">Categorias</a>
+                                <a href="{{ route('public.categorias') }}" class="text-gray-600 hover:text-brand-600">Categorias</a>
                             </div>
                         </li>
                         <li aria-current="page">
@@ -29,7 +29,7 @@
                 
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <h1 class="text-4xl font-bold text-blue-600 mb-2">{{ $categoriaAtual->nome }}</h1>
+                        <h1 class="text-4xl font-bold text-brand-600 mb-2">{{ $categoriaAtual->nome }}</h1>
                         <p class="text-gray-600">
                             @if($categoriaAtual->descricao)
                                 {{ $categoriaAtual->descricao }}
@@ -45,7 +45,7 @@
                     </a>
                 </div>
             @else
-                <h1 class="text-4xl font-bold text-blue-600 mb-4">{{ __('Sinais') }}</h1>
+                <h1 class="text-4xl font-bold text-brand-600 mb-4">{{ __('Sinais') }}</h1>
                 <p class="text-gray-600 mb-8">
                     {{ __('Explore todos os sinais catalogados na plataforma') }}
                 </p>
@@ -92,8 +92,8 @@
                                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 </div>
                             @else
-                                <div class="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-                                    <i class="ph ph-hand-waving text-blue-300 text-6xl"></i>
+                                <div class="aspect-video bg-gradient-to-br from-brand-100 to-brand-50 flex items-center justify-center">
+                                    <i class="ph ph-hand-waving text-brand-100 text-6xl"></i>
                                 </div>
                             @endif
                             <div class="p-4 flex flex-col justify-between flex-1">
@@ -106,7 +106,7 @@
                                 @if($sinal->categorias->count() > 0)
                                     <div class="flex flex-wrap gap-2">
                                         @foreach($sinal->categorias->take(2) as $categoria)
-                                            <span class="px-2 py-1 bg-blue-100 text-[#4A83FF] text-xs rounded-md font-semibold border border-[#4A83FF]">
+                                            <span class="px-2 py-1 bg-brand-100 text-brand-600 text-xs rounded-md font-semibold border border-logo-sky">
                                                 {{ $categoria->nome }}
                                             </span>
                                         @endforeach

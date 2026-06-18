@@ -197,11 +197,11 @@
         @drop.prevent="isDragging = false; handleFiles($event.dataTransfer.files)"
         @click="$refs.fileInput.click()"
         :class="{ 
-            'border-blue-500 bg-blue-50': isDragging,
+            'border-logo-sky bg-brand-50': isDragging,
             'border-red-500 bg-red-50': error,
             'border-gray-300 bg-white': !isDragging && !error
         }"
-        class="relative border-2 border-dashed rounded-lg p-6 transition-all duration-200 cursor-pointer hover:border-blue-400 hover:bg-gray-50"
+        class="relative border-2 border-dashed rounded-lg p-6 transition-all duration-200 cursor-pointer hover:border-logo-sky hover:bg-gray-50"
     >
         <!-- Hidden File Input -->
         <input 
@@ -223,7 +223,7 @@
                 <i class="ph ph-upload-simple text-4xl"></i>
             </div>
             <div class="flex text-sm text-gray-600 justify-center">
-                <span class="font-semibold text-blue-600 hover:text-blue-500">
+                <span class="font-semibold text-brand-600 hover:text-logo-sky">
                     Clique para selecionar
                 </span>
                 <span class="ml-1">ou arraste e solte</span>
@@ -244,7 +244,7 @@
         <div x-show="fileName && !error && !isMultiple" class="flex items-center justify-between">
             <div class="flex items-center space-x-3 flex-1 min-w-0">
                 <div class="flex-shrink-0">
-                    <i class="ph ph-file text-blue-600 text-3xl"></i>
+                    <i class="ph ph-file text-brand-600 text-3xl"></i>
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-medium text-gray-900 truncate" x-text="fileName"></p>
@@ -279,7 +279,7 @@
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="flex items-center space-x-3 flex-1 min-w-0">
                         <div class="flex-shrink-0">
-                            <i class="ph ph-file text-blue-600 text-2xl"></i>
+                            <i class="ph ph-file text-brand-600 text-2xl"></i>
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-medium text-gray-900 truncate" x-text="file.name"></p>
@@ -306,7 +306,7 @@
             <button 
                 type="button"
                 @click.stop="clearFile()"
-                class="mt-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                class="mt-2 text-sm text-brand-600 hover:text-brand-700 font-medium"
             >
                 Tentar novamente
             </button>

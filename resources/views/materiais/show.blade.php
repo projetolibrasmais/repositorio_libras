@@ -25,7 +25,7 @@
                             </a>
                             @can('edit_materiais')
                                 <a href="{{ route('materiais.edit', $material) }}"
-                                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                    class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                                     <i class="ph ph-pencil mr-2"></i>
                                     Editar
                                 </a>
@@ -41,7 +41,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-info mr-2 text-blue-600"></i>
+                                    <i class="ph ph-info mr-2 text-brand-600"></i>
                                     Informações Gerais
                                 </h3>
                             </div>
@@ -87,7 +87,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-clock mr-2 text-blue-600"></i>
+                                    <i class="ph ph-clock mr-2 text-brand-600"></i>
                                     Registro
                                 </h3>
                             </div>
@@ -135,7 +135,7 @@
                             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                                 <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                     <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                        <i class="ph ph-user mr-2 text-blue-600"></i>
+                                        <i class="ph ph-user mr-2 text-brand-600"></i>
                                         Enviado por
                                     </h3>
                                 </div>
@@ -154,7 +154,7 @@
                     <div class="mt-6 bg-white border border-gray-200 rounded-lg shadow-sm">
                         <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                             <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                <i class="ph ph-file-text mr-2 text-blue-600"></i>
+                                <i class="ph ph-file-text mr-2 text-brand-600"></i>
                                 Visualização do Arquivo
                             </h3>
                         </div>

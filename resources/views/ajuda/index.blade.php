@@ -1,288 +1,117 @@
 <x-app-layout>
+    @php
+        $sections = [
+            [
+                'title' => 'Sinais',
+                'description' => 'Cadastre, edite, restaure e gerencie os sinais do repositório.',
+                'icon' => 'ph-hand-waving',
+                'color' => 'text-brand-600',
+                'bg' => 'bg-brand-100',
+                'items' => [
+                    ['permissao' => 'create_sinais', 'titulo' => 'Criar Sinal', 'descricao' => 'Acesse Sinais, clique em Novo Sinal, preencha os dados e clique em Criar Sinal.', 'imagem' => 'help/sinais/create_sinal.PNG'],
+                    ['permissao' => 'edit_sinais', 'titulo' => 'Editar Sinal', 'descricao' => 'Acesse Sinais, abra o sinal desejado, faça as alterações e clique em Atualizar Sinal.', 'imagem' => 'help/sinais/edit_sinal.PNG'],
+                    ['permissao' => 'delete_sinais', 'titulo' => 'Excluir Sinal', 'descricao' => 'Abra o sinal desejado, clique em Excluir Sinal e confirme a ação.', 'imagem' => 'help/sinais/delete_sinal.PNG'],
+                    ['permissao' => 'restore_sinais', 'titulo' => 'Acessar Sinais Deletados', 'descricao' => 'Use o filtro de Sinais e selecione Apenas Sinais Deletados.', 'imagem' => 'help/sinais/filtro_sinais.PNG'],
+                    ['permissao' => 'restore_sinais', 'titulo' => 'Restaurar Sinais Deletados', 'descricao' => 'Filtre por sinais deletados, encontre o sinal e clique no ícone Restaurar.', 'imagem' => 'help/sinais/restore_sinais.PNG'],
+                    ['permissao' => 'force_delete_sinais', 'titulo' => 'Deletar Permanentemente um Sinal', 'descricao' => 'Filtre por sinais deletados, abra o item e confirme a exclusão permanente.', 'imagem' => 'help/sinais/force_delete_sinais.PNG'],
+                ],
+            ],
+            [
+                'title' => 'Categorias',
+                'description' => 'Organize os sinais por áreas do conhecimento.',
+                'icon' => 'ph-folders',
+                'color' => 'text-logo-green',
+                'bg' => 'bg-green-100',
+                'items' => [
+                    ['permissao' => 'create_categorias', 'titulo' => 'Criar Categoria', 'descricao' => 'Acesse Categorias, clique em Nova Categoria, preencha os dados e salve.', 'imagem' => 'help/categorias/create_categoria.PNG'],
+                    ['permissao' => 'edit_categorias', 'titulo' => 'Editar Categoria', 'descricao' => 'Abra a categoria desejada, faça as alterações e clique em Atualizar Categoria.', 'imagem' => 'help/categorias/edit_categoria.PNG'],
+                    ['permissao' => 'delete_categorias', 'titulo' => 'Excluir Categoria', 'descricao' => 'Abra a categoria desejada, clique em Excluir Categoria e confirme.', 'imagem' => 'help/categorias/delete_categoria.PNG'],
+                    ['permissao' => 'restore_categorias', 'titulo' => 'Acessar Categorias Deletadas', 'descricao' => 'Use o filtro e selecione Apenas Categorias Deletadas.', 'imagem' => 'help/categorias/filtro_categorias.PNG'],
+                    ['permissao' => 'restore_categorias', 'titulo' => 'Restaurar Categorias Deletadas', 'descricao' => 'Filtre por categorias deletadas e clique no ícone Restaurar.', 'imagem' => 'help/categorias/restore_categorias.PNG'],
+                    ['permissao' => 'force_delete_categorias', 'titulo' => 'Deletar Permanentemente uma Categoria', 'descricao' => 'Filtre por categorias deletadas, abra a categoria e confirme a exclusão permanente.', 'imagem' => 'help/categorias/force_delete_categorias.PNG'],
+                ],
+            ],
+            [
+                'title' => 'Materiais',
+                'description' => 'Gerencie arquivos, produções e recursos complementares.',
+                'icon' => 'ph-file-text',
+                'color' => 'text-logo-orange',
+                'bg' => 'bg-orange-100',
+                'items' => [
+                    ['permissao' => 'create_materiais', 'titulo' => 'Criar Material', 'descricao' => 'Acesse Materiais, clique em Novo Material, preencha os dados e salve.', 'imagem' => 'help/materiais/create_material.PNG'],
+                    ['permissao' => 'edit_materiais', 'titulo' => 'Editar Material', 'descricao' => 'Abra o material desejado, faça as alterações e clique em Atualizar Material.', 'imagem' => 'help/materiais/edit_material.PNG'],
+                    ['permissao' => 'view_materiais', 'titulo' => 'Baixar Material', 'descricao' => 'Abra o material desejado e clique no ícone de download.', 'imagem' => 'help/materiais/download_material.PNG'],
+                    ['permissao' => 'delete_materiais', 'titulo' => 'Excluir Material', 'descricao' => 'Abra o material desejado, clique em Excluir Material e confirme.', 'imagem' => 'help/materiais/delete_material.PNG'],
+                    ['permissao' => 'delete_materiais', 'titulo' => 'Acessar Materiais Deletados', 'descricao' => 'Use o filtro e selecione Apenas Materiais Deletados.', 'imagem' => 'help/materiais/filtro_material.PNG'],
+                    ['permissao' => 'restore_materiais', 'titulo' => 'Restaurar Materiais Deletados', 'descricao' => 'Filtre por materiais deletados e clique no ícone Restaurar.', 'imagem' => 'help/materiais/restore_material.PNG'],
+                    ['permissao' => 'force_delete_materiais', 'titulo' => 'Deletar Permanentemente um Material', 'descricao' => 'Filtre por materiais deletados, abra o item e confirme a exclusão permanente.', 'imagem' => 'help/materiais/force_delete_material.PNG'],
+                ],
+            ],
+            [
+                'title' => 'Usuários e Permissões',
+                'description' => 'Administre acessos, funções e permissões do sistema.',
+                'icon' => 'ph-users',
+                'color' => 'text-logo-pink',
+                'bg' => 'bg-pink-100',
+                'items' => [
+                    ['permissao' => 'create_users', 'titulo' => 'Criar Usuários', 'descricao' => 'Acesse Usuários, clique em Novo Usuário, preencha os dados e salve.', 'imagem' => 'help/usuarios/create_usuario.PNG'],
+                    ['permissao' => 'edit_users', 'titulo' => 'Editar Usuários', 'descricao' => 'Abra o usuário desejado, faça as alterações e clique em Atualizar Usuário.', 'imagem' => 'help/usuarios/edit_usuario.PNG'],
+                    ['permissao' => 'delete_users', 'titulo' => 'Excluir Usuários', 'descricao' => 'Abra o usuário desejado, clique em Excluir Usuário e confirme.', 'imagem' => 'help/usuarios/delete_usuario.PNG'],
+                    ['permissao' => 'create_roles', 'titulo' => 'Criar Funções', 'descricao' => 'Acesse Funções, clique em Nova Função, preencha os dados e salve.', 'imagem' => 'help/roles/create_roles.PNG'],
+                    ['permissao' => 'edit_roles', 'titulo' => 'Editar Funções', 'descricao' => 'Abra a função desejada, faça as alterações e clique em Atualizar Função.', 'imagem' => 'help/roles/edit_roles.PNG'],
+                    ['permissao' => 'delete_roles', 'titulo' => 'Excluir Funções', 'descricao' => 'Abra a função desejada, clique em Excluir Função e confirme.', 'imagem' => 'help/roles/delete_roles.PNG'],
+                    ['permissao' => 'view_permissions', 'titulo' => 'Visualizar Permissões', 'descricao' => 'Acesse Permissões para visualizar permissões disponíveis e suas descrições.', 'imagem' => 'help/permissions/view_permissions.PNG'],
+                ],
+            ],
+            [
+                'title' => 'Sistema e Perfil',
+                'description' => 'Consulte logs e gerencie suas informações pessoais.',
+                'icon' => 'ph-gear-six',
+                'color' => 'text-logo-sky',
+                'bg' => 'bg-brand-100',
+                'items' => [
+                    ['permissao' => 'view_logs', 'titulo' => 'Visualizar Logs', 'descricao' => 'Acesse Logs para filtrar registros por data, usuário e ação realizada.', 'imagem' => 'help/logs/view_logs.PNG'],
+                    ['titulo' => 'Acessar Perfil', 'descricao' => 'Clique no seu nome no canto superior direito e selecione Perfil.', 'imagem' => 'help/profile/access_profile.PNG'],
+                    ['titulo' => 'Editar Nome e Email', 'descricao' => 'Acesse Perfil, faça as alterações desejadas e clique em Salvar.', 'imagem' => 'help/profile/edit_name_profile.PNG'],
+                    ['titulo' => 'Editar Senha', 'descricao' => 'Acesse Perfil, atualize sua senha e clique em Salvar.', 'imagem' => 'help/profile/edit_password_profile.PNG'],
+                ],
+            ],
+        ];
+    @endphp
 
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-    
+    <div class="p-4 sm:p-6 lg:p-8">
+        <x-page-header
+            title="Central de Ajuda"
+            description="Tutoriais rápidos para as principais rotinas administrativas do Repositório Libras+." />
 
-{{-- SINAIS --}}
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Sinais</h1>
-        <div class="p-6 space-y-4">
-            {{-- CRIAR SINAL --}}
-            <x-help-card
-                permissao="create_sinais"
-                titulo="Criar Sinal"
-                descricao="Para criar um sinal, acesse o menu Sinais, clique em Novo Sinal, preencha os dados e clique em Criar Sinal."
-                imagem="help\sinais\create_sinal.PNG"
-            />
+        <div class="space-y-8">
+            @foreach ($sections as $section)
+                <section class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-200">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full {{ $section['bg'] }} flex items-center justify-center shrink-0">
+                                <i class="ph {{ $section['icon'] }} {{ $section['color'] }} text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-semibold text-gray-900">{{ $section['title'] }}</h2>
+                                <p class="text-sm text-gray-600 mt-1">{{ $section['description'] }}</p>
+                            </div>
+                        </div>
+                    </div>
 
-            {{-- EDITAR SINAL --}}
-            <x-help-card
-                permissao="edit_sinais"
-                titulo="Editar Sinal"
-                descricao="Para editar um sinal, acesse o menu Sinais, clique no sinal desejado, faça as alterações e clique em Atualizar Sinal."
-                imagem="help\sinais\edit_sinal.PNG"
-            />
-
-            {{-- EXCLUIR SINAL --}}
-            <x-help-card
-                permissao="delete_sinais"
-                titulo="Excluir Sinal"
-                descricao="Para excluir um sinal, acesse o menu Sinais, clique no sinal desejado, clique em Excluir Sinal e confirme."
-                imagem="help\sinais\delete_sinal.PNG"
-            />
-            
-            {{-- ACESSAR SINAIS DELETADOS --}}
-            <x-help-card
-                permissao="restore_sinais"
-                titulo="Acessar Sinais Deletados"
-                descricao="Para acessar sinais deletados, acesse o menu Sinais, acesse o filtro e selecione 'Apenas Sinais Deletados'."
-                imagem="help\sinais\filtro_sinais.PNG"
-            />
-            
-            {{-- RESTAURAR SINAIS DELETADOS --}}
-            <x-help-card
-                permissao="restore_sinais"
-                titulo="Restaurar Sinais Deletados"
-                descricao="Para restaurar um sinal deletado, acesse o menu Sinais, acesse o filtro e selecione 'Apenas Sinais Deletados'. Busque no sinal desejado e clique no ícone Restaurar."
-                imagem="help\sinais\restore_sinais.PNG"
-            />
-
-            {{-- DELETAR PERMANENTEMENTE SINAIS DELETADOS--}}
-            <x-help-card
-                permissao="force_delete_sinais"
-                titulo="Deletar Permanentemente um Sinal"
-                descricao="Para deletar permanentemente um sinal, acesse o menu Sinais, acesse o filtro e selecione 'Apenas Sinais Deletados'. Clique no sinal desejado, clique no ícone Deletar Permanentemente e confirme."
-                imagem="help\sinais\force_delete_sinais.PNG"
-            />
-        </div>
-    </div>
-
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Categoria</h1>
-        <div class="p-6 space-y-4">
-            <!-- CRIAR CATEGORIA -->
-            <x-help-card
-                permissao="create_categorias"
-                titulo="Criar Categoria"
-                descricao="Para criar uma categoria, acesse o menu Categorias, clique em Nova Categoria, preencha os dados e clique em Criar Categoria."
-                imagem="help\categorias\create_categoria.PNG"
-            />
-            <!-- EDITAR CATEGORIA -->
-            <x-help-card
-                permissao="edit_categorias"
-                titulo="Editar Categoria"
-                descricao="Para editar uma categoria, acesse o menu Categorias, clique na categoria desejada, faça as alterações e clique em Atualizar Categoria."
-                imagem="help\categorias\edit_categoria.PNG"
-            />
-
-            <!-- EXCLUIR CATEGORIA -->
-            <x-help-card
-                permissao="delete_categorias"
-                titulo="Excluir Categoria"
-                descricao="Para excluir uma categoria, acesse o menu Categorias, clique na categoria desejada, clique em Excluir Categoria e confirme."
-                imagem="help\categorias\delete_categoria.PNG"
-            />
-
-            <!-- ACESSAR CATEGORIAS DELETADAS -->
-            <x-help-card
-                permissao="restore_categorias"
-                titulo="Acessar Categorias Deletadas"
-                descricao="Para acessar categorias deletadas, acesse o menu Categorias, acesse o filtro e selecione 'Apenas Categorias Deletadas'."
-                imagem="help\categorias\filtro_categorias.PNG"
-            />
-
-            <!-- RESTAURAR CATEGORIAS DELETADAS -->
-            <x-help-card
-                permissao="restore_categorias"
-                titulo="Restaurar Categorias Deletadas"
-                descricao="Para restaurar uma categoria deletada, acesse o menu Categorias, acesse o filtro e selecione 'Apenas Categorias Deletadas'. Busque na categoria desejada e clique no ícone Restaurar."
-                imagem="help\categorias\restore_categorias.PNG"
-            />
-
-            <!-- DELETAR PERMANENTEMENTE CATEGORIAS DELETADAS-->
-            <x-help-card
-                permissao="force_delete_categorias"
-                titulo="Deletar Permanentemente uma Categoria"
-                descricao="Para deletar permanentemente uma categoria, acesse o menu Categorias, acesse o filtro e selecione 'Apenas Categorias Deletadas'. Clique na categoria desejada, clique no ícone Deletar Permanentemente e confirme."
-                imagem="help\categorias\force_delete_categorias.PNG"
-            />
-
-        </div>
-    </div>
-    
-    <!-- USUÁRIOS -->
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Usuários</h1>
-        <div class="p-6 space-y-4">
-            <!-- CRIAR USUÁRIOS -->
-            <x-help-card
-                permissao="create_users"
-                titulo="Criar Usuários"
-                descricao="Para criar usuários, acesse o menu Usuários, clique em Novo Usuário, preencha os dados e clique em Criar Usuário."
-                imagem="help\usuarios\create_usuario.PNG"
-            />
-
-            <!-- EDITAR USUÁRIOS -->
-            <x-help-card
-                permissao="edit_users"
-                titulo="Editar Usuários"
-                descricao="Para editar um usuário, acesse o menu Usuários, clique no usuário desejado, faça as alterações e clique em Atualizar Usuário."
-                imagem="help\usuarios\edit_usuario.PNG"
-            />
-
-            <!-- EXCLUIR USUÁRIOS -->
-            <x-help-card
-                permissao="delete_users"
-                titulo="Excluir Usuários"
-                descricao="Para excluir um usuário, acesse o menu Usuários, clique no usuário desejado, clique em Excluir Usuário e confirme."
-                imagem="help\usuarios\delete_usuario.PNG"
-            />
-
-        </div>
-
-    <!-- Funções -->
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Funções</h1>
-        <div class="p-6 space-y-4">
-            <!-- CRIAR FUNÇÕES -->
-            <x-help-card
-                permissao="create_roles"
-                titulo="Criar Funções"
-                descricao="Para criar funções, acesse o menu Funções, clique em Nova Função, preencha os dados e clique em Criar Função."
-                imagem="help\roles\create_roles.PNG"
-            />
-
-            <!-- EDITAR FUNÇÕES -->
-            <x-help-card
-                permissao="edit_roles"
-                titulo="Editar Funções"
-                descricao="Para editar uma função, acesse o menu Funções, clique na função desejada, faça as alterações e clique em Atualizar Função."
-                imagem="help\roles\edit_roles.PNG"
-            />
-
-            <!-- EXCLUIR FUNÇÕES -->
-            <x-help-card
-                permissao="delete_roles"
-                titulo="Excluir Funções"
-                descricao="Para excluir uma função, acesse o menu Funções, clique na função desejada, clique em Excluir Função e confirme."
-                imagem="help\roles\delete_roles.PNG"
-            />
-        </div>
-    </div>
-
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Logs</h1>
-        <div class="p-6 space-y-4">
-            <!-- VISUALIZAR LOGS -->
-            <x-help-card
-                permissao="view_logs"
-                titulo="Visualizar Logs"
-                descricao="Para visualizar os logs do sistema, acesse o menu Logs. Você pode filtrar os logs por data, usuário e ação realizada. Para ver mais informações basta clicar no ícone indicado."
-                imagem="help\logs\view_logs.PNG"
-            />
-        </div>
-    </div>
-
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Permissões</h1>
-        <div class="p-6 space-y-4">
-            <!-- VISUALIZAR PERMISSÕES -->
-            <x-help-card
-                permissao="view_permissions"
-                titulo="Visualizar Permissões"
-                descricao="Para visualizar as permissões do sistema, acesse o menu Permissões. Você pode ver todas as permissões disponíveis e suas descrições, ao clicar no ícone de detalhes."
-                imagem="help\permissions\view_permissions.PNG"
-            />
-
-        </div>
-    </div>
-    
-     <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Perfil</h1>
-        <div class="p-6 space-y-4">
-            <!-- ACESSAR PERFIL -->
-            <x-help-card                
-                titulo="Acessar Perfil"
-                descricao="Para acessar seu perfil, clique no seu nome no canto superior direito e selecione 'Perfil'."
-                imagem="help\profile\access_profile.PNG"
-            />
-
-            <!-- EDITAR NOME e EMAIL -->
-            <x-help-card                
-                titulo="Editar Nome e Email"
-                descricao="Para editar seu perfil, clique no seu nome no canto superior direito e selecione 'Perfil'. Faça as alterações desejadas e clique em 'Salvar."
-                imagem="help\profile\edit_name_profile.PNG"
-            />
-
-            <!-- EDITAR SENHA DO PERFIL -->
-            <x-help-card                
-                titulo="Editar Senha"
-                descricao="Para editar sua senha, clique no seu nome no canto superior direito e selecione 'Perfil'. Faça as alterações desejadas e clique em 'Salvar."
-                imagem="help\profile\edit_password_profile.PNG"
-            />
-        </div>
-    </div>
-
-
-    <div class="bg-gray-100 p-4 border-b border-gray-200">
-        <h1 class="text-2xl font-semibold text-gray-900">Ajuda - Material</h1>
-        <div class="p-6 space-y-4">
-            <!-- CRIAR Material -->
-            <x-help-card
-                permissao="create_materiais"
-                titulo="Criar Material"
-                descricao="Para criar um material, acesse o menu Materiais, clique em Novo Material, preencha os dados e clique em Criar Material."
-                imagem="help\materiais\create_material.PNG"
-            />
-            <!-- EDITAR MATERIAL -->
-            <x-help-card
-                permissao="edit_materiais"
-                titulo="Editar Material"
-                descricao="Para editar um material, acesse o menu Materiais, clique no material desejado, faça as alterações e clique em Atualizar Material."
-                imagem="help\materiais\edit_material.PNG"
-            />
-
-            <!-- BAIXAR MATERIAL -->
-            <x-help-card
-                permissao="view_materiais"
-                titulo="Baixar Material"
-                descricao="Para baixar um material, acesse o menu Materiais, clique no material desejado e clique no ícone de download."
-                imagem="help\materiais\download_material.PNG"
-            />
-
-            <!-- EXCLUIR MATERIAL -->
-            <x-help-card
-                permissao="delete_materiais"
-                titulo="Excluir Material"
-                descricao="Para excluir um material, acesse o menu Materiais, clique no material desejado, clique em Excluir Material e confirme."
-                imagem="help\materiais\delete_material.PNG"
-            />
-
-            <!-- ACESSAR Materiais DELETADAS -->
-            <x-help-card
-                permissao="delete_materiais"
-                titulo="Acessar Materiais Deletados"
-                descricao="Para acessar materiais deletados, acesse o menu Materiais, acesse o filtro e selecione 'Apenas Materiais Deletados'."
-                imagem="help\materiais\filtro_material.PNG"
-            />
-
-            <!-- RESTAURAR MATERIAIS DELETADAS -->
-            <x-help-card
-                permissao="restore_materiais"
-                titulo="Restaurar Materiais Deletados"
-                descricao="Para restaurar um material deletado, acesse o menu Materiais, acesse o filtro e selecione 'Apenas Materiais Deletados'. Busque no material desejado e clique no ícone Restaurar."
-                imagem="help\materiais\restore_material.PNG"
-            />
-
-            <!-- DELETAR PERMANENTEMENTE MATERIAIS DELETADAS-->
-            <x-help-card
-                permissao="force_delete_materiais"
-                titulo="Deletar Permanentemente um Material"
-                descricao="Para deletar permanentemente um material, acesse o menu Materiais, acesse o filtro e selecione 'Apenas Materiais Deletados'. Clique no material desejado, clique no ícone Deletar Permanentemente e confirme."
-                imagem="help\materiais\force_delete_material.PNG"
-            />
-
+                    <div class="p-6 bg-gray-50">
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                            @foreach ($section['items'] as $item)
+                                <x-help-card
+                                    :permissao="$item['permissao'] ?? null"
+                                    :titulo="$item['titulo']"
+                                    :descricao="$item['descricao']"
+                                    :imagem="$item['imagem']" />
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
+            @endforeach
         </div>
     </div>
 </x-app-layout>

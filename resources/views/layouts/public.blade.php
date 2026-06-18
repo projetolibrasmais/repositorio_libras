@@ -47,7 +47,19 @@ initVoiceRecognition();">
 
         /* VLibras */
         [vw] .enabled {
-            background-color: rgb(37 99 235) !important;
+            background-color: #304A89 !important;
+        }
+
+        .goog-te-banner-frame,
+        .goog-te-gadget-icon,
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            height: 0;
+            overflow: hidden;
         }
     </style>
 
@@ -74,7 +86,7 @@ initVoiceRecognition();">
             </button>
 
             <!-- High Contrast Toggle -->
-            <button @click="highContrast = !highContrast" :class="highContrast ? 'bg-blue-600' : 'bg-gray-700'"
+            <button @click="highContrast = !highContrast" :class="highContrast ? 'bg-brand-600' : 'bg-gray-700'"
                 class="px-3 py-1 hover:bg-gray-600 rounded transition-colors flex items-center gap-2 text-sm"
                 :title="'{{ __('Alto contraste') }}'">
                 <i class="ph ph-circle-half"></i>
@@ -96,15 +108,7 @@ initVoiceRecognition();">
                     class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors flex items-center gap-2 text-sm"
                     :title="'{{ __('Idioma') }}'">
                     <i class="ph ph-globe"></i>
-                    <span>
-                        @if(app()->getLocale() == 'pt_BR')
-                            PT
-                        @elseif(app()->getLocale() == 'en')
-                            EN
-                        @else
-                            ES
-                        @endif
-                    </span>
+                    <span class="notranslate" x-text="localStorage.getItem('googleTranslateLangLabel') || 'PT'"></span>
                     <i class="ph ph-caret-down text-xs"></i>
                 </button>
                 
@@ -112,21 +116,18 @@ initVoiceRecognition();">
                      @click.away="open = false"
                      x-transition
                      class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                    <a href="{{ route('locale.switch', 'pt_BR') }}" 
-                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'pt_BR' ? 'bg-blue-50 text-blue-600 font-semibold' : '' }}">
-                        <i class="ph ph-check mr-2 {{ app()->getLocale() == 'pt_BR' ? '' : 'invisible' }}"></i>
-                        {{ __('Português') }}
-                    </a>
-                    <a href="{{ route('locale.switch', 'en') }}" 
-                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'en' ? 'bg-blue-50 text-blue-600 font-semibold' : '' }}">
-                        <i class="ph ph-check mr-2 {{ app()->getLocale() == 'en' ? '' : 'invisible' }}"></i>
-                        {{ __('Inglês') }}
-                    </a>
-                    <a href="{{ route('locale.switch', 'es') }}" 
-                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ app()->getLocale() == 'es' ? 'bg-blue-50 text-blue-600 font-semibold' : '' }}">
-                        <i class="ph ph-check mr-2 {{ app()->getLocale() == 'es' ? '' : 'invisible' }}"></i>
-                        {{ __('Espanhol') }}
-                    </a>
+                    <button type="button" @click="translatePage('pt', 'PT'); open = false"
+                        class="notranslate block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Português
+                    </button>
+                    <button type="button" @click="translatePage('en', 'EN'); open = false"
+                        class="notranslate block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        English
+                    </button>
+                    <button type="button" @click="translatePage('es', 'ES'); open = false"
+                        class="notranslate block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Español
+                    </button>
                 </div>
             </div>
         </div>
@@ -143,7 +144,9 @@ initVoiceRecognition();">
     <!-- Footer -->
     <x-public-footer />
 
-    <!-- VLibras Widget -->
+    <!-- Translation and VLibras Widgets -->
+    <div id="google_translate_element" class="hidden"></div>
+
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
@@ -153,6 +156,41 @@ initVoiceRecognition();">
 
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'pt',
+                includedLanguages: 'pt,en,es',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function translatePage(language, label) {
+            localStorage.setItem('googleTranslateLangLabel', label);
+
+            if (language === 'pt') {
+                clearGoogleTranslateCookie();
+                window.location.reload();
+                return;
+            }
+
+            document.cookie = `googtrans=/pt/${language};path=/`;
+            document.cookie = `googtrans=/pt/${language};domain=${window.location.hostname};path=/`;
+
+            const translateSelect = document.querySelector('.goog-te-combo');
+            if (translateSelect) {
+                translateSelect.value = language;
+                translateSelect.dispatchEvent(new Event('change'));
+                return;
+            }
+
+            window.location.reload();
+        }
+
+        function clearGoogleTranslateCookie() {
+            document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+            document.cookie = `googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;domain=${window.location.hostname};path=/`;
+        }
 
         // Voice Recognition System
         function initVoiceRecognition() {
@@ -314,6 +352,8 @@ initVoiceRecognition();">
             }
         }
     </script>
+
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     @stack('scripts')
 </body>

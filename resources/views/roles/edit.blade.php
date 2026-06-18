@@ -45,7 +45,7 @@
                                                    id="name"
                                                    value="{{ old('name', $role->name) }}"
                                                    required
-                                                   class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror">
+                                                   class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('name') border-red-500 @enderror">
                                         </div>
                                         @error('name')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -74,14 +74,14 @@
 
                         <!-- Sidebar Info (1/3) -->
                         <div class="lg:col-span-1">
-                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                            <div class="bg-brand-50 border border-brand-100 rounded-lg p-6">
                                 <div class="flex items-start">
                                     <div class="flex-shrink-0">
-                                        <i class="ph ph-info text-blue-500 text-2xl"></i>
+                                        <i class="ph ph-info text-logo-sky text-2xl"></i>
                                     </div>
                                     <div class="ml-3">
-                                        <h3 class="text-sm font-medium text-blue-800">Informações</h3>
-                                        <div class="mt-2 text-sm text-blue-700">
+                                        <h3 class="text-sm font-medium text-brand-800">Informações</h3>
+                                        <div class="mt-2 text-sm text-brand-700">
                                             <ul class="list-disc list-inside space-y-1">
                                                 <li>O nome da função deve ser único</li>
                                                 <li>Selecione as permissões desejadas</li>
@@ -108,7 +108,7 @@
                                                    id="permission_{{ $permission->id }}"
                                                    value="{{ $permission->name }}"
                                                    {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}
-                                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                                   class="w-4 h-4 text-brand-600 bg-gray-100 border-gray-300 rounded focus:ring-logo-sky focus:ring-2">
                                         </div>
                                         <div class="ml-2 text-sm">
                                             <label for="permission_{{ $permission->id }}" class="font-medium text-gray-700 cursor-pointer">
@@ -138,7 +138,7 @@
                             Cancelar
                         </a>
                         <button type="submit" 
-                                class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                class="px-6 py-2 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                             <i class="ph ph-floppy-disk mr-2"></i>
                             Salvar Alterações
                         </button>
