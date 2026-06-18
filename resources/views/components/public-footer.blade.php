@@ -6,15 +6,21 @@
                 <h3 class="text-lg font-semibold mb-4">Parceiros</h3>
                 <div class="flex gap-4">
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
-                        <img src="/images/asmoc.png" alt="ASMOC" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <a href="https://www.instagram.com/asmoc.montesclaros/" target="_blank" class="block h-full w-full flex items-center justify-center">
+                            <img src="/images/asmoc.png" alt="ASMOC" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        </a>
                         <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">ASMOC</div>
                     </div>
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
-                        <img src="/images/cead.png" alt="CEAD" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <a href="https://www.cead.unimontes.br/" target="_blank" class="block h-full w-full flex items-center justify-center">
+                            <img src="/images/cead.png" alt="CEAD" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        </a>
                         <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">CEAD</div>
                     </div>
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
-                        <img src="/images/fapemig.png" alt="FAPEMIG" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <a href="https://fapemig.br/" target="_blank" class="block h-full w-full flex items-center justify-center">
+                            <img src="/images/fapemig.png" alt="FAPEMIG" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        </a>
                         <div style="display:none;" class="text-[#4A83FF] font-bold text-sm">FAPEMIG</div>
                     </div>
                 </div>
