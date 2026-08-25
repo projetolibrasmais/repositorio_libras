@@ -100,7 +100,11 @@ class RoleController extends Controller implements HasMiddleware
         if ($role->id === 1) {
             return redirect()->route('roles.index')->with('error', 'A função padrão não pode ser excluída.');
         }
-        $this->roleRepository->delete($role->id);
+        $deleted = $this->roleRepository->delete($role->id);
+
+        if (!$deleted) {
+            return redirect()->route('roles.index')->with('error', 'Não é possível excluir a função porque ela está associada a um ou mais usuários.');
+        }
         return redirect()->route('roles.index')->with('success', 'Função excluída com sucesso!');
     }
 }

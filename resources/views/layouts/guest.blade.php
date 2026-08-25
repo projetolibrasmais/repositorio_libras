@@ -20,7 +20,7 @@
             <!-- Lado da imagem: escondida em telas pequenas -->
             <div class="hidden md:block md:w-1/2 min-h-screen">
                 <!-- Substitua o src pela sua imagem quando estiver pronta -->
-                <img src="{{ asset('images/auth-side.jpg') }}" alt="Imagem lateral" class="object-cover w-full h-full" />
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Imagem lateral" class="object-cover w-full h-full" />
             </div>
 
             <!-- Lado do formulário -->

@@ -22,7 +22,7 @@ class StoreRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:roles,name',
+            'name' => 'required|string|unique:roles,name|min:3|max:50',
             'guard_name' => 'required|string',
             'permissions' => 'required|array',
             'permissions.*' => 'exists:permissions,name',
@@ -37,10 +37,10 @@ class StoreRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'required' => 'O campo :attribute é obrigatório.',
-            'string' => 'O campo :attribute deve ser uma string.',
-            'unique' => 'O campo :attribute já está em uso.',
-            'array' => 'O campo :attribute deve ser um array.',
+            'required' => 'O :attribute é obrigatório.',
+            'string' => 'O :attribute deve ser uma string.',
+            'unique' => 'O :attribute já está em uso.',
+            'array' => 'As :attribute devem ser um array.',
             'exists' => 'O valor selecionado para :attribute é inválido.',
         ];
     }

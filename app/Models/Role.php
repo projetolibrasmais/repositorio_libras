@@ -19,6 +19,16 @@ class Role extends ModelsRole
     protected $searchable = ['name', 'guard_name'];
 
     /**
+     * The attributes that can be filtered.
+     */
+    protected $filterable = [
+        'name' => 'like',
+        'guard_name' => '=',
+        'date_from:created_at' => 'date_from',
+        'date_to:created_at' => 'date_to',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [

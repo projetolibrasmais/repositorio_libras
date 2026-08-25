@@ -13,7 +13,7 @@
                     <x-slot name="action">
                         @can('create_roles')
                             <a href="{{ route('roles.create') }}"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                class="inline-flex items-center px-4 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors">
                                 <i class="ph ph-plus mr-2"></i>
                                 Nova Função
                             </a>
@@ -36,7 +36,7 @@
                         <x-table-header :sortable="false">
                             Permissões
                         </x-table-header>
-                        <x-table-header column="guard_name" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
+                        <x-table-header :sortable="false">
                             Guard
                         </x-table-header>
                         <x-table-header column="created_at" :currentSort="request('sort')" :currentDirection="request('direction', 'asc')">
@@ -67,13 +67,13 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-600">
                                     <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-brand-100 text-brand-800">
                                         {{ $role->permissions()->count() }} permissões
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-100 text-green-800">
                                         {{ $role->guard_name }}
                                     </span>
                                 </td>
@@ -83,7 +83,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex items-center gap-2">
                                         <a href="{{ route('roles.show', $role) }}"
-                                            class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg hover:bg-blue-200 transition-colors">
+                                            class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
                                             <i class="ph ph-eye text-lg"></i>
                                         </a>
                                         @can('edit_roles')

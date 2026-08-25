@@ -27,7 +27,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-info mr-2 text-blue-600"></i>
+                                    <i class="ph ph-info mr-2 text-brand-600"></i>
                                     Informações Gerais
                                 </h3>
                             </div>
@@ -83,7 +83,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-clock mr-2 text-blue-600"></i>
+                                    <i class="ph ph-clock mr-2 text-brand-600"></i>
                                     Registro
                                 </h3>
                             </div>
@@ -130,7 +130,7 @@
                         <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                             <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                    <i class="ph ph-chart-bar mr-2 text-blue-600"></i>
+                                    <i class="ph ph-chart-bar mr-2 text-brand-600"></i>
                                     Estatísticas
                                 </h3>
                             </div>
@@ -156,8 +156,8 @@
                                 <div class="flex items-center justify-between py-3 border-t border-gray-100">
                                     <div class="flex items-center">
                                         <div
-                                            class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                            <i class="ph ph-users text-blue-600"></i>
+                                            class="flex-shrink-0 h-10 w-10 bg-brand-100 rounded-lg flex items-center justify-center">
+                                            <i class="ph ph-users text-brand-600"></i>
                                         </div>
                                         <div class="ml-3">
                                             <p class="text-sm font-medium text-gray-900">Usuários</p>
@@ -178,7 +178,7 @@
                     <div class="mt-6 bg-white border border-gray-200 rounded-lg shadow-sm">
                         <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
                             <h3 class="text-lg font-semibold text-gray-900 flex items-center">
-                                <i class="ph ph-shield-checkered mr-2 text-blue-600"></i>
+                                <i class="ph ph-shield-checkered mr-2 text-brand-600"></i>
                                 Funções com esta Permissão
                             </h3>
                         </div>

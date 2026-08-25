@@ -1,11 +1,11 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-full px-2">
         <div class="flex justify-between sm:justify-end h-16">
             <!-- Logo -->
             <div class="md:hidden shrink-0 flex items-center">
                 <button @click="$dispatch('toggle-sidebar')" class="focus:outline-none">
-                    <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
                 </button>
             </div>
 

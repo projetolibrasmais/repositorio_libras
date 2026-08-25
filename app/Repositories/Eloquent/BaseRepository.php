@@ -16,21 +16,32 @@ class BaseRepository implements BaseContract
 
     public function all($request = null, $perPage = 15)
     {
-        $query = $this->model->query();
+        $query = $this->getBaseQuery();
 
-        if ($request && $request->input('search')) {
-            $query->search($request->input('search'));
-        }
+        if ($request) {
+            if ($request->filled('search')) {
+                $query->search($request->search);
+            }
 
-        if ($request && $request->input('sort')) {
-            $sort = $request->input('sort');
-            $direction = $request->input('direction', 'asc');
-            $query->orderBy($sort, $direction);
+            $query->applyFilters($request);
+
+            $sortColumn = $request->get('sort', 'created_at');
+            $sortDirection = $request->get('direction', 'desc');
+            $query->orderByColumn($sortColumn, $sortDirection);
         } else {
             $query->orderBy('created_at', 'desc');
         }
 
         return $query->paginate($perPage)->withQueryString();
+    }
+
+    /**
+     * Get the base query builder.
+     * Can be overridden in child repositories to add eager loading.
+     */
+    protected function getBaseQuery()
+    {
+        return $this->model->query();
     }
 
     public function find(int $id)
