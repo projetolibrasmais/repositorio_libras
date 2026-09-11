@@ -40,14 +40,14 @@
                     <li>
                         <a href="https://www.sign-lang.uni-hamburg.de/lr/compendium/index.html" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-brand-100 transition-colors flex items-center gap-2">
-                            Sign Language Dataset Compendium
+                            Sign Language Dataset Compendium - Uni. Hamburg
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
                     <li>
                         <a href="https://sldict.korean.go.kr/front/main/main.do" target="_blank" rel="noopener noreferrer" 
                            class="hover:text-brand-100 transition-colors flex items-center gap-2">
-                            Sign Language Dictionary - Coreia
+                            Sign Language Dictionary - Korean
                             <i class="ph ph-arrow-square-out text-sm"></i>
                         </a>
                     </li>
