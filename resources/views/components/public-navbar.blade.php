@@ -3,8 +3,8 @@
         <div class="flex justify-between h-20">
             <div class="flex items-center">
                 <!-- Logo -->
-                <a href="{{ route('home') }}" class="flex items-center relative bg-white rounded-full h-16 p-1">
-                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-full w-auto rounded-full">
+                <a href="{{ route('home') }}" class="flex items-center justify-center relative bg-white rounded-full w-16 h-16 p-2">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="h-full w-auto rounded-full">
                 </a>
             </div>
 

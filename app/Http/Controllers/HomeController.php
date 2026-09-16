@@ -92,8 +92,8 @@ class HomeController extends Controller
         }
 
         $sinais = $query->orderBy('palavra_portugues', 'asc')
-                        ->paginate(12)
-                        ->withQueryString();
+            ->paginate(12)
+            ->withQueryString();
 
         return view('public.catalogo', compact('sinais'));
     }

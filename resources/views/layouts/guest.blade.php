@@ -18,9 +18,9 @@
         <div class="min-h-screen flex flex-col md:flex-row">
 
             <!-- Lado da imagem: escondida em telas pequenas -->
-            <div class="hidden md:block md:w-1/2 min-h-screen">
+            <div class="hidden md:flex md:w-1/2 min-h-screen max-h-screen p-5 items-center justify-center">
                 <!-- Substitua o src pela sua imagem quando estiver pronta -->
-                <img src="{{ asset('images/logo.jpeg') }}" alt="Imagem lateral" class="object-cover w-full h-full" />
+                <img src="{{ asset('images/logo.png') }}" alt="Imagem lateral" class="w-[90%] object-cover" />
             </div>
 
             <!-- Lado do formulário -->

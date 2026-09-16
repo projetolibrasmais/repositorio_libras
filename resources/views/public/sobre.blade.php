@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <h1 class="text-4xl font-bold text-brand-600 mb-8 text-center">Sobre o Projeto</h1>
         <div class="prose prose-lg max-w-none bg-white rounded-xl p-8 mb-8">
-            <img src="{{ asset('images/logo.jpeg') }}" alt="Imagem ilustrativa sobre o projeto"
+            <img src="{{ asset('images/logo.png') }}" alt="Imagem ilustrativa sobre o projeto"
                 class="h-48 mx-auto mb-6 object-cover">
             <p class="text-gray-700 leading-relaxed mb-4">
                 A Plataforma Digital Libras + é uma iniciativa dedicada à criação de um Repositório Digital
