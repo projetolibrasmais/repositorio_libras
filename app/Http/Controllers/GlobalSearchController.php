@@ -5,9 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Sinal;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class GlobalSearchController extends Controller
 {
+    private const SIGNAL_TEXT_FILTERS = [
+        'definicao',
+        'config_mao',
+        'ponto_articulacao',
+        'orientacao_palma_mao',
+        'movimento',
+        'expressao_nao_manual',
+        'contexto_utilizacao',
+    ];
+
     private const SINAL_SEARCH_COLUMNS = [
         'palavra_portugues',
         'slug',
@@ -20,6 +31,17 @@ class GlobalSearchController extends Controller
         'contexto_utilizacao',
         'categorias.nome',
     ];
+
+    public function categories(): JsonResponse
+    {
+        return response()->json([
+            'categories' => Categoria::query()
+                ->orderBy('nome')
+                ->get(['nome'])
+                ->map(fn (Categoria $categoria) => $categoria->nome)
+                ->values(),
+        ]);
+    }
 
     /**
      * Autocomplete search - returns JSON for dropdown.
@@ -75,20 +97,42 @@ class GlobalSearchController extends Controller
     public function results(Request $request)
     {
         $query = trim((string) $request->input('query'));
+        $hasFilters = collect(self::SIGNAL_TEXT_FILTERS)
+            ->contains(fn (string $field) => $request->filled($field))
+            || $request->filled('categorias.nome');
 
         $sinais = collect();
         $categorias = collect();
         $materiais = collect();
 
-        if (mb_strlen($query) >= 2) {
-            $sinais = Sinal::whereIn('status', ['catalogado', 'publicado'])
-                ->search($query, self::SINAL_SEARCH_COLUMNS)
-                ->with('video', 'categorias')
-                ->paginate(12, ['*'], 'sinais_page');
+        if (mb_strlen($query) >= 2 || $hasFilters) {
+            $sinaisQuery = Sinal::whereIn('status', ['catalogado', 'publicado'])
+                ->search(mb_strlen($query) >= 2 ? $query : null, self::SINAL_SEARCH_COLUMNS)
+                ->with('video', 'categorias');
 
+            foreach (self::SIGNAL_TEXT_FILTERS as $field) {
+                $value = $request->input($field);
+
+                if (is_string($value) && trim($value) !== '') {
+                    $sinaisQuery->where($field, 'LIKE', '%' . trim($value) . '%');
+                }
+            }
+
+            $categoriaNome = $request->input('categorias.nome');
+            if (is_string($categoriaNome) && trim($categoriaNome) !== '') {
+                $sinaisQuery->whereHas('categorias', function ($categoriaQuery) use ($categoriaNome) {
+                    $categoriaQuery->where('nome', trim($categoriaNome));
+                });
+            }
+
+            $sinais = $sinaisQuery->paginate(12, ['*'], 'sinais_page')->withQueryString();
+        }
+
+        if (mb_strlen($query) >= 2) {
             $categorias = Categoria::search($query, ['nome'])
                 ->withCount('sinais')
-                ->paginate(12, ['*'], 'categorias_page');
+                ->paginate(12, ['*'], 'categorias_page')
+                ->withQueryString();
         }
 
         return view('search.results', compact('query', 'sinais', 'categorias', 'materiais'));
