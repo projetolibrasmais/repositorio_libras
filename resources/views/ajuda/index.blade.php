@@ -77,16 +77,47 @@
                 ],
             ],
         ];
+
+        $sections = collect($sections)->map(function ($section) {
+            $section['items'] = collect($section['items'])
+                ->filter(fn ($item) => empty($item['permissao']) || auth()->user()->can($item['permissao']))
+                ->values()
+                ->all();
+
+            return $section;
+        })->filter(fn ($section) => count($section['items']) > 0)->values()->all();
     @endphp
 
-    <div class="p-4 sm:p-6 lg:p-8">
+    <div class="p-4 sm:p-6 lg:p-8" x-data="helpSearch(@js($sections))">
         <x-page-header
             title="Central de Ajuda"
-            description="Tutoriais rápidos para as principais rotinas administrativas do Repositório Libras+." />
+            description="Tutoriais rápidos para as principais rotinas administrativas da Plataforma Digital Libras+." />
+
+        <div class="mb-8 bg-white border border-brand-100 rounded-xl shadow-sm p-5">
+            <label for="help-search" class="block text-sm font-semibold text-brand-800 mb-2">
+                Pesquisar na central de ajuda
+            </label>
+            <div class="relative">
+                <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-brand-600 text-xl" aria-hidden="true"></i>
+                <input id="help-search" x-ref="helpSearch" type="search" x-model.debounce.200ms="query"
+                    placeholder="Ex.: criar sinal, restaurar categoria ou editar perfil"
+                    class="w-full rounded-xl border-gray-300 bg-white py-3 pl-12 pr-12 text-gray-900 placeholder:text-gray-500 focus:border-logo-sky focus:ring-logo-sky">
+                <button x-show="query" x-cloak type="button" @click="query = ''; $refs.helpSearch.focus()"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-lg text-gray-500 hover:text-brand-700 hover:bg-brand-50"
+                    aria-label="Limpar pesquisa">
+                    <i class="ph ph-x" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p class="mt-2 text-sm text-gray-600" aria-live="polite">
+                <span x-show="query"><strong x-text="resultCount"></strong> <span x-text="resultCount === 1 ? 'tutorial encontrado' : 'tutoriais encontrados'"></span></span>
+                <span x-show="!query">Pesquise pelo nome da tarefa, descrição ou área administrativa.</span>
+            </p>
+        </div>
 
         <div class="space-y-8">
             @foreach ($sections as $section)
-                <section class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                <section x-show="sectionMatches(@js($section))" x-cloak
+                    class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-200">
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-full {{ $section['bg'] }} flex items-center justify-center shrink-0">
@@ -102,16 +133,64 @@
                     <div class="p-6 bg-gray-50">
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                             @foreach ($section['items'] as $item)
-                                <x-help-card
-                                    :permissao="$item['permissao'] ?? null"
-                                    :titulo="$item['titulo']"
-                                    :descricao="$item['descricao']"
-                                    :imagem="$item['imagem']" />
+                                <div x-show="itemMatches(@js($section), @js($item))" x-cloak>
+                                    <x-help-card
+                                        :titulo="$item['titulo']"
+                                        :descricao="$item['descricao']"
+                                        :imagem="$item['imagem']" />
+                                </div>
                             @endforeach
                         </div>
                     </div>
                 </section>
             @endforeach
+
+            <div x-show="query && resultCount === 0" x-cloak
+                class="bg-white border border-gray-200 rounded-xl p-10 text-center">
+                <span class="mx-auto mb-4 flex w-14 h-14 items-center justify-center rounded-full bg-brand-100">
+                    <i class="ph ph-magnifying-glass text-brand-600 text-2xl"></i>
+                </span>
+                <h2 class="text-lg font-semibold text-gray-900">Nenhum tutorial encontrado</h2>
+                <p class="mt-1 text-sm text-gray-600">Tente pesquisar com termos mais gerais.</p>
+                <button type="button" @click="query = ''" class="mt-5 px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700">
+                    Limpar pesquisa
+                </button>
+            </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            function helpSearch(sections) {
+                return {
+                    query: '',
+                    sections,
+                    normalize(value) {
+                        return String(value ?? '')
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
+                            .toLocaleLowerCase('pt-BR');
+                    },
+                    terms() {
+                        return this.normalize(this.query).trim().split(/\s+/).filter(Boolean);
+                    },
+                    searchableText(section, item) {
+                        return this.normalize(`${section.title} ${section.description} ${item.titulo} ${item.descricao}`);
+                    },
+                    itemMatches(section, item) {
+                        const terms = this.terms();
+                        return terms.length === 0 || terms.every(term => this.searchableText(section, item).includes(term));
+                    },
+                    sectionMatches(section) {
+                        return section.items.some(item => this.itemMatches(section, item));
+                    },
+                    get resultCount() {
+                        return this.sections.reduce((total, section) => {
+                            return total + section.items.filter(item => this.itemMatches(section, item)).length;
+                        }, 0);
+                    },
+                };
+            }
+        </script>
+    @endpush
 </x-app-layout>
