@@ -1,315 +1,121 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="p-2 w-full h-full">
-        <!-- Cards de Estatísticas -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Total de Sinais -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-logo-sky">
-                <div class="p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-600 mb-1">Sinais Cadastrados</p>
-                            <p class="text-3xl font-bold text-gray-900">{{ $totalSinais }}</p>
-                        </div>
-                        <div class="bg-brand-100 rounded-full p-3">
-                            <i class="ph ph-hands-clapping text-brand-600 text-3xl"></i>
-                        </div>
-                    </div>
+    <div class="p-4 sm:p-6 lg:p-8 space-y-6">
+        <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-900 via-brand-700 to-brand-600 p-6 sm:p-8 text-white shadow-lg">
+            <div class="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                    <p class="mb-2 text-sm font-medium text-brand-100">Painel administrativo</p>
+                    <h1 class="text-2xl sm:text-3xl font-bold">Olá, {{ auth()->user()->name }}!</h1>
+                    <p class="mt-2 max-w-2xl text-sm sm:text-base text-brand-100">Acompanhe o crescimento da Plataforma Digital Libras+ e acesse rapidamente as principais rotinas.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    @can('create_sinais')
+                        <a href="{{ route('sinais.create') }}" class="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-brand-800 hover:bg-brand-50"><i class="ph ph-plus-circle text-lg"></i>Novo sinal</a>
+                    @endcan
+                    <a href="{{ route('ajuda.index') }}" class="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/20"><i class="ph ph-question text-lg"></i>Central de ajuda</a>
                 </div>
             </div>
+            <i class="ph ph-hands-clapping absolute -bottom-10 -right-6 text-[180px] text-white/5" aria-hidden="true"></i>
+        </section>
 
-            <!-- Total de Categorias -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-green-500">
-                <div class="p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-600 mb-1">Categorias Cadastradas</p>
-                            <p class="text-3xl font-bold text-gray-900">{{ $totalCategorias }}</p>
-                        </div>
-                        <div class="bg-green-100 rounded-full p-3">
-                            <i class="ph ph-tag text-green-500 text-3xl"></i>
-                        </div>
+        <section aria-label="Indicadores gerais" class="grid grid-cols-2 lg:grid-cols-3 @can('view_users') xl:grid-cols-5 @else xl:grid-cols-4 @endcan gap-3 sm:gap-5">
+            @php
+                $indicators = [
+                    ['label' => 'Sinais', 'value' => $totalSinais, 'icon' => 'ph-hand-waving', 'iconClass' => 'text-brand-600', 'bgClass' => 'bg-brand-100', 'route' => route('sinais.index')],
+                    ['label' => 'Categorias', 'value' => $totalCategorias, 'icon' => 'ph-folders', 'iconClass' => 'text-logo-green', 'bgClass' => 'bg-green-100', 'route' => route('categorias.index')],
+                    ['label' => 'Materiais', 'value' => $totalMateriais, 'icon' => 'ph-file-text', 'iconClass' => 'text-logo-orange', 'bgClass' => 'bg-orange-100', 'route' => route('materiais.index')],
+                    ['label' => 'Vídeos', 'value' => $totalVideos, 'icon' => 'ph-video-camera', 'iconClass' => 'text-logo-pink', 'bgClass' => 'bg-pink-100', 'route' => route('sinais.index')],
+                ];
+            @endphp
+            @foreach ($indicators as $indicator)
+                <a href="{{ $indicator['route'] }}" class="group rounded-xl border border-brand-100 bg-white p-4 sm:p-5 shadow-sm hover:-translate-y-0.5 hover:border-logo-sky hover:shadow-md transition">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0"><p class="text-xs sm:text-sm font-medium text-gray-600 truncate">{{ $indicator['label'] }}</p><p class="mt-1 text-2xl sm:text-3xl font-bold text-gray-900">{{ $indicator['value'] }}</p></div>
+                        <span class="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl {{ $indicator['bgClass'] }}"><i class="ph {{ $indicator['icon'] }} {{ $indicator['iconClass'] }} text-xl sm:text-2xl"></i></span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Total de Materiais -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-purple-500">
-                <div class="p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-600 mb-1">Materiais Produzidos</p>
-                            <p class="text-3xl font-bold text-gray-900">{{ $totalMateriais }}</p>
-                        </div>
-                        <div class="bg-purple-100 rounded-full p-3">
-                            <i class="ph ph-file-text text-purple-500 text-3xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                </a>
+            @endforeach
             @can('view_users')
-                <!-- Total de Usuários -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-orange-500">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm font-medium text-gray-600 mb-1">Usuários Ativos</p>
-                                <p class="text-3xl font-bold text-gray-900">{{ $totalUsuarios }}</p>
-                            </div>
-                            <div class="bg-orange-100 rounded-full p-3">
-                                <i class="ph ph-users text-orange-500 text-3xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="{{ route('users.index') }}" class="group col-span-2 lg:col-span-1 rounded-xl border border-brand-100 bg-white p-4 sm:p-5 shadow-sm hover:-translate-y-0.5 hover:border-logo-sky hover:shadow-md transition">
+                    <div class="flex items-center justify-between gap-3"><div><p class="text-xs sm:text-sm font-medium text-gray-600">Usuários</p><p class="mt-1 text-2xl sm:text-3xl font-bold text-gray-900">{{ $totalUsuarios }}</p></div><span class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-purple-100"><i class="ph ph-users text-purple-600 text-xl sm:text-2xl"></i></span></div>
+                </a>
             @endcan
+        </section>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <section class="xl:col-span-2 rounded-xl border border-gray-200 bg-white shadow-sm">
+                <header class="flex items-center justify-between gap-4 border-b border-gray-200 px-5 py-4">
+                    <div class="flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100"><i class="ph ph-clock-counter-clockwise text-brand-600 text-xl"></i></span><div><h2 class="font-semibold text-gray-900">Sinais recentes</h2><p class="text-xs text-gray-500">Últimos cadastros realizados</p></div></div>
+                    <a href="{{ route('sinais.index') }}" class="text-sm font-medium text-brand-600 hover:text-brand-800">Ver todos</a>
+                </header>
+                <div class="p-4 sm:p-5">
+                    @forelse ($ultimosSinais as $sinal)
+                        <a href="{{ route('sinais.show', $sinal) }}" class="flex items-center gap-4 rounded-lg px-3 py-3 hover:bg-brand-50">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-100"><i class="ph ph-hand-waving text-brand-600"></i></span>
+                            <span class="min-w-0 flex-1"><strong class="block truncate text-sm text-gray-900">{{ $sinal->palavra_portugues }}</strong><span class="block truncate text-xs text-gray-500">{{ $sinal->categorias->pluck('nome')->join(', ') ?: 'Sem categoria' }}</span></span>
+                            <span class="hidden sm:block text-xs text-gray-500">{{ $sinal->created_at->diffForHumans() }}</span><i class="ph ph-caret-right text-gray-400"></i>
+                        </a>
+                    @empty
+                        <div class="py-10 text-center"><span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-100"><i class="ph ph-hand-waving text-brand-600 text-2xl"></i></span><h3 class="mt-3 font-semibold text-gray-900">Nenhum sinal cadastrado</h3><p class="mt-1 text-sm text-gray-500">Cadastre o primeiro sinal para começar a preencher o repositório.</p>@can('create_sinais')<a href="{{ route('sinais.create') }}" class="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700"><i class="ph ph-plus"></i>Cadastrar sinal</a>@endcan</div>
+                    @endforelse
+                </div>
+            </section>
+
+            <section class="rounded-xl border border-gray-200 bg-white shadow-sm">
+                <header class="flex items-center gap-3 border-b border-gray-200 px-5 py-4"><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100"><i class="ph ph-chart-bar text-logo-green text-xl"></i></span><div><h2 class="font-semibold text-gray-900">Categorias em destaque</h2><p class="text-xs text-gray-500">Mais utilizadas nos sinais</p></div></header>
+                <div class="p-5 space-y-4">
+                    @forelse ($categoriasMaisUsadas as $categoria)
+                        @php($percentage = $totalSinais > 0 ? min(100, ($categoria->sinais_count / $totalSinais) * 100) : 0)
+                        <div><div class="mb-1.5 flex items-center justify-between gap-3 text-sm"><span class="truncate font-medium text-gray-800">{{ $categoria->nome }}</span><span class="shrink-0 text-xs text-gray-500">{{ $categoria->sinais_count }} {{ $categoria->sinais_count === 1 ? 'sinal' : 'sinais' }}</span></div><div class="h-2 overflow-hidden rounded-full bg-gray-200"><div class="h-full rounded-full bg-logo-green" style="width: {{ $percentage }}%"></div></div></div>
+                    @empty
+                        <p class="py-8 text-center text-sm text-gray-500">Nenhuma categoria cadastrada.</p>
+                    @endforelse
+                    <a href="{{ route('categorias.index') }}" class="inline-flex items-center gap-1 text-sm font-medium text-brand-600 hover:text-brand-800">Ver categorias <i class="ph ph-arrow-right"></i></a>
+                </div>
+            </section>
         </div>
 
-        <!-- Seção de Gráficos e Listas -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-
-            <!-- Últimos Sinais Cadastrados -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="ph ph-clock-counter-clockwise text-brand-600 mr-2 text-2xl"></i>
-                        Últimos Sinais Cadastrados
-                    </h3>
-                    <div class="space-y-3">
-                        @forelse($ultimosSinais as $sinal)
-                            <div
-                                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-900">{{ $sinal->palavra_portugues }}</p>
-                                    <p class="text-sm text-gray-600">
-                                        @if ($sinal->categorias->isNotEmpty())
-                                            {{ $sinal->categorias->pluck('nome')->join(', ') }}
-                                        @else
-                                            Sem categoria
-                                        @endif
-                                    </p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-xs text-gray-500">{{ $sinal->created_at->diffForHumans() }}</p>
-                                </div>
-                            </div>
-                        @empty
-                            <p class="text-gray-500 text-center py-4">Nenhum sinal cadastrado ainda.</p>
-                        @endforelse
-                    </div>
-                    <div class="mt-4 text-center">
-                        <a href="{{ route('sinais.index') }}"
-                            class="text-brand-600 hover:underline text-sm font-medium">
-                            Ver todos os sinais →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Categorias Mais Usadas -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="ph ph-chart-bar text-green-500 mr-2 text-2xl"></i>
-                        Categorias Mais Usadas
-                    </h3>
-                    <div class="space-y-3">
-                        @forelse($categoriasMaisUsadas as $categoria)
-                            <div class="flex items-center justify-between">
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span class="font-medium text-gray-900">{{ $categoria->nome }}</span>
-                                        <span
-                                            class="text-sm text-gray-600 font-semibold">{{ $categoria->sinais_count }}
-                                            sinais</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="bg-green-500 h-2 rounded-full"
-                                            style="width: {{ $totalSinais > 0 ? ($categoria->sinais_count / $totalSinais) * 100 : 0 }}%">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            <p class="text-gray-500 text-center py-4">Nenhuma categoria cadastrada ainda.</p>
-                        @endforelse
-                    </div>
-                    <div class="mt-4 text-center">
-                        <a href="{{ route('categorias.index') }}"
-                            class="text-green-500 hover:underline text-sm font-medium">
-                            Ver todas as categorias →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Crescimento Mensal e Atividades Recentes -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <!-- Crescimento Mensal -->
-            <div class="lg:col-span-2 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <i class="ph ph-trend-up text-brand-600 mr-2 text-2xl"></i>
-                        Crescimento Mensal de Sinais
-                    </h3>
-                    <div class="flex items-end justify-between space-x-2 h-64">
-                        @forelse($crescimentoMensal as $mes)
-                            @php
-                                $maxTotal = $crescimentoMensal->max('total') ?: 1;
-                                $altura = ($mes->total / $maxTotal) * 100;
-                                $meses = [
-                                    'Jan',
-                                    'Fev',
-                                    'Mar',
-                                    'Abr',
-                                    'Mai',
-                                    'Jun',
-                                    'Jul',
-                                    'Ago',
-                                    'Set',
-                                    'Out',
-                                    'Nov',
-                                    'Dez',
-                                ];
-                                $nomeMes = $meses[$mes->mes - 1];
-                            @endphp
-                            <div class="flex-1 flex flex-col items-center">
-                                <div class="relative w-full bg-gray-200 rounded-t-lg flex items-end justify-center"
-                                    style="height: {{ $altura }}%; min-height: 30px;">
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-brand-600 to-logo-sky rounded-t-lg">
-                                    </div>
-                                    <span class="relative text-white font-bold text-xs mb-1">{{ $mes->total }}</span>
-                                </div>
-                                <p class="text-xs text-gray-600 mt-2 font-medium">{{ $nomeMes }}</p>
-                            </div>
-                        @empty
-                            <p class="text-gray-500 text-center w-full py-8">Sem dados para exibir</p>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-
-            @can('view_logs')
-                <!-- Atividades Recentes -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                            <i class="ph ph-activity text-purple-500 mr-2 text-2xl"></i>
-                            Atividades Recentes
-                        </h3>
-                        <div class="space-y-3 max-h-64 overflow-y-auto">
-                            @forelse($atividadesRecentes as $atividade)
-                                <div class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg transition">
-                                    <div class="flex-shrink-0">
-                                        @if ($atividade->event === 'created')
-                                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                                <i class="ph ph-plus text-green-600 text-sm"></i>
-                                            </div>
-                                        @elseif($atividade->event === 'updated')
-                                            <div class="w-8 h-8 bg-brand-100 rounded-full flex items-center justify-center">
-                                                <i class="ph ph-pencil text-brand-600 text-sm"></i>
-                                            </div>
-                                        @elseif($atividade->event === 'deleted')
-                                            <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                                                <i class="ph ph-trash text-red-600 text-sm"></i>
-                                            </div>
-                                        @else
-                                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                                                <i class="ph ph-dot-outline text-gray-600 text-sm"></i>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-900">
-                                            <span class="font-medium">{{ $atividade->causer->name ?? 'Sistema' }}</span>
-                                            {{ $atividade->description }}
-                                        </p>
-                                        <p class="text-xs text-gray-500">{{ $atividade->created_at->diffForHumans() }}</p>
-                                    </div>
-                                </div>
-                            @empty
-                                <p class="text-gray-500 text-center py-4 text-sm">Nenhuma atividade recente.</p>
-                            @endforelse
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <section class="xl:col-span-2 rounded-xl border border-gray-200 bg-white shadow-sm">
+                <header class="border-b border-gray-200 px-5 py-4"><div class="flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100"><i class="ph ph-trend-up text-brand-600 text-xl"></i></span><div><h2 class="font-semibold text-gray-900">Crescimento mensal</h2><p class="text-xs text-gray-500">Sinais cadastrados nos últimos meses</p></div></div></header>
+                <div class="p-5">
+                    @if ($crescimentoMensal->isNotEmpty())
+                        <div class="flex h-52 items-end gap-3 sm:gap-5" aria-label="Gráfico de crescimento mensal">
+                            @php($maxTotal = $crescimentoMensal->max('total') ?: 1)
+                            @foreach ($crescimentoMensal as $mes)
+                                @php($altura = max(12, ($mes->total / $maxTotal) * 100))
+                                <div class="flex h-full flex-1 flex-col items-center justify-end gap-2"><span class="text-xs font-semibold text-brand-700">{{ $mes->total }}</span><div class="w-full max-w-16 rounded-t-lg bg-gradient-to-t from-brand-700 to-logo-sky" style="height: {{ $altura }}%"></div><span class="text-xs font-medium text-gray-500">{{ ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'][$mes->mes - 1] }}/{{ substr($mes->ano, -2) }}</span></div>
+                            @endforeach
                         </div>
-                    </div>
+                    @else
+                        <div class="py-10 text-center"><i class="ph ph-chart-line text-4xl text-gray-300"></i><p class="mt-2 text-sm text-gray-500">O gráfico aparecerá após o cadastro dos primeiros sinais.</p></div>
+                    @endif
                 </div>
+            </section>
+
+            <div class="space-y-6">
+                @can('view_logs')
+                    <section class="rounded-xl border border-gray-200 bg-white shadow-sm">
+                        <header class="flex items-center justify-between border-b border-gray-200 px-5 py-4"><h2 class="font-semibold text-gray-900">Atividades recentes</h2><a href="{{ route('logs.index') }}" class="text-xs font-medium text-brand-600">Ver logs</a></header>
+                        <div class="max-h-64 overflow-y-auto p-3">@forelse ($atividadesRecentes->take(5) as $atividade)<div class="flex gap-3 rounded-lg p-2 hover:bg-gray-50"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-logo-sky"></span><div class="min-w-0"><p class="line-clamp-2 text-sm text-gray-700"><strong>{{ $atividade->causer->name ?? 'Sistema' }}</strong> {{ $atividade->description }}</p><p class="mt-1 text-xs text-gray-500">{{ $atividade->created_at->diffForHumans() }}</p></div></div>@empty<p class="py-6 text-center text-sm text-gray-500">Nenhuma atividade recente.</p>@endforelse</div>
+                    </section>
+                @endcan
+                @can('view_materiais')
+                    <section class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                        <div class="flex items-center justify-between"><div><h2 class="font-semibold text-gray-900">Materiais por tipo</h2><p class="text-xs text-gray-500">{{ $totalMateriais }} no total</p></div><i class="ph ph-files text-logo-orange text-2xl"></i></div>
+                        <div class="mt-4 space-y-2">@forelse ($materiaisPorTipo as $tipo)<div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2 text-sm"><span class="text-gray-700">{{ ucfirst($tipo->tipo ?? 'Outro') }}</span><strong class="text-gray-900">{{ $tipo->total }}</strong></div>@empty<p class="text-sm text-gray-500">Nenhum material cadastrado.</p>@endforelse</div>
+                    </section>
+                @endcan
             </div>
-        @endcan
-
-        <!-- Estatísticas Adicionais -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-
-            <!-- Total de Vídeos -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-sm font-semibold text-gray-600">Total de Vídeos</h4>
-                        <i class="ph ph-video text-red-500 text-2xl"></i>
-                    </div>
-                    <p class="text-3xl font-bold text-gray-900">{{ $totalVideos }}</p>
-                    <p class="text-xs text-gray-500 mt-2">Vídeos de sinais cadastrados</p>
-                </div>
-            </div>
-
-            <!-- Materiais por Tipo -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-sm font-semibold text-gray-600">Tipos de Materiais</h4>
-                        <i class="ph ph-files text-logo-pink text-2xl"></i>
-                    </div>
-                    <div class="space-y-2">
-                        @forelse($materiaisPorTipo as $tipo)
-                            <div class="flex items-center justify-between text-sm">
-                                <span class="text-gray-700">{{ ucfirst($tipo->tipo ?? 'Outro') }}</span>
-                                <span class="font-semibold text-gray-900">{{ $tipo->total }}</span>
-                            </div>
-                        @empty
-                            <p class="text-xs text-gray-500">Nenhum material cadastrado</p>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-
-            <!-- Acesso Rápido -->
-            <div class="bg-brand-600 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-white">
-                    <div class="flex items-center justify-between mb-4">
-                        <h4 class="text-sm font-semibold">Acesso Rápido</h4>
-                        <i class="ph ph-lightning text-2xl"></i>
-                    </div>
-                    <div class="space-y-2">
-                        @can('create_sinais')
-                            <a href="{{ route('sinais.create') }}"
-                                class="block px-3 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition text-sm">
-                                <i class="ph ph-plus-circle mr-2"></i>Novo Sinal
-                            </a>
-                        @endcan
-                        @can('create_categorias')
-                            <a href="{{ route('categorias.create') }}"
-                                class="block px-3 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition text-sm">
-                                <i class="ph ph-plus-circle mr-2"></i>Nova Categoria
-                            </a>
-                        @endcan
-                        @can('create_users')
-                            <a href="{{ route('users.create') }}"
-                                class="block px-3 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition text-sm">
-                                <i class="ph ph-plus-circle mr-2"></i>Novo Usuário
-                            </a>
-                        @endcan
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <section class="rounded-xl border border-brand-100 bg-white p-5 shadow-sm">
+            <div class="mb-4"><h2 class="font-semibold text-gray-900">Ações rápidas</h2><p class="text-xs text-gray-500">Atalhos para as tarefas mais frequentes</p></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                @can('create_sinais')<a href="{{ route('sinais.create') }}" class="flex items-center gap-3 rounded-lg border border-gray-200 p-3 hover:border-logo-sky hover:bg-brand-50"><i class="ph ph-hand-waving text-brand-600 text-xl"></i><span class="text-sm font-medium text-gray-800">Novo sinal</span></a>@endcan
+                @can('create_categorias')<a href="{{ route('categorias.create') }}" class="flex items-center gap-3 rounded-lg border border-gray-200 p-3 hover:border-logo-green hover:bg-green-50"><i class="ph ph-folder-plus text-logo-green text-xl"></i><span class="text-sm font-medium text-gray-800">Nova categoria</span></a>@endcan
+                @can('create_materiais')<a href="{{ route('materiais.create') }}" class="flex items-center gap-3 rounded-lg border border-gray-200 p-3 hover:border-logo-orange hover:bg-orange-50"><i class="ph ph-file-plus text-logo-orange text-xl"></i><span class="text-sm font-medium text-gray-800">Novo material</span></a>@endcan
+                @can('create_users')<a href="{{ route('users.create') }}" class="flex items-center gap-3 rounded-lg border border-gray-200 p-3 hover:border-logo-pink hover:bg-pink-50"><i class="ph ph-user-plus text-logo-pink text-xl"></i><span class="text-sm font-medium text-gray-800">Novo usuário</span></a>@endcan
+            </div>
+        </section>
     </div>
 </x-app-layout>
