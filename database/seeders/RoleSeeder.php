@@ -18,8 +18,30 @@ class RoleSeeder extends Seeder
             'name' => 'Administrador',
             'guard_name' => 'web',
         ]);
-
         $permissions = Permission::all();
         $adminRole->syncPermissions($permissions);
+
+        $interpreterRole = Role::create([
+            'name' => 'Intérprete',
+            'guard_name' => 'web',
+        ]);
+        $interpreterRole->syncPermissions([
+            'view_sinais',
+            'create_sinais',
+            'edit_sinais',
+            'view_categorias',
+        ]);
+
+        $researcherRole = Role::create([
+            'name' => 'Pesquisador',
+            'guard_name' => 'web',
+        ]);
+        $researcherRole->syncPermissions([
+            'view_sinais',
+            'view_categorias',
+            'view_materiais',
+            'create_materiais',
+            'edit_materiais',
+        ]);
     }
 }
