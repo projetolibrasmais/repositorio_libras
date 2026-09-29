@@ -1,3 +1,247 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* Tema de alto contraste: cores explícitas, sem filtros sobre a página. */
+html.high-contrast {
+    color-scheme: dark;
+}
+
+html.high-contrast body,
+html.high-contrast main {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+html.high-contrast .bg-white,
+html.high-contrast .bg-gray-50,
+html.high-contrast .bg-gray-100,
+html.high-contrast .bg-gray-200,
+html.high-contrast .bg-brand-50,
+html.high-contrast .bg-brand-100 {
+    background-color: #0a0a0a !important;
+}
+
+html.high-contrast .bg-gray-600,
+html.high-contrast .bg-gray-700,
+html.high-contrast .bg-gray-800,
+html.high-contrast .bg-gray-900,
+html.high-contrast .bg-brand-600,
+html.high-contrast .bg-brand-700,
+html.high-contrast .bg-brand-800,
+html.high-contrast .bg-brand-900 {
+    background-color: #000 !important;
+}
+
+html.high-contrast .text-gray-400,
+html.high-contrast .text-gray-500,
+html.high-contrast .text-gray-600,
+html.high-contrast .text-gray-700,
+html.high-contrast .text-gray-800,
+html.high-contrast .text-gray-900,
+html.high-contrast .text-brand-100,
+html.high-contrast .text-brand-600,
+html.high-contrast .text-brand-700,
+html.high-contrast .text-brand-800,
+html.high-contrast .text-brand-900 {
+    color: #fff !important;
+}
+
+html.high-contrast h1,
+html.high-contrast h2,
+html.high-contrast h3,
+html.high-contrast .text-logo-sky,
+html.high-contrast .text-logo-green,
+html.high-contrast .text-logo-orange,
+html.high-contrast .text-logo-pink,
+html.high-contrast .text-logo-yellow,
+html.high-contrast .text-transparent {
+    color: #ff0 !important;
+    background: none !important;
+}
+
+html.high-contrast a {
+    text-decoration-color: #ff0;
+}
+
+html.high-contrast a:hover {
+    text-decoration: underline;
+}
+
+html.high-contrast .border-gray-100,
+html.high-contrast .border-gray-200,
+html.high-contrast .border-gray-300,
+html.high-contrast .border-brand-100,
+html.high-contrast .border-logo-sky,
+html.high-contrast .border-logo-green,
+html.high-contrast .border-logo-pink,
+html.high-contrast .border-logo-orange,
+html.high-contrast .border-logo-yellow {
+    border-color: #fff !important;
+}
+
+html.high-contrast input,
+html.high-contrast select,
+html.high-contrast textarea {
+    color: #fff !important;
+    background-color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+html.high-contrast input::placeholder,
+html.high-contrast textarea::placeholder {
+    color: #ddd !important;
+    opacity: 1;
+}
+
+html.high-contrast input:focus,
+html.high-contrast select:focus,
+html.high-contrast textarea:focus,
+html.high-contrast button:focus-visible,
+html.high-contrast a:focus-visible {
+    outline: 3px solid #ff0 !important;
+    outline-offset: 3px !important;
+    box-shadow: none !important;
+}
+
+html.high-contrast button[class*="bg-brand-"],
+html.high-contrast a[class*="bg-brand-"] {
+    color: #000 !important;
+    background-color: #ff0 !important;
+    border-color: #ff0 !important;
+}
+
+html.high-contrast nav {
+    background: #000 !important;
+    border-bottom-color: #ff0 !important;
+}
+
+html.high-contrast nav a[aria-current="page"],
+html.high-contrast nav a.bg-brand-800 {
+    color: #000 !important;
+    background: #ff0 !important;
+}
+
+html.high-contrast footer {
+    color: #fff !important;
+    background: #000 !important;
+    border-top: 2px solid #ff0;
+}
+
+html.high-contrast img,
+html.high-contrast video {
+    filter: none !important;
+}
+
+html.high-contrast #contrast-toggle {
+    color: #000 !important;
+    background: #ff0 !important;
+    border: 2px solid #fff;
+}
+
+/* Identidade visual da área administrativa. */
+.admin-shell {
+    background-color: #eef5ff;
+}
+
+.admin-content > main {
+    min-height: calc(100vh - 4rem);
+    background-color: #f5f7fb;
+}
+
+.admin-sidebar {
+    color: #fff;
+    background: linear-gradient(180deg, #18264b 0%, #263c73 58%, #304a89 100%) !important;
+}
+
+.admin-sidebar > div > div:first-child {
+    border-bottom-color: rgb(255 255 255 / 18%) !important;
+}
+
+.admin-sidebar p,
+.admin-sidebar small,
+.admin-sidebar .text-slate-600,
+.admin-sidebar .text-gray-500 {
+    color: #d9e9ff !important;
+}
+
+.admin-sidebar hr {
+    border-color: rgb(255 255 255 / 18%);
+}
+
+.admin-sidebar a {
+    color: #eef5ff !important;
+    border-left: 3px solid transparent;
+}
+
+.admin-sidebar a:hover {
+    color: #fff !important;
+    background-color: rgb(62 163 217 / 20%) !important;
+}
+
+.admin-sidebar a.bg-brand-50 {
+    color: #fff !important;
+    background-color: rgb(62 163 217 / 28%) !important;
+}
+
+.admin-sidebar button {
+    color: #eef5ff !important;
+}
+
+.admin-sidebar button:hover {
+    background-color: rgb(255 255 255 / 12%) !important;
+}
+
+.admin-sidebar img {
+    padding: 3px;
+    background: #fff;
+    border-radius: 9999px;
+}
+
+.admin-navbar {
+    box-shadow: 0 3px 12px rgb(24 38 75 / 8%);
+}
+
+.admin-content main .bg-white {
+    border-color: #d9e9ff;
+}
+
+.admin-content main table thead,
+.admin-content main .bg-gray-50 {
+    background-color: #eef5ff;
+}
+
+.admin-content :focus-visible {
+    outline: 3px solid #3ea3d9;
+    outline-offset: 2px;
+}
+
+.admin-table-scroll {
+    scrollbar-color: #304a89 #d9e9ff;
+    scrollbar-width: thin;
+}
+
+@media (max-width: 639px) {
+    .admin-content > main > .p-2 {
+        padding: 0.5rem;
+    }
+
+    .admin-content > main > .p-2 > .bg-white > .p-6 {
+        padding: 1rem;
+    }
+
+    .admin-content main table th,
+    .admin-content main table td {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .admin-table-scroll {
+        border: 1px solid #d9e9ff;
+        box-shadow: inset -12px 0 12px -14px #18264b;
+    }
+}

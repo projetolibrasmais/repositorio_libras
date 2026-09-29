@@ -10,29 +10,29 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex md:items-center md:space-x-8">
-                <a href="{{ route('home') }}" 
+                <a href="{{ route('home') }}" aria-current="{{ request()->routeIs('home') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('home') ? 'bg-brand-800' : '' }}">
                     {{ __('INÍCIO') }}
                 </a>
-                <a href="{{ route('public.sinais') }}" 
+                <a href="{{ route('public.sinais') }}" aria-current="{{ request()->routeIs('public.sinais') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.sinais') ? 'bg-brand-800' : '' }}">
                     {{ __('SINAIS') }}
                 </a>
-                <a href="{{ route('public.catalogo') }}" 
+                <a href="{{ route('public.catalogo') }}" aria-current="{{ request()->routeIs('public.catalogo') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.catalogo') ? 'bg-brand-800' : '' }}">
                     {{ __('CATÁLOGO') }}
                 </a>
-                <a href="{{ route('public.categorias') }}" 
+                <a href="{{ route('public.categorias') }}" aria-current="{{ request()->routeIs('public.categorias') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.categorias') ? 'bg-brand-800' : '' }}">
                     {{ __('CATEGORIAS') }}
                 </a>
 
-                <a href="{{ route('public.faq') }}" 
+                <a href="{{ route('public.faq') }}" aria-current="{{ request()->routeIs('public.faq') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.faq') ? 'bg-brand-800' : '' }}">
                     {{ __('FAQ') }}
                 </a>
                 
-                <a href="{{ route('public.about') }}" 
+                <a href="{{ route('public.about') }}" aria-current="{{ request()->routeIs('public.about') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('public.about') ? 'bg-brand-800' : '' }}">
                     {{ __('SOBRE') }}
                 </a>

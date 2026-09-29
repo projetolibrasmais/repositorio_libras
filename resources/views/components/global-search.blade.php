@@ -1,4 +1,4 @@
-@props(['placeholder' => 'O que você procura?'])
+@props(['placeholder' => 'O que você procura?', 'category' => null])
 
 <div x-data="globalSearch()" class="relative w-full max-w-2xl mx-auto">
     <div class="relative">
@@ -27,6 +27,28 @@
                 <i class="ph ph-magnifying-glass text-2xl hover:text-brand-600 cursor-pointer text-gray-600"></i>
             </button>
         </div>
+    </div>
+
+    <!-- Resumo dos filtros ativos -->
+    <div x-show="activeFilterCount > 0" x-cloak style="display: none;" class="flex flex-wrap items-center justify-center gap-2 mt-3">
+        <span class="text-xs font-semibold text-gray-500">Filtros ativos:</span>
+        <template x-for="field in textFields" :key="`active-${field.key}`">
+            <button x-show="filters[field.key]" type="button" @click="removeFilter(field.key)"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-100 text-brand-700 border border-logo-sky text-xs font-medium hover:bg-brand-50"
+                :title="`Remover filtro ${field.label}`">
+                <span x-text="`${field.label}: ${filters[field.key]}`"></span>
+                <i class="ph ph-x" aria-hidden="true"></i>
+            </button>
+        </template>
+        <button x-show="filters.categorias.nome" type="button" @click="removeFilter('categorias.nome')"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-100 text-brand-700 border border-logo-sky text-xs font-medium hover:bg-brand-50"
+            title="Remover filtro de categoria">
+            <span x-text="`Categoria: ${filters.categorias.nome}`"></span>
+            <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+        <button type="button" @click="clearFilters()" class="text-xs font-medium text-gray-600 underline hover:text-brand-700">
+            Limpar todos
+        </button>
     </div>
 
     <!-- Autocomplete Results -->
@@ -179,7 +201,7 @@ function globalSearch() {
             movimento: '',
             expressao_nao_manual: '',
             contexto_utilizacao: '',
-            categorias: { nome: '' },
+            categorias: { nome: @js($category ?? '') },
         },
 
         get activeFilterCount() {
@@ -200,7 +222,26 @@ function globalSearch() {
                 console.warn('Could not clear saved search filters:', error);
             }
             this.filtersOpen = false;
-            this.performSearch(true);
+
+            // Na página inicial, limpar filtros não deve iniciar uma busca nem
+            // retirar o visitante da página. Em /sinais, atualiza os resultados.
+            if (window.location.pathname === @js(route('public.sinais', [], false))) {
+                this.performSearch(true);
+            }
+        },
+
+        removeFilter(key) {
+            if (key === 'categorias.nome') {
+                this.filters.categorias.nome = '';
+            } else if (Object.prototype.hasOwnProperty.call(this.filters, key)) {
+                this.filters[key] = '';
+            }
+
+            this.persistFilters();
+
+            if (window.location.pathname === @js(route('public.sinais', [], false))) {
+                this.performSearch(true);
+            }
         },
 
         applyFilters() {
@@ -212,9 +253,25 @@ function globalSearch() {
         init() {
             this.hydrateFromUrl();
             this.restoreFilters();
+            this.loadCategoryOptions();
 
             if (this.query.length >= 2) {
                 this.search();
+            }
+        },
+
+        async loadCategoryOptions() {
+            try {
+                const response = await fetch(@js(route('search.categories')), {
+                    headers: { 'Accept': 'application/json' }
+                });
+                const data = await response.json();
+
+                if (Array.isArray(data.categories)) {
+                    this.categoriaOptions = data.categories;
+                }
+            } catch (error) {
+                console.warn('Não foi possível atualizar a lista de categorias:', error);
             }
         },
 
@@ -245,7 +302,7 @@ function globalSearch() {
 
         restoreFilters() {
             const params = new URLSearchParams(window.location.search);
-            const hasCategoryInUrl = params.has('categorias[nome]') || params.has('categorias.nome');
+            const hasCategoryInUrl = params.has('categorias[nome]') || params.has('categorias.nome') || params.has('categoria');
 
             try {
                 const savedFilters = JSON.parse(sessionStorage.getItem(this.filterStorageKey) || 'null');
@@ -323,7 +380,8 @@ function globalSearch() {
             // mesmo quando query e filtros ficam vazios.
             if (force || this.query.length >= 2 || this.activeFilterCount > 0) {
                 this.persistFilters();
-                window.location.href = `{{ route('search.results') }}?${params.toString()}`;
+                const queryString = params.toString();
+                window.location.href = `{{ route('public.sinais') }}${queryString ? `?${queryString}` : ''}`;
             }
         }
     }

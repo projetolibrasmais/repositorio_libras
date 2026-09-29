@@ -1,6 +1,6 @@
 @props(['sortableColumns' => [], 'currentSort' => null, 'currentDirection' => 'asc'])
 
-<div class="overflow-x-auto bg-white rounded-lg shadow">
+<div class="admin-table-scroll max-w-full overflow-x-auto bg-white rounded-lg shadow" tabindex="0" aria-label="Tabela com rolagem horizontal em telas pequenas">
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
