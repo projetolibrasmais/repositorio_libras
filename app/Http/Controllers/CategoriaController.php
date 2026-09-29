@@ -25,12 +25,12 @@ class CategoriaController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_categorias', ['only' => ['index', 'show']]),
-            new Middleware('permission:create_categorias', ['only' => ['create', 'store']]),
-            new Middleware('permission:edit_categorias', ['only' => ['edit', 'update']]),
-            new Middleware('permission:delete_categorias', ['only' => ['destroy']]),
-            new Middleware('permission:restore_categorias', ['only' => ['restore']]),
-            new Middleware('permission:force_delete_categorias', ['only' => ['forceDelete']]),
+            new Middleware('permission:view_categorias', only: ['index', 'show']),
+            new Middleware('permission:create_categorias', only: ['create', 'store']),
+            new Middleware('permission:edit_categorias', only: ['edit', 'update']),
+            new Middleware('permission:delete_categorias', only: ['destroy']),
+            new Middleware('permission:restore_categorias', only: ['restore']),
+            new Middleware('permission:force_delete_categorias', only: ['forceDelete']),
         ];
     }
 

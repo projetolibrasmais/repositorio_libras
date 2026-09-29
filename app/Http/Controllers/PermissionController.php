@@ -29,7 +29,7 @@ class PermissionController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_permissions', ['only' => ['index', 'show']]),
+            new Middleware('permission:view_permissions', only: ['index', 'show']),
         ];
     }
 

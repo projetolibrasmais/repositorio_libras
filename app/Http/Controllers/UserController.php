@@ -32,12 +32,12 @@ class UserController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_users', ['only' => ['index', 'show']]),
-            new Middleware('permission:create_users', ['only' => ['create', 'store']]),
-            new Middleware('permission:edit_users', ['only' => ['edit', 'update']]),
-            new Middleware('permission:delete_users', ['only' => ['destroy']]),
-            new Middleware('permission:restore_users', ['only' => ['restore']]),
-            new Middleware('permission:force_delete_users', ['only' => ['forceDelete']]),
+            new Middleware('permission:view_users', only: ['index', 'show']),
+            new Middleware('permission:create_users', only: ['create', 'store']),
+            new Middleware('permission:edit_users', only: ['edit', 'update']),
+            new Middleware('permission:delete_users', only: ['destroy']),
+            new Middleware('permission:restore_users', only: ['restore']),
+            new Middleware('permission:force_delete_users', only: ['forceDelete']),
         ];
     }
 

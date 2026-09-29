@@ -26,12 +26,12 @@ class MaterialController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_materiais', ['only' => ['index', 'show']]),
-            new Middleware('permission:create_materiais', ['only' => ['create', 'store']]),
-            new Middleware('permission:edit_materiais', ['only' => ['edit', 'update']]),
-            new Middleware('permission:delete_materiais', ['only' => ['destroy']]),
-            new Middleware('permission:restore_materiais', ['only' => ['restore']]),
-            new Middleware('permission:force_delete_materiais', ['only' => ['forceDelete']]),
+            new Middleware('permission:view_materiais', only: ['index', 'show']),
+            new Middleware('permission:create_materiais', only: ['create', 'store']),
+            new Middleware('permission:edit_materiais', only: ['edit', 'update']),
+            new Middleware('permission:delete_materiais', only: ['destroy']),
+            new Middleware('permission:restore_materiais', only: ['restore']),
+            new Middleware('permission:force_delete_materiais', only: ['forceDelete']),
         ];
     }
 
