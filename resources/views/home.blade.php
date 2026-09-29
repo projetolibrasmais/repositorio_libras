@@ -30,7 +30,7 @@
                     <h2 class="text-5xl font-bold text-brand-600 mb-6 text-center">
                         {{ __('Sobre o Projeto') }}
                     </h2>
-                    <img src="{{ asset('images/logo.png') }}" alt="Sobre o Projeto" class="w-[50%] rounded-3xl">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Sobre o Projeto" class="w-[50%] max-h-80 object-contain rounded-3xl">
                 </div>
                 <div class="prose prose-lg text-gray-700 space-y-4 bg-white p-5 md:p-10 rounded-lg">
                     <p>
