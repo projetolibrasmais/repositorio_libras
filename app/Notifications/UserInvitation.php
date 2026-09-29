@@ -54,7 +54,7 @@ class UserInvitation extends Notification
         ], false));
 
         return (new MailMessage)
-            ->subject('Convite - Repositório Libras+')
+            ->subject('Convite - Plataforma Digital Libras+')
             ->view('emails.user-invitation', [
                 'userName' => $notifiable->name,
                 'actionUrl' => $url,

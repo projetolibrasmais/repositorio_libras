@@ -45,7 +45,7 @@ class ResetPasswordNotification extends Notification
         ], false));
 
         return (new MailMessage)
-            ->subject('Redefinir senha - Repositório Libras+')
+            ->subject('Redefinir senha - Plataforma Digital Libras+')
             ->view('emails.reset-password', [
                 'userName' => $notifiable->name,
                 'actionUrl' => $url,
