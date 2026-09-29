@@ -37,6 +37,7 @@ Route::get('/faq', [HomeController::class, 'faq'])->name('public.faq');
 // Search Routes
 Route::get('/buscar', [GlobalSearchController::class, 'results'])->name('search.results');
 Route::get('/api/buscar/autocomplete', [GlobalSearchController::class, 'autocomplete'])->name('search.autocomplete');
+Route::get('/api/buscar/categorias', [GlobalSearchController::class, 'categories'])->name('search.categories');
 
 Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

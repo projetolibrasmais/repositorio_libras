@@ -20,7 +20,7 @@
             <!-- Lado da imagem: escondida em telas pequenas -->
             <div class="hidden md:flex md:w-1/2 min-h-screen max-h-screen p-5 items-center justify-center">
                 <!-- Substitua o src pela sua imagem quando estiver pronta -->
-                <img src="{{ asset('images/logo.png') }}" alt="Imagem lateral" class="w-[90%] object-cover" />
+                <img src="{{ asset('images/logo.svg') }}" alt="Libras+" class="w-[90%] max-h-[70vh] object-contain" />
             </div>
 
             <!-- Lado do formulário -->

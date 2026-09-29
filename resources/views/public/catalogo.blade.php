@@ -4,37 +4,31 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
-            <h1 class="text-4xl font-bold text-brand-600 mb-8 text-center">Catálogo</h1>
+            <h1 class="text-4xl font-bold text-brand-600 mb-4">{{ __('Catálogo') }}</h1>
+            <p class="text-gray-600 mb-8">{{ __('Explore os sinais em ordem alfabética ou refine a busca usando os filtros.') }}</p>
 
             <!-- Search Bar -->
-            <div class="mb-8">
-                <x-global-search placeholder="O que você procura?" />
+            <div class="mb-10">
+                <x-global-search :placeholder="__('Buscar sinais...')" />
             </div>
 
             <!-- Alphabet Filter -->
             <x-alphabet-filter :currentLetter="request('letra')" />
 
-            <!-- Divisor -->
-            <div class="flex items-center justify-center py-10 px-10">
-                <div class="flex-grow border-t border-gray-300"></div>
-                <div class="mx-4">
-                    <i
-                        class="ph ph-hand-waving bg-gradient-to-r from-brand-600 via-logo-green to-logo-pink text-transparent bg-clip-text text-3xl"></i>
-                </div>
-                <div class="flex-grow border-t border-gray-300"></div>
-            </div>
-
             <!-- Section Title -->
-            <div class="mb-6">
-                <h2 class="text-3xl font-bold text-brand-600 text-center">Sinais</h2>
+            <div class="my-8">
+                <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                    <i class="ph ph-hand-waving text-brand-600"></i>
+                    {{ __('Sinais') }}
+                </h2>
             </div>
 
             <!-- Sinais Grid -->
             @if ($sinais->count() > 0)
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
                     @foreach ($sinais as $sinal)
                         <a href="{{ route('public.sinal.show', $sinal->slug) }}"
-                            class="bg-white rounded-xl transition-shadow overflow-hidden group">
+                            class="bg-white rounded-xl transition-shadow overflow-hidden border border-gray-200 group">
                             @if ($sinal->video)
                                 <div class="aspect-video bg-gray-200 relative">
                                     <video class="w-full h-full object-cover" preload="metadata">
@@ -50,7 +44,7 @@
                                     <i class="ph ph-video-camera text-gray-400 text-6xl"></i>
                                 </div>
                             @endif
-                            <div class="p-4 text-center">
+                            <div class="p-4">
                                 <h3 class="font-semibold text-lg text-gray-900">
                                     {{ $sinal->palavra_portugues }}
                                 </h3>

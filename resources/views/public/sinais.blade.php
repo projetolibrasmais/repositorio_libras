@@ -3,7 +3,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            @if(request()->has('categoria') && isset($categoriaAtual))
+            @if($categoriaAtual)
                 <!-- Breadcrumb -->
                 <nav class="flex mb-6" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-2">
@@ -38,43 +38,58 @@
                             @endif
                         </p>
                     </div>
-                    <a href="{{ route('public.sinais') }}" 
-                       class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm">
-                        <i class="ph ph-x"></i>
-                        <span>Limpar filtro</span>
-                    </a>
                 </div>
             @else
-                <h1 class="text-4xl font-bold text-brand-600 mb-4">{{ __('Sinais') }}</h1>
+                <h1 class="text-4xl font-bold text-brand-600 mb-4">
+                    {{ $search !== '' ? __('Resultados da busca') : __('Sinais') }}
+                </h1>
                 <p class="text-gray-600 mb-8">
-                    {{ __('Explore todos os sinais catalogados na plataforma') }}
+                    @if($search !== '')
+                        {{ __('Resultados para ":query"', ['query' => $search]) }}
+                    @else
+                        {{ __('Explore todos os sinais catalogados na plataforma') }}
+                    @endif
                 </p>
             @endif
 
             <!-- Search -->
             <div class="mb-8">
-                <x-global-search :placeholder="__('Buscar sinais...')" />
+                <x-global-search :placeholder="__('Buscar sinais...')" :category="$categoriaAtual?->nome" />
             </div>
 
+            @if($categorias->isNotEmpty())
+                <section class="mb-10" aria-labelledby="categorias-encontradas">
+                    <h2 id="categorias-encontradas" class="text-2xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+                        <i class="ph ph-folders text-brand-600"></i>
+                        {{ __('Categorias encontradas') }}
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach($categorias as $categoria)
+                            <a href="{{ route('public.sinais', ['categorias' => ['nome' => $categoria->nome]]) }}"
+                               class="flex items-center gap-4 bg-white rounded-xl border border-gray-200 p-5 hover:border-logo-sky transition-colors">
+                                <span class="w-11 h-11 bg-brand-100 rounded-full flex items-center justify-center shrink-0">
+                                    <i class="ph ph-folder text-brand-600 text-xl"></i>
+                                </span>
+                                <span>
+                                    <strong class="block text-gray-900">{{ $categoria->nome }}</strong>
+                                    <span class="text-sm text-brand-600">{{ trans_choice(':count sinal|:count sinais', $categoria->sinais_count, ['count' => $categoria->sinais_count]) }}</span>
+                                </span>
+                            </a>
+                        @endforeach
+                    </div>
+                    <div class="mt-5">{{ $categorias->links() }}</div>
+                </section>
+            @endif
+
             <!-- Sinais Grid -->
-            @php
-                $query = \App\Models\Sinal::with('video', 'imagens', 'categorias');
-                
-                // Filtrar por categoria se fornecido
-                if (request()->has('categoria')) {
-                    $categoriaSlug = request()->get('categoria');
-                    $query->whereHas('categorias', function($q) use ($categoriaSlug) {
-                        $q->where('slug', $categoriaSlug);
-                    });
-                    
-                    // Buscar nome da categoria para exibir
-                    $categoriaAtual = \App\Models\Categoria::where('slug', $categoriaSlug)->first();
-                }
-                
-                $sinais = $query->latest()->paginate(12);
-            @endphp
 
             @if($sinais->count() > 0)
+                @if($search !== '' || request()->hasAny(['definicao', 'config_mao', 'ponto_articulacao', 'orientacao_palma_mao', 'movimento', 'expressao_nao_manual', 'contexto_utilizacao', 'categorias']))
+                    <h2 class="text-2xl font-bold text-gray-900 mb-5 flex items-center gap-2">
+                        <i class="ph ph-hand-waving text-brand-600"></i>
+                        {{ trans_choice(':count sinal encontrado|:count sinais encontrados', $sinais->total(), ['count' => $sinais->total()]) }}
+                    </h2>
+                @endif
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach($sinais as $sinal)
                         <a href="{{ route('public.sinal.show', $sinal->slug) }}" 
@@ -123,7 +138,9 @@
             @else
                 <div class="text-center py-12">
                     <i class="ph ph-hand-waving text-gray-400 text-6xl mb-4"></i>
-                    <p class="text-gray-600">{{ __('Nenhum sinal disponível no momento.') }}</p>
+                    <p class="text-gray-600">
+                        {{ $search !== '' || request()->query() ? __('Nenhum sinal encontrado com os critérios informados.') : __('Nenhum sinal disponível no momento.') }}
+                    </p>
                 </div>
             @endif
         </div>

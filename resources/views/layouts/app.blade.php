@@ -18,14 +18,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div x-data="{ sidebarCollapsed: false }" @sidebar-toggled.window="sidebarCollapsed = $event.detail.collapsed" class="min-h-screen bg-gray-100 flex flex-col">
+        <div x-data="{ sidebarCollapsed: false }" @sidebar-toggled.window="sidebarCollapsed = $event.detail.collapsed" class="admin-shell min-h-screen bg-gray-100 flex flex-col">
             <!-- Container com Sidebar e Conteúdo -->
             <div class="flex flex-1 overflow-hidden">
                 <!-- Sidebar -->
                 <x-sidebar />
                 
                 <!-- Main Content Area -->
-                <div class="flex-1 overflow-y-auto transition-all duration-300"
+                <div class="admin-content flex-1 overflow-y-auto transition-all duration-300"
                     :class="sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-[280px]'">
                     <!-- Navigation no topo -->
                     @include('layouts.navigation')

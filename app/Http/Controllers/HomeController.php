@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Material;
 use App\Models\Sinal;
 use App\Repositories\Eloquent\CategoriaRepository;
@@ -10,6 +11,16 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    private const SIGNAL_TEXT_FILTERS = [
+        'definicao',
+        'config_mao',
+        'ponto_articulacao',
+        'orientacao_palma_mao',
+        'movimento',
+        'expressao_nao_manual',
+        'contexto_utilizacao',
+    ];
+
     /**
      * @var SinalRepository
      * @var CategoriaRepository
@@ -46,9 +57,55 @@ class HomeController extends Controller
     /**
      * Show sinais page.
      */
-    public function sinais()
+    public function sinais(Request $request)
     {
-        return view('public.sinais');
+        $search = trim((string) $request->input('query'));
+        $query = Sinal::whereIn('status', ['catalogado', 'publicado'])
+            ->with('video', 'imagens', 'categorias');
+
+        if (mb_strlen($search) >= 2) {
+            $query->search($search);
+        }
+
+        foreach (self::SIGNAL_TEXT_FILTERS as $field) {
+            $value = $request->input($field);
+
+            if (is_string($value) && trim($value) !== '') {
+                $query->where($field, 'LIKE', '%' . trim($value) . '%');
+            }
+        }
+
+        $categoriaAtual = null;
+        $categoriaNome = $request->input('categorias.nome');
+
+        if (is_string($categoriaNome) && trim($categoriaNome) !== '') {
+            $categoriaAtual = Categoria::where('nome', trim($categoriaNome))->first();
+
+            if ($categoriaAtual) {
+                $query->whereHas('categorias', fn ($categoryQuery) => $categoryQuery->whereKey($categoriaAtual->id));
+            }
+        } elseif ($request->filled('categoria')) {
+            // Compatibilidade com links antigos que utilizavam o slug.
+            $categoriaAtual = Categoria::where('slug', (string) $request->string('categoria'))->first();
+
+            if ($categoriaAtual) {
+                $query->whereHas('categorias', fn ($categoryQuery) => $categoryQuery->whereKey($categoriaAtual->id));
+            }
+        }
+
+        $sinais = $query->orderBy('palavra_portugues')
+            ->paginate(12, ['*'], 'sinais_page')
+            ->withQueryString();
+
+        $categorias = mb_strlen($search) >= 2
+            ? Categoria::search($search, ['nome'])
+                ->withCount(['sinais' => fn ($signalQuery) => $signalQuery->whereIn('status', ['catalogado', 'publicado'])])
+                ->orderBy('nome')
+                ->paginate(6, ['*'], 'categorias_page')
+                ->withQueryString()
+            : collect();
+
+        return view('public.sinais', compact('sinais', 'categorias', 'categoriaAtual', 'search'));
     }
 
     /**
@@ -103,7 +160,10 @@ class HomeController extends Controller
      */
     public function categorias()
     {
-        $categorias = $this->categoriaRepository->all();
+        $categorias = Categoria::withCount([
+            'sinais' => fn ($query) => $query->whereIn('status', ['catalogado', 'publicado']),
+        ])->orderBy('nome')->get();
+
         return view('public.categorias', compact('categorias'));
     }
 

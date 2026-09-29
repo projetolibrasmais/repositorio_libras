@@ -35,16 +35,6 @@ initVoiceRecognition();">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* High Contrast Mode */
-        .high-contrast {
-            filter: contrast(1.5) saturate(0);
-        }
-
-        .high-contrast img,
-        .high-contrast video {
-            filter: contrast(1.2);
-        }
-
         /* VLibras */
         [vw] .enabled {
             background-color: #304A89 !important;
@@ -69,7 +59,7 @@ initVoiceRecognition();">
 
 <body class="font-sans antialiased bg-[#F2F2F2]">
     <!-- Accessibility Bar (todas as classes usam px arbitrário, não rem — imune ao fontSize dinâmico) -->
-    <div class="bg-gray-800 text-white h-[52px] flex items-center justify-center sm:justify-end overflow-hidden">
+    <div class="relative z-[200] bg-gray-800 text-white h-[52px] flex items-center justify-center sm:justify-end overflow-visible">
         <div class="flex gap-1 sm:gap-3 justify-center items-center">
             <span class="text-[14px] leading-none">{{ __('Acessibilidade:') }}</span>
 
@@ -86,7 +76,8 @@ initVoiceRecognition();">
             </button>
 
             <!-- High Contrast Toggle -->
-            <button @click="highContrast = !highContrast" :class="highContrast ? 'bg-brand-600' : 'bg-gray-700'"
+            <button id="contrast-toggle" @click="highContrast = !highContrast" :class="highContrast ? 'bg-brand-600' : 'bg-gray-700'"
+                :aria-pressed="highContrast.toString()"
                 class="px-[12px] py-[4px] hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none"
                 :title="'{{ __('Alto contraste') }}'">
                 <i class="ph ph-circle-half text-[14px]"></i>
@@ -94,13 +85,13 @@ initVoiceRecognition();">
             </button>
 
             <!-- Voice Command -->
-            <button @click="toggleVoiceCommand()" 
+            {{-- <button @click="toggleVoiceCommand()"
                 :class="voiceActive ? 'bg-red-600' : 'bg-gray-700'"
                 class="px-[12px] py-[4px] hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none whitespace-nowrap"
                 :title="voiceActive ? '{{ __('Parar comando de voz') }}' : '{{ __('Iniciar comando de voz') }}'">
                 <i class="ph text-[14px]" :class="voiceActive ? 'ph-microphone-slash' : 'ph-microphone'"></i>
                 <span class="hidden sm:block" x-text="voiceActive ? '{{ __('Parar') }}' : '{{ __('Comando de voz') }}'"></span>
-            </button>
+            </button> --}}
 
             <!-- Language Selector -->
             <div x-data="{ open: false }" class="relative">
@@ -115,7 +106,7 @@ initVoiceRecognition();">
                 <div x-show="open" 
                      @click.away="open = false"
                      x-transition
-                     class="absolute right-0 mt-[8px] w-[192px] bg-white rounded-[8px] shadow-lg py-[8px] z-50">
+                     class="absolute right-0 top-full mt-[8px] w-[192px] bg-white rounded-[8px] shadow-lg py-[8px] z-[210] ring-1 ring-black/10">
                     <button type="button" @click="translatePage('pt', 'PT'); open = false"
                         class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         Português
