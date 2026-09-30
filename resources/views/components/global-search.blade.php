@@ -1,6 +1,6 @@
 @props(['placeholder' => 'O que você procura?', 'category' => null])
 
-<div x-data="globalSearch()" class="relative w-full max-w-2xl mx-auto">
+<div x-data="globalSearch()" @pageshow.window="if ($event.persisted) resetToUrl()" class="relative w-full max-w-2xl mx-auto">
     <div class="relative">
         <input
             type="text"
@@ -166,7 +166,21 @@ function globalSearch() {
         results: [],
         loading: false,
         showResults: false,
+        defaultCategory: @js($category ?? ''),
 
+        resetToUrl() {
+            // zera tudo e repovoa somente com o que está na URL
+            this.query = '';
+            this.textFields.forEach(field => { this.filters[field.key] = ''; });
+            this.filters.categorias.nome = this.defaultCategory;
+            this.hydrateFromUrl();
+
+            this.results = [];
+            this.showResults = false;
+            this.filtersOpen = false;
+            this.loading = false;
+        },
+        
         // --- Filtros ---
         filtersOpen: false,
         filterStorageKey: 'global-search-filters',
@@ -252,8 +266,6 @@ function globalSearch() {
 
         init() {
             this.hydrateFromUrl();
-            this.restoreFilters();
-            this.loadCategoryOptions();
 
             if (this.query.length >= 2) {
                 this.search();
