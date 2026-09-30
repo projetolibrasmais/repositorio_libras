@@ -35,6 +35,11 @@ initVoiceRecognition();">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
+        /* Evita que elementos controlados pelo Alpine apareçam antes do JavaScript iniciar. */
+        [x-cloak] {
+            display: none !important;
+        }
+
         /* VLibras */
         [vw] .enabled {
             background-color: #304A89 !important;
@@ -95,7 +100,9 @@ initVoiceRecognition();">
 
             <!-- Language Selector -->
             <div x-data="{ open: false }" class="relative">
-                <button @click="open = !open" 
+                <button @click="open = !open"
+                    :aria-expanded="open.toString()"
+                    aria-haspopup="menu"
                     class="px-[12px] py-[4px] bg-gray-700 hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none"
                     :title="'{{ __('Idioma') }}'">
                     <i class="ph ph-globe text-[14px]"></i>
@@ -103,7 +110,9 @@ initVoiceRecognition();">
                     <i class="ph ph-caret-down text-[12px]"></i>
                 </button>
                 
-                <div x-show="open" 
+                <div x-show="open"
+                     x-cloak
+                     role="menu"
                      @click.away="open = false"
                      x-transition
                      class="absolute right-0 top-full mt-[8px] w-[192px] bg-white rounded-[8px] shadow-lg py-[8px] z-[210] ring-1 ring-black/10">

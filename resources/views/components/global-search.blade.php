@@ -19,7 +19,7 @@
             <button type="button" @click="filtersOpen = true"
                 class="relative p-2 text-gray-500 hover:text-brand-600 transition-colors" title="Filtros">
                 <i class="ph ph-funnel text-xl"></i>
-                <span x-show="activeFilterCount > 0" x-text="activeFilterCount"
+                <span x-show="activeFilterCount > 0" x-cloak x-text="activeFilterCount"
                     class="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-brand-600 rounded-full"></span>
             </button>
 
@@ -52,7 +52,8 @@
     </div>
 
     <!-- Autocomplete Results -->
-    <div x-show="showResults && results.length > 0"
+    <div x-show="showResults && !loading && results.length > 0"
+         x-cloak
          x-transition
          class="absolute z-50 w-full mt-2 bg-white rounded-xl shadow border border-gray-200 max-h-96 overflow-y-auto">
         <template x-for="(result, index) in results" :key="index">
@@ -76,6 +77,7 @@
 
     <!-- Loading State -->
     <div x-show="loading"
+         x-cloak
          x-transition
          class="absolute z-50 w-full mt-2 bg-white rounded-xl shadow border border-gray-200 p-4 text-center">
         <i class="ph ph-circle-notch animate-spin text-brand-600 text-2xl"></i>
@@ -84,6 +86,7 @@
 
     <!-- No Results -->
     <div x-show="showResults && !loading && query.length >= 2 && results.length === 0"
+         x-cloak
          x-transition
          class="absolute z-50 w-full mt-2 bg-white rounded-xl shadow border border-gray-200 p-6 text-center">
         <i class="ph ph-magnifying-glass text-gray-400 text-4xl"></i>
@@ -166,6 +169,7 @@ function globalSearch() {
         results: [],
         loading: false,
         showResults: false,
+        searchSequence: 0,
 
         // --- Filtros ---
         filtersOpen: false,
@@ -333,15 +337,21 @@ function globalSearch() {
         },
 
         async search() {
-            if (this.query.length < 2) {
+            const searchTerm = this.query.trim();
+            const requestId = ++this.searchSequence;
+
+            if (searchTerm.length < 2) {
                 this.results = [];
+                this.loading = false;
                 return;
             }
 
+            // Esconde os resultados anteriores enquanto a nova consulta está em andamento.
+            this.results = [];
             this.loading = true;
 
             try {
-                const response = await fetch(`{{ route('search.autocomplete') }}?query=${encodeURIComponent(this.query)}`, {
+                const response = await fetch(`{{ route('search.autocomplete') }}?query=${encodeURIComponent(searchTerm)}`, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                         'Accept': 'application/json'
@@ -349,12 +359,20 @@ function globalSearch() {
                 });
 
                 const data = await response.json();
+
+                // Ignora respostas antigas caso o texto tenha mudado durante a requisição.
+                if (requestId !== this.searchSequence) return;
+
                 this.results = data.results || [];
             } catch (error) {
+                if (requestId !== this.searchSequence) return;
+
                 console.error('Search error:', error);
                 this.results = [];
             } finally {
-                this.loading = false;
+                if (requestId === this.searchSequence) {
+                    this.loading = false;
+                }
             }
         },
 

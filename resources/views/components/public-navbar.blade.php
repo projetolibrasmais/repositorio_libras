@@ -53,7 +53,8 @@
     <!-- Mobile menu -->
     <div x-data="{ open: false }" 
          @toggle-mobile-menu.window="open = !open"
-         x-show="open" 
+         x-show="open"
+         x-cloak
          x-transition
          class="md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-brand-700">
