@@ -169,6 +169,7 @@ function globalSearch() {
         results: [],
         loading: false,
         showResults: false,
+        searchSequence: 0,
         defaultCategory: @js($category ?? ''),
 
         resetToUrl() {

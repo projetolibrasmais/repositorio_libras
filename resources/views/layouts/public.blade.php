@@ -99,14 +99,17 @@ initVoiceRecognition();">
             </button> --}}
 
             <!-- Language Selector -->
-            <div x-data="{ open: false }" class="relative">
+            <div x-data="{
+                open: false,
+                languageLabel: localStorage.getItem('googleTranslateLangLabel') || 'PT'
+            }" class="relative">
                 <button @click="open = !open"
                     :aria-expanded="open.toString()"
                     aria-haspopup="menu"
                     class="px-[12px] py-[4px] bg-gray-700 hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none"
                     :title="'{{ __('Idioma') }}'">
                     <i class="ph ph-globe text-[14px]"></i>
-                    <span class="notranslate" x-text="localStorage.getItem('googleTranslateLangLabel') || 'PT'"></span>
+                    <span class="notranslate" x-text="languageLabel"></span>
                     <i class="ph ph-caret-down text-[12px]"></i>
                 </button>
                 
@@ -116,15 +119,15 @@ initVoiceRecognition();">
                      @click.away="open = false"
                      x-transition
                      class="absolute right-0 top-full mt-[8px] w-[192px] bg-white rounded-[8px] shadow-lg py-[8px] z-[210] ring-1 ring-black/10">
-                    <button type="button" @click="translatePage('pt', 'PT'); open = false"
+                    <button type="button" @click="languageLabel = 'PT'; translatePage('pt', 'PT'); open = false"
                         class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         Português
                     </button>
-                    <button type="button" @click="translatePage('en', 'EN'); open = false"
+                    <button type="button" @click="languageLabel = 'EN'; translatePage('en', 'EN'); open = false"
                         class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         English
                     </button>
-                    <button type="button" @click="translatePage('es', 'ES'); open = false"
+                    <button type="button" @click="languageLabel = 'ES'; translatePage('es', 'ES'); open = false"
                         class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         Español
                     </button>
