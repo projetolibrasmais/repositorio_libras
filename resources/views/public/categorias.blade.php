@@ -8,9 +8,9 @@
                 {{ __('Explore os sinais organizados por áreas do conhecimento') }}
             </p>
 
-            <div class="mb-10">
+            {{-- <div class="mb-10">
                 <x-global-search :placeholder="__('Buscar sinais...')" />
-            </div>
+            </div> --}}
 
             <!-- Categorias Grid -->
             @if($categorias->count() > 0)
