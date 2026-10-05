@@ -2,11 +2,15 @@
     'permissao' => null,
     'titulo',
     'descricao' => '',
-    'imagem',
+    'imagem' => null,
+    'passos' => [],
 ])
 
 @php
     $podeVer = $permissao ? auth()->user()?->can($permissao) : true;
+    $etapas = count($passos) > 0
+        ? $passos
+        : [['descricao' => $descricao, 'imagens' => $imagem ? [$imagem] : []]];
 @endphp
 
 @if ($podeVer)
@@ -64,9 +68,29 @@
                 </div>
 
                 <div class="p-6 overflow-auto bg-gray-50">
-                    <img src="{{ asset($imagem) }}"
-                        alt="{{ $titulo }}"
-                        class="w-full h-auto rounded-lg border border-gray-200 object-contain bg-white">
+                    <ol class="space-y-6">
+                        @foreach ($etapas as $etapa)
+                            <li class="rounded-lg border border-gray-200 bg-white p-5">
+                                <h4 class="text-base font-semibold text-gray-900">
+                                    Passo {{ $loop->iteration }}@if (!empty($etapa['titulo'])): {{ $etapa['titulo'] }}@endif
+                                </h4>
+
+                                @if (!empty($etapa['descricao']))
+                                    <p class="mt-2 text-sm text-gray-700">{{ $etapa['descricao'] }}</p>
+                                @endif
+
+                                @if (!empty($etapa['imagens']))
+                                    <div class="mt-4 ">
+                                        @foreach ($etapa['imagens'] as $imagemEtapa)
+                                            <img src="{{ asset($imagemEtapa) }}"
+                                                alt="{{ $titulo }} - passo {{ $loop->parent->iteration }}"
+                                                class="w-full rounded-lg border border-gray-200 object-contain bg-white">
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ol>
                 </div>
             </div>
         </div>

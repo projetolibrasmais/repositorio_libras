@@ -8,12 +8,95 @@
                 'color' => 'text-brand-600',
                 'bg' => 'bg-brand-100',
                 'items' => [
-                    ['permissao' => 'create_sinais', 'titulo' => 'Criar Sinal', 'descricao' => 'Acesse Sinais, clique em Novo Sinal, preencha os dados e clique em Criar Sinal.', 'imagem' => 'help/sinais/create_sinal.PNG'],
-                    ['permissao' => 'edit_sinais', 'titulo' => 'Editar Sinal', 'descricao' => 'Acesse Sinais, abra o sinal desejado, faça as alterações e clique em Atualizar Sinal.', 'imagem' => 'help/sinais/edit_sinal.PNG'],
-                    ['permissao' => 'delete_sinais', 'titulo' => 'Excluir Sinal', 'descricao' => 'Abra o sinal desejado, clique em Excluir Sinal e confirme a ação.', 'imagem' => 'help/sinais/delete_sinal.PNG'],
-                    ['permissao' => 'restore_sinais', 'titulo' => 'Acessar Sinais Deletados', 'descricao' => 'Use o filtro de Sinais e selecione Apenas Sinais Deletados.', 'imagem' => 'help/sinais/filtro_sinais.PNG'],
-                    ['permissao' => 'restore_sinais', 'titulo' => 'Restaurar Sinais Deletados', 'descricao' => 'Filtre por sinais deletados, encontre o sinal e clique no ícone Restaurar.', 'imagem' => 'help/sinais/restore_sinais.PNG'],
-                    ['permissao' => 'force_delete_sinais', 'titulo' => 'Deletar Permanentemente um Sinal', 'descricao' => 'Filtre por sinais deletados, abra o item e confirme a exclusão permanente.', 'imagem' => 'help/sinais/force_delete_sinais.PNG'],
+                    ['permissao' => 'create_sinais', 'titulo' => 'Criar Sinal', 'descricao' => 'Aprenda a cadastrar um sinal no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar cadastro',
+                            'descricao' => 'Acesse Sinais e clique em "Novo Sinal".',
+                            'imagens' => ['help/sinais/create-sinal-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Preencher os dados',
+                            'descricao' => 'Preencha os dados do sinal.',
+                            'imagens' => ['help/sinais/create-sinal-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Finalização do cadastro',
+                            'descricao' => 'Clique em "Criar Sinal" para finalizar o cadastro.',
+                            'imagens' => ['help/sinais/create-sinal-3.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'edit_sinais', 'titulo' => 'Editar Sinal', 'descricao' => 'Aprenda a editar um sinal no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar edição',
+                            'descricao' => 'Acesse Sinais e clique no sinal que deseja editar.',
+                            'imagens' => ['help/sinais/edit-sinal-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Atualização dos dados',
+                            'descricao' => 'Preencha os dados do sinal.',
+                            'imagens' => ['help/sinais/edit-sinal-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Finalização da edição',
+                            'descricao' => 'Clique em "Salvar Alterações" para finalizar a edição.',
+                            'imagens' => ['help/sinais/edit-sinal-3.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'delete_sinais', 'titulo' => 'Excluir Sinal', 'descricao' => 'Aprenda a excluir um sinal no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar exclusão',
+                            'descricao' => 'Acesse Sinais e clique no sinal que deseja excluir.',
+                            'imagens' => ['help/sinais/delete-sinal-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmação da exclusão',
+                            'descricao' => 'Confirmar a exclusão do sinal.',
+                            'imagens' => ['help/sinais/delete-sinal-2.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'restore_sinais', 'titulo' => 'Restaurar Sinais Deletados', 'descricao' => 'Aprenda a restaurar um sinal deletado.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar o filtro de sinais deletados',
+                            'descricao' => 'Vá até Sinais e selecione "Apenas Sinais Deletados" no filtro.',
+                            'imagens' => ['help/sinais/restore-sinal-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Restaurar sinal',
+                            'descricao' => 'Clique no ícone "Restaurar" para restaurar o sinal.',
+                            'imagens' => ['help/sinais/restore-sinal-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar restauração',
+                            'descricao' => 'Confirme a restauração do sinal.',
+                            'imagens' => ['help/sinais/restore-sinal-3.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'force_delete_sinais', 'titulo' => 'Deletar Permanentemente um Sinal', 'descricao' => 'Aprenda a deletar permanentemente um sinal.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar o filtro de sinais deletados',
+                            'descricao' => 'Vá até Sinais e selecione "Apenas Sinais Deletados" no filtro.',
+                            'imagens' => ['help/sinais/restore-sinal-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Deletar Permanentemente',
+                            'descricao' => 'Clique no ícone "Deletar Permanentemente" para deletar o sinal.',
+                            'imagens' => ['help/sinais/force-delete-sinal-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar exclusão',
+                            'descricao' => 'Confirme a exclusão do sinal.',
+                            'imagens' => ['help/sinais/force-delete-sinal-2.png'],
+                        ],
+                    ]],
                 ],
             ],
             [
@@ -23,12 +106,18 @@
                 'color' => 'text-logo-green',
                 'bg' => 'bg-green-100',
                 'items' => [
-                    ['permissao' => 'create_categorias', 'titulo' => 'Criar Categoria', 'descricao' => 'Acesse Categorias, clique em Nova Categoria, preencha os dados e salve.', 'imagem' => 'help/categorias/create_categoria.PNG'],
-                    ['permissao' => 'edit_categorias', 'titulo' => 'Editar Categoria', 'descricao' => 'Abra a categoria desejada, faça as alterações e clique em Atualizar Categoria.', 'imagem' => 'help/categorias/edit_categoria.PNG'],
-                    ['permissao' => 'delete_categorias', 'titulo' => 'Excluir Categoria', 'descricao' => 'Abra a categoria desejada, clique em Excluir Categoria e confirme.', 'imagem' => 'help/categorias/delete_categoria.PNG'],
-                    ['permissao' => 'restore_categorias', 'titulo' => 'Acessar Categorias Deletadas', 'descricao' => 'Use o filtro e selecione Apenas Categorias Deletadas.', 'imagem' => 'help/categorias/filtro_categorias.PNG'],
-                    ['permissao' => 'restore_categorias', 'titulo' => 'Restaurar Categorias Deletadas', 'descricao' => 'Filtre por categorias deletadas e clique no ícone Restaurar.', 'imagem' => 'help/categorias/restore_categorias.PNG'],
-                    ['permissao' => 'force_delete_categorias', 'titulo' => 'Deletar Permanentemente uma Categoria', 'descricao' => 'Filtre por categorias deletadas, abra a categoria e confirme a exclusão permanente.', 'imagem' => 'help/categorias/force_delete_categorias.PNG'],
+                    ['permissao' => 'create_categorias', 'titulo' => 'Criar Categoria', 'descricao' => 'Para cadastrar uma categoria, vá até Categorias, clique em "Nova Categoria", preencha os dados e salve em "Criar Categoria".', 
+                    'imagem' => 'help/categorias/create_categoria.PNG'],
+                    ['permissao' => 'edit_categorias', 'titulo' => 'Editar Categoria', 'descricao' => 'Para editar uma categoria, vá até Categorias, abra a categoria desejada, faça as alterações e salve em "Atualizar Categoria".', 
+                    'imagem' => 'help/categorias/edit_categoria.PNG'],
+                    ['permissao' => 'delete_categorias', 'titulo' => 'Excluir Categoria', 'descricao' => 'Para excluir uma categoria, vá até Categorias, abra a categoria desejada e clique em "Excluir Categoria".', 
+                    'imagem' => 'help/categorias/delete_categoria.PNG'],
+                    ['permissao' => 'restore_categorias', 'titulo' => 'Acessar Categorias Deletadas', 'descricao' => 'Para acessar categorias deletadas, vá até Categorias, clique no filtro e selecione Apenas Categorias Deletadas.', 
+                    'imagem' => 'help/categorias/filtro_categorias.PNG'],
+                    ['permissao' => 'restore_categorias', 'titulo' => 'Restaurar Categorias Deletadas', 'descricao' => 'Para restaurar uma categoria deletada, filtre por categorias deletadas, clique no ícone "Restaurar" e confirme a restauração.', 
+                    'imagem' => 'help/categorias/restore_categorias.PNG'],
+                    ['permissao' => 'force_delete_categorias', 'titulo' => 'Deletar Permanentemente uma Categoria', 'descricao' => 'Para deletar permanentemente uma categoria, filtre por categorias deletadas, abra a categoria desejada, clique em "Deletar Permanentemente" e confirme a exclusão.', 
+                    'imagem' => 'help/categorias/force_delete_categorias.PNG'],
                 ],
             ],
             [
@@ -38,13 +127,20 @@
                 'color' => 'text-logo-orange',
                 'bg' => 'bg-orange-100',
                 'items' => [
-                    ['permissao' => 'create_materiais', 'titulo' => 'Criar Material', 'descricao' => 'Acesse Materiais, clique em Novo Material, preencha os dados e salve.', 'imagem' => 'help/materiais/create_material.PNG'],
-                    ['permissao' => 'edit_materiais', 'titulo' => 'Editar Material', 'descricao' => 'Abra o material desejado, faça as alterações e clique em Atualizar Material.', 'imagem' => 'help/materiais/edit_material.PNG'],
-                    ['permissao' => 'view_materiais', 'titulo' => 'Baixar Material', 'descricao' => 'Abra o material desejado e clique no ícone de download.', 'imagem' => 'help/materiais/download_material.PNG'],
-                    ['permissao' => 'delete_materiais', 'titulo' => 'Excluir Material', 'descricao' => 'Abra o material desejado, clique em Excluir Material e confirme.', 'imagem' => 'help/materiais/delete_material.PNG'],
-                    ['permissao' => 'delete_materiais', 'titulo' => 'Acessar Materiais Deletados', 'descricao' => 'Use o filtro e selecione Apenas Materiais Deletados.', 'imagem' => 'help/materiais/filtro_material.PNG'],
-                    ['permissao' => 'restore_materiais', 'titulo' => 'Restaurar Materiais Deletados', 'descricao' => 'Filtre por materiais deletados e clique no ícone Restaurar.', 'imagem' => 'help/materiais/restore_material.PNG'],
-                    ['permissao' => 'force_delete_materiais', 'titulo' => 'Deletar Permanentemente um Material', 'descricao' => 'Filtre por materiais deletados, abra o item e confirme a exclusão permanente.', 'imagem' => 'help/materiais/force_delete_material.PNG'],
+                    ['permissao' => 'create_materiais', 'titulo' => 'Criar Material', 'descricao' => 'Para cadastrar um material, vá até Materiais, clique em "Novo Material", preencha os dados e salve em "Criar Material".', 
+                    'imagem' => 'help/materiais/create_material.PNG'],
+                    ['permissao' => 'edit_materiais', 'titulo' => 'Editar Material', 'descricao' => 'Para editar um material, vá até Materiais, abra o material desejado, faça as alterações e salve em "Atualizar Material".', 
+                    'imagem' => 'help/materiais/edit_material.PNG'],
+                    ['permissao' => 'view_materiais', 'titulo' => 'Baixar Material', 'descricao' => 'Abra o material desejado e clique no ícone de download.', 
+                    'imagem' => 'help/materiais/download_material.PNG'],
+                    ['permissao' => 'delete_materiais', 'titulo' => 'Excluir Material', 'descricao' => 'Abra o material desejado, clique em "Excluir Material" e confirme.', 
+                    'imagem' => 'help/materiais/delete_material.PNG'],
+                    ['permissao' => 'delete_materiais', 'titulo' => 'Acessar Materiais Deletados', 'descricao' => 'Para acessar materiais deletados, vá até Materiais, clique no filtro e selecione Apenas Materiais Deletados.', 
+                    'imagem' => 'help/materiais/filtro_material.PNG'],
+                    ['permissao' => 'restore_materiais', 'titulo' => 'Restaurar Materiais Deletados', 'descricao' => 'Para restaurar um material deletado, filtre por materiais deletados, clique no ícone "Restaurar" e confirme a restauração.', 
+                    'imagem' => 'help/materiais/restore_material.PNG'],
+                    ['permissao' => 'force_delete_materiais', 'titulo' => 'Deletar Permanentemente um Material', 'descricao' => 'Para deletar permanentemente um material, filtre por materiais deletados, abra o material desejado, clique em "Deletar Permanentemente" e confirme a exclusão.', 
+                    'imagem' => 'help/materiais/force_delete_material.PNG'],
                 ],
             ],
             [
@@ -54,13 +150,20 @@
                 'color' => 'text-logo-pink',
                 'bg' => 'bg-pink-100',
                 'items' => [
-                    ['permissao' => 'create_users', 'titulo' => 'Criar Usuários', 'descricao' => 'Acesse Usuários, clique em Novo Usuário, preencha os dados e salve.', 'imagem' => 'help/usuarios/create_usuario.PNG'],
-                    ['permissao' => 'edit_users', 'titulo' => 'Editar Usuários', 'descricao' => 'Abra o usuário desejado, faça as alterações e clique em Atualizar Usuário.', 'imagem' => 'help/usuarios/edit_usuario.PNG'],
-                    ['permissao' => 'delete_users', 'titulo' => 'Excluir Usuários', 'descricao' => 'Abra o usuário desejado, clique em Excluir Usuário e confirme.', 'imagem' => 'help/usuarios/delete_usuario.PNG'],
-                    ['permissao' => 'create_roles', 'titulo' => 'Criar Funções', 'descricao' => 'Acesse Funções, clique em Nova Função, preencha os dados e salve.', 'imagem' => 'help/roles/create_roles.PNG'],
-                    ['permissao' => 'edit_roles', 'titulo' => 'Editar Funções', 'descricao' => 'Abra a função desejada, faça as alterações e clique em Atualizar Função.', 'imagem' => 'help/roles/edit_roles.PNG'],
-                    ['permissao' => 'delete_roles', 'titulo' => 'Excluir Funções', 'descricao' => 'Abra a função desejada, clique em Excluir Função e confirme.', 'imagem' => 'help/roles/delete_roles.PNG'],
-                    ['permissao' => 'view_permissions', 'titulo' => 'Visualizar Permissões', 'descricao' => 'Acesse Permissões para visualizar permissões disponíveis e suas descrições.', 'imagem' => 'help/permissions/view_permissions.PNG'],
+                    ['permissao' => 'create_users', 'titulo' => 'Criar Usuários', 'descricao' => 'Para cadastrar um usuário, vá até Usuários, clique em "Novo Usuário", preencha os dados e salve em "Criar Usuário".', 
+                    'imagem' => 'help/usuarios/create_usuario.PNG'],
+                    ['permissao' => 'edit_users', 'titulo' => 'Editar Usuários', 'descricao' => 'Para editar um usuário, vá até Usuários, abra o usuário desejado, altere o que precisar e salve em "Atualizar Usuário".', 
+                    'imagem' => 'help/usuarios/edit_usuario.PNG'],
+                    ['permissao' => 'delete_users', 'titulo' => 'Excluir Usuários', 'descricao' => 'Para excluir um usuário, vá até Usuários, abra o usuário desejado, clique em "Excluir Usuário" e confirme a exclusão.', 
+                    'imagem' => 'help/usuarios/delete_usuario.PNG'],
+                    ['permissao' => 'create_roles', 'titulo' => 'Criar Funções', 'descricao' => 'Para cadastrar uma função, vá até Funções, clique em "Nova Função", preencha os dados e salve em "Criar Função".', 
+                    'imagem' => 'help/roles/create_roles.PNG'],
+                    ['permissao' => 'edit_roles', 'titulo' => 'Editar Funções', 'descricao' => 'Para editar uma função, vá até Funções, abra a função desejada, faça as alterações e clique em "Atualizar Função".', 
+                    'imagem' => 'help/roles/edit_roles.PNG'],
+                    ['permissao' => 'delete_roles', 'titulo' => 'Excluir Funções', 'descricao' => 'Para excluir uma função, vá até Funções, abra a função desejada, clique em "Excluir Função" e confirme.', 
+                    'imagem' => 'help/roles/delete_roles.PNG'],
+                    ['permissao' => 'view_permissions', 'titulo' => 'Visualizar Permissões', 'descricao' => 'Para visualizar permissões disponíveis, vá até Permissões.', 
+                    'imagem' => 'help/permissions/view_permissions.PNG'],
                 ],
             ],
             [
@@ -70,10 +173,14 @@
                 'color' => 'text-logo-sky',
                 'bg' => 'bg-brand-100',
                 'items' => [
-                    ['permissao' => 'view_logs', 'titulo' => 'Visualizar Logs', 'descricao' => 'Acesse Logs para filtrar registros por data, usuário e ação realizada.', 'imagem' => 'help/logs/view_logs.PNG'],
-                    ['titulo' => 'Acessar Perfil', 'descricao' => 'Clique no seu nome no canto superior direito e selecione Perfil.', 'imagem' => 'help/profile/access_profile.PNG'],
-                    ['titulo' => 'Editar Nome e Email', 'descricao' => 'Acesse Perfil, faça as alterações desejadas e clique em Salvar.', 'imagem' => 'help/profile/edit_name_profile.PNG'],
-                    ['titulo' => 'Editar Senha', 'descricao' => 'Acesse Perfil, atualize sua senha e clique em Salvar.', 'imagem' => 'help/profile/edit_password_profile.PNG'],
+                    ['permissao' => 'view_logs', 'titulo' => 'Visualizar Logs', 'descricao' => 'Para visualizar logs, vá até Logs, lá é possível filtrar os registros por data, usuário e ação realizada.', 
+                    'imagem' => 'help/logs/view_logs.PNG'],
+                    ['titulo' => 'Acessar Perfil', 'descricao' => 'Para acessar seu perfil, clique no ícone do usuário no canto superior direito e selecione "Perfil".', 
+                    'imagem' => 'help/profile/access_profile.PNG'],
+                    ['titulo' => 'Editar Nome e Email', 'descricao' => 'Para editar seu nome e email, acesse Perfil, faça as alterações desejadas e clique em "Salvar".', 
+                    'imagem' => 'help/profile/edit_name_profile.PNG'],
+                    ['titulo' => 'Editar Senha', 'descricao' => 'Para editar sua senha, acesse Perfil, atualize sua senha e clique em "Salvar".', 
+                    'imagem' => 'help/profile/edit_password_profile.PNG'],
                 ],
             ],
         ];
@@ -137,7 +244,8 @@
                                     <x-help-card
                                         :titulo="$item['titulo']"
                                         :descricao="$item['descricao']"
-                                        :imagem="$item['imagem']" />
+                                        :imagem="$item['imagem'] ?? null"
+                                        :passos="$item['passos'] ?? []" />
                                 </div>
                             @endforeach
                         </div>
