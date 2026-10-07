@@ -379,6 +379,52 @@
                     ]],
                 ],
             ],
+            [
+                'title' => 'Contato e Suporte',
+                'description' => 'Entre em contato com a equipe de suporte da plataforma.',
+                'icon' => 'ph-chat-teardrop-text',
+                'color' => 'text-logo-purple',
+                'bg' => 'bg-purple-100',
+                'items' => [
+                    ['permissao' => 'view_contatos', 'titulo' => 'Visualizar os contatos', 'descricao' => 'Aprenda a visualizar os contatos da plataforma.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Visualizar os Contatos',
+                            'descricao' => 'Vá até Contatos e selecione o ícone para visualizar os detalhes do contato desejado.',
+                            'imagens' => ['help/contatos/view-contato-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Marcar Contato como Lido',
+                            'descricao' => 'Após visualizar o contato, você pode marcar como lido clicando no ícone para indicar que foi lido.',
+                            'imagens' => ['help/contatos/view-contato-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Detalhes dos Contatos',
+                            'descricao' => '',
+                            'imagens' => ['help/contatos/view-contato-3.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'edit_contatos', 'titulo' => 'Responder aos contatos', 'descricao' => 'Aprenda a responder aos contatos da plataforma.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Visualizar os Contatos',
+                            'descricao' => 'Vá até Contatos e selecione o ícone para visualizar os detalhes do contato desejado.',
+                            'imagens' => ['help/contatos/view-contato-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Envio de Resposta de Forma Externa',
+                            'descricao' => 'Caso a resposta seja enviada de forma externa e clique no ícone "Marcar como já respondido".',
+                            'imagens' => ['help/contatos/reply-contato-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Envio de Resposta pela Plataforma',
+                            'descricao' => 'Preencha a resposta no campo de texto e clique em "Enviar Resposta".',
+                            'imagens' => ['help/contatos/reply-contato-2.png'],
+                        ],
+                    ]],
+                ]
+            ],
         ];
 
         $sections = collect($sections)->map(function ($section) {
