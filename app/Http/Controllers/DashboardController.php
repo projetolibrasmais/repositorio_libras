@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
 use App\Models\Categoria;
+use App\Models\Contato;
 use App\Models\Material;
 use App\Models\Sinal;
 use App\Models\User;
@@ -21,6 +22,12 @@ class DashboardController extends Controller
         $totalMateriais = Material::count();
         $totalUsuarios = User::count();
         $totalVideos = Video::count();
+        $contatosNovos = auth()->user()->can('view_contatos')
+            ? Contato::where('lido', false)->latest()->limit(5)->get()
+            : collect();
+        $totalContatosNovos = auth()->user()->can('view_contatos')
+            ? Contato::where('lido', false)->count()
+            : 0;
 
         // Últimos sinais cadastrados
         $ultimosSinais = Sinal::with('categorias')
@@ -74,6 +81,8 @@ class DashboardController extends Controller
             'totalMateriais',
             'totalUsuarios',
             'totalVideos',
+            'contatosNovos',
+            'totalContatosNovos',
             'ultimosSinais',
             'categoriasMaisUsadas',
             'sinaisPorDia',

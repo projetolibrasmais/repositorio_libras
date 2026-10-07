@@ -92,12 +92,12 @@
                         </a>
                     </li>
 
-                    @can(['view_categorias', 'view_sinais'])
+                    @canany(['view_categorias', 'view_sinais', 'view_materiais'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
                             x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
                             x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">CONTEÚDO</small>
                         <hr class="mb-3">
-                    @endcan
+                    @endcanany
 
                     @can('view_sinais')
                         <!-- Sinais -->
@@ -153,7 +153,7 @@
                         </li>
                     @endcan
 
-                    @can(['view_contatos'])
+                    @can('view_contatos')
                         <small x-show="!collapsed || window.innerWidth < 1024"
                             x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
                             x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">CONTATOS</small>
@@ -175,13 +175,13 @@
                         </li>
                     @endcan
 
-                                        @can(['view_permissions', 'view_roles'])
+                    @canany(['view_permissions', 'view_roles'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
                             x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
                             x-transition:enter-end="opacity-100"
                             class="text-xs font-bold text-gray-500">PERMISSÕES</small>
                         <hr class="mb-3">
-                    @endcan
+                    @endcanany
 
                     @can('view_roles')
                         <!-- Roles -->
