@@ -414,7 +414,7 @@
                         ],
                         [
                             'titulo' => 'Envio de Resposta de Forma Externa',
-                            'descricao' => 'Caso a resposta seja enviada de forma externa e clique no ícone "Marcar como já respondido".',
+                            'descricao' => 'Caso a resposta seja enviada de forma externa, clique no ícone "Marcar como já respondido".',
                             'imagens' => ['help/contatos/reply-contato-1.png'],
                         ],
                         [
