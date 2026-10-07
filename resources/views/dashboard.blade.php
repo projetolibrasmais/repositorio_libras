@@ -25,7 +25,7 @@
         </section>
 
         <section aria-label="Indicadores gerais"
-            class="grid grid-cols-2 lg:grid-cols-3 @can('view_users') xl:grid-cols-5 @else xl:grid-cols-4 @endcan gap-3 sm:gap-5">
+            class="grid grid-cols-2 lg:grid-cols-3 @canany(['view_users', 'view_contatos']) xl:grid-cols-5 @else xl:grid-cols-4 @endcan gap-3 sm:gap-5">
             @php
                 $indicators = [
                     [
@@ -52,14 +52,14 @@
                         'bgClass' => 'bg-orange-100',
                         'route' => route('materiais.index'),
                     ],
-                    [
-                        'label' => 'Vídeos',
-                        'value' => $totalVideos,
-                        'icon' => 'ph-video-camera',
-                        'iconClass' => 'text-logo-pink',
-                        'bgClass' => 'bg-pink-100',
-                        'route' => route('sinais.index'),
-                    ],
+                    // [
+                    //     'label' => 'Vídeos',
+                    //     'value' => $totalVideos,
+                    //     'icon' => 'ph-video-camera',
+                    //     'iconClass' => 'text-logo-pink',
+                    //     'bgClass' => 'bg-pink-100',
+                    //     'route' => route('sinais.index'),
+                    // ],
                 ];
             @endphp
             @foreach ($indicators as $indicator)
@@ -90,7 +90,35 @@
                     </div>
                 </a>
             @endcan
+            @can('view_contatos')
+                <a href="{{ route('contatos.index', ['status' => 'nao_lidos']) }}"
+                    class="group rounded-xl border border-brand-100 bg-white p-4 sm:p-5 shadow-sm hover:-translate-y-0.5 hover:border-logo-sky hover:shadow-md transition">
+                    <div class="flex items-center justify-between gap-3">
+                        <div><p class="text-xs sm:text-sm font-medium text-gray-600">Contatos novos</p><p class="mt-1 text-2xl sm:text-3xl font-bold text-gray-900">{{ $totalContatosNovos }}</p></div>
+                        <span class="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-brand-100"><i class="ph ph-envelope-simple text-brand-600 text-xl sm:text-2xl"></i></span>
+                    </div>
+                </a>
+            @endcan
         </section>
+
+        @can('view_contatos')
+            @if ($contatosNovos->isNotEmpty())
+                <section class="rounded-xl border border-gray-200 bg-white shadow-sm">
+                    <header class="flex items-center justify-between gap-4 border-b border-gray-200 px-5 py-4">
+                        <div class="flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100"><i class="ph ph-envelope-simple text-brand-600 text-xl"></i></span><div><h2 class="font-semibold text-gray-900">Contatos novos</h2><p class="text-xs text-gray-500">Mensagens ainda não lidas</p></div></div>
+                        <a href="{{ route('contatos.index', ['status' => 'nao_lidos']) }}" class="text-sm font-medium text-brand-600 hover:text-brand-800">Ver todos</a>
+                    </header>
+                    <div class="divide-y divide-gray-100 px-4">
+                        @foreach ($contatosNovos as $contato)
+                            <a href="{{ route('contatos.show', $contato) }}" class="flex items-center gap-4 rounded-lg px-3 py-3 hover:bg-brand-50">
+                                <span class="min-w-0 flex-1"><strong class="block truncate text-sm text-gray-900">{{ $contato->assunto }}</strong><span class="block truncate text-xs text-gray-500">{{ $contato->nome }} · {{ $contato->email }}</span></span>
+                                <span class="hidden sm:block text-xs text-gray-500">{{ $contato->created_at->diffForHumans() }}</span><i class="ph ph-caret-right text-gray-400"></i>
+                            </a>
+                        @endforeach
+                    </div>
+                </section>
+            @endif
+        @endcan
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
             <section class="xl:col-span-2 rounded-xl border border-gray-200 bg-white shadow-sm">
