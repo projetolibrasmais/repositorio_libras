@@ -43,6 +43,11 @@
                                     @can('edit_contatos') @unless ($contato->lido)
                                         <form method="POST" action="{{ route('contatos.read', $contato) }}">@csrf @method('PATCH')<button class="bg-green-100 text-green-700 px-3 py-1 rounded-lg hover:bg-green-200 transition-colors" title="Marcar como lido" aria-label="Marcar contato de {{ $contato->nome }} como lido"><i class="ph ph-check text-lg"></i></button></form>
                                     @endunless @endcan
+                                    @can('delete_contatos')
+                                        <form method="POST" action="{{ route('contatos.destroy', $contato) }}" class="delete-form-{{ $contato->id }}">@csrf @method('DELETE')
+                                            <button type="button" onclick="deleteForm = document.querySelector('.delete-form-{{ $contato->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-contato' }));" class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors" title="Excluir" aria-label="Excluir contato de {{ $contato->nome }}"><i class="ph ph-trash text-lg"></i></button>
+                                        </form>
+                                    @endcan
                                 </div></td>
                             </tr>
                         @endforeach
@@ -54,4 +59,13 @@
             @endif
         </div></div>
     </div>
+    @can('delete_contatos')
+        <x-delete-modal name="delete-contato" title="Confirmar exclusão do contato" message="Tem certeza que deseja excluir este contato? Esta ação não pode ser desfeita." />
+        @push('scripts')
+            <script>
+                let deleteForm = null;
+                function confirmDelete() { if (deleteForm) deleteForm.submit(); }
+            </script>
+        @endpush
+    @endcan
 </x-app-layout>

@@ -48,6 +48,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::patch('/contatos/{contato}/lido', [ContatoController::class, 'markRead'])->name('contatos.read');
     Route::patch('/contatos/{contato}/respondido', [ContatoController::class, 'markAnswered'])->name('contatos.answered');
     Route::post('/contatos/{contato}/responder', [ContatoController::class, 'answer'])->name('contatos.answer');
+    Route::delete('/contatos/{contato}', [ContatoController::class, 'destroy'])->name('contatos.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

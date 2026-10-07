@@ -34,13 +34,14 @@ class RoleSeeder extends Seeder
         // Assign permissions to roles
         $superAdminRole->syncPermissions(Permission::all());
         $adminRole->syncPermissions(Permission::whereIn('name', [
+            'view_permissions',
             'view_roles', 'create_roles', 'edit_roles', 'delete_roles',
             'view_categorias', 'create_categorias', 'edit_categorias', 'delete_categorias', 'restore_categorias', 'force_delete_categorias',
             'view_materiais', 'create_materiais', 'edit_materiais', 'delete_materiais', 'restore_materiais', 'force_delete_materiais',
             'view_logs',
             'view_users', 'create_users', 'edit_users', 'delete_users', 'restore_users', 'force_delete_users',
             'view_sinais', 'create_sinais', 'edit_sinais', 'delete_sinais', 'restore_sinais', 'force_delete_sinais',
-            'view_contatos', 'edit_contatos', 'delete_contatos',
+            'view_contatos', 'edit_contatos',
         ])->get());
         $interpreterRole->syncPermissions(Permission::whereIn('name', [
             'view_categorias', 'view_sinais', 'create_sinais', 'edit_sinais',
