@@ -57,6 +57,11 @@ class PermissionSeeder extends Seeder
             ['name' => 'delete_sinais', 'description' => 'Excluir sinais', 'guard_name' => 'web'],
             ['name' => 'restore_sinais', 'description' => 'Restaurar sinais', 'guard_name' => 'web'],
             ['name' => 'force_delete_sinais', 'description' => 'Excluir permanentemente sinais', 'guard_name' => 'web'],
+
+            // Contatos
+            ['name' => 'view_contatos', 'description' => 'Visualizar contatos', 'guard_name' => 'web'],
+            ['name' => 'edit_contatos', 'description' => 'Responder contatos', 'guard_name' => 'web'],
+            ['name' => 'delete_contatos', 'description' => 'Excluir contatos', 'guard_name' => 'web'],
         ];
 
         foreach ($permissions as $permission) {
