@@ -144,6 +144,17 @@ initVoiceRecognition();">
         {{ $slot }}
     </main>
 
+    <x-toast />
+    @if (session('success'))
+        <script>
+            document.addEventListener('alpine:init', () => {
+                setTimeout(() => window.dispatchEvent(new CustomEvent('toast', {
+                    detail: { type: 'success', message: @js(session('success')) }
+                })), 100);
+            });
+        </script>
+    @endif
+
     <!-- Footer -->
     <x-public-footer />
 

@@ -112,6 +112,17 @@
                         Acesse os materiais e produções relacionados ao projeto
                     </p>
                 </a>
+
+                <a href="{{ route('public.about') }}#contato"
+                    class="bg-white rounded-xl p-6 transition-shadow border-2 border-transparent hover:border-brand-700">
+                    <div class="w-12 h-12 bg-brand-700/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ph ph-envelope text-brand-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">Contato e Sugestões</h3>
+                    <p class="text-gray-600 text-sm">
+                        Entre em contato conosco para dúvidas, sugestões ou feedbacks
+                    </p>
+                </a>
             </div>
         </div>
     </div>
