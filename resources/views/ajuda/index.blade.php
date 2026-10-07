@@ -106,18 +106,85 @@
                 'color' => 'text-logo-green',
                 'bg' => 'bg-green-100',
                 'items' => [
-                    ['permissao' => 'create_categorias', 'titulo' => 'Criar Categoria', 'descricao' => 'Para cadastrar uma categoria, vá até Categorias, clique em "Nova Categoria", preencha os dados e salve em "Criar Categoria".', 
-                    'imagem' => 'help/categorias/create_categoria.PNG'],
-                    ['permissao' => 'edit_categorias', 'titulo' => 'Editar Categoria', 'descricao' => 'Para editar uma categoria, vá até Categorias, abra a categoria desejada, faça as alterações e salve em "Atualizar Categoria".', 
-                    'imagem' => 'help/categorias/edit_categoria.PNG'],
-                    ['permissao' => 'delete_categorias', 'titulo' => 'Excluir Categoria', 'descricao' => 'Para excluir uma categoria, vá até Categorias, abra a categoria desejada e clique em "Excluir Categoria".', 
-                    'imagem' => 'help/categorias/delete_categoria.PNG'],
-                    ['permissao' => 'restore_categorias', 'titulo' => 'Acessar Categorias Deletadas', 'descricao' => 'Para acessar categorias deletadas, vá até Categorias, clique no filtro e selecione Apenas Categorias Deletadas.', 
-                    'imagem' => 'help/categorias/filtro_categorias.PNG'],
-                    ['permissao' => 'restore_categorias', 'titulo' => 'Restaurar Categorias Deletadas', 'descricao' => 'Para restaurar uma categoria deletada, filtre por categorias deletadas, clique no ícone "Restaurar" e confirme a restauração.', 
-                    'imagem' => 'help/categorias/restore_categorias.PNG'],
-                    ['permissao' => 'force_delete_categorias', 'titulo' => 'Deletar Permanentemente uma Categoria', 'descricao' => 'Para deletar permanentemente uma categoria, filtre por categorias deletadas, abra a categoria desejada, clique em "Deletar Permanentemente" e confirme a exclusão.', 
-                    'imagem' => 'help/categorias/force_delete_categorias.PNG'],
+                    ['permissao' => 'create_categorias', 'titulo' => 'Criar Categoria', 'descricao' => 'Aprenda a cadastrar uma categoria no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar cadastro',
+                            'descricao' => 'Acesse Categorias e clique em "Nova Categoria".',
+                            'imagens' => ['help/categorias/create-categoria-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Preencher os dados e Finalização do Cadastro',
+                            'descricao' => 'Preencha os dados da categoria e clique em "Criar Categoria" para finalizar o cadastro.',
+                            'imagens' => ['help/categorias/create-categoria-2.png'],
+                        ],
+                    ]],
+                    
+                    ['permissao' => 'edit_categorias', 'titulo' => 'Editar Categoria', 'descricao' => 'Aprenda a editar uma categoria no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar edição',
+                            'descricao' => 'Acesse Categorias e clique na categoria que deseja editar.',
+                            'imagens' => ['help/categorias/edit-categoria-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Altere os dados e Finalização da Edição',
+                            'descricao' => 'Preencha os dados da categoria e clique em "Salvar Alterações" para finalizar a edição.',
+                            'imagens' => ['help/categorias/edit-categoria-2.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'delete_categorias', 'titulo' => 'Excluir Categoria', 'descricao' => 'Aprenda a excluir uma categoria no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar exclusão',
+                            'descricao' => 'Acesse Categorias e clique na categoria que deseja excluir. Só são possíveis de excluir categorias que não possuem sinais associados.',
+                            'imagens' => ['help/categorias/delete-categoria-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar exclusão',
+                            'descricao' => 'Clique em "Excluir Categoria" e confirme a exclusão.',
+                            'imagens' => ['help/categorias/delete-categoria-2.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'restore_categorias', 'titulo' => 'Restaurar Categoria', 'descricao' => 'Aprenda a restaurar uma categoria no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar Categorias Deletadas',
+                            'descricao' => 'Vá até Categorias e selecione "Apenas Categorias Deletadas" no filtro.',
+                            'imagens' => ['help/categorias/restore-categoria-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Iniciar Restauração',
+                            'descricao' => 'Clique no ícone "Restaurar" para restaurar a categoria.',
+                            'imagens' => ['help/categorias/restore-categoria-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar Restauração',
+                            'descricao' => 'Confirme a restauração da categoria.',
+                            'imagens' => ['help/categorias/restore-categoria-3.png'],
+                        ],
+                    ]],
+                    
+                    ['permissao' => 'force_delete_categorias', 'titulo' => 'Excluir Permanentemente uma Categoria', 'descricao' => 'Aprenda a excluir permanentemente uma categoria no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar Categorias Deletadas',
+                            'descricao' => 'Vá até Categorias e selecione "Apenas Categorias Deletadas" no filtro.',
+                            'imagens' => ['help/categorias/restore-categoria-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Iniciar exclusão permanente',
+                            'descricao' => 'Clique no ícone "Excluir Permanentemente" para excluir a categoria.',
+                            'imagens' => ['help/categorias/force-delete-categoria-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar exclusão permanente',
+                            'descricao' => 'Confirme a exclusão permanente da categoria.',
+                            'imagens' => ['help/categorias/force-delete-categoria-2.png'],
+                        ],
+                    ]],
                 ],
             ],
             [
@@ -127,8 +194,20 @@
                 'color' => 'text-logo-orange',
                 'bg' => 'bg-orange-100',
                 'items' => [
-                    ['permissao' => 'create_materiais', 'titulo' => 'Criar Material', 'descricao' => 'Para cadastrar um material, vá até Materiais, clique em "Novo Material", preencha os dados e salve em "Criar Material".', 
-                    'imagem' => 'help/materiais/create_material.PNG'],
+                    ['permissao' => 'create_materiais', 'titulo' => 'Criar Material', 'descricao' => 'Aprenda a cadastrar um material no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar cadastro',
+                            'descricao' => 'Acesse Materiais e clique em "Novo Material".',
+                            'imagens' => ['help/materiais/create-material-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Preencher os dados e Finalização do Cadastro',
+                            'descricao' => 'Preencha os dados do material e clique em "Criar Material" para finalizar o cadastro.',
+                            'imagens' => ['help/materiais/create-material-2.png'],
+                        ],
+                    ]],
+// depois mexer
                     ['permissao' => 'edit_materiais', 'titulo' => 'Editar Material', 'descricao' => 'Para editar um material, vá até Materiais, abra o material desejado, faça as alterações e salve em "Atualizar Material".', 
                     'imagem' => 'help/materiais/edit_material.PNG'],
                     ['permissao' => 'view_materiais', 'titulo' => 'Baixar Material', 'descricao' => 'Abra o material desejado e clique no ícone de download.', 
@@ -150,20 +229,113 @@
                 'color' => 'text-logo-pink',
                 'bg' => 'bg-pink-100',
                 'items' => [
-                    ['permissao' => 'create_users', 'titulo' => 'Criar Usuários', 'descricao' => 'Para cadastrar um usuário, vá até Usuários, clique em "Novo Usuário", preencha os dados e salve em "Criar Usuário".', 
-                    'imagem' => 'help/usuarios/create_usuario.PNG'],
-                    ['permissao' => 'edit_users', 'titulo' => 'Editar Usuários', 'descricao' => 'Para editar um usuário, vá até Usuários, abra o usuário desejado, altere o que precisar e salve em "Atualizar Usuário".', 
-                    'imagem' => 'help/usuarios/edit_usuario.PNG'],
-                    ['permissao' => 'delete_users', 'titulo' => 'Excluir Usuários', 'descricao' => 'Para excluir um usuário, vá até Usuários, abra o usuário desejado, clique em "Excluir Usuário" e confirme a exclusão.', 
-                    'imagem' => 'help/usuarios/delete_usuario.PNG'],
-                    ['permissao' => 'create_roles', 'titulo' => 'Criar Funções', 'descricao' => 'Para cadastrar uma função, vá até Funções, clique em "Nova Função", preencha os dados e salve em "Criar Função".', 
-                    'imagem' => 'help/roles/create_roles.PNG'],
-                    ['permissao' => 'edit_roles', 'titulo' => 'Editar Funções', 'descricao' => 'Para editar uma função, vá até Funções, abra a função desejada, faça as alterações e clique em "Atualizar Função".', 
-                    'imagem' => 'help/roles/edit_roles.PNG'],
-                    ['permissao' => 'delete_roles', 'titulo' => 'Excluir Funções', 'descricao' => 'Para excluir uma função, vá até Funções, abra a função desejada, clique em "Excluir Função" e confirme.', 
-                    'imagem' => 'help/roles/delete_roles.PNG'],
-                    ['permissao' => 'view_permissions', 'titulo' => 'Visualizar Permissões', 'descricao' => 'Para visualizar permissões disponíveis, vá até Permissões.', 
-                    'imagem' => 'help/permissions/view_permissions.PNG'],
+                    ['permissao' => 'create_users', 'titulo' => 'Criar Usuários', 'descricao' => 'Aprenda a criar um usuário no sistema',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar Criação de Usuário',
+                            'descricao' => 'Vá até Usuários e clique no ícone "Novo Usuário" para iniciar a criação.',
+                            'imagens' => ['help/usuarios/create-usuario-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Preencher Dados do Usuário e Finalizar Criação',
+                            'descricao' => 'Preencha os dados do novo usuário e clique em "Criar Usuário".',
+                            'imagens' => ['help/usuarios/create-usuario-2.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'edit_users', 'titulo' => 'Editar Usuários', 'descricao' => 'Aprenda a editar um usuário no sistema',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar Edição de Usuário',
+                            'descricao' => 'Vá até Usuários e clique no ícone "Editar Usuário" para iniciar a edição.',
+                            'imagens' => ['help/usuarios/edit-usuario-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Realizar Alterações e Finalizar Edição',
+                            'descricao' => 'Realize as alterações necessárias e clique em "Salvar Alterações".',
+                            'imagens' => ['help/usuarios/edit-usuario-2.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'delete_users', 'titulo' => 'Excluir Usuários', 'descricao' => 'Aprenda a excluir um usuário no sistema',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar Exclusão de Usuário',
+                            'descricao' => 'Vá até Usuários e clique no ícone "Excluir Usuário" para iniciar a exclusão.',
+                            'imagens' => ['help/usuarios/delete-usuario-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar Exclusão',
+                            'descricao' => 'Confirme a exclusão do usuário.',
+                            'imagens' => ['help/usuarios/delete-usuario-2.png'],
+                        ],
+                    ]],
+                    
+                    ['permissao' => 'create_roles', 'titulo' => 'Criar Funções', 'descricao' => 'Aprenda a criar funções no sistema',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar Cadastro de Função',
+                            'descricao' => 'Vá até Funções e clique no ícone "Nova Função" para iniciar o cadastro.',
+                            'imagens' => ['help/roles/create-role-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Preencha os Dados da Função',
+                            'descricao' => 'Preencha os dados da função.',
+                            'imagens' => ['help/roles/create-role-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Selecione as Permissões da Função e Finalize o Cadastro',
+                            'descricao' => 'Selecione as permissões associadas à função e clique em "Criar Função".',
+                            'imagens' => ['help/roles/create-role-3.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'edit_roles', 'titulo' => 'Editar Funções', 'descricao' => 'Aprenda a editar funções no sistema',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar Edição de Função',
+                            'descricao' => 'Vá até Funções e clique no ícone "Editar Função" para iniciar a edição.',
+                            'imagens' => ['help/roles/edit-role-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Edite os Dados da Função',
+                            'descricao' => 'Edite os dados da função.',
+                            'imagens' => ['help/roles/edit-role-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Selecione as Novas Permissões da Função e Finalize o Cadastro',
+                            'descricao' => 'Selecione as novas permissões associadas à função e clique em "Salvar Alterações".',
+                            'imagens' => ['help/roles/edit-role-3.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'delete_roles', 'titulo' => 'Excluir Funções', 'descricao' => 'Aprenda a excluir uma função no sistema',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar Exclusão de Função',
+                            'descricao' => 'Vá até Funções e clique no ícone "Excluir Função" para iniciar a exclusão.',
+                            'imagens' => ['help/roles/delete-role-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirmar Exclusão',
+                            'descricao' => 'Confirme a exclusão da função.',
+                            'imagens' => ['help/roles/delete-role-2.png'],
+                        ],
+                    ]],
+                    
+                    ['permissao' => 'view_permissions', 'titulo' => 'Visualizar Permissões', 'descricao' => 'Aprenda a visualizar as permissões disponíveis.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Visualizar Detalhes das Permissões',
+                            'descricao' => 'Vá até Permissões e selecione o ícone para visualizar os detalhes da permissão desejada.',
+                            'imagens' => ['help/permissions/view-permission-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Detalhes das Permissões',
+                            'descricao' => '',
+                            'imagens' => ['help/permissions/view-permission-2.png'],
+                        ],
+                    ]],
                 ],
             ],
             [
@@ -173,14 +345,38 @@
                 'color' => 'text-logo-sky',
                 'bg' => 'bg-brand-100',
                 'items' => [
-                    ['permissao' => 'view_logs', 'titulo' => 'Visualizar Logs', 'descricao' => 'Para visualizar logs, vá até Logs, lá é possível filtrar os registros por data, usuário e ação realizada.', 
-                    'imagem' => 'help/logs/view_logs.PNG'],
-                    ['titulo' => 'Acessar Perfil', 'descricao' => 'Para acessar seu perfil, clique no ícone do usuário no canto superior direito e selecione "Perfil".', 
-                    'imagem' => 'help/profile/access_profile.PNG'],
-                    ['titulo' => 'Editar Nome e Email', 'descricao' => 'Para editar seu nome e email, acesse Perfil, faça as alterações desejadas e clique em "Salvar".', 
-                    'imagem' => 'help/profile/edit_name_profile.PNG'],
-                    ['titulo' => 'Editar Senha', 'descricao' => 'Para editar sua senha, acesse Perfil, atualize sua senha e clique em "Salvar".', 
-                    'imagem' => 'help/profile/edit_password_profile.PNG'],
+                    ['permissao' => 'view_logs', 'titulo' => 'Visualizar Logs', 'descricao' => 'Aprenda a visualizar os logs do sistema.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Visualizar Detalhes dos Logs',
+                            'descricao' => 'Vá até Logs e selecione o ícone para visualizar os detalhes do log desejado.',
+                            'imagens' => ['help/logs/view-logs-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Detalhes dos Logs',
+                            'descricao' => '',
+                            'imagens' => ['help/logs/view-logs-2.png'],
+                        ],
+                    ]],
+
+                    ['titulo' => 'Funções do Perfil', 'descricao' => 'Aprenda quais são as funções disponíveis no seu perfil.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar o Perfil',
+                            'descricao' => 'Clique no ícone do usuário no canto superior direito e selecione "Perfil".',
+                            'imagens' => ['help/profile/access-profile.png'],
+                        ],
+                        [
+                            'titulo' => 'Edição de Nome e Email',
+                            'descricao' => 'Após acessar o perfil, você pode editar seu nome e email.',
+                            'imagens' => ['help/profile/edit-name-email.png'],
+                        ],
+                        [
+                            'titulo' => 'Alterar Senha',
+                            'descricao' => 'Para alterar sua senha, acesse o perfil e siga as instruções.',
+                            'imagens' => ['help/profile/edit-password.png'],
+                        ],
+                    ]],
                 ],
             ],
         ];
