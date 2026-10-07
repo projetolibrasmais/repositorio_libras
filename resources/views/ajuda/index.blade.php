@@ -380,9 +380,9 @@
                 ],
             ],
             [
-                'title' => 'Contato e Suporte',
-                'description' => 'Entre em contato com a equipe de suporte da plataforma.',
-                'icon' => 'ph-chat-teardrop-text',
+                'title' => 'Contato e Sugestões',
+                'description' => 'Consultar e responder aos contatos enviados pelos usuários da plataforma.',
+                'icon' => 'ph-envelope-simple',
                 'color' => 'text-logo-purple',
                 'bg' => 'bg-purple-100',
                 'items' => [
