@@ -102,6 +102,16 @@
             @endif
         }
     },
+    handleDrop(event) {
+        this.isDragging = false;
+        if (!event.dataTransfer.files.length) return;
+        if (!this.isMultiple) {
+            const transfer = new DataTransfer();
+            transfer.items.add(event.dataTransfer.files[0]);
+            this.$refs.fileInput.files = transfer.files;
+        }
+        this.handleFiles(event.dataTransfer.files);
+    },
     validateFile(file) {
         // Validate file type
         const acceptedTypes = '{{ $accept }}'.split(',').map(t => t.trim());
@@ -194,8 +204,8 @@
     <div 
         @dragover.prevent="isDragging = true"
         @dragleave.prevent="isDragging = false"
-        @drop.prevent="isDragging = false; handleFiles($event.dataTransfer.files)"
-        @click="$refs.fileInput.click()"
+        @drop.prevent="handleDrop($event)"
+        @click="if ($event.target !== $refs.fileInput) $refs.fileInput.click()"
         :class="{ 
             'border-logo-sky bg-brand-50': isDragging,
             'border-red-500 bg-red-50': error,
