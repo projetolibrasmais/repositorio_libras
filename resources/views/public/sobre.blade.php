@@ -186,7 +186,7 @@
                         </p>
 
                         <div class="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                            @foreach ([['Caio Luis Silva Macedo', 'Desenvolvedor'], ['Matheus de Sousa Barbosa', 'Desenvolvedor'], ['Helen Maria Rodrigues Cordeiro', 'Pesquisadora'], ['Simone Maria Oliveira Azevedo Rocha', 'Pesquisadora'], ['Christine Martins de Matos', 'Coordenadora'], ['Joeli Teixeira Antunes', 'Coordenadora']] as [$nome, $funcao])
+                            @foreach ([['Matheus de Sousa Barbosa', 'Desenvolvedor'],['Caio Luis Silva Macedo', 'Desenvolvedor'], ['Helen Maria Rodrigues Cordeiro', 'Pesquisadora'], ['Simone Maria Oliveira Azevedo Rocha', 'Pesquisadora'], ['Christine Martins de Matos', 'Coordenadora'], ['Joeli Teixeira Antunes', 'Coordenadora']] as [$nome, $funcao])
                                 <article class="flex items-center gap-4 rounded-xl border border-slate-200 p-5">
                                     <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-800"
                                         aria-hidden="true">
