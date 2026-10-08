@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Contatos e sugestões</h2></x-slot>
+    <x-slot name="header"><h2 class="font-semibold text-xl text-gray-800 leading-tight">Contatos e Sugestões</h2></x-slot>
     <div class="p-2 w-full h-full">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"><div class="p-6">
             <x-page-header title="Contatos e sugestões" description="Acompanhe as mensagens recebidas pelo formulário do projeto" />
@@ -53,7 +53,7 @@
                         @endforeach
                     </x-slot>
                 </x-table>
-                <div class="mt-4">{{ $contatos->links() }}</div>
+                <x-pagination :paginator="$contatos" />
             @else
                 <div class="py-12 text-center text-gray-500"><i class="ph ph-envelope-simple text-4xl text-gray-300"></i><p class="mt-2">Nenhum contato encontrado.</p></div>
             @endif
