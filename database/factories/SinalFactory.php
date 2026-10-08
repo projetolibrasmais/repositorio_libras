@@ -25,6 +25,7 @@ class SinalFactory extends Factory
         ];
         $termo = $termos[array_rand($termos)];
         $palavra = $termo . ' ' . Str::upper(Str::random(8));
+        $dataCriacao = now()->subDays(random_int(1, 365));
 
         return [
             'palavra_portugues' => $palavra,
@@ -37,6 +38,8 @@ class SinalFactory extends Factory
             'expressao_nao_manual' => 'Expressão facial neutra.',
             'contexto_utilizacao' => "Exemplo de uso de {$termo} em uma atividade acadêmica.",
             'status' => 'publicado',
+            'created_at' => $dataCriacao,
+            'updated_at' => $dataCriacao,
         ];
     }
 }

@@ -54,9 +54,7 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex justify-center">
-                    {{ $sinais->appends(request()->query())->links() }}
-                </div>
+                <x-pagination :paginator="$sinais->appends(request()->query())" />
             @else
                 <div class="text-center py-12 bg-white rounded-xl">
                     <i class="ph ph-magnifying-glass text-gray-400 text-6xl mb-4"></i>

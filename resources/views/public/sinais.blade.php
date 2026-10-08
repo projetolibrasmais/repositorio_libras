@@ -77,7 +77,7 @@
                             </a>
                         @endforeach
                     </div>
-                    <div class="mt-5">{{ $categorias->links() }}</div>
+                    <x-pagination :paginator="$categorias" />
                 </section>
             @endif
 
@@ -132,9 +132,7 @@
                     @endforeach
                 </div>
 
-                <div class="mt-8">
-                    {{ $sinais->links() }}
-                </div>
+                <x-pagination :paginator="$sinais" />
             @else
                 <div class="text-center py-12">
                     <i class="ph ph-hand-waving text-gray-400 text-6xl mb-4"></i>
