@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use App\Models\Role;
 use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -31,12 +32,12 @@ class UserController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_users', ['only' => ['index', 'show']]),
-            new Middleware('permission:create_users', ['only' => ['create', 'store']]),
-            new Middleware('permission:edit_users', ['only' => ['edit', 'update']]),
-            new Middleware('permission:delete_users', ['only' => ['destroy']]),
-            new Middleware('permission:restore_users', ['only' => ['restore']]),
-            new Middleware('permission:force_delete_users', ['only' => ['forceDelete']]),
+            new Middleware('permission:view_users', only: ['index', 'show']),
+            new Middleware('permission:create_users', only: ['create', 'store']),
+            new Middleware('permission:edit_users', only: ['edit', 'update']),
+            new Middleware('permission:delete_users', only: ['destroy']),
+            new Middleware('permission:restore_users', only: ['restore']),
+            new Middleware('permission:force_delete_users', only: ['forceDelete']),
         ];
     }
 
@@ -58,7 +59,9 @@ class UserController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::orderBy('name')->get();
+
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -87,7 +90,9 @@ class UserController extends Controller implements HasMiddleware
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles = Role::orderBy('name')->get();
+
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -95,7 +100,7 @@ class UserController extends Controller implements HasMiddleware
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->userRepository->update($user->id, $request->all());
+        $this->userRepository->update($user->id, $request->validated());
         return redirect()->route('users.show', $user)->with('success', 'Usuário atualizado com sucesso!');
     }
 

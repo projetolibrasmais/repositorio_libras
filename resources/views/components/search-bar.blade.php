@@ -16,11 +16,11 @@
                 />
             </div>
             
-            <div class="flex gap-2">
+            <div class="flex flex-wrap sm:flex-nowrap gap-2">
                 @if(isset($filters))
                     <!-- Filter Button -->
                     <button @click.prevent="filtersOpen = !filtersOpen" type="button"
-                        class="inline-flex items-center px-4 py-2.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors relative">
+                        class="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors relative">
                         <i class="ph ph-funnel mr-2"></i>
                         Filtros
                         <span x-show="filtersOpen" class="ml-2">
@@ -40,7 +40,7 @@
 
                 <button 
                     type="submit"
-                    class="inline-flex items-center px-4 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors"
+                    class="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-logo-sky transition-colors"
                 >
                     <i class="ph ph-magnifying-glass mr-2"></i>
                     Buscar
@@ -49,7 +49,7 @@
                 @if(request('search') || (count($filterKeys) > 0 && request()->hasAny($filterKeys)))
                     <a 
                         href="{{ url()->current() }}"
-                        class="inline-flex items-center px-4 py-2.5 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors"
+                        class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors"
                     >
                         <i class="ph ph-x mr-2"></i>
                         Limpar

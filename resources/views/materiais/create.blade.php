@@ -71,36 +71,9 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Arquivo -->
-                                    <div>
-                                        <label for="arquivo"
-                                            class="block text-sm font-medium text-gray-700 mb-1">
-                                            Arquivo <span class="text-red-500">*</span>
-                                        </label>
-                                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-logo-sky transition-colors @error('arquivo') border-red-500 @enderror">
-                                            <div class="space-y-1 text-center">
-                                                <i class="ph ph-upload-simple text-5xl text-gray-400 mb-3"></i>
-                                                <div class="flex text-sm text-gray-600">
-                                                    <label for="arquivo"
-                                                        class="relative cursor-pointer bg-white rounded-md font-medium text-brand-600 hover:text-logo-sky focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-logo-sky">
-                                                        <span>Selecione um arquivo</span>
-                                                        <input id="arquivo" name="arquivo" type="file" required
-                                                            class="sr-only"
-                                                            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.odt,.ods,.odp"
-                                                            onchange="updateFileName(this)">
-                                                    </label>
-                                                    <p class="pl-1">ou arraste e solte</p>
-                                                </div>
-                                                <p class="text-xs text-gray-500">
-                                                    PDF, Word, Excel, PowerPoint até 20MB
-                                                </p>
-                                                <p id="file-name" class="text-sm font-medium text-gray-900 mt-2"></p>
-                                            </div>
-                                        </div>
-                                        @error('arquivo')
-                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                    <x-file-input name="arquivo" label="Arquivo"
+                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.odt,.ods,.odp"
+                                        :maxSize="20480" required />
                                 </div>
                             </div>
                         </div>
@@ -143,14 +116,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function updateFileName(input) {
-            const fileName = input.files[0]?.name;
-            const fileNameElement = document.getElementById('file-name');
-            if (fileName) {
-                fileNameElement.textContent = `Arquivo selecionado: ${fileName}`;
-            }
-        }
-    </script>
 </x-app-layout>

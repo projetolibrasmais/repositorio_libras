@@ -24,7 +24,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'role' => 'nullable|string|exists:roles,name',
+            'roles' => 'required|array|min:1',
+            'roles.*' => 'required|string|distinct|exists:roles,name',
         ];
     }
 
@@ -39,6 +40,8 @@ class StoreUserRequest extends FormRequest
             'unique' => 'O :attribute já está em uso.',
             'max' => 'O campo :attribute não pode exceder :max caracteres.',
             'exists' => 'O :attribute selecionado é inválido.',
+            'array' => 'Selecione uma função válida.',
+            'min' => 'Selecione pelo menos uma função.',
         ];
     }
 
@@ -50,7 +53,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'nome',
             'email' => 'e-mail',
-            'role' => 'função',
+            'roles' => 'funções',
         ];
     }
 }

@@ -54,14 +54,11 @@ class UserInvitation extends Notification
         ], false));
 
         return (new MailMessage)
-            ->subject('Convite - Repositório Libras+')
-            ->greeting('Olá, ' . $notifiable->name . '!')
-            ->line('Você foi convidado para fazer parte do sistema Repositório Libras+.')
-            ->line('Para começar a utilizar o sistema, você precisa definir sua senha de acesso.')
-            ->action('Definir Senha', $url)
-            ->line('Este link de convite expirará em 60 minutos.')
-            ->line('Se você não esperava receber este convite, nenhuma ação adicional é necessária.')
-            ->salutation('Atenciosamente, Equipe Repositório Libras+');
+            ->subject('Convite - Plataforma Digital Libras+')
+            ->view('emails.user-invitation', [
+                'userName' => $notifiable->name,
+                'actionUrl' => $url,
+            ]);
     }
 
     /**

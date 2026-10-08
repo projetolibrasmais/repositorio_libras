@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Sinal;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class GlobalSearchController extends Controller
 {
@@ -20,6 +21,17 @@ class GlobalSearchController extends Controller
         'contexto_utilizacao',
         'categorias.nome',
     ];
+
+    public function categories(): JsonResponse
+    {
+        return response()->json([
+            'categories' => Categoria::query()
+                ->orderBy('nome')
+                ->get(['nome'])
+                ->map(fn (Categoria $categoria) => $categoria->nome)
+                ->values(),
+        ]);
+    }
 
     /**
      * Autocomplete search - returns JSON for dropdown.
@@ -59,7 +71,7 @@ class GlobalSearchController extends Controller
             $results[] = [
                 'title' => $categoria->nome,
                 'description' => '',
-                'url' => route('public.categoria.show', $categoria->slug),
+                'url' => route('public.sinais', ['categorias' => ['nome' => $categoria->nome]]),
                 'type' => 'categoria',
                 'type_label' => 'Categoria',
                 'icon' => 'ph ph-folder',
@@ -74,24 +86,7 @@ class GlobalSearchController extends Controller
      */
     public function results(Request $request)
     {
-        $query = trim((string) $request->input('query'));
-
-        $sinais = collect();
-        $categorias = collect();
-        $materiais = collect();
-
-        if (mb_strlen($query) >= 2) {
-            $sinais = Sinal::whereIn('status', ['catalogado', 'publicado'])
-                ->search($query, self::SINAL_SEARCH_COLUMNS)
-                ->with('video', 'categorias')
-                ->paginate(12, ['*'], 'sinais_page');
-
-            $categorias = Categoria::search($query, ['nome'])
-                ->withCount('sinais')
-                ->paginate(12, ['*'], 'categorias_page');
-        }
-
-        return view('search.results', compact('query', 'sinais', 'categorias', 'materiais'));
+        return redirect()->route('public.sinais', $request->query());
     }
 
     private function buildSinalDescription(Sinal $sinal): string

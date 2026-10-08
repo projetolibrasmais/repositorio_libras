@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -23,8 +24,15 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('user'),
-            'role' => 'nullable|string|exists:roles,name',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users', 'email')->ignore($this->route('user')),
+            ],
+            'roles' => 'required|array|min:1',
+            'roles.*' => 'required|string|distinct|exists:roles,name',
         ];
     }
 
@@ -39,6 +47,8 @@ class UpdateUserRequest extends FormRequest
             'unique' => 'O :attribute já está em uso.',
             'max' => 'O campo :attribute não pode exceder :max caracteres.',
             'exists' => 'O :attribute selecionado é inválido.',
+            'array' => 'Selecione uma função válida.',
+            'min' => 'Selecione pelo menos uma função.',
         ];
     }
 
@@ -50,7 +60,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => 'nome',
             'email' => 'e-mail',
-            'role' => 'função',
+            'roles' => 'funções',
         ];
     }
 }

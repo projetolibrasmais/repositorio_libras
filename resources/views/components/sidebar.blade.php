@@ -25,7 +25,8 @@
             'w-[280px]': !collapsed || window.innerWidth < 1024,
             'lg:w-20': collapsed && window.innerWidth >= 1024
         }"
-        class="fixed top-0 left-0 h-full bg-white border-r border-slate-200 shadow-lg lg:shadow-sm transition-all duration-300 ease-in-out z-50 overflow-y-auto flex-shrink-0">
+        @click="if (window.innerWidth < 1024 && $event.target.closest('a')) open = false"
+        class="admin-sidebar fixed top-0 left-0 h-full bg-white border-r border-slate-200 shadow-lg lg:shadow-sm transition-all duration-300 ease-in-out z-50 overflow-y-auto flex-shrink-0">
         <div class="flex flex-col h-full">
             <!-- Header com botão de toggle -->
             <div class="flex items-center p-4 pb-3 border-b border-slate-200"
@@ -35,7 +36,7 @@
                 <div x-show="!collapsed || window.innerWidth < 1024"
                     x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" class="flex items-center space-x-3">
-                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Libras+" class="h-11 w-11 object-contain">
                     <p class="font-sans antialiased text-base text-current font-semibold text-brand-800">
                         Repositório Libras+
                     </p>
@@ -46,7 +47,7 @@
                     x-transition:enter="transition ease-in-out duration-300" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" class="flex items-center justify-center cursor-pointer"
                     @click="toggleCollapsed()">
-                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Libras+" class="h-11 w-11 object-contain">
                 </div>
 
                 <!-- Toggle button desktop -->
@@ -91,12 +92,12 @@
                         </a>
                     </li>
 
-                    @can(['view_categorias', 'view_sinais'])
+                    @canany(['view_categorias', 'view_sinais', 'view_materiais'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
                             x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
                             x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">CONTEÚDO</small>
                         <hr class="mb-3">
-                    @endcan
+                    @endcanany
 
                     @can('view_sinais')
                         <!-- Sinais -->
@@ -152,13 +153,35 @@
                         </li>
                     @endcan
 
-                    @can(['view_permissions', 'view_roles'])
+                    @can('view_contatos')
+                        <small x-show="!collapsed || window.innerWidth < 1024"
+                            x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">CONTATOS</small>
+                        <hr class="mb-3">
+                    @endcan
+
+
+                    @can('view_contatos')
+                        <li>
+                            <a href="{{ route('contatos.index') }}"
+                                :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('contatos.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                <span class="grid place-items-center shrink-0"
+                                    :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''"><i
+                                        class="ph ph-envelope-simple text-xl"></i></span>
+                                <span x-show="!collapsed || window.innerWidth < 1024" class="flex-1">Contatos e
+                                    sugestões</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @canany(['view_permissions', 'view_roles'])
                         <small x-show="!collapsed || window.innerWidth < 1024"
                             x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
                             x-transition:enter-end="opacity-100"
                             class="text-xs font-bold text-gray-500">PERMISSÕES</small>
                         <hr class="mb-3">
-                    @endcan
+                    @endcanany
 
                     @can('view_roles')
                         <!-- Roles -->
@@ -196,12 +219,10 @@
                         </li>
                     @endcan
 
-                    @can(['view_logs', 'view_users'])
-                        <small x-show="!collapsed || window.innerWidth < 1024"
-                            x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
-                            x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">SISTEMA</small>
-                        <hr class="mb-3">
-                    @endcan
+                    <small x-show="!collapsed || window.innerWidth < 1024"
+                        x-transition:enter="transition ease-in-out duration-200" x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100" class="text-xs font-bold text-gray-500">SISTEMA</small>
+                    <hr class="mb-3">
 
                     @can('view_users')
                         <!-- Users -->
@@ -334,12 +355,4 @@
         </div>
     </aside>
 
-    <!-- Botão para abrir sidebar no mobile -->
-    <button @click="open = true" x-show="!open"
-        class="fixed bottom-4 left-4 lg:hidden z-30 p-3 rounded-full bg-brand-600 text-white shadow-lg hover:bg-brand-700 transition-colors"
-        style="display: none;">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-    </button>
 </div>

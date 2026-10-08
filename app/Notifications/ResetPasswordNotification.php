@@ -45,13 +45,11 @@ class ResetPasswordNotification extends Notification
         ], false));
 
         return (new MailMessage)
-            ->subject('Redefinir Senha - Repositório Libras+')
-            ->greeting('Olá, ' . $notifiable->name . '!')
-            ->line('Você está recebendo este e-mail porque recebemos uma solicitação de redefinição de senha para sua conta.')
-            ->action('Redefinir Senha', $url)
-            ->line('Este link de redefinição de senha expirará em 60 minutos.')
-            ->line('Se você não solicitou uma redefinição de senha, nenhuma ação adicional é necessária.')
-            ->salutation('Atenciosamente, Equipe Repositório Libras+');
+            ->subject('Redefinir senha - Plataforma Digital Libras+')
+            ->view('emails.reset-password', [
+                'userName' => $notifiable->name,
+                'actionUrl' => $url,
+            ]);
     }
 
     /**

@@ -31,7 +31,7 @@ class UpdateSinalRequest extends FormRequest
             'expressao_nao_manual' => 'required|string',
             'contexto_utilizacao' => 'required|string',
             'status' => 'required|in:catalogado,em_validacao,publicado',
-            'video' => 'file|mimes:mp4,avi,mov,wmv|max:10240',
+            'video' => 'file|mimes:mp4,avi,mov,wmv|max:51200', // Max 50MB
             'imagens' => 'array',
             'imagens.*' => 'file|mimes:jpg,jpeg,png,gif,webp,svg|max:5120',
             'categorias' => 'required|array',

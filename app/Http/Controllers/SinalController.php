@@ -27,12 +27,12 @@ class SinalController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_sinais', ['only' => ['index', 'show']]),
-            new Middleware('permission:create_sinais', ['only' => ['create', 'store']]),
-            new Middleware('permission:edit_sinais', ['only' => ['edit', 'update']]),
-            new Middleware('permission:delete_sinais', ['only' => ['destroy']]),
-            new Middleware('permission:restore_sinais', ['only' => ['restore']]),
-            new Middleware('permission:force_delete_sinais', ['only' => ['forceDelete']]),
+            new Middleware('permission:view_sinais', only: ['index', 'show']),
+            new Middleware('permission:create_sinais', only: ['create', 'store']),
+            new Middleware('permission:edit_sinais', only: ['edit', 'update']),
+            new Middleware('permission:delete_sinais', only: ['destroy']),
+            new Middleware('permission:restore_sinais', only: ['restore']),
+            new Middleware('permission:force_delete_sinais', only: ['forceDelete']),
         ];
     }
 

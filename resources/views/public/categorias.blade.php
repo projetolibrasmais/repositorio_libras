@@ -8,17 +8,15 @@
                 {{ __('Explore os sinais organizados por áreas do conhecimento') }}
             </p>
 
-            <!-- Categorias Grid -->
-            @php
-                $categorias = \App\Models\Categoria::withCount('sinais')
-                    ->orderBy('nome')
-                    ->get();
-            @endphp
+            {{-- <div class="mb-10">
+                <x-global-search :placeholder="__('Buscar sinais...')" />
+            </div> --}}
 
+            <!-- Categorias Grid -->
             @if($categorias->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($categorias as $categoria)
-                        <a href="{{ route('public.sinais', ['categoria' => $categoria->slug]) }}" 
+                        <a href="{{ route('public.sinais', ['categorias' => ['nome' => $categoria->nome]]) }}"
                            class="bg-white rounded-lg transition-shadow p-6 border border-gray-200 hover:border-logo-sky group">
                             <div class="flex items-start gap-4">
                                 <div class="flex-shrink-0 w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center">

@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SinalController;
@@ -34,11 +35,20 @@ Route::get('/categorias', [HomeController::class, 'categorias'])->name('public.c
 
 Route::get('/faq', [HomeController::class, 'faq'])->name('public.faq');
 
+Route::post('/contato', [ContatoController::class, 'store'])->name('public.contato');
+
 // Search Routes
 Route::get('/buscar', [GlobalSearchController::class, 'results'])->name('search.results');
 Route::get('/api/buscar/autocomplete', [GlobalSearchController::class, 'autocomplete'])->name('search.autocomplete');
+Route::get('/api/buscar/categorias', [GlobalSearchController::class, 'categories'])->name('search.categories');
 
 Route::middleware('auth')->prefix('/admin')->group(function () {
+    Route::get('/contatos', [ContatoController::class, 'index'])->name('contatos.index');
+    Route::get('/contatos/{contato}', [ContatoController::class, 'show'])->name('contatos.show');
+    Route::patch('/contatos/{contato}/lido', [ContatoController::class, 'markRead'])->name('contatos.read');
+    Route::patch('/contatos/{contato}/respondido', [ContatoController::class, 'markAnswered'])->name('contatos.answered');
+    Route::post('/contatos/{contato}/responder', [ContatoController::class, 'answer'])->name('contatos.answer');
+    Route::delete('/contatos/{contato}', [ContatoController::class, 'destroy'])->name('contatos.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

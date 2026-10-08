@@ -63,7 +63,9 @@ class UserRepository extends BaseRepository
         $data['password'] = bcrypt(uniqid('temp_', true));
         
         $user = parent::create($data);
-        $user->assignRole($data['role'] ?? 'user');
+        foreach ($data['roles'] ?? [] as $role) {
+            $user->assignRole($role);
+        }
         return $user;
     }
 
@@ -73,8 +75,8 @@ class UserRepository extends BaseRepository
     public function update(int $id, array $data): ?User
     {
         $user = parent::update($id, $data);
-        if ($user && isset($data['role'])) {
-            $user->syncRoles($data['role']);
+        if ($user && isset($data['roles'])) {
+            $user->syncRoles($data['roles']);
         }
         return $user;
     }

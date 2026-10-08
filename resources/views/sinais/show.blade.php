@@ -181,7 +181,7 @@
                                                         'bg-red-100 text-red-800 border-red-200',
                                                         'bg-purple-100 text-purple-800 border-purple-200',
                                                         'bg-pink-100 text-pink-800 border-pink-200',
-                                                        'bg-brand-100 text-brand-800 border-logo-pink',
+                                                        'bg-logo-pink/20 text-logo-pink border-logo-pink',
                                                         'bg-teal-100 text-teal-800 border-teal-200',
                                                     ];
 

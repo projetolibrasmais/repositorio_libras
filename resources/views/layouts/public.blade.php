@@ -35,14 +35,9 @@ initVoiceRecognition();">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* High Contrast Mode */
-        .high-contrast {
-            filter: contrast(1.5) saturate(0);
-        }
-
-        .high-contrast img,
-        .high-contrast video {
-            filter: contrast(1.2);
+        /* Evita que elementos controlados pelo Alpine apareçam antes do JavaScript iniciar. */
+        [x-cloak] {
+            display: none !important;
         }
 
         /* VLibras */
@@ -68,69 +63,77 @@ initVoiceRecognition();">
 </head>
 
 <body class="font-sans antialiased bg-[#F2F2F2]">
-    <!-- Accessibility Bar -->
-    <div class="bg-gray-800 text-white py-2">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-end items-center gap-4">
-            <span class="text-sm">{{ __('Acessibilidade:') }}</span>
+    <!-- Accessibility Bar (todas as classes usam px arbitrário, não rem — imune ao fontSize dinâmico) -->
+    <div class="relative z-[50] flex min-h-[52px] items-center justify-center bg-gray-800 px-2 py-2 text-white sm:justify-end sm:px-4">
+        <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-3">
+            <span class="text-[14px] leading-none">{{ __('Acessibilidade:') }}</span>
 
             <!-- Font Size Controls -->
             <button @click="fontSize = Math.max(12, fontSize - 2)"
-                class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors text-sm"
+                class="px-[12px] py-[4px] bg-gray-700 hover:bg-gray-600 rounded-[4px] transition-colors text-[14px] leading-none"
                 :title="'{{ __('Diminuir fonte') }}'">
                 A-
             </button>
             <button @click="fontSize = Math.min(24, fontSize + 2)"
-                class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors text-sm"
+                class="px-[12px] py-[4px] bg-gray-700 hover:bg-gray-600 rounded-[4px] transition-colors text-[14px] leading-none"
                 :title="'{{ __('Aumentar fonte') }}'">
                 A+
             </button>
 
             <!-- High Contrast Toggle -->
-            <button @click="highContrast = !highContrast" :class="highContrast ? 'bg-brand-600' : 'bg-gray-700'"
-                class="px-3 py-1 hover:bg-gray-600 rounded transition-colors flex items-center gap-2 text-sm"
+            <button id="contrast-toggle" @click="highContrast = !highContrast" :class="highContrast ? 'bg-brand-600' : 'bg-gray-700'"
+                :aria-pressed="highContrast.toString()"
+                class="px-[12px] py-[4px] hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none"
                 :title="'{{ __('Alto contraste') }}'">
-                <i class="ph ph-circle-half"></i>
-                <span>{{ __('Contraste') }}</span>
+                <i class="ph ph-circle-half text-[14px]"></i>
+                <span class="hidden sm:block">{{ __('Contraste') }}</span>
             </button>
 
             <!-- Voice Command -->
-            <button @click="toggleVoiceCommand()" 
+            {{-- <button @click="toggleVoiceCommand()"
                 :class="voiceActive ? 'bg-red-600' : 'bg-gray-700'"
-                class="px-3 py-1 hover:bg-gray-600 rounded transition-colors flex items-center gap-2 text-sm"
+                class="px-[12px] py-[4px] hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none whitespace-nowrap"
                 :title="voiceActive ? '{{ __('Parar comando de voz') }}' : '{{ __('Iniciar comando de voz') }}'">
-                <i class="ph" :class="voiceActive ? 'ph-microphone-slash' : 'ph-microphone'"></i>
-                <span x-text="voiceActive ? '{{ __('Parar') }}' : '{{ __('Comando de voz') }}'"></span>
-            </button>
+                <i class="ph text-[14px]" :class="voiceActive ? 'ph-microphone-slash' : 'ph-microphone'"></i>
+                <span class="hidden sm:block" x-text="voiceActive ? '{{ __('Parar') }}' : '{{ __('Comando de voz') }}'"></span>
+            </button> --}}
 
             <!-- Language Selector -->
-            <div x-data="{ open: false }" class="relative">
-                <button @click="open = !open" 
-                    class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded transition-colors flex items-center gap-2 text-sm"
+            <div x-data="{
+                open: false,
+                languageLabel: localStorage.getItem('googleTranslateLangLabel') || 'PT'
+            }" class="relative">
+                <button @click="open = !open"
+                    :aria-expanded="open.toString()"
+                    aria-haspopup="menu"
+                    class="px-[12px] py-[4px] bg-gray-700 hover:bg-gray-600 rounded-[4px] transition-colors flex items-center gap-[8px] text-[14px] leading-none"
                     :title="'{{ __('Idioma') }}'">
-                    <i class="ph ph-globe"></i>
-                    <span class="notranslate" x-text="localStorage.getItem('googleTranslateLangLabel') || 'PT'"></span>
-                    <i class="ph ph-caret-down text-xs"></i>
+                    <i class="ph ph-globe text-[14px]"></i>
+                    <span class="notranslate" x-text="languageLabel"></span>
+                    <i class="ph ph-caret-down text-[12px]"></i>
                 </button>
                 
-                <div x-show="open" 
+                <div x-show="open"
+                     x-cloak
+                     role="menu"
                      @click.away="open = false"
                      x-transition
-                     class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                    <button type="button" @click="translatePage('pt', 'PT'); open = false"
-                        class="notranslate block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                     class="absolute right-0 top-full mt-[8px] w-[192px] bg-white rounded-[8px] shadow-lg py-[8px] z-[210] ring-1 ring-black/10">
+                    <button type="button" @click="languageLabel = 'PT'; translatePage('pt', 'PT'); open = false"
+                        class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         Português
                     </button>
-                    <button type="button" @click="translatePage('en', 'EN'); open = false"
-                        class="notranslate block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <button type="button" @click="languageLabel = 'EN'; translatePage('en', 'EN'); open = false"
+                        class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         English
                     </button>
-                    <button type="button" @click="translatePage('es', 'ES'); open = false"
-                        class="notranslate block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <button type="button" @click="languageLabel = 'ES'; translatePage('es', 'ES'); open = false"
+                        class="notranslate block w-full text-left px-[16px] py-[8px] text-[14px] text-gray-700 hover:bg-gray-100">
                         Español
                     </button>
                 </div>
             </div>
-        </div>
+        </div>  
     </div>
 
     <!-- Navigation -->
@@ -140,6 +143,17 @@ initVoiceRecognition();">
     <main class="flex-grow min-h-[90vh]">
         {{ $slot }}
     </main>
+
+    <x-toast />
+    @if (session('success'))
+        <script>
+            document.addEventListener('alpine:init', () => {
+                setTimeout(() => window.dispatchEvent(new CustomEvent('toast', {
+                    detail: { type: 'success', message: @js(session('success')) }
+                })), 100);
+            });
+        </script>
+    @endif
 
     <!-- Footer -->
     <x-public-footer />

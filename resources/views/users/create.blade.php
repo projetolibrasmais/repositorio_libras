@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="p-2 w-full h-full">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white overflow-visible shadow-sm sm:rounded-lg">
             <div class="p-6">
                 <!-- Page Header -->
                 <x-page-header title="Novo Usuário" description="Crie um novo usuário no sistema">
@@ -70,29 +70,23 @@
 
                                     <!-- Função -->
                                     <div>
-                                        <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Função <span class="text-red-500">*</span>
+                                        <label for="roles" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Funções <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <div
                                                 class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                                 <i class="ph ph-shield-checkered text-gray-400"></i>
                                             </div>
-                                            <select name="role" id="role" required
-                                                class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-logo-sky focus:border-transparent @error('role') border-red-500 @enderror">
-                                                <option value="">Selecione uma função</option>
-                                                @foreach (\App\Models\Role::all() as $role)
-                                                    <option value="{{ $role->name }}"
-                                                        {{ old('role') == $role->name ? 'selected' : '' }}>
-                                                        {{ $role->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <x-role-select :roles="$roles" :selected="old('roles', [])" />
                                         </div>
-                                        @error('role')
+                                        @error('roles')
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
-                                        <p class="mt-1 text-sm text-gray-500">Selecione a função do usuário no sistema.</p>
+                                        @error('roles.*')
+                                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                        <p class="mt-1 text-sm text-gray-500">Selecione uma ou mais funções para o usuário.</p>
                                     </div>
                                 </div>
                             </div>

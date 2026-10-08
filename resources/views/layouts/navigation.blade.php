@@ -1,21 +1,40 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="admin-navbar sticky top-0 z-30 bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-full px-2">
-        <div class="flex justify-between sm:justify-end h-16">
-            <!-- Logo -->
-            <div class="md:hidden shrink-0 flex items-center">
-                <button @click="$dispatch('toggle-sidebar')" class="focus:outline-none">
-                    <img src="{{ asset('images/logo-simple.png') }}" alt="Logo" class="h-10 w-10">
+        <div class="flex justify-between h-[4.4rem]">
+            <!-- Navegação mobile -->
+            <div class="lg:hidden flex items-center gap-2">
+                <button type="button" @click="$dispatch('toggle-sidebar')"
+                    class="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-brand-800 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-logo-sky"
+                    aria-label="Abrir menu de administração">
+                    <i class="ph ph-list text-2xl" aria-hidden="true"></i>
+                    <span class="text-sm font-semibold">Menu</span>
                 </button>
+                <a href="{{ route('dashboard') }}" class="flex items-center" aria-label="Ir para o painel">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Libras+" class="h-11 w-11 object-contain">
+                </a>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-3 px-4">
+                <span class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center">
+                    <i class="ph ph-gear-six text-brand-600 text-xl"></i>
+                </span>
+                <div>
+                    <p class="text-sm font-semibold text-brand-800 leading-tight">Área administrativa</p>
+                    <a href="{{ route('home') }}" class="text-xs text-gray-500 hover:text-brand-600">Visualizar site</a>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden md:flex sm:items-center sm:ms-6">
+            <div class="hidden lg:flex lg:items-center lg:ms-6 pe-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            class="inline-flex items-center gap-2 px-4 py-2 border border-brand-100 text-sm leading-4 font-medium rounded-lg text-brand-800 bg-brand-50 hover:bg-brand-100 focus:outline-none focus:ring-2 focus:ring-logo-sky transition ease-in-out duration-150">
+                            <span class="w-7 h-7 rounded-full bg-brand-600 text-white flex items-center justify-center">
+                                <i class="ph ph-user"></i>
+                            </span>
+                            <div class="max-w-40 truncate">{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -47,34 +66,34 @@
                 </x-dropdown>
             </div>
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <!-- Conta no mobile -->
+            <div class="flex items-center lg:hidden pe-1">
                 <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-600 text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-logo-sky focus:ring-offset-2"
+                    :aria-expanded="open.toString()" aria-controls="mobile-account-menu" aria-label="Abrir opções da conta">
+                    <i class="ph text-xl" :class="open ? 'ph-x' : 'ph-user'" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+    <div id="mobile-account-menu" x-show="open" x-transition class="lg:hidden bg-white shadow-lg" style="display: none;">
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="break-words font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                <div class="break-all font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('home')">
+                    <i class="ph ph-arrow-square-out mr-2"></i>
+                    {{ __('Visualizar site') }}
+                </x-responsive-nav-link>
+
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    {{ __('Perfil') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -84,7 +103,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Sair') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

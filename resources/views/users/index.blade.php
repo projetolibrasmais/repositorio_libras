@@ -149,7 +149,7 @@
                             Nome
                         </x-table-header>
                         <x-table-header :sortable="false">
-                            Função
+                            Funções
                         </x-table-header>
                         <x-table-header :sortable="false">
                             Email

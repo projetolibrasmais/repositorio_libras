@@ -28,7 +28,7 @@ class LogController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('permission:view_logs', ['only' => ['index', 'show']]),
+            new Middleware('permission:view_logs', only: ['index', 'show']),
         ];
     }
 

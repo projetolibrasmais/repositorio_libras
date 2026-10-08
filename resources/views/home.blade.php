@@ -1,8 +1,8 @@
 <x-public-layout>
-    <div class="min-h-[70vh] flex items-center justify-center">
+    <div class="flex min-h-[55vh] items-center justify-center py-10 sm:min-h-[70vh]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <p class="text-xl text-brand-600 mb-12 font-semibold">
+                <p class="mb-8 text-lg font-semibold text-brand-600 sm:mb-12 sm:text-xl">
                     {{ __('Encontre facilmente um sinal, palavra, categoria ou configuração de mão.') }}
                 </p>
 
@@ -25,12 +25,12 @@
     <!-- Seção Sobre -->
     <div class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
                 <div class="flex flex-col items-center text-center">
-                    <h2 class="text-5xl font-bold text-brand-600 mb-6 text-center">
+                    <h2 class="mb-6 text-center text-3xl font-bold text-brand-600 sm:text-5xl">
                         {{ __('Sobre o Projeto') }}
                     </h2>
-                    <img src="{{ asset('images/logo.jpeg') }}" alt="Sobre o Projeto" class="w-[50%] rounded-3xl border border-brand-700">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Sobre o Projeto" class="w-36 max-w-full max-h-80 object-contain rounded-3xl sm:w-1/2">
                 </div>
                 <div class="prose prose-lg text-gray-700 space-y-4 bg-white p-5 md:p-10 rounded-lg">
                     <p>
@@ -57,7 +57,7 @@
                 Explore a Plataforma
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <a href="{{ route('public.sinais') }}"
                     class="bg-white rounded-xl p-6 transition-shadow border-2 border-transparent hover:border-logo-green">
                     <div class="w-12 h-12 bg-logo-green/10 rounded-full flex items-center justify-center mb-4">
@@ -110,6 +110,17 @@
                     <h3 class="font-semibold text-lg text-gray-900 mb-2">Materiais e Produções</h3>
                     <p class="text-gray-600 text-sm">
                         Acesse os materiais e produções relacionados ao projeto
+                    </p>
+                </a>
+
+                <a href="{{ route('public.about') }}#contato"
+                    class="bg-white rounded-xl p-6 transition-shadow border-2 border-transparent hover:border-brand-700">
+                    <div class="w-12 h-12 bg-brand-700/10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ph ph-envelope text-brand-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg text-gray-900 mb-2">Contato e Sugestões</h3>
+                    <p class="text-gray-600 text-sm">
+                        Entre em contato conosco para dúvidas, sugestões ou feedbacks
                     </p>
                 </a>
             </div>
