@@ -191,8 +191,11 @@
                                                             'bg-red-100 text-red-800 border-red-200',
                                                             'bg-purple-100 text-purple-800 border-purple-200',
                                                             'bg-pink-100 text-pink-800 border-pink-200',
-                                                            'bg-brand-100 text-brand-800 border-logo-pink',
+                                                            'bg-logo-pink/20 text-logo-pink border-logo-pink',
                                                             'bg-teal-100 text-teal-800 border-teal-200',
+                                                            'bg-indigo-100 text-indigo-800 border-indigo-200',
+                                                            'bg-gray-100 text-gray-800 border-gray-200',
+                                                            'bg-orange-100 text-orange-800 border-orange-200',
                                                         ];
                                                         // garante índice válido mesmo se o ID for alto
                                                         $cor = $cores[($categoria->id - 1) % count($cores)];

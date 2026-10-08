@@ -64,8 +64,8 @@ initVoiceRecognition();">
 
 <body class="font-sans antialiased bg-[#F2F2F2]">
     <!-- Accessibility Bar (todas as classes usam px arbitrário, não rem — imune ao fontSize dinâmico) -->
-    <div class="relative z-[50] bg-gray-800 text-white h-[52px] flex items-center justify-center sm:justify-end overflow-visible">
-        <div class="flex gap-1 sm:gap-3 justify-center items-center">
+    <div class="relative z-[50] flex min-h-[52px] items-center justify-center bg-gray-800 px-2 py-2 text-white sm:justify-end sm:px-4">
+        <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-3">
             <span class="text-[14px] leading-none">{{ __('Acessibilidade:') }}</span>
 
             <!-- Font Size Controls -->

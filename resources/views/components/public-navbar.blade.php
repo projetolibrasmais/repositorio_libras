@@ -9,7 +9,7 @@
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden md:flex md:items-center md:space-x-8">
+            <div class="hidden xl:flex xl:items-center xl:gap-2 2xl:gap-5">
                 <a href="{{ route('home') }}" aria-current="{{ request()->routeIs('home') ? 'page' : 'false' }}"
                    class="text-white hover:bg-brand-800 px-3 py-2 rounded-md text-sm font-medium transition-colors {{ request()->routeIs('home') ? 'bg-brand-800' : '' }}">
                     {{ __('INÍCIO') }}
@@ -39,10 +39,11 @@
             </div>
 
             <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
+            <div class="xl:hidden flex items-center">
                 <button type="button" 
                         x-data="" 
                         @click="$dispatch('toggle-mobile-menu')"
+                        aria-label="Abrir menu de navegação"
                         class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-brand-100 hover:bg-brand-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <i class="ph ph-list text-2xl"></i>
                 </button>
@@ -56,7 +57,7 @@
          x-show="open"
          x-cloak
          x-transition
-         class="md:hidden">
+         class="xl:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-brand-700">
             <a href="{{ route('home') }}" 
                class="text-white hover:text-brand-100 hover:bg-brand-800 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'bg-brand-800' : '' }}">
@@ -73,6 +74,10 @@
             <a href="{{ route('public.categorias') }}" 
                class="text-white hover:text-brand-100 hover:bg-brand-800 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.categorias') ? 'bg-brand-800' : '' }}">
                 {{ __('CATEGORIAS') }}
+            </a>
+            <a href="{{ route('public.faq') }}"
+               class="text-white hover:text-brand-100 hover:bg-brand-800 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.faq') ? 'bg-brand-800' : '' }}">
+                {{ __('FAQ') }}
             </a>
             <a href="{{ route('public.about') }}" 
                class="text-white hover:text-brand-100 hover:bg-brand-800 block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('public.about') ? 'bg-brand-800' : '' }}">

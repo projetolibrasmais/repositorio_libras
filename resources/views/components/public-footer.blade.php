@@ -4,7 +4,7 @@
             <!-- Logo e Instituições -->
             <div class="space-y-4">
                 <h3 class="text-lg font-semibold mb-4">Parceiros</h3>
-                <div class="flex gap-4">
+                <div class="flex flex-wrap gap-3 sm:gap-4">
                     <div class="bg-white rounded-lg p-3 flex items-center justify-center">
                         <a href="https://www.instagram.com/asmoc.montesclaros/" target="_blank" class="block h-full w-full flex items-center justify-center">
                             <img src="/images/asmoc.png" alt="ASMOC" class="w-20 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">

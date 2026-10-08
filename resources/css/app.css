@@ -26,6 +26,73 @@ html.high-contrast .bg-brand-100 {
     background-color: #0a0a0a !important;
 }
 
+html.high-contrast .sinal-detail.bg-slate-50,
+html.high-contrast .sinal-detail .bg-slate-50,
+html.high-contrast .sinal-detail .bg-slate-100,
+html.high-contrast .sinal-detail .bg-slate-900,
+html.high-contrast .sinal-detail .bg-slate-950 {
+    background-color: #000 !important;
+}
+
+html.high-contrast .sinal-detail .text-slate-300,
+html.high-contrast .sinal-detail .text-slate-400,
+html.high-contrast .sinal-detail .text-slate-600,
+html.high-contrast .sinal-detail .text-slate-700,
+html.high-contrast .sinal-detail .text-slate-800,
+html.high-contrast .sinal-detail .text-slate-900,
+html.high-contrast .sinal-detail .text-slate-950 {
+    color: #fff !important;
+}
+
+html.high-contrast .sinal-detail .border-slate-200,
+html.high-contrast .sinal-detail .border-slate-300,
+html.high-contrast .sinal-detail .border-slate-700 {
+    border-color: #fff !important;
+}
+
+html.high-contrast .sinal-detail h1,
+html.high-contrast .sinal-detail h2,
+html.high-contrast .sinal-detail h3 {
+    color: #ff0 !important;
+}
+
+html.high-contrast .sobre-page.bg-slate-50,
+html.high-contrast .sobre-page .bg-slate-50,
+html.high-contrast .sobre-page .bg-slate-100 {
+    background-color: #000 !important;
+}
+
+html.high-contrast .sobre-page .text-slate-100,
+html.high-contrast .sobre-page .text-slate-400,
+html.high-contrast .sobre-page .text-slate-600,
+html.high-contrast .sobre-page .text-slate-700,
+html.high-contrast .sobre-page .text-slate-900,
+html.high-contrast .sobre-page .text-slate-950 {
+    color: #fff !important;
+}
+
+html.high-contrast .sobre-page .text-brand-700 {
+    color: #ff0 !important;
+}
+
+html.high-contrast .sobre-page .border-slate-200,
+html.high-contrast .sobre-page .border-slate-300 {
+    border-color: #fff !important;
+}
+
+html.high-contrast .sobre-page [role="tab"][aria-selected="true"] {
+    color: #000 !important;
+    background-color: #ff0 !important;
+    outline: 2px solid #ff0;
+    outline-offset: -2px;
+}
+
+html.high-contrast .sobre-page h1,
+html.high-contrast .sobre-page h2,
+html.high-contrast .sobre-page h3 {
+    color: #ff0 !important;
+}
+
 html.high-contrast .bg-gray-600,
 html.high-contrast .bg-gray-700,
 html.high-contrast .bg-gray-800,

@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="p-4 sm:p-6 lg:p-8 space-y-6">
+    <div class="min-w-0 space-y-6 p-3 sm:p-6 lg:p-8">
         <section
             class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-900 via-brand-700 to-brand-600 p-6 sm:p-8 text-white shadow-lg">
             <div class="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-                <div>
+                <div class="min-w-0">
                     <p class="mb-2 text-sm font-medium text-brand-100">Painel administrativo</p>
                     <h1 class="text-2xl sm:text-3xl font-bold">Olá, {{ auth()->user()->name }}!</h1>
                     <p class="mt-2 max-w-2xl text-sm sm:text-base text-brand-100">Acompanhe o crescimento da Plataforma
@@ -25,7 +25,7 @@
         </section>
 
         <section aria-label="Indicadores gerais"
-            class="grid grid-cols-2 lg:grid-cols-3 @canany(['view_users', 'view_contatos']) xl:grid-cols-5 @else xl:grid-cols-4 @endcan gap-3 sm:gap-5">
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 @canany(['view_users', 'view_contatos']) 2xl:grid-cols-5 @else 2xl:grid-cols-4 @endcan gap-3 sm:gap-5">
             @php
                 $indicators = [
                     [
@@ -79,7 +79,7 @@
             @endforeach
             @can('view_users')
                 <a href="{{ route('users.index') }}"
-                    class="group col-span-2 lg:col-span-1 rounded-xl border border-brand-100 bg-white p-4 sm:p-5 shadow-sm hover:-translate-y-0.5 hover:border-logo-sky hover:shadow-md transition">
+                    class="group rounded-xl border border-brand-100 bg-white p-4 sm:p-5 shadow-sm hover:-translate-y-0.5 hover:border-logo-sky hover:shadow-md transition">
                     <div class="flex items-center justify-between gap-3">
                         <div>
                             <p class="text-xs sm:text-sm font-medium text-gray-600">Usuários</p>
@@ -121,7 +121,7 @@
         @endcan
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-            <section class="xl:col-span-2 rounded-xl border border-gray-200 bg-white shadow-sm">
+            <section class="min-w-0 xl:col-span-2 rounded-xl border border-gray-200 bg-white shadow-sm">
                 <header class="flex items-center justify-between gap-4 border-b border-gray-200 px-5 py-4">
                     <div class="flex items-center gap-3"><span
                             class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100"><i
@@ -165,7 +165,7 @@
                 </div>
             </section>
 
-            <section class="rounded-xl border border-gray-200 bg-white shadow-sm">
+            <section class="min-w-0 rounded-xl border border-gray-200 bg-white shadow-sm">
                 <header class="flex items-center gap-3 border-b border-gray-200 px-5 py-4"><span
                         class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100"><i
                             class="ph ph-chart-bar text-logo-green text-xl"></i></span>
@@ -198,7 +198,7 @@
         </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <section class="@can(['view_logs', 'view_materiais']) xl:col-span-2 @else col-span-3 @endcan rounded-xl border border-gray-200 bg-white shadow-sm">
+                <section class="min-w-0 @can(['view_logs', 'view_materiais']) xl:col-span-2 @else xl:col-span-3 @endcan rounded-xl border border-gray-200 bg-white shadow-sm">
                     <header class="border-b border-gray-200 px-5 py-4">
                         <div class="flex items-center gap-3"><span
                                 class="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-100"><i
@@ -211,7 +211,8 @@
                 </header>
                 <div class="p-5">
                     @if ($crescimentoMensal->isNotEmpty())
-                        <div class="flex h-52 items-end gap-3 sm:gap-5" aria-label="Gráfico de crescimento mensal">
+                        <div class="overflow-x-auto pb-2" role="region" aria-label="Gráfico de crescimento mensal" tabindex="0">
+                        <div class="flex h-52 min-w-[420px] items-end gap-3 sm:gap-5">
                             @php($maxTotal = $crescimentoMensal->max('total') ?: 1)
                             @foreach ($crescimentoMensal as $mes)
                                 @php($altura = max(12, ($mes->total / $maxTotal) * 100))
@@ -222,6 +223,7 @@
                                         class="text-xs font-medium text-gray-500">{{ ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'][$mes->mes - 1] }}/{{ substr($mes->ano, -2) }}</span>
                                 </div>
                             @endforeach
+                        </div>
                         </div>
                     @else
                         <div class="py-10 text-center"><i class="ph ph-chart-line text-4xl text-gray-300"></i>

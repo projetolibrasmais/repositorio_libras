@@ -6,7 +6,7 @@
             @if($categoriaAtual)
                 <!-- Breadcrumb -->
                 <nav class="flex mb-6" aria-label="Breadcrumb">
-                    <ol class="inline-flex items-center space-x-2">
+                    <ol class="inline-flex min-w-0 flex-wrap items-center gap-2">
                         <li class="inline-flex items-center">
                             <a href="{{ route('home') }}" class="text-gray-600 hover:text-brand-600 flex items-center gap-1">
                                 <i class="ph ph-house text-lg"></i>
@@ -21,7 +21,7 @@
                         <li aria-current="page">
                             <div class="flex items-center">
                                 <i class="ph ph-caret-right text-gray-400 mx-2"></i>
-                                <span class="text-gray-900 font-medium">{{ $categoriaAtual->nome }}</span>
+                                <span class="break-words text-gray-900 font-medium">{{ $categoriaAtual->nome }}</span>
                             </div>
                         </li>
                     </ol>

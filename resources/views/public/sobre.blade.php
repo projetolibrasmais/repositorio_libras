@@ -1,7 +1,7 @@
 <x-public-layout>
     <x-slot name="title">Sobre - Plataforma Digital Libras+</x-slot>
 
-    <div class="bg-slate-50 py-8 sm:py-12">
+    <div class="sobre-page bg-slate-50 py-8 sm:py-12">
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8" x-data="{
             activeTab: 'projeto',
             tabs: ['projeto', 'objetivos', 'equipe', 'apoio', 'materiais', 'contato'],

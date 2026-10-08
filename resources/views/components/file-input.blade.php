@@ -52,17 +52,10 @@
                         file: file
                     };
                     
-                    // Generate preview
+                    // Make the preview available as soon as the file is selected.
                     @if($showPreview)
                         if (file.type.startsWith('{{ $previewType }}/')) {
-                            const reader = new FileReader();
-                            reader.onload = (e) => {
-                                fileData.previewUrl = e.target.result;
-                                this.$nextTick(() => {
-                                    this.files = [...this.files];
-                                });
-                            };
-                            reader.readAsDataURL(file);
+                            fileData.previewUrl = URL.createObjectURL(file);
                         }
                     @endif
                     
@@ -93,11 +86,8 @@
             // Generate preview
             @if($showPreview)
                 if (file.type.startsWith('{{ $previewType }}/')) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.previewUrl = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
+                    if (this.previewUrl) URL.revokeObjectURL(this.previewUrl);
+                    this.previewUrl = URL.createObjectURL(file);
                 }
             @endif
         }
@@ -150,6 +140,7 @@
     },
     removeFile(index) {
         // Remove from files array
+        if (this.files[index].previewUrl) URL.revokeObjectURL(this.files[index].previewUrl);
         this.files.splice(index, 1);
         
         if (this.isMultiple) {
@@ -173,6 +164,10 @@
         }
     },
     clearFile() {
+        if (this.previewUrl) URL.revokeObjectURL(this.previewUrl);
+        this.files.forEach(file => {
+            if (file.previewUrl) URL.revokeObjectURL(file.previewUrl);
+        });
         this.fileName = '';
         this.fileSize = '';
         this.previewUrl = null;
@@ -289,7 +284,13 @@
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
                     <div class="flex items-center space-x-3 flex-1 min-w-0">
                         <div class="flex-shrink-0">
-                            <i class="ph ph-file text-brand-600 text-2xl"></i>
+                            @if($showPreview && $previewType === 'image')
+                                <img x-show="file.previewUrl" :src="file.previewUrl" :alt="file.name"
+                                    class="w-16 h-16 object-cover rounded-lg border border-gray-200">
+                                <i x-show="!file.previewUrl" class="ph ph-file text-brand-600 text-2xl"></i>
+                            @else
+                                <i class="ph ph-file text-brand-600 text-2xl"></i>
+                            @endif
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-medium text-gray-900 truncate" x-text="file.name"></p>
@@ -334,27 +335,6 @@
             @endif
         </div>
         
-        <!-- Multiple Files Preview -->
-        <div x-show="files.length > 0 && isMultiple" class="mt-4">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <template x-for="(file, index) in files" :key="index">
-                    <div x-show="file.previewUrl" class="relative group">
-                        @if($previewType === 'image')
-                            <img :src="file.previewUrl" :alt="file.name" class="w-full h-32 object-cover rounded-lg border border-gray-200">
-                        @elseif($previewType === 'video')
-                            <video :src="file.previewUrl" class="w-full h-32 object-cover rounded-lg border border-gray-200"></video>
-                        @endif
-                        <button 
-                            type="button"
-                            @click.stop="removeFile(index)"
-                            class="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
-                        >
-                            <i class="ph ph-x text-sm"></i>
-                        </button>
-                    </div>
-                </template>
-            </div>
-        </div>
     @endif
 
     <!-- Error Message from Server -->

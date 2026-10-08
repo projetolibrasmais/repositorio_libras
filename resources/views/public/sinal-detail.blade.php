@@ -31,7 +31,7 @@
         ];
     @endphp
 
-    <div class="bg-slate-50 py-8 sm:py-12">
+    <div class="sinal-detail bg-slate-50 py-8 sm:py-12">
         <article class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <nav aria-label="Navegação estrutural" class="mb-7">
                 <ol class="flex flex-wrap items-center gap-2 text-sm text-slate-600">
@@ -151,22 +151,6 @@
                     </aside> --}}
             </section>
 
-            <section id="uso" aria-labelledby="uso-titulo"
-                class="mt-8 scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
-                <h2 id="uso-titulo" class="flex items-center gap-2 text-lg font-bold text-slate-950">
-                    <i class="ph ph-chat-text text-2xl text-brand-700" aria-hidden="true"></i>
-                    Contexto de uso
-                </h2>
-                @if ($sinal->contexto_utilizacao)
-                    <p class="whitespace-pre-line text-base leading-relaxed text-slate-700">
-                        {{ $sinal->contexto_utilizacao }}</p>
-                @else
-                    <p class="text-base leading-relaxed text-slate-600">
-                        Nenhum contexto de uso foi informado para este sinal.
-                    </p>
-                @endif
-            </section>
-
             <section id="parametros" aria-labelledby="parametros-titulo"
                 class="mt-8 scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
                 <div class="max-w-3xl">
@@ -177,6 +161,15 @@
                 </div>
 
                 <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div id="uso" class="scroll-mt-28 rounded-xl border border-slate-200 bg-slate-50 p-5 sm:col-span-2">
+                        <dt class="flex items-center gap-3 font-bold text-slate-950">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-800">
+                                <i class="ph ph-chat-text text-xl" aria-hidden="true"></i>
+                            </span>
+                            Contexto de uso
+                        </dt>
+                        <dd class="mt-3 whitespace-pre-line text-base leading-relaxed text-slate-700">{{ filled($sinal->contexto_utilizacao) ? $sinal->contexto_utilizacao : 'Nenhum contexto de uso foi informado para este sinal.' }}</dd>
+                    </div>
                     @foreach ($parametros as $indice => $parametro)
                         <div class="rounded-xl border border-slate-200 bg-slate-50 p-5">
                             <dt class="flex items-center gap-3 font-bold text-slate-950">
@@ -199,6 +192,22 @@
 
             @if ($sinal->imagens->isNotEmpty())
                 <section id="imagens" aria-labelledby="imagens-titulo"
+                    x-data="{
+                        imagemAberta: null,
+                        imagemAlt: '',
+                        botaoOrigem: null,
+                        abrir(event) {
+                            this.botaoOrigem = event.currentTarget;
+                            this.imagemAberta = this.botaoOrigem.dataset.src;
+                            this.imagemAlt = this.botaoOrigem.dataset.alt;
+                            this.$nextTick(() => this.$refs.fecharImagem.focus());
+                        },
+                        fechar() {
+                            this.imagemAberta = null;
+                            this.$nextTick(() => this.botaoOrigem?.focus());
+                        }
+                    }"
+                    @keydown.escape.window="if (imagemAberta) fechar()"
                     class="mt-8 scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
                     <h2 id="imagens-titulo" class="text-2xl font-bold text-slate-950">Imagens de apoio</h2>
                     <p class="mt-2 text-base text-slate-600">Selecione uma imagem para visualizá-la em tamanho maior.
@@ -206,7 +215,9 @@
 
                     <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                         @foreach ($sinal->imagens as $indice => $imagem)
-                            <a href="{{ Storage::url($imagem->url_imagem) }}" target="_blank" rel="noopener noreferrer"
+                            <button type="button" @click="abrir($event)"
+                                data-src="{{ Storage::url($imagem->url_imagem) }}"
+                                data-alt="Imagem de apoio {{ $indice + 1 }} do sinal {{ $sinal->palavra_portugues }}"
                                 class="group overflow-hidden rounded-xl border border-slate-200 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
                                 <img src="{{ Storage::url($imagem->url_imagem) }}"
                                     alt="Imagem de apoio {{ $indice + 1 }} do sinal {{ $sinal->palavra_portugues }}"
@@ -217,9 +228,24 @@
                                     <i class="ph ph-arrows-out" aria-hidden="true"></i>
                                     Ampliar imagem
                                 </span>
-                            </a>
+                            </button>
                         @endforeach
                     </div>
+                    <template x-teleport="body">
+                        <div x-show="imagemAberta" x-cloak
+                            class="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950/95 p-4 sm:p-8"
+                            role="dialog" aria-modal="true" aria-label="Imagem ampliada"
+                            @click.self="fechar()">
+                            <button type="button" x-ref="fecharImagem" @click="fechar()"
+                                class="absolute right-4 top-4 z-10 flex min-h-11 items-center gap-2 rounded-lg bg-white px-4 py-2 font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                                aria-label="Fechar imagem ampliada">
+                                <i class="ph ph-x text-xl" aria-hidden="true"></i>
+                                <span class="hidden sm:inline">Fechar</span>
+                            </button>
+                            <img :src="imagemAberta" :alt="imagemAlt"
+                                class="max-h-full max-w-full object-contain">
+                        </div>
+                    </template>
                 </section>
             @endif
 

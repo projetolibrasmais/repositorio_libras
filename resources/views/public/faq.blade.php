@@ -1,7 +1,7 @@
 <x-public-layout>
     <x-slot name="title">FAQ - Plataforma Digital Libras+</x-slot>
     <!-- Seção FAQ -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
         <h1 class="text-4xl font-bold text-brand-600 mb-8 text-center">FAQ</h1>
     </div>
 
@@ -15,9 +15,9 @@
     </div>
 
     <!-- Seção Sobre o Projeto -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div>
                 <x-acordeon-faq nome="O que é a Plataforma Digital Libras+?"
                     descricao="A Plataforma Digital Libras+ é um recurso online projetado para facilitar o aprendizado e a prática da Língua Brasileira de Sinais (Libras) por meio de vídeos, exercícios interativos e materiais didáticos." />
 
@@ -26,9 +26,6 @@
 
                 <x-acordeon-faq nome="Quais são os recursos disponíveis na plataforma?"
                     descricao="Os recursos disponíveis incluem vídeos explicativos, materiais didáticos e um repositório de sinais em Libras." />
-
-                <x-acordeon-faq nome="Como posso acessar a plataforma?"
-                    descricao="A plataforma pode ser acessada através do nosso site oficial, onde você pode criar uma conta gratuita para começar a explorar os recursos disponíveis." />
             
                 <x-acordeon-faq nome="É possível criar uma conta na plataforma?"
                     descricao="Não, a plataforma não requer cadastro para acesso aos recursos." />

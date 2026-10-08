@@ -20,12 +20,12 @@
     <body class="font-sans antialiased">
         <div x-data="{ sidebarCollapsed: false }" @sidebar-toggled.window="sidebarCollapsed = $event.detail.collapsed" class="admin-shell min-h-screen bg-gray-100 flex flex-col">
             <!-- Container com Sidebar e Conteúdo -->
-            <div class="flex flex-1 overflow-hidden">
+            <div class="flex min-w-0 flex-1">
                 <!-- Sidebar -->
                 <x-sidebar />
                 
                 <!-- Main Content Area -->
-                <div class="admin-content flex-1 overflow-y-auto transition-all duration-300"
+                <div class="admin-content min-w-0 flex-1 transition-all duration-300"
                     :class="sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-[280px]'">
                     <!-- Navigation no topo -->
                     @include('layouts.navigation')
