@@ -207,19 +207,81 @@
                             'imagens' => ['help/materiais/create-material-2.png'],
                         ],
                     ]],
-// depois mexer
-                    ['permissao' => 'edit_materiais', 'titulo' => 'Editar Material', 'descricao' => 'Para editar um material, vá até Materiais, abra o material desejado, faça as alterações e salve em "Atualizar Material".', 
-                    'imagem' => 'help/materiais/edit_material.PNG'],
-                    ['permissao' => 'view_materiais', 'titulo' => 'Baixar Material', 'descricao' => 'Abra o material desejado e clique no ícone de download.', 
-                    'imagem' => 'help/materiais/download_material.PNG'],
-                    ['permissao' => 'delete_materiais', 'titulo' => 'Excluir Material', 'descricao' => 'Abra o material desejado, clique em "Excluir Material" e confirme.', 
-                    'imagem' => 'help/materiais/delete_material.PNG'],
-                    ['permissao' => 'delete_materiais', 'titulo' => 'Acessar Materiais Deletados', 'descricao' => 'Para acessar materiais deletados, vá até Materiais, clique no filtro e selecione Apenas Materiais Deletados.', 
-                    'imagem' => 'help/materiais/filtro_material.PNG'],
-                    ['permissao' => 'restore_materiais', 'titulo' => 'Restaurar Materiais Deletados', 'descricao' => 'Para restaurar um material deletado, filtre por materiais deletados, clique no ícone "Restaurar" e confirme a restauração.', 
-                    'imagem' => 'help/materiais/restore_material.PNG'],
+
+                    ['permissao' => 'edit_materiais', 'titulo' => 'Editar Material', 'descricao' => 'Aprenda a editar um material no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar edição',
+                            'descricao' => 'Acesse Materiais e clique no material que deseja editar.',
+                            'imagens' => ['help/materiais/edit-material-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Preencher os dados e Finalize a Edição',
+                            'descricao' => 'Preencha os dados do material e clique em "Salvar Alterações" para finalizar a edição.',
+                            'imagens' => ['help/materiais/edit-material-2.png'],
+                        ],
+                    ]],
+                    
+                    ['permissao' => 'view_materiais', 'titulo' => 'Baixar Material', 'descricao' => 'Aprenda a baixar um material no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Download do material',
+                            'descricao' => 'Acesse Materiais e clique no material que deseja baixar.',
+                            'imagens' => ['help/materiais/download-material-1.png'],
+                        ],
+                    ]],
+                    
+                    ['permissao' => 'delete_materiais', 'titulo' => 'Excluir Material', 'descricao' => 'Aprenda a excluir um material no repositório.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Iniciar exclusão',
+                            'descricao' => 'Acesse Materiais e clique no material que deseja excluir.',
+                            'imagens' => ['help/materiais/delete-material-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirme a exclusão',
+                            'descricao' => 'Confirme a exclusão do material.',
+                            'imagens' => ['help/materiais/delete-material-2.png'],
+                        ],
+                    ]],
+
+                    ['permissao' => 'restore_materiais', 'titulo' => 'Restaurar Materiais Deletados', 'descricao' => 'Para restaurar um material deletado, filtre por materiais deletados, clique no ícone "Restaurar" e confirme a restauração.',
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar Materiais Deletados',
+                            'descricao' => 'Vá até Materiais, clique no filtro e selecione Apenas Materiais Deletados.',
+                            'imagens' => ['help/materiais/restore-material-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Iniciar Restauração',
+                            'descricao' => 'Clique no ícone "Restaurar" ao lado do material que deseja restaurar.',
+                            'imagens' => ['help/materiais/restore-material-2.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirme a Restauração',
+                            'descricao' => 'Confirme a restauração do material.',
+                            'imagens' => ['help/materiais/restore-material-3.png'],
+                        ],
+                    ]],
+
                     ['permissao' => 'force_delete_materiais', 'titulo' => 'Deletar Permanentemente um Material', 'descricao' => 'Para deletar permanentemente um material, filtre por materiais deletados, abra o material desejado, clique em "Deletar Permanentemente" e confirme a exclusão.', 
-                    'imagem' => 'help/materiais/force_delete_material.PNG'],
+                     'passos' => [
+                        [
+                            'titulo' => 'Acessar Materiais Deletados',
+                            'descricao' => 'Vá até Materiais, clique no filtro e selecione Apenas Materiais Deletados.',
+                            'imagens' => ['help/materiais/restore-material-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Iniciar Deleção Permanente',
+                            'descricao' => 'Clique no ícone "Deletar Permanentemente" ao lado do material que deseja deletar.',
+                            'imagens' => ['help/materiais/force-delete-material-1.png'],
+                        ],
+                        [
+                            'titulo' => 'Confirme a Deleção Permanente',
+                            'descricao' => 'Confirme a deleção permanente do material.',
+                            'imagens' => ['help/materiais/force-delete-material-2.png'],
+                        ],
+                    ]],
                 ],
             ],
             [
