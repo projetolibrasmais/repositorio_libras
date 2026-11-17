@@ -41,6 +41,7 @@ class PermissionSeeder extends Seeder
 
             // Logs
             ['name' => 'view_logs', 'description' => 'Visualizar logs de atividade', 'guard_name' => 'web'],
+            ['name' => 'view_application_logs', 'description' => 'Visualizar logs de aplicação', 'guard_name' => 'web'],
 
             // Usuários
             ['name' => 'view_users', 'description' => 'Visualizar usuários', 'guard_name' => 'web'],

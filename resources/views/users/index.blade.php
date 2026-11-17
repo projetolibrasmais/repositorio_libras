@@ -204,10 +204,12 @@
                                                 <i class="ph ph-eye text-lg"></i>
                                             </a>
                                             @can('edit_users')
-                                                <a href="{{ route('users.edit', $user) }}"
-                                                    class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-200 transition-colors">
-                                                    <i class="ph ph-pencil text-lg"></i>
-                                                </a>
+                                                @if ($user->id !== 1)
+                                                    <a href="{{ route('users.edit', $user) }}"
+                                                        class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-200 transition-colors">
+                                                        <i class="ph ph-pencil text-lg"></i>
+                                                    </a>
+                                                @endif
                                             @endcan
                                             @can('delete_users')
                                                 @if ($user->id !== 1)

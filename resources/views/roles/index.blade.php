@@ -47,69 +47,71 @@
                         </x-table-header>
 
                         <x-slot name="body">
-                        @foreach ($roles as $role)
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    {{ $role->id }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="flex-shrink-0 h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                            <i class="ph ph-shield-checkered text-purple-600"></i>
-                                        </div>
-                                        <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">
-                                                {{ $role->name }}
+                            @foreach ($roles as $role)
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ $role->id }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="flex-shrink-0 h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <i class="ph ph-shield-checkered text-purple-600"></i>
+                                            </div>
+                                            <div class="ml-3">
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    {{ $role->name }}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-600">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-brand-100 text-brand-800">
-                                        {{ $role->permissions()->count() }} permissões
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-100 text-green-800">
-                                        {{ $role->guard_name }}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                    {{ $role->created_at->format('d/m/Y H:i') }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex items-center gap-2">
-                                        <a href="{{ route('roles.show', $role) }}"
-                                            class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
-                                            <i class="ph ph-eye text-lg"></i>
-                                        </a>
-                                        @can('edit_roles')
-                                            <a href="{{ route('roles.edit', $role) }}"
-                                                class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-200 transition-colors">
-                                                <i class="ph ph-pencil text-lg"></i>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-brand-100 text-brand-800">
+                                            {{ $role->permissions()->count() }} permissões
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-100 text-green-800">
+                                            {{ $role->guard_name }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                        {{ $role->created_at->format('d/m/Y H:i') }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex items-center gap-2">
+                                            <a href="{{ route('roles.show', $role) }}"
+                                                class="bg-brand-100 text-brand-600 px-3 py-1 rounded-lg hover:bg-brand-100 transition-colors">
+                                                <i class="ph ph-eye text-lg"></i>
                                             </a>
-                                        @endcan
-                                        @can('delete_roles')
-                                            @if ($role->id !== 1)
-                                                <form action="{{ route('roles.destroy', $role) }}" method="POST"
-                                                    class="delete-form-{{ $role->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button"
-                                                        onclick="deleteForm = document.querySelector('.delete-form-{{ $role->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-role' }));"
-                                                        class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors">
-                                                        <i class="ph ph-trash text-lg"></i>
-                                                    </button>
-                                                </form>
-                                            @endif
-                                        @endcan
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                            @can('edit_roles')
+                                                @if ($role->id !== 1)
+                                                    <a href="{{ route('roles.edit', $role) }}"
+                                                        class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-lg hover:bg-yellow-200 transition-colors">
+                                                        <i class="ph ph-pencil text-lg"></i>
+                                                    </a>
+                                                @endif
+                                            @endcan
+                                            @can('delete_roles')
+                                                @if ($role->id !== 1)
+                                                    <form action="{{ route('roles.destroy', $role) }}" method="POST"
+                                                        class="delete-form-{{ $role->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button"
+                                                            onclick="deleteForm = document.querySelector('.delete-form-{{ $role->id }}'); window.dispatchEvent(new CustomEvent('open-modal', { detail: 'delete-role' }));"
+                                                            class="bg-red-100 text-red-600 px-3 py-1 rounded-lg hover:bg-red-200 transition-colors">
+                                                            <i class="ph ph-trash text-lg"></i>
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endcan
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </x-slot>
                     </x-table>
 

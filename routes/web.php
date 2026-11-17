@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GlobalSearchController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\ApplicationLogController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -74,6 +75,7 @@ Route::middleware('auth')->prefix('/admin')->group(function () {
     Route::resource('materiais', MaterialController::class)->parameters(['materiais' => 'material']);
 
     Route::resource('logs', LogController::class)->only(['index', 'show']);
+    Route::resource('application-logs', ApplicationLogController::class)->only(['index', 'show']);
 
     Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
     Route::delete('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('users.force-delete');

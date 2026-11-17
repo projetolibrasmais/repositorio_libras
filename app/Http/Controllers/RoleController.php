@@ -79,6 +79,10 @@ class RoleController extends Controller implements HasMiddleware
      */
     public function edit(Role $role)
     {
+        if ($role->id === 1) {
+            return redirect()->route('roles.index')->with('error', 'A função super-administrador não pode ser editada.');
+        }
+
         $permissions = Permission::all();
         return view('roles.edit', compact('role', 'permissions'));
     }
@@ -98,7 +102,7 @@ class RoleController extends Controller implements HasMiddleware
     public function destroy(Role $role)
     {
         if ($role->id === 1) {
-            return redirect()->route('roles.index')->with('error', 'A função padrão não pode ser excluída.');
+            return redirect()->route('roles.index')->with('error', 'A função super-administrador não pode ser excluída.');
         }
         $deleted = $this->roleRepository->delete($role->id);
 
