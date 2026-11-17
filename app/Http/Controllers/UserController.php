@@ -59,7 +59,10 @@ class UserController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        $roles = Role::orderBy('name')->get();
+        $roles = Role::query()
+            ->whereKeyNot(1)
+            ->orderBy('name')
+            ->get();
 
         return view('users.create', compact('roles'));
     }
@@ -90,7 +93,14 @@ class UserController extends Controller implements HasMiddleware
      */
     public function edit(User $user)
     {
-        $roles = Role::orderBy('name')->get();
+        if ($user->id === 1) {
+            return redirect()->route('users.index')->with('error', 'O usuário super-administrador não pode ser editado!');
+        }
+
+        $roles = Role::query()
+            ->whereKeyNot(1)
+            ->orderBy('name')
+            ->get();
 
         return view('users.edit', compact('user', 'roles'));
     }
@@ -110,7 +120,7 @@ class UserController extends Controller implements HasMiddleware
     public function destroy(User $user)
     {
         if ($user->id === 1) {
-            return redirect()->route('users.index')->with('error', 'O usuário administrador não pode ser deletado!');
+            return redirect()->route('users.index')->with('error', 'O usuário super-administrador não pode ser deletado!');
         }
         $this->userRepository->delete($user->id);
         return redirect()->route('users.index')->with('success', 'Usuário deletado com sucesso!');

@@ -260,6 +260,19 @@
                         </li>
                     @endcan
 
+                    @can('view_application_logs')
+                        <li>
+                            <a href="{{ route('application-logs.index') }}"
+                                :class="collapsed && window.innerWidth >= 1024 ? 'justify-center' : ''"
+                                class="flex items-center py-2.5 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('application-logs.*') ? 'bg-brand-50 text-brand-600 font-medium' : 'text-slate-600 hover:text-slate-800 hover:bg-slate-100' }} group">
+                                <span class="grid place-items-center shrink-0" :class="!collapsed || window.innerWidth < 1024 ? 'me-3' : ''">
+                                    <i class="ph ph-terminal-window text-xl"></i>
+                                </span>
+                                <span x-show="!collapsed || window.innerWidth < 1024" class="flex-1">Logs da aplicação</span>
+                            </a>
+                        </li>
+                    @endcan
+
                     <!-- Ajuda -->
                     <li>
                         <a href="{{ route('ajuda.index') }}"
